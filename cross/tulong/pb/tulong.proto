@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package pb;
+
+
+message TuLongRankInfo{
+    int32 serverId=1;
+    int64 allianceId=2;
+    string allianceName=3;
+    int32 killNum=4;
+}
+
+//获取跨服屠龙排行榜列表
+message TuLongRankListRequest{
+}
+
+//跨服屠龙排行榜列表回复
+message TuLongRankListResponse{
+    repeated TuLongRankInfo rankInfoList=1;
+}
+
+service TuLong{
+    //获取
+    rpc GetTuLongRankList(TuLongRankListRequest) returns(TuLongRankListResponse){}
+}
+

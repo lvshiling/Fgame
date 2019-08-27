@@ -1,0 +1,21 @@
+syntax = "proto2";
+
+package  ui;
+
+message RedDotInfo {
+    required int32 groupId=1;  
+    required bool isReddot=2;
+} 
+//运营活动推送
+message SCActivityNotice{
+    repeated RedDotInfo infoList=1; 
+}
+
+message ReceiveRecord {
+    repeated int32 recordList=1;
+}
+//运营活动数据推送
+message SCActivityDataNotice{
+    required int32 groupId=1;
+    optional ReceiveRecord record=2;
+}

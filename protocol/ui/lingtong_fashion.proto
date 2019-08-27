@@ -1,0 +1,115 @@
+syntax = "proto2";
+
+package ui;
+
+message LingTongFashionInfo {
+    //时装id
+    required int32 fashionId=1;
+    //等级
+    required int32 level=2;
+    //等级进度值
+    required int32 levelPro=3;
+    //激活时间 (0永久)
+    required int64 activteTime=4 [default=0];;
+}
+
+
+//灵童时装信息请求
+message CSLingTongFashionGet {
+}
+//灵童时装信息应答
+message SCLingTongFashionGet{
+   //出战灵童id
+   required int32 lingTongId=1;
+   //灵童时装信息列表
+   repeated LingTongFashionInfo fashionList=2;
+}
+
+//激活灵童时装请求
+message CSLingTongFashionActive {
+    //灵童时装id
+   required int32 fashionId=1;
+} 
+//激活灵童时装应答
+message SCLingTongFashionActive {
+   required  LingTongFashionInfo fashionInfo=1;
+}
+
+//灵童时装穿戴请求 (当前出战的穿戴)
+message CSLingTongFashionWear {
+   //灵童时装id
+   required int32 fashionId=1;
+}
+//穿戴灵童时装应答
+message SCLingTongFashionWear {
+    //灵童时装id
+    required int32 fashionId=1;
+}
+
+//灵童时装卸下
+message CSLingTongFashionUnload{
+    
+}
+
+//灵童时装卸下回复
+message SCLingTongFashionUnload{
+    required int32 fashionId=1;
+}
+
+
+//灵童时装升星请求
+message CSLingTongFashionUpstar {
+    //灵童时装id
+    required int32 fashionId=1;
+ }
+ 
+ //灵童时装升级应答
+ message SCLingTongFashionUpstar {
+     //灵童时装id
+     required int32 fashionId=1;
+     //灵童时装等级
+     required int32 level=2;
+     //进度值
+     required int32 levelPro=3;
+     //状态 false 失败 true成功
+     required bool result=4;
+  }
+
+
+//时装移除
+message SCLingTongFashionRemove{
+    //时装id
+    required int32 fashionId=1;
+}
+
+// 灵童时装试用推送
+message SCLingTongFashionTrialNotice{
+    //时装id
+    required int32 trialFashionId=1;
+    //过期时间
+    required int64 expireTime=2;
+}
+
+// 灵童时装试用过期
+message SCLingTongFashionTrialOverdueNotice{
+    required int32 trialFashionId=1;
+    //1激活过期 2时效过期 
+    required int32 overdueType=2;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

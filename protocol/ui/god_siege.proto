@@ -1,0 +1,90 @@
+syntax = "proto2";
+
+package ui;
+import "item.proto";
+import "common.proto";
+import "scene.proto";
+
+//采集数量
+message CollectInfo {
+    //采集数量
+    required int32 num=1;
+    //物品id
+    repeated ItemInfo itemList=2; 
+}
+
+//进场景下发
+message SCGodSiegeGet {
+    //类型 1麒麟来袭 2 火凤来袭 3毒龙来袭 4金银密窟
+    required int32 godType=1;
+    //boss状态 0 待刷新 1 已刷新  2 已击杀
+    required int32 bossStatus=2;
+    //boss位置
+    optional Position pos=3;
+    //采集数量
+    optional CollectInfo collectInfo=4;
+    // 采集物信息
+    repeated GeneralCollectInfo collectNpcInfo=5;
+}
+
+//取消排队
+message CSGodSiegeCancleLineUp {
+    //类型
+    required int32 godType=1;
+}
+
+//取消排队回复
+message SCGodSiegeCancleLineUp {
+    //类型
+    required int32 godType=1;
+}
+
+//排队变更回复
+message SCGodSiegeLineUp {
+    //类型
+    required int32 godType=1;
+    //前面人数
+    required int32 beforeNum=2;
+}
+
+//排队成功回复
+message SCGodSiegeLineUpSuccess {
+    //类型
+    required int32 godType=1;
+}
+
+//boss 状态变更推送
+message SCGodSiegeBossStatus {
+    //类型
+    required int32 godType=1;
+    //boss状态 0 待刷新 1 已刷新  2 已击杀
+    required int32 bossStatus=2;
+    //boss位置
+    optional Position pos=3;
+}
+
+
+//结束后获得物品推送
+message SCGodSiegeResult {
+    //类型
+    required int32 godType=1;
+    //物品id
+    repeated ItemInfo itemList=2; 
+}
+
+//场景结束推送给排队
+message SCGodSiegeFinishToLineUp{
+    //类型
+    required int32 godType=1;
+}
+
+//采集数量变更推送
+message SCGodSiegeCollectChanged {
+    required int32 godType=1;
+    required CollectInfo collectInfo=2;
+}
+
+//采集生物信息变更推送
+message SCGodSiegeCollectNpcChanged {
+    required GeneralCollectInfo collectNpcInfo=1;
+} 

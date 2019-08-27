@@ -1,0 +1,146 @@
+syntax="proto2";
+
+package ui;
+
+
+//身法基本信息
+message ShenfaInfo {
+    //进阶等级
+    required int32 advancedId=1;
+    //当前身法id
+    required int32 shenfaId=2;
+    //食幻化丹食丹等级
+    required int32 unrealLevel=3;
+    //幻化丹培养进度值
+    required int32 unrealPro=4;
+    //皮肤信息列表
+    repeated ShenFaSkinInfo skinList=5;
+}
+
+
+
+//身法皮肤
+message ShenFaSkinInfo {
+    //身法皮肤id
+    required int32 shenFaId=1;
+    //升星等级
+    required int32 level=2;
+    //升星培养值
+    required int32 pro=3;
+}
+
+//身法信息请求
+message CSShenfaGet {
+}
+//身法信息应答
+message SCShenfaGet{
+   //进阶等级
+   required int32 advancedId=1;
+   //当前身法id
+   required int32 shenfaId=2;
+   //食幻化丹食丹等级
+   required int32 unrealLevel=3;
+   //食幻化丹培养进度值
+   required int32 unrealPro=4;
+   //幻化
+   repeated int32 unrealList=5;
+   //祝福值
+   optional int32 bless=6;
+   //祝福值开始时间
+   optional int64 blessTime=7;
+   //是否隐藏
+   required bool hidden=8;
+    //身法皮肤列表
+    repeated ShenFaSkinInfo shenFaSkinList=9;
+}
+
+//食用幻化丹请求
+message CSShenfaUnrealDan {
+    required int32 num=1;
+}
+//食用幻化丹应答
+message SCShenfaUnrealDan {
+   //幻化丹食丹等级
+   required int32 level=1;
+    //进度值
+    required int32 progress=2;
+}
+
+
+//幻化请求
+message CSShenfaUnreal {
+    //幻化身法id
+    required int32 shenfaId=1;
+}
+//幻化应答
+message SCShenfaUnreal {
+    //幻化
+    optional int32 shenfaId=1;
+}
+
+//卸下请求
+message CSShenfaUnload {
+}
+
+//卸下应答
+message SCShenfaUnload {
+    //身法id
+    required int32 shenfaId=1;
+}
+
+//进阶请求
+message CSShenfaAdvanced{
+    //是否自动进阶
+    required bool autoFlag=1;
+}
+//进阶应答
+message SCShenfaAdvanced{
+    //进阶后id
+    required int32 advancedId=1;
+    //身法id
+    required int32 shenfaId=2;
+    //祝福值
+    optional int32 bless=3;
+    //祝福值开始时间
+    optional int64 blessTime=4;
+    //进阶方式 1进阶丹 2祝福丹 3直升券
+    required int32 advancedType=5;
+    // 是否暴击
+    optional bool isDouble=6[default=false];
+    //总祝福值
+    optional int32 totalBless=7;
+}
+
+
+//身法隐藏
+message CSShenfaHidden {
+    //是否隐藏 0展示  1隐藏
+    required bool hidden=1;
+}
+
+//身法隐藏
+message SCShenfaHidden {
+    required bool hidden=1;
+}
+
+
+//身法皮肤升星请求
+message CSShenFaUpstar {
+    //身法皮肤id
+    required int32 shenFaId=1;
+ }
+ 
+ //身法皮肤升星应答
+ message SCShenFaUpstar {
+     //身法皮肤id
+     required int32 shenFaId=1;
+     //皮肤星数
+     required int32 level=2;
+     //进度值
+     required int32 upPro=3;
+}
+
+
+
+
+

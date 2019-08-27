@@ -1,0 +1,34 @@
+syntax = "proto2";
+
+package cross;
+
+
+//用户外观数据
+message PlayerShowData{
+    optional int32 titleId =1;
+    optional int32 weaponId=2;
+    optional int32 clothesId=3;
+    optional int32 rideId=4;
+    optional int32 wingId=5; 
+    optional int32 shenFaId=6;
+    optional int32 lingYuId=7;
+    optional int32 fourGodKey=8;
+    optional int32 realm=9;
+    optional string spouse=10;
+    optional int32 weddingStatus=11;
+    optional int32 model=12;
+    optional int32 weaponState=13;
+    optional int32 ringType=14;
+    optional int32 faBaoId=15;
+    optional int32 petId=16;
+    optional int32 xianTiId=17;
+    optional int32 baGua=18;
+    optional bool mountHidden=19;
+    optional int32 mountAdvanceId=20;
+}
+
+
+//展示数据变化
+message SIPlayerShowDataChanged{
+    required PlayerShowData playerShowData=1;
+}

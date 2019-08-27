@@ -1,0 +1,81 @@
+syntax = "proto2";
+
+package ui;
+import "item.proto";
+
+message TeamCopyPlayerShowData {
+    required int64 playerId =1;
+    optional string name=2 [default=""]; //""未变化
+    optional int32 role=3 [default=-1];  //-1未变化
+    optional int32 sex=4 [default=-1];   //-1 未变化
+    optional int64 damage=5 [default=-1]; //-1未变化
+    optional int32 status = 6 [default=-1]; //-1未变化 0:离线 1:在线 2:失败 3:退出
+    optional int64 maxHp=7 [default=-1]; //-1未变化 最大血量
+    optional int64 hp=8 [default=-1]; //-1未变化 当前血量
+    optional int32 level=9 [default=-1]; //-1未变化 等级变化 
+}
+
+message TeamCopyInfo {
+    required int32 purpose=1;
+    required int32 num=2;
+}
+
+//组队副本信息
+message CSTeamCopyAllGet {
+
+}
+
+//组队副本信息
+message SCTeamCopyAllGet {
+    repeated TeamCopyInfo teamCopyList=1;
+}
+
+//组队副本开始战斗
+message CSTeamCopyStartBattle {
+}
+
+//组队副本开始战斗回复
+message SCTeamCopyStartBattle {
+}
+
+//玩家组队副本开始战斗请求广播 
+message SCTeamCopyStartBattleBroadcast{
+    //组队标识
+    required int32 purpose=1;
+}
+
+//玩家组队副本开始战斗请求结果广播
+message SCTeamCopyStartBattleResultBroadcast{
+    //组队标识
+    required int32 purpose=1;
+    required bool sucess=2;
+}
+
+
+//进场景下发
+message SCTeamCopySceneInfo {
+    //创建场景事件
+    required int64 createTime=1;
+    //组队副本标识
+    required int32 purpose=2;
+    repeated TeamCopyPlayerShowData playerShowList=3;
+}
+
+//玩家数据改变
+message SCTeamCopyPlayerDataChanged {
+    required TeamCopyPlayerShowData playerShow=1;
+}
+
+//组队副本结果
+message SCTeamCopyResult {
+    //组队标识
+    required int32 purpose=1;
+    //是否成功
+    required bool sucess=2;
+    //是否有奖励
+    required bool isRew=3;
+    required TeamCopyInfo teamCopyInfo=4;
+}
+
+
+

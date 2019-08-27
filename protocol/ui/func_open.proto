@@ -1,0 +1,32 @@
+syntax = "proto2";
+
+package ui;
+
+
+//功能开启列表
+message SCFuncOpenList{
+   //功能开启列表
+   repeated int32 funcOpenList=1;
+}
+
+
+//功能开启更新列表
+message SCFuncOpenUpdateList{
+    //功能开启列表
+    repeated int32 funcOpenList=1;
+ }
+
+
+ //手动功能开启
+message CSFuncOpenManualActive{
+   //功能开启id
+   required int32 moduleId=1;
+}
+
+//手动功能开启回复
+message SCFuncOpenManualActive{
+    //功能开启列表
+    repeated int32 funcOpenList=1;
+    //激活结果 0成功  1失败
+    required int32 result=2;
+}

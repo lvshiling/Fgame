@@ -1,0 +1,42 @@
+syntax = "proto2";
+
+import "basic.proto";
+
+//chat message optional from 4000-4999
+package pb;
+
+message CGChatMinitor {
+   repeated int32 serverlist = 1;       
+}
+
+extend pb.Message {
+   optional CGChatMinitor cgChatMinitor = 4001;
+}
+
+message GCChatMinitor {
+   required int64 playerId = 1;
+}
+
+extend pb.Message{
+   optional GCChatMinitor gcChatMinitor = 4002;
+}
+
+message GCChatMinitorMsg {
+    required string playerId = 1;
+    required string playerName = 2;
+    required int32 vipLevel = 3;
+    required int32 gameLevel = 4;
+    required int32 chatType = 5;
+    required int32 chatMethod = 6;
+    required string chatMsg = 7;
+    required int64 chatTime = 8;
+    optional string toPlayerId = 9;
+    optional string toPlayerName = 10;
+    optional string ip = 11;
+    required int32 centerPlatformId = 12;
+    required int32 centerServerId = 13;
+}
+
+extend pb.Message {
+   optional GCChatMinitorMsg gcChatMinitorMsg = 4003;
+}

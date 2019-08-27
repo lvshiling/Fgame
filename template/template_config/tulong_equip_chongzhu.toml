@@ -1,0 +1,23 @@
+
+
+file="tulong_equip_ronghe_vo.go"
+pkg="template"
+class="TuLongEquipRongHeTemplateVO"
+comment = "屠龙重铸配置"
+[[variables]]
+name="Id"
+type="int"
+tag="id"
+comment="id"
+
+[[variables]]
+name="Level"
+type="int32"
+tag="level"
+comment="强化等级"
+
+[[variables]]
+name="DropId"
+type="int32"
+tag="drop_id"
+comment="掉落id"

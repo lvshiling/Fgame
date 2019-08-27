@@ -1,0 +1,8 @@
+//golang 使用
+syntax = "proto2";
+package pb;
+
+message Message {
+  required int32 messageType = 1;        // Unique ID number for message type
+  extensions 100 to 10000;
+}

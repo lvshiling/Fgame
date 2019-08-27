@@ -1,0 +1,378 @@
+syntax = "proto2";
+
+import "player.proto";
+
+package ui;
+
+
+//玩家信息
+message FriendInfo{
+    required int64 friendId=1;
+    required int32 point =2;
+    required PlayerBasicInfo playerBasicInfo=3;
+}
+
+//邀请信息
+message FriendInviteInfo {
+    //邀请时间
+    required int64 inviteTime=1;
+    //用户id
+    required int64 inviteId=2;
+    //用户名字
+    required string name=3;
+    //战力
+    required int64 force=4;
+    //角色
+    required int32 role =5;
+    //性别
+    required int32 sex = 6;
+    //等级
+    required int32 level=7;
+}
+
+message FriendFeedback{
+    required int32 noticeType=1;    //0.升级1.转生2.击杀boss掉落3.坐骑升阶4.战翼升阶
+    required int32 feedbackType=2;  //0.鲜花1.鸡蛋
+    required int64 friendId=3;
+    required string friendName=4;
+    required int32 condition=5; 
+}
+
+message FriendMarryDevelopLog{
+    required int64 createTime=1;
+    required string sendName=2;
+    required string recvName=3;
+    required int32 itemId=4;
+    required int32 itemNum=5;
+    required int32 charmNum=6;
+    required int32 developExp=7;
+    required string contextStr=8;
+}
+
+//好友推送
+message SCFriendsGet{
+    //好友列表
+    repeated FriendInfo friendList=1;
+    //黑名单
+    repeated FriendInfo blackList=2;
+    //赞赏列表
+    repeated FriendFeedback feedbackList=3;
+    //好友添加奖励记录
+    repeated int32 rewRecord=4;
+    //虚拟好友数量
+    required int32 dummyFrNum=5;
+}
+
+//获取推荐好友
+message CSRecommentFriendsGet{
+    
+}
+
+//获取推荐好友回复
+message SCRecommentFriendsGet{
+    repeated PlayerBasicInfo playerList=1;
+}
+
+
+
+
+//移动陌生人
+message CSFriendBlack{
+    required int64 friendId = 1;
+}
+
+//移动陌生人回复
+message SCFriendBlack{
+    required int64 friendId = 1;
+}
+
+
+//删除好友
+message CSFriendDelete{
+    required int64 friendId = 1;
+}
+
+//删除好友
+message SCFriendDelete{
+    required int64 friendId = 1;
+}
+
+
+//查找好友
+message CSFriendSearch{
+    required string search = 1;
+}
+
+//查找好友
+message SCFriendSearch{
+    repeated PlayerBasicInfo playerList= 1;
+}
+
+
+//赠送鲜花
+message CSFriendGift{
+    //好友id
+    required int64 friendId=1;
+    //鲜花物品id
+    required int32 itemId=2;
+    //鲜花数量
+    required int32 num=3;
+    //消息id
+    required int32 msgId=4;
+    //自动购买
+    required int32 auto =5;
+    //消息内容
+    optional string msgContent=6;
+}
+
+
+//赠送鲜花
+message SCFriendGift{
+    //好友id
+    required int64 friendId=1;
+    //鲜花物品id
+    required int32 itemId=2;
+    //鲜花数量
+    required int32 num=3;
+    //消息id
+    required int32 msgId=4;
+    //自动购买
+    required int32 auto =5;
+}
+
+//接受鲜花
+message SCFriendGiftRecv{
+    //发送id
+    required int64 sendId=1;
+    //鲜花物品id
+    required int32 itemId=2;
+    //鲜花数量
+    required int32 num=3;
+    //消息id
+    required int32 msgId=4;
+    //消息内容
+    optional string msgContent=5;
+}
+
+
+
+//表达谢意
+message CSFriendGiftFeedback{
+    //好友id
+    required int64 friendId=1;
+}
+
+
+//表达谢意反馈
+message SCFriendGiftFeedback{
+    //好友id
+    required int64 friendId=1;
+}
+
+//表达谢意反馈推送 
+message SCFriendGiftFeedbackRecv{
+    //发送id
+    required int64 sendId=1;
+}
+
+//亲密度改变
+message SCFriendPointChange {
+    //好友id
+    required int64 friendId=1;
+    //亲密度值
+    required int32 point=2;
+}
+
+//移除黑名单
+message CSFriendRemoveBlack {
+    required int64 friendId = 1;
+}
+
+//移除黑名单回复
+message SCFriendRemoveBlack {
+    required int64 friendId = 1;
+    required bool isFriend=2;
+}
+
+
+//好友添加邀请
+message CSFriendInvite {
+    required int64 friendId=1;
+}
+
+//好友添加邀请回复
+message SCFriendInvite{
+    required int64 friendId=1;
+    required int64 inviteTime=2;
+}
+
+//邀请信息推送给对方
+message SCFriendInvitePushPeer {
+    required PlayerBasicInfo playerBasicInfo=1;
+    //邀请时间
+    required int64 inviteTime=2;
+}
+
+
+//添加好友请求
+message CSFriendAdd{
+    //false 拒绝 true 同意
+    required bool agree=1;
+    required int64 friendId =2;
+
+}
+
+//添加好友
+message SCFriendAdd{
+    required bool agree=1;
+    optional FriendInfo friend=2;
+}
+
+//拒绝邀请
+message SCFriendInviteRefusePushPeer {
+    required int64 friendId=1;
+    required string name=2;
+}
+
+//好友邀请列表请求
+message CSFriendInviteList {
+
+}
+
+//好友申请列表回复 (前端需根据邀请时间做排序)
+message SCFriendInviteList {
+    repeated  FriendInviteInfo inviteList=1;
+}
+
+//好友邀请批量处理
+message CSFriendBatch{
+    required bool agree=1;
+}
+
+//好友邀请批量处理回复
+message SCFriendBatch {
+    required bool agree=1;
+}
+
+//光效广播
+message SCFriendGiveFlowerLight {
+    required int32 itemId=1;
+    repeated int64 playerIdList=2;
+    repeated string playerNameList=3;
+    required int32 num=4;
+}
+
+
+//广播给好友
+message SCFriendNoticeBroadcase{
+    required int32 noticeType=1; //0.升级1.转生2.击杀boss掉落3.坐骑升阶4.战翼升阶
+    required string friendName=2;
+    required int32 friendRole=3;
+    required int32 friendSex=4;
+    required int64 friendId=5;
+    // 参数
+    required string args=6;
+    // 推送条件
+    required int32 condition=7;
+}
+
+// 好友赞赏提醒
+message SCFriendNoticeFeedbackNotice{
+    required int32 noticeType=1;    //0.升级1.转生2.击杀boss掉落3.坐骑升阶4.战翼升阶
+    required int32 feedbackType=2;  //0.鲜花1.鸡蛋
+    required int64 friendId=3;
+    required string friendName=4; 
+    required int32 condition=5; 
+}
+
+//赞赏好友
+message CSFriendNoticeFeedback{
+    required int32 noticeType=1;    //0.升级1.转生2.击杀boss掉落3.坐骑升阶4.战翼升阶
+    required int32 feedbackType=2;  //0.鲜花1.鸡蛋
+    required int64 friendId=3;
+    required int32 condition=4;
+}
+message SCFriendNoticeFeedback{
+    required int32 feedbackType=1;
+    required int32 condition=2;
+}
+
+//查询赞赏信息
+message CSFriendNoticeFeedbackRead{
+}
+message SCFriendNoticeFeedbackRead{
+    repeated FriendFeedback feedbackList=1; 
+}
+
+//领取添加好友奖励
+message CSFriendAddRew{
+    //好友数量
+    required int32 frNum=1;
+}
+message SCFriendAddRew{
+    required int32 frNum=1; 
+}
+
+//虚拟好友数变化
+message SCFriendDummyFriendNumChanged{
+    required int32 dummyFrNum=1;
+}
+
+
+//一键添加
+message CSFriendAddAll {
+
+}
+
+//一键添加
+message SCFriendAddAll {
+    required int64 inviteAllTime=1;
+}
+
+//好友索取
+message CSFriendFeedbackAskFor{
+    required int32 itemId=1;
+    required int64 friendId=2; 
+    required int32 condition=3;  
+}
+message SCFriendFeedbackAskFor{
+
+}
+
+// 索取推送
+message SCFriendFeedbackAskForNotice{
+    required int64 friendId=1;
+    required string frName=2;
+    required string allianceName=3;
+    required int32 itemId=4;
+    required int32 sex=5;
+    required int32 role=6;
+}
+
+//好友索取应答
+message CSFriendFeedbackAskForReply{
+    required bool isAgree=1;
+    required int32 itemId=2;
+    required int64 friendId=3;
+}
+message SCFriendFeedbackAskForReply{
+    required bool isAgree=1;
+}
+
+// 索取应答推送
+message SCFriendFeedbackAskForReplyNotice {
+    required bool isAgree=1;
+    required string friendName=2; 
+}
+
+//好友表白日志增量
+message CSFriendMarryDevelopLogIncr{
+    //0：所有表白记录；1：我的表白；2：对我的表白
+    required int32 logType=1;
+    required int64 logTime=2;
+}
+//好友表白日志增量回复
+message SCFriendMarryDevelopLogIncr{
+    required int32 logType=1;
+    repeated FriendMarryDevelopLog logList=2;
+}

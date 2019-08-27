@@ -1,0 +1,34 @@
+syntax = "proto2";
+
+package cross;
+
+//用户基本数据
+message PlayerBasicData{
+    //账户id
+    required int64 userId=1;
+    //角色id
+    required int64 playerId=2;
+    //名字
+    required string name=3;
+    //角色
+    required int32 role=4;
+    //性别
+    required int32 sex=5;
+    //服务器id
+    required int32 serverId=6;
+    //挂机
+    required bool guaJi=7;
+    //平台id
+    required int32 platform=8;
+}
+
+
+
+
+
+
+
+
+
+
+

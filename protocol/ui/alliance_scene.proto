@@ -1,0 +1,154 @@
+syntax = "proto2";
+
+package ui;
+
+import "rewproperty.proto";
+import "drop.proto";
+import "scene.proto";
+
+
+//九霄城战场景信息
+message SCAllianceSceneInfo{
+    //守方联盟id
+    required int64 defendAllianceId=1;
+    //当前守方联盟id
+    required int64 currentDefendAllianceId=2;
+    //当前守方联盟名字
+    required string currentDefendAllianceName=3;
+    //当前守方虎符
+    required int64 currentDefendAllianceHuFu=4;
+    //当前门
+    required int32 currentDoor=5;
+    //结束时间
+    required int64 endTime=6;
+    //已经领取过的奖励啊
+    repeated int32 doorRewardList=7;
+    //当前复活点仙盟
+    required int64 cuurentReliveAllianceId=8;
+    //正在读条占领复活点仙盟
+    required int64 currentCollectReliveAllianceId=9;
+    //正在读条占领复活点开始时间
+    required int64 collectReliveStartTime=10; 
+    //当前城战积分
+    required int32 warPoint=11;
+    //玉玺采集物
+    optional GeneralCollectInfo yuXi=12;
+} 
+
+//召唤
+message CSAllianceSceneCall {
+    //守卫id
+    required int32 guardId=1;
+}
+message SCAllianceSceneCall {
+    //守卫id
+    required int32 guardId=1;
+}
+
+//已经召唤的守卫
+message CSAllianceSceneCalledGuardList{
+}
+message SCAllianceSceneCalledGuardList{
+    repeated int32 calledGuardList = 1;
+}
+
+//城门破了
+message SCAllianceSceneDoorBroke {
+    //城门
+    required int32 door =1;
+}
+
+
+// //正在占领
+// message SCAllianceSceneOccupying{
+//     required int64 allianceId=1;
+// }
+
+// //占领取消 
+// message SCAllianceSceneOccupyStop{
+//     required int64 allianceId=1;
+// }
+
+//玉玺占领成功
+message SCAllianceSceneOccupy{
+    required int64 allianceId=1;    //占领玉玺的仙盟id
+    required string allianceName=2; //占领玉玺的仙盟名字
+    required int64 huFu=3;          //占领玉玺的虎符 
+}
+
+//活动结束
+message SCAllianceSceneFinish{
+    required int64 allianceId=1;
+    required string allianceName=2;
+}
+
+//守方虎符改变
+message SCAllianceSceneDefendHuFuChanged{
+    required int64 huFu=1;
+}
+
+//领取城门奖励
+message CSAllianceSceneGetReward{
+    required int32 door=1;
+}
+message SCAllianceSceneGetReward{
+    required int32 door=1;
+    repeated DropInfo dropInfo=2;
+    required RewProperty rewProperty=3;
+}
+
+//九霄城战霸主信息
+message CSAllianceHegemonInfo{
+}
+message SCAllianceHegemonInfo{
+    //联盟id
+    required int64 allianceId=1;
+    //联盟名字
+    required string allianceName=2;
+    //盟主id
+    required int64 mengZhuId=3;
+    //盟主名字
+    required string mengZhuName=4;
+    //战力
+    required int64 totalForce=5;
+    //连胜次数
+    required int32 winNum=6;
+    //霸主性别
+    required int32 mengZhuSex=7;
+}
+
+//正在抢占复活点
+message CSAllianceSceneReliveOccupying{
+}
+message SCAllianceSceneReliveOccupying{
+    required int64 allianceId=1;
+    required int64 playerId=2;
+}
+
+//复活点占领取消 
+message SCAllianceSceneReliveOccupyStop{
+    required int64 allianceId=1;
+}
+
+//复活点占领成功
+message SCAllianceSceneReliveOccupy{
+    required int64 allianceId=1;
+    optional string allianceName=2;
+    optional string playerName=3;
+}
+
+//原地复活次数改变
+message SCAllianceSceneReliveTimeChange {
+    //已使用原地复活次数
+    required int32 reliveTime=1;
+}
+
+// 城战积分变化
+message SCAllianceSceneWarPointChanged {
+    required int32 warPoint=1;
+}
+
+// 玉玺信息广播
+message  SCAllianceSceneYuXiBroadcast {
+    required GeneralCollectInfo yuXi=1;
+}

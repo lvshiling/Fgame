@@ -1,0 +1,34 @@
+syntax = "proto2";
+
+package ui;
+import "item.proto";
+import "common.proto";
+ 
+//取消排队
+message CSLineupCancel {
+    required int32 crossType=1;
+    required int64 sceneId=2;
+}
+message SCLineupCancel {
+    required int32 crossType=1;
+}  
+
+//排队信息推送
+message SCLineupNotice {
+    //前面人数
+    required int32 beforeNum=1;
+    //0无 13比武大会
+    required int32 crossType=2;   
+} 
+ 
+//排队成功回复
+message SCLineupSuccess { 
+    required int32 crossType=1;
+}
+ 
+
+//场景结束推送给排队
+message SCLineupSceneFinishToCancel{
+    required int32 crossType=1;
+}
+

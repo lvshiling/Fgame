@@ -1,0 +1,96 @@
+syntax = "proto2";
+
+package ui;
+
+message SystemSkillSubInfo {
+    required int32 subType=1;
+    required int32 level=2;
+}
+
+message SystemSkillCacheInfo {
+    //系统技能类型
+    required int32 tag=1;
+    repeated SystemSkillSubInfo skillSubList=2;
+}
+
+//所有系统技能
+message AllSystemSkillInfo {
+   repeated SystemSkillCacheInfo systemSkillList=1;
+}
+
+
+
+
+message SystemSkillInfo {
+    //系统技能类型
+    required int32 tag=1;
+    //技能类型
+    required int32 subType=2;
+    //系统技能等级
+    required int32 level=3;
+}
+
+//获取系统技能
+message CSSystemSkillGet{
+    //系统技能类型
+    required int32 tag=1;
+}
+
+//系统技能信息应答
+message SCSystemSkillGet{
+    //系统技能类型
+    required int32 tag=1;
+    //系统技能信息
+    repeated SystemSkillInfo systemSkillList=2;
+ }
+
+//激活系统技能请求
+message CSSystemSkillActive {
+    //系统技能类型
+   required int32 tag=1;
+   //技能类型
+   required int32 subType=2;
+   
+}
+
+//激活系统技能应答
+message SCSystemSkillActive {
+    required SystemSkillInfo systemSkill=1;
+}
+
+
+//系统技能升级请求
+message CSSystemSkillUpgrade {
+   //系统技能类型
+   required int32 tag=1;
+   //技能类型
+   required int32 subType=2;
+}
+
+//系统技能升级应答
+message SCSystemSkillUpgrade {
+    required  SystemSkillInfo systemSkill=1;
+}
+
+//所有系统技能信息
+message CSSystemSkillAllGet{
+
+}
+
+//所有系统技能信息应答
+message SCSystemSkillAllGet{
+    //系统技能信息
+    repeated SystemSkillInfo systemSkillList=1;
+ }
+
+ 
+
+
+
+
+
+
+
+
+
+

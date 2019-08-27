@@ -1,0 +1,74 @@
+syntax = "proto3";
+
+package pb;
+
+//自己账户登陆请求
+message SelfLoginRequest{
+    string name=1;                   //名字 
+    string password=2;             //密码
+}
+
+//自己账户登陆返回
+message SelfLoginResponse{
+    int32 platform=1; //平台
+    string platformUserId=2; //平台id
+}
+
+
+//登陆请求
+message LoginRequest{
+    int32 platform=1;                   //平台 
+    int32 devicePlatform=2;             //设备平台
+    string userId=3;                    //平台用户id
+    string ip=4; //ip
+}
+
+//登陆回复
+message LoginResponse{
+    int64 userId=1; //用户id
+    string token=2; //token
+    int64 expiredTime=3; //过期时间
+    int32 gm=4; //是否gm
+}
+
+message LoginVerifyRequest{
+    string token=1; //登陆验证
+    int32 serverId=2; //登陆服务器id
+    int32 originServerId=3; //服务器id
+}
+
+message LoginVerifyResponse{
+    int32 sdkType=1;
+    int32 devicePlatformType=2;
+    int64 userId=3;
+    string platformUserId =4;
+    int32 gm=5;
+    string iosVersion=6;
+    string androidVersion=7;
+}
+
+//内挂登陆
+message GMLoginRequest{
+    int32 sdkType=1;                   //平台 
+    string userId=2;                    //平台用户id
+    string name=3;                     //用户
+    string password=4;                 //密码
+}
+
+//登陆回复
+message GMLoginResponse{
+    int64 userId=1; //用户id
+    string token=2; //token
+    int64 expiredTime=3; //过期时间
+}
+
+service LoginManage {
+    //自己账户登陆
+    rpc SelfLogin(SelfLoginRequest) returns(SelfLoginResponse){}
+    //登陆
+    rpc Login(LoginRequest) returns(LoginResponse){}
+    //登陆验证
+    rpc LoginVerify(LoginVerifyRequest) returns(LoginVerifyResponse){}
+    //GM
+    rpc GMLogin(GMLoginRequest) returns(GMLoginResponse){}
+}

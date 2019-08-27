@@ -1,0 +1,97 @@
+syntax = "proto2";
+
+package ui;
+
+//丹药信息
+message DanInfo {
+    //丹药类型
+    required int32 id=1;
+    //已吃丹药数量
+    required int32 num=2;
+}
+
+//炼丹信息
+message AlchemyInfo {
+    //模板id
+    required int32 kindId=1;
+    //炼丹数目
+    required int32 num=2;
+    //丹药状态 1进行中 2完成 
+    required int32 state=3;
+    //炼丹开始时间
+    required int64 startTime=4;
+}
+
+//食丹信息请求
+message CSDanGet {
+  }
+//食丹信息应答
+message SCDanGet{
+   //食丹等级
+   required int32 level=1;
+   //已吃丹药信息
+   repeated DanInfo danList=2;
+}
+
+//全部食用请求
+message CSDanUse {
+}
+//全部食用应答
+message SCDanUse {
+   //丹药
+   repeated DanInfo danList=1;
+}
+
+//升级请求
+message CSDanUpgrade {
+}
+//升级应答
+message SCDanUpgrade {
+    required int32 level=1;
+}
+
+//炼丹信息请求
+message CSAlchemyGet{
+}
+//炼丹信息应答
+message SCAlchemyGet{
+    //炼丹
+    repeated AlchemyInfo alchemyList=1;
+}
+
+//开始炼丹请求
+message CSAlchemyStart{
+    required int32 kindId=1;
+    required int32 num=2;
+}
+//开始炼丹应答
+message SCAlchemyStart{
+    required AlchemyInfo alchemyInfo=1;
+}
+
+//加速炼丹请求
+message CSAlchemyAccelerate{
+    required int32 kindId=1;
+}
+//加速炼丹应答
+message SCAlchemyAccelerate{
+    required int32 kindId=1;
+}
+
+//练完丹药领取请求
+message CSAlchemyReceive{
+    required int32 kindId=1;
+}
+//练完丹药领取应答
+message SCAlchemyReceive{
+    optional int32 kindId=1;
+    required int32 num=2;
+}
+
+
+
+
+
+
+
+

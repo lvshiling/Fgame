@@ -1,0 +1,12 @@
+file="system_online.go"
+pkg="model"
+class="SystemOnline"
+base="SystemLogMsg"
+comment = "系统在线日志"
+name="system_online"
+[[variables]]
+name="OnlineNum"
+type="int32"
+tag="onlineNum"
+comment="在线人数"
+show="normal"

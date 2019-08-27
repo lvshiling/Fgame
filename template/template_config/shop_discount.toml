@@ -1,0 +1,27 @@
+file="shop_discount_vo.go"
+pkg="template"
+class="ShopDiscountTemplateVO"
+comment = "商城促销配置"
+[[variables]]
+name="Id"
+type="int"
+tag="id"
+comment="id"
+
+[[variables]]
+name="Type"
+type="int32"
+tag="type"
+comment="促销类型"
+
+[[variables]]
+name="ShopType"
+type="int32"
+tag="shop_type"
+comment="商店类型"
+
+[[variables]]
+name="Discount"
+type="int32"
+tag="discount"
+comment="打折万分比"

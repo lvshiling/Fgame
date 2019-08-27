@@ -1,0 +1,23 @@
+syntax = "proto2";
+
+package ui;
+
+message GoldEquipAttrList{
+    repeated int32 attrList=1;
+}
+
+//掉落物品
+message DropInfo {
+    //掉落id
+    required int32 itemId=1;
+    //掉落数量
+    required int32 num=2;
+    //等级
+    optional int32 level=3 [default=0];
+    //绑定:0不绑定1绑定
+    optional int32 bind=4 [default=0];
+    //升星等级
+    optional int32 upstarLevel=5;
+    //附加属性
+    optional GoldEquipAttrList attr=6;  
+}

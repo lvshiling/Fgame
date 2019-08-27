@@ -1,0 +1,17 @@
+{
+    "global":{
+        "nats":{
+            "host":"192.168.1.13",
+            "port":4222,
+            "topic":"log"
+        },
+        "mongo":{
+            "addrs":["192.168.1.13:27017"],
+            "failFast":true,
+            "poolLimit":500,
+            "database":"game_log",
+            "username":"",
+            "password":""
+        }
+    }
+}

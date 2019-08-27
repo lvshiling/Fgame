@@ -1,0 +1,57 @@
+syntax = "proto2";
+
+package cross;
+
+
+//参加神兽攻城
+message SIGodSiegeAttend{
+   //类型
+   required int32 godType=1;
+}
+
+//参加神兽攻城回复
+message ISGodSiegeAttend{
+    //类型
+    required int32 godType=1;
+    //是否需要排队
+    required bool isLineUp=2;
+    //排队位置
+    required int32 beforeNum=3;
+}
+
+//排队完成
+message ISGodSiegeLineUpSuccess {
+    //类型
+    required int32 godType=1;
+}
+
+//排队完成
+message SIGodSiegeLineUpSuccess {
+    //类型
+    required int32 godType=1;
+}
+
+
+//取消排队
+message SIGodSiegeCancleLineUp {
+    //类型
+    required int32 godType=1;
+}
+
+//取消排队回复
+message ISGodSiegeCancleLineUp {
+    //类型
+    required int32 godType=1;
+}
+
+//场景结束本服玩家取消排队
+message ISGodSiegeFinishLineUpCancle{
+    //类型
+    required int32 godType=1;
+}
+
+//场景结束本服玩家取消排队回复
+message SIGodSiegeFinishLineUpCancle{
+    //类型
+    required int32 godType=1;
+}

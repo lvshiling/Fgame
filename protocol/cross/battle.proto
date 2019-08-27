@@ -1,0 +1,20 @@
+syntax = "proto2";
+
+package cross;
+
+
+//战斗数据
+message PlayerBattleData{
+    optional int32 level=1;
+    optional int32 zhuanSheng=2;
+    optional int32 soulAwakenNum=3;
+    optional int32 vip=4;
+    optional bool isHuiYuan=5;
+}
+
+
+
+//玩家战斗数据变化
+message SIPlayerBattleDataChanged{
+    required PlayerBattleData playerBattleData=1;
+}

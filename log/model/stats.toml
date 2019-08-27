@@ -1,0 +1,13 @@
+file="player_stats.go"
+pkg="model"
+class="PlayerStats"
+base="PlayerLogMsg"
+comment = "玩家点击统计"
+name="player_stats"
+
+[[variables]]
+name="Stats"
+type="string"
+tag="stats"
+comment="统计内容"
+show="normal"

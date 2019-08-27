@@ -1,0 +1,24 @@
+syntax = "proto2";
+
+package cross;
+
+//属性
+message Property {
+    required int32 key=1;
+    required int64 value=2;
+}
+
+//用户基本属性
+message PropertyData{
+    repeated Property propertyList=1;
+}
+
+
+ 
+
+
+
+
+
+
+

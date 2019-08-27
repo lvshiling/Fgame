@@ -1,0 +1,39 @@
+syntax = "proto2";
+
+import "fgame/fgame/gm/gamegm/basic/pb/basic.proto";
+
+//login message optional from 1000-1999
+package pb;
+
+message CGLogin {
+   required int64 playerId = 1;
+   required string token = 2;        // token string
+}
+
+extend pb.Message {
+   optional CGLogin cgLogin = 101;
+}
+
+message GCLogin {
+   required int64 playerId = 1;
+}
+
+extend pb.Message{
+   optional GCLogin gcLogin = 102;
+}
+
+message CGPing {
+}
+
+extend pb.Message {
+   optional CGPing cgPing = 103;
+}
+
+message GCPing {
+   required int64 now = 1;
+}
+
+extend pb.Message{
+   optional GCPing gcPing = 104;
+}
+

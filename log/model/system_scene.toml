@@ -1,0 +1,12 @@
+file="system_scene.go"
+pkg="model"
+class="SystemScene"
+base="SystemLogMsg"
+comment = "系统场景日志"
+name="system_scene"
+[[variables]]
+name="Content"
+type="string"
+tag="content"
+comment="内容"
+show="normal"

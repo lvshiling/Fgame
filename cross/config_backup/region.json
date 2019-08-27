@@ -1,0 +1,49 @@
+{
+    "debug":false,
+    "game":{
+        "map":"../resources/map",
+        "template":"../resources/template",
+        "redis":{
+            "host":"127.0.0.1",
+            "port":6379,
+            "maxIdle":50,
+            "maxActive":50,
+            "wait": true,
+            "idleTimeout":240
+    
+        },
+        "db":{
+            "debug":false,
+            "dialect":"mysql",
+            "user":"root",
+            "password":"Fhgame2018!",
+            "host":"192.168.1.123:3306",
+            "dbName":"game_center_master",
+            "parseTime":true,
+            "charset":"utf8mb4",
+            "maxActive":100,
+            "maxIdle":50,
+            "maxLifeTime":240
+        },
+        "center":{
+            "host":"192.168.1.123",
+            "port":20001,
+            "syncInterval":10000
+        }
+    },
+    "server":{
+        "server":"./data/server",
+        "id":1,
+        "serverType":3,
+        "platform":1,
+        "host":"192.168.1.7",
+        "port":17001,
+        "path":"",
+        "pprofPort":6060,
+        "statsPort":9000
+    }
+}
+
+
+
+

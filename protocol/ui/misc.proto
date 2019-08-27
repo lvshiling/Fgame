@@ -1,0 +1,40 @@
+syntax = "proto2";
+
+package ui;
+
+//获取验证码
+message CSGetIdentifyCode  {
+    required string phoneNum =1;
+}
+//获取验证码回复
+message SCGetIdentifyCode  {
+}
+
+//实名认证
+message CSRealNameAuth{
+    required string name=1;
+    required string cardNum=2;
+    required string phoneNum=3;
+    required string code=4;
+}
+
+//验证成功
+message SCRealNameAuth{
+    //1:未成年 2:成年
+    required int32 realNameState=1; 
+}
+
+
+//脱离卡死
+message CSExitKaSi{
+}
+
+//脱离卡死
+message SCExitKaSi{
+}
+
+
+
+
+
+

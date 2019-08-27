@@ -1,0 +1,450 @@
+syntax = "proto2";
+
+package ui;
+import "common.proto";
+
+
+message TeamMember {
+    //位置 0 队长
+    required int32 pos=1;
+    //玩家id
+    required int64 playerId=2;
+    //玩家名字
+    required string name=3;
+    //玩家等级
+    required int32 level=4;
+    //玩家角色  //1 开天 2 奕剑 3 破月
+    required int32 role=5;
+    //玩家性别  //1 男   2 女
+    required int32 sex=6;
+    //玩家当前血量
+    required int64 hp=7;
+    //玩家最大血量 
+    required int64 maxHp=8;
+    //玩家战斗力
+    required int64 force=9;
+    //服装id
+    required int32 fashionId=10;
+    //是否在线  //0离线 1在线
+    required int32 online=11;  
+    //转生数
+    required int32 zhuanSheng=12;
+    //是否准备
+    required bool isPrepare = 13 ;
+}
+
+
+message TeamNearMember {
+    //角色
+    required  int32 role=1;
+    //等级
+    required int32 level=2;
+}
+
+message TeamNearInfo {
+    //队伍id
+    required int64 teamId=1;
+    //队伍名字
+    required string teamName=2;
+    //队长性别
+    required int32 sex=3;
+    //地图map_id
+    required int32 mapId=4;
+    //队员信息
+    repeated TeamNearMember memberList=5;
+}
+
+message TeamNearPlayer {
+    //玩家id
+    required int64 playerId=1;
+    //玩家角色
+    required int32 role=2;
+    //玩家性别
+    required int32 sex=3;
+    //玩家名字
+    required string name=4;
+    //玩家战力
+    required int64 force=5;
+}
+
+//成员位置
+message TeamMemberPos {
+    //玩家id
+    required int64 playerId=1;
+    //地图id
+    required int32 mapId=2;
+     //当前位置
+     required Position pos=3;
+}
+
+//队伍信息
+message TeamInfo {
+    //队伍id
+    required int64 teamId=1;
+    //队内成员
+    repeated TeamMember memberList=2;
+    //是否是登录下发 1登录下发 -1走原本的
+    optional int32 login=3 [default=-1];
+    //匹配
+    required bool match =4;
+    //自动审核
+    required bool autoReview=5;
+    //组队标识
+    required int32 purpose=6;
+}
+
+//玩家组队界面信息请求
+message CSTeamGet {
+}
+
+//组队信息
+message SCTeamGet {
+    //队伍id
+    required int64 teamId=1;
+    //队内成员
+    repeated TeamMember memberList=2;
+    //是否是登录下发 1登录下发 -1走原本的
+    optional int32 login=3 [default=-1];
+    //匹配
+    required bool match =4;
+    //自动审核
+    required bool autoReview=5;
+    //组队标识
+    required int32 purpose=6;
+}
+
+//玩家点击创建队伍请求
+message CSTeamCreateByPlayer {
+}
+
+//邀请玩家请求
+message CSTeamInvite {
+    //被邀请玩家id
+    required int64 invitedId=1;
+}
+
+//邀请玩家回复
+message SCTeamInvite {
+    //被邀请玩家id
+    required int64 invitedId=1;
+}
+
+//推送被邀请者
+message SCTeamInviteToInvited {
+    //类型 1 玩家对其它/附近玩家发出组队邀请 2 邀请玩家
+    required int32 typ=1;
+    //id typ=1 邀请者id typ=2 teamId
+    required int64 id=2;
+    //邀请者名字
+    required string inviteName=3;
+    //typ=1 "" typ=2 teamName
+    required string teamName=4;
+}
+
+//被邀请玩家决策
+message CSTeamInviteResult {
+    //类型 1 玩家对其它/附近玩家发出组队邀请 2 邀请玩家
+    required int32 typ=1;
+    //类型 1 同意 2拒绝
+    required int32 result=2;
+    //id  typ=1 邀请者id  typ=2 teamId
+    required int64 id=3;
+}
+
+
+//邀请结果组内广播
+message SCTeamInviteBroadcast {
+    //状态 1 同意  2拒绝
+    required int32 result=1;
+    //被邀请玩家名字
+    required string playerName=2;
+}
+
+message SCTeamBroadcast {
+    //类型  1转让队长  2离队 3请离队  4申请者加入成功  5 被邀请者同意加入
+    required int32 typ=1;
+    //name 新队长名字  离队玩家名字  被请离者名字  申请者名字  被邀请者名字
+    required string name=2;
+    //队伍id 
+    required int64 teamId=3;
+    //队内成员 
+    repeated TeamMember memberList=4;
+    //是否自动审核
+    required bool autoReview = 5;
+    //组队标识
+    required int32 purpose=6;
+}
+
+//离队请求
+message CSTeamLeave {
+}
+
+//离队请求回复
+message SCTeamLeave {
+    //队伍名字
+    required string name=1;
+}
+
+//转让队长请求
+message CSTeamTransferCaptain {
+    //被任命者id
+    required int64 captainId=1;
+}
+
+
+//请离队伍
+message CSTeamByLeaved {
+    //被请离玩家id
+    required int64 leavedId=1;
+}
+
+//推送给被请离者
+message SCTeamByLeavedToLeave {
+    //队伍名字
+    required string name=1;
+}
+
+//组队列表-附近队伍请求
+message CSTeamNearGet {
+}
+
+//组队列表-附近队伍回复
+message SCTeamNearGet {
+    repeated TeamNearInfo teamNearList=1;
+}
+
+//申请加入
+message CSTeamNearJoin {
+    //申请队伍id
+    required int64 teamId=1;
+}
+
+//申请加入回复
+message SCTeamNearJoin {
+    //申请队伍id
+    required int64 teamId=1;
+    //结果 0 已申请  1 当前队伍人数已达上限  2 队伍已解散 3加入队伍
+    required int32 result=2;
+}
+
+//推送给队长
+message SCTeamNearJoinToCaptain {
+    //申请者id
+    required int64 applyId=1;
+}
+
+
+//队长对申请加入决策
+message CSTeamNearJoinResult {
+    //  1 同意 2 拒绝
+    required int32 result=1;
+    //申请者id
+    required int64 applyId=2;
+}
+
+//队长对申请加入决策回复
+message SCTeamNearJoinResult {
+    //申请者id
+    required int64 applyId=1;
+}
+
+//推送拒绝结果给申请者
+message SCTeamNearJoinResultToApply {
+    //申请队伍名字
+    required string name=1;
+}
+
+//组队列表—附近玩家请求
+message CSTeamNearPlayerGet {
+}
+
+//组队列表—附近玩家回复(战力前端做排序)
+message SCTeamNearPlayerGet {
+    repeated TeamNearPlayer playerNearList=1;
+}
+
+//请求申请列表
+message CSTeamApplyGet {
+}
+
+//请求申请列表回复
+message SCTeamApplyGet {
+    repeated TeamNearPlayer applyList=1;
+}
+
+//清空列表
+message CSTeamClearApply {
+
+}
+
+//队伍信息变化
+message SCTeamDataChanged {
+    required int64 playerId=1;
+    optional int32 level=2 [default=-1];  //-1没有变化
+    optional int64 maxHp=3 [default=-1];
+    optional int64 hp=4 [default=-1];
+    optional int64 force=5 [default=-1];
+    optional int32 fashionId=6 [default=-1];
+    optional int32 online=7 [default=-1]; //0离线 1在线
+    optional int32 zhuanSheng=8 [default=-1]; 
+    optional int32 sex=9 [default=-1]; //性别
+    optional string name=10 [default=""]; //名字
+    optional int32 purpose=11 [default=-1]; //-1没有变化
+}
+
+//一键申请
+message CSTeamApplyAll {
+
+}
+
+//一键申请回复
+message SCTeamApplyAll {
+
+}
+
+//一键邀请
+message CSTeamInviteAll {
+
+}
+
+//一键邀请回复
+message SCTeamInviteAll {
+    
+}
+
+//队友位置信息请求
+message CSTeamMemberPos {
+
+}
+
+//队友位置
+message SCTeamMemberPos {
+    repeated TeamMemberPos memberPosList=1;
+}
+
+
+//队长修改审核标识
+message CSTeamAutoReview {
+    required bool autoReview=1;
+}
+
+//队长修改审核标识回复
+message SCTeamAutoReview {
+    required bool autoReview=1;
+}
+
+
+//副本房间信息请求
+message CSTeamHousesGet {
+    //副本标识
+    required int32 purpose=1;
+}
+
+//副本房间信息回复 
+message SCTeamHousesGet {
+    //副本标识
+    required int32 purpose=1;
+    //队伍信息
+    repeated TeamInfo teamInfoList=2;
+}
+
+
+//创建房间
+message CSTeamCreateHouse {
+    //副本标识
+    required int32 purpose=1;
+}
+
+//创建房间回复
+message SCTeamCreateHouse {
+    //副本标识
+    required int32 purpose=1;
+    //队伍信息
+    required TeamInfo teamInfo=2;
+}
+
+
+//队员匹配条件不满足推送给队长
+message SCTeamMatchCondtionFailed{
+    //队员
+    repeated TeamMember memberList=1;
+}
+
+//咨询问题决策
+message CSTeamMatchCondtionFailedDeal{
+    required bool result =1;
+}
+
+//咨询问题决策回复
+message SCTeamMatchCondtionFailedDeal{
+    required bool result =1;
+}
+
+
+//广播未准备好的标识 
+message SCTeamMatchCondtionFailedBroadcast {
+    repeated int64 playerIdList=1;
+}
+
+//队员匹配条件不满足推送给队员
+message SCTeamMatchCondtionFailedToPrepare{
+
+}
+
+//队员准备决策
+message CSTeamMatchCondtionPrepareDeal{
+    required bool result=1;
+}
+
+//队员准备决策回复
+message SCTeamMatchCondtionPrepareDeal{
+    required bool result=1;
+}
+
+//广播玩家从未准备好到准备好状态
+message SCTeamMatchCondtionPrepareBroadcast {
+    required int64 playerId=1;
+}
+
+//催处开始请求
+message CSTeamMatchRushStart {
+
+}
+
+//催处开始请求回复
+message SCTeamMatchRushStart{
+
+}
+
+//催处开始推送给队长
+message SCTeamMatchRushToCaptain {
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,298 @@
+syntax = "proto2";
+
+package scene;
+
+import "common.proto";
+import "player.proto";
+import "monster.proto";
+import "item.proto";
+import "buff.proto";
+
+
+//场景模块 101-200
+//延迟包
+message CSPing {
+}
+
+message SCPing {
+}
+
+//进入场景
+message CSEnterScene {
+     //地图模板id
+    required int32 mapId = 1;
+    //位置
+    optional Position pos =2;
+
+}
+
+//进入场景回复
+message SCEnterScene {
+    //地图模板id
+    required int32 mapId = 1;
+    //位置
+    required Position pos=2;
+    //玩家数据
+    required ScenePlayerData playerData =3;
+}
+
+
+//对象进入视野包括人,NPC和物品
+message SCObjectEnterScope {
+    repeated ScenePlayerData playerDataList =1;
+    repeated SceneMonsterData monsterDataList=2;
+     //TODO 添加物品数据
+    repeated SceneItemData itemDataList=3;
+}
+
+message ExitObject{
+    //uuid
+    required int64 uid = 1;
+    //对象类型 
+    required int32 objecType = 2; 
+}
+
+//对象退出视野
+message SCObjectExitScope{
+    repeated ExitObject exitObjectList = 1;
+}
+
+
+message ObjectMoveData {
+    //uuid
+    required int64 uid = 1;
+    //对象类型 
+    required int32 objecType = 2;
+    //位置
+    required Position pos=3;
+    //移动速度
+    required float moveSpeed=4;
+    //移动角度
+    required float angle=5;
+    //移动类型
+    required int32 moveType=6;
+    //客户端需要
+    optional bool flag=7;
+}
+
+//移动包
+message CSObjectMove {
+    //预测的位置
+    required Position pos=1;
+    //移动速度
+    required float moveSpeed=2;
+    //移动角度
+    required float angle=3; 
+    //移动类型
+    required int32 moveType=4;
+    //uid
+    required int64 uid=5;
+    //客户端需要
+    optional bool flag=6;
+    //现在的位置
+    optional Position curPos=7;
+}
+
+//移动包
+message SCObjectMove {
+    required ObjectMoveData moveData=1;
+}
+
+
+//攻击数据
+message ObjectAttackData {
+    //uuid
+    required int64 uid = 1;
+    //对象类型 
+    required int32 objecType = 2;
+    //位置
+    required Position pos=3;
+    //移动角度
+    required float angle=4;
+    //技能id
+    required int32 skillId=5;
+}
+
+
+//移动包
+message CSObjectAttack {
+    //位置
+    required Position pos=1;
+    //移动角度
+    required float angle=2; 
+    //移动类型
+    required int32 skillId=3;
+    //uid
+    required int64 uid=4;
+}
+
+//攻击包
+message SCObjectAttack {
+    required ObjectAttackData attackData=2;
+}
+
+
+//伤害包或治疗
+message ObjectDamage{
+  //uuid
+  required int64 uid = 1;
+  //对象类型 
+  required int32 objecType = 2;
+  //最终血量
+  required int64 hp = 3;
+  //伤害类型或治疗类型
+  required int32 damageType = 4;
+  //伤害或治疗值
+  required int64 damageVal=5;
+  //攻击者id
+  optional int64 attackId=6;
+}
+
+//伤害包或治疗
+message SCObjectDamage{
+     //技能id 技能id为0代表为buff
+    required int32 skillId = 1;
+    repeated ObjectDamage objectDamageList=2;
+}
+
+
+
+
+//buff包
+message SCObjectBuff{
+   repeated ObjectBuffData objectBuffList=1;
+}
+
+
+//buff移除
+message SCObjectBuffRemove{
+   repeated ObjectBuffData objectBuffList=1;
+}
+
+
+
+//战斗包
+message SCObjectBattle{
+   required bool battleState=1;
+}
+
+
+//玩家数据变更
+message SCPlayerDataChanged {
+    //玩家数据
+    required ScenePlayerShowData playerData =1;
+}
+
+
+//复活
+message CSPlayerRelive{
+    //复活类型 0:原地复活 1:回城复活
+    required int32 reliveType = 1;
+    optional bool autoBuy=2; //复活丹不足自动购买
+}
+
+//复活数据
+message ObjectReliveData {
+    required int32 sceneId=1;
+    required int64 uid=2;
+    required Position pos=3;
+    required int64 hp=4;
+    required int64 hpMax=5;
+}
+
+//复活回复
+message SCPlayerRelive{
+    required ObjectReliveData reliveData=1;
+}
+
+//领取物品
+message CSItemGet{
+    repeated  int64 ItemId=1;
+}
+
+
+//获得物品
+message SCItemGet{
+    repeated int64 ItemId=1;
+}
+
+
+//退出场景
+message SCExitScene{
+    required  int64 playerId=1;
+}
+
+
+//修正位置
+message SCObjectFixPosition {
+    //uuid
+    required int64 uid = 1;
+    //对象类型 
+    required int32 objecType = 2;
+    //位置
+    required Position pos=3;
+}
+
+//怪物阵营变化
+message SCMonsterCampChanged{
+     //uuid
+     required int64 uid = 1;
+     //对象类型 
+     required int32 objecType = 2;
+     //敌人
+     required bool enemy=3;
+}
+
+
+
+
+//物品变化
+message SCItemOwnerChanged{
+    //掉落物品唯一id
+    required int64 itemId=1;
+    required bool state=2;
+}
+
+//世界场景进入
+message CSWorldEnterScene{
+    required int32 worldMapId=1;
+}
+
+message CSEnterPortal {
+    required int32 portalId=1;
+}
+
+message SCEnterPortal {
+    required int32 portalId=1;
+}
+
+//重新进入场景
+message CSReenterScene{
+
+}
+
+
+//心跳包
+message CSSceneHeartBeat {
+}
+
+message SCSceneHeartBeat {
+}
+
+
+//宠物攻击
+message CSPetAttack {
+    //位置
+    required Position pos=1;
+    //移动角度
+    required float angle=2; 
+    //移动类型
+    required int32 skillId=3;
+    //类型
+    required int32 objectType=4;
+}
+
+//攻击包
+message SCPetAttack {
+    required ObjectAttackData attackData=2;
+}

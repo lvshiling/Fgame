@@ -1,0 +1,34 @@
+syntax = "proto2";
+
+package cross;
+
+
+import "item.proto";
+
+//跨服采集完成
+message ISCollectFinish{
+    //biologyId
+    required int32 biologyId=1;
+}
+
+//跨服采集完成回复
+message SICollectFinish{
+    repeated ItemInfo itemList=1;
+}
+
+
+//跨服密藏采集完成
+message ISCollectMiZangFinish{
+    required int64 npcId=1;
+    //密藏id
+    required int32 biologyId=2;
+    required int32 miZangId=3;
+    required int32 openType=4;
+}
+
+//跨服密藏采集回复
+message SICollectMiZangFinish{
+    required int64 npcId=1;
+    repeated ItemInfo itemList=2;
+}
+

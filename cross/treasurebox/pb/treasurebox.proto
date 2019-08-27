@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+package pb;
+
+message itemInfo {
+    int32 itemId=1;
+    int32 num=2;
+}
+
+message BoxLogInfo{
+    int32 serverId=1;
+    string playerName=2;
+    int64 lastTime=3;
+    repeated itemInfo itemList=4;
+}
+
+//开跨服宝箱
+message TreasureBoxOpenLogRequest {
+    int32 serverId=1;
+    string playerName=2;
+    int64 lastTime=3;
+    repeated itemInfo itemList=4;
+}
+
+//开跨服宝箱回复
+message TreasureBoxOpenLogResponse {
+
+}
+
+//获取跨服宝箱日志列表
+message TreasureBoxLogListRequest{
+}
+
+//获取跨服宝箱日志列表回复
+message TreasureBoxLogListResponse{
+    repeated BoxLogInfo logList=1;
+}
+
+service TreasureBox{
+    //获取日志
+    rpc GetTreasureBoxLogList(TreasureBoxLogListRequest) returns(TreasureBoxLogListResponse){}
+    //开跨服宝箱
+    rpc OpenTreasureBox(TreasureBoxOpenLogRequest) returns(TreasureBoxOpenLogResponse){}
+}
+

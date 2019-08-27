@@ -1,0 +1,89 @@
+syntax = "proto2";
+
+package ui;
+import "common.proto";
+import "drop.proto";
+
+
+message FloorInfo {
+    required int32 biologyId=1;
+    required bool isDead=2;
+    required int64 deadTime=3;
+    required int32 floor=4;
+}
+
+message TowerLog{
+    required int64 createTime=1;
+    required string playerName=2;
+    required string biologyName=3;
+    required int32 itemId=4; 
+}
+
+
+//进入打宝塔
+message CSTowerEnter{
+    // 层数
+    required int32 floor=1;
+}
+message SCTowerEnter{
+    // 剩余打宝时间
+    required int64 remainTime=1;
+    // 打宝日志
+    repeated TowerLog logList=2;
+    // 当前层数
+    required int32 floor=3;
+    // 是否死亡
+    optional bool isDead=4;
+    // 死亡时间
+    optional int64 deadTime=5;
+}
+
+//boss击杀/复活公告推送
+message SCTowerBossInfoNotice{
+    required FloorInfo floorInfo=1;
+    optional string playerName=2;
+    optional string bossName=3;
+    optional string mapName=4; 
+}
+
+//打宝时间推送
+message SCTowerTimeNotice{
+    required int64 remainTime=1;
+}
+
+//打宝结算推送
+message SCTowerResultNotice{
+    // 累计打宝经验
+    required int64 totalExp=1;
+    // 累计打宝获得物品
+    repeated DropInfo dropList=2;
+    // 剩余打宝时间
+    required int64 remainTime=3;
+}
+
+//打宝塔列表
+message CSTowerFloorList{
+}
+message SCTowerFloorList{
+    // 剩余打宝时间
+    required int64 remainTime=1;
+    // BOSS层数信息
+    repeated FloorInfo floorList=2;
+}
+
+//打宝记录增量请求
+message CSTowerLogIncr{
+    required int64 logTime=1;
+}
+message SCTowerLogIncr{
+    repeated TowerLog logList=1;
+}
+
+//打宝
+message CSTowerDaBao{
+    // 0开始打宝 1结束打宝 
+    required int32 typ=1;
+}
+message SCTowerDaBao{
+    required int64 remainTime=1;
+}

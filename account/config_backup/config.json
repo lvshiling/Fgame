@@ -1,0 +1,22 @@
+{
+    "debug":false,
+    "account":{
+        "center":{
+            "host":"192.168.1.7",
+            "port":10001
+        },
+        "sdk":"./config/sdk",
+        "enablePC":false
+    },
+    "server":{ 
+        "debug":false,
+        "server":"./data/server",
+        "host":"0.0.0.0",
+        "port":3000,
+        "path":"",
+        "pprofPort":6060,
+        "statsPort":9000
+    }
+
+}
+

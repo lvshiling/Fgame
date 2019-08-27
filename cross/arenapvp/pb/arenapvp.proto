@@ -1,0 +1,78 @@
+syntax = "proto3";
+
+package pb;
+
+
+message BattleResult {
+    int32 pvpType=1;
+	int64 winnerId=2;   //获胜id
+	int64 battleId1=3;  //对战id1
+	int64 battleId2=4;  //对战id2
+	int32 index=5;      //场次
+}
+message ArenapvpBattlePlayer{
+    int32 serverId=1; 
+    int64 playerId=2; 
+    string playerName=3;    //玩家姓名
+    int32 platform=4; 
+    int32 sex=5;   //性别
+    int32 role=6;   //职业
+    repeated BattleResult resultList=7;
+    int32 wingId=8;
+    int32 weaponId=9;
+    int32 fashionId=10; 
+    int32 weaponState=11;
+    int32 xianTiId=12;
+    int32 lingYuId=13;
+    int32 faBaoId=14;
+}
+
+message GuessData {
+    int32 pvpType=1;
+    int32 raceNumber=2;
+    repeated ArenapvpBattlePlayer playerList=3;
+}
+
+
+message BaZhuData {
+    int32 serverId=1; 
+    int64 playerId=2; 
+    string playerName=3;    //玩家姓名
+    int32 platform=4; 
+    int32 sex=5;            //性别
+    int32 role=6;           //职业 
+    int32 raceNumber=7;     //届
+    int32 weaponId=8;       //兵魂
+    int32 wingId=9;         //战翼
+    int32 fashionId=10;     //时装
+}
+
+//海选会场信息
+message ElectionData {
+    int32 electionIndex=1;  // 会场号
+    int32 plNumber=2;       //人数
+    int64 lastLuckyTime=3;  //上次幸运奖时间
+    string luckyNameText=4; //中奖名单
+}
+
+message ArenapvpData{
+    //历届霸主 
+    repeated BaZhuData baZhuList=1; 
+    //pvp赛程
+    repeated ArenapvpBattlePlayer playerList=2;
+    //当前竞猜
+    repeated GuessData guessDataList=3;
+    //海选会场信息
+    repeated ElectionData electionDataList=4;
+} 
+  
+message ArenapvpRequest{
+}
+message ArenapvpResponse{
+    ArenapvpData arenapvpData=1; 
+}  
+
+service Arenapvp{
+    //获取
+    rpc GetArenapvpData(ArenapvpRequest) returns(ArenapvpResponse){}
+} 

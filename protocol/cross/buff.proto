@@ -1,0 +1,32 @@
+syntax = "proto2";
+
+package cross;
+
+//buff数据
+message BuffData{
+    required int64 ownerId =1;
+    required int32 buffId=2;
+    required int32 groupId=3;
+    required int64 startTime=4;
+    required int64 useTime=5;
+    required int32 culTime=6;
+    required int64 lastTouchTime=7;
+    required int64 duration=8;
+}
+
+
+//buff更新
+message SIBuffAdd{
+    required BuffData buffData=1;
+}
+
+//匹配
+message SIBuffRemove{
+    required int32 buffId=1;
+}
+
+//buff更新
+message SIBuffUpdate{
+    required BuffData buffData=1;
+}
+

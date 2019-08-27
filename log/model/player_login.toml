@@ -1,0 +1,13 @@
+file="player_login.go"
+pkg="model"
+class="PlayerLogin"
+base="PlayerLogMsg"
+comment = "玩家登陆日志"
+name="player_login"
+
+[[variables]]
+name="Ip1"
+type="string"
+tag="ip1"
+comment="ip1"
+show="normal"

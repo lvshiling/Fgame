@@ -1,0 +1,108 @@
+syntax = "proto2";
+
+package cross;
+
+
+//神魔战场数据
+message ShenMoData{
+    required int32 gongXunNum=1;
+    required int32 killNum =2;
+    required int64 endTime=3;
+}
+
+
+//神魔战场数据同步
+message ISShenMoSync{
+    required ShenMoData shenMoData=1;
+}
+
+//神魔战场同步确认
+message SIShenMoSync{
+
+}
+
+//参加神魔战场
+message SIShenMoAttend{
+   
+}
+
+//参加神魔战场回复
+message ISShenMoAttend{
+    //是否需要排队
+    required bool isLineUp=1;
+    //排队位置
+    required int32 beforeNum=2;
+}
+
+//排队完成
+message ISShenMoLineUpSuccess {
+    
+}
+
+//排队完成
+message SIShenMoLineUpSuccess {
+    
+}
+
+
+//取消排队
+message SIShenMoCancleLineUp {
+
+}
+
+//取消排队回复
+message ISShenMoCancleLineUp {
+
+}
+
+//场景结束本服玩家取消排队
+message ISShenMoFinishLineUpCancle{
+
+}
+
+//场景结束本服玩家取消排队回复
+message SIShenMoFinishLineUpCancle{
+
+}
+
+//击杀人数
+message ISShenMoKillNumChanged {
+    required int32 killNum=1;
+}
+
+//击杀人数回复
+message SIShenMoKillNumChanged {
+
+}
+
+
+//玩家功勋增加
+message ISPlayerGongXunAdd {
+    required int32 num=1;
+}
+
+//玩家功勋增加
+message SIPlayerGongXunAdd {
+
+}
+
+//玩家功勋减少
+message ISPlayerGongXunSub{
+    required int32 num=1;
+}
+
+//玩家功勋减少
+message SIPlayerGongXunSub {
+
+}
+
+//玩家功勋改变
+message SIPlayerGongXunChanged {
+    required int32 num=1;
+}
+
+//玩家功勋改变
+message ISPlayerGongXunChanged {
+
+}
+

@@ -1,0 +1,59 @@
+syntax = "proto2";
+import "error.proto";
+package ui;
+
+//定义
+message Position {
+    required float posX =1;
+    required float posY =2;
+    required float posZ =3;
+}
+
+//心跳包
+message CSHeartBeat {
+}
+
+message SCHeartBeat {
+}
+
+//获取服务器时间
+message CSGetTime{
+
+}
+
+message SCGetTime {
+    required int64 now=1;
+}
+
+//系统消息
+message SCSystemMessage{
+    required string content=1; //内容
+    repeated string args=2;   //参数0个或多个
+}
+
+//通用错误
+message SCError{
+    required ErrorCode errorCode=1;    
+}
+
+//通用异常
+message SCException{
+    required string content=1; 
+    required int32 code=2; //1:踢人 2:服务器繁忙 3：登陆超时 4：状态异常 5：玩家登陆失效 6：玩家同时登陆
+}
+
+//开服时间
+message CSOpenServerTime{
+}
+message SCOpenServerTime{
+    required int64 openServerTime=1;
+    required int64 activityOpenServerTime=2;  //活动开服时间
+}
+
+//合服时间
+message CSMergeServerTime{
+}
+message SCMergeServerTime{
+    required int64 mergeServerTime=1;
+    required int64 activityMergeServerTime=2;   //活动合服时间
+} 

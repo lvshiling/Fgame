@@ -1,0 +1,68 @@
+syntax = "proto2";
+
+package ui;
+
+import "drop.proto";
+
+//采集请求
+message CSSceneCollect{
+    required int64 npcId=1;
+    required int32 collectType=2; //0:服务器id 1:布怪表id
+}
+
+//采集回复
+message SCSceneCollect {
+    required int64 npcId=1;
+    required int64 startTime=2;
+    required bool success = 3;
+} 
+
+//采集被打断
+message SCSceneCollectStop {
+    required int64 npcId=1;
+}
+
+//采集完成
+message SCSceneCollectFinish {
+    required int64 npcId=1;
+    required int32 biologyId=2;
+    repeated DropInfo dropInfoList=3;
+    optional int32 bossId=4 [default=-1]; //密藏需要
+}
+
+//选择采集结果请求
+message CSSceneCollectChooseResult{
+    required int32 result=1;//采集选择结果
+}
+
+//选择采集结果回复
+message SCSceneCollectChooseResult {
+    required int64 npcId=1;
+    required int32 result=2;//采集选择结果
+    required bool success = 3;
+}
+
+
+
+//密藏放弃采集
+message CSSceneCollectMiZangGiveup{
+    required int64 npcId=1;
+}
+message SCSceneCollectMiZangGiveup{
+    required int64 npcId=1;
+}
+
+//密藏打开
+message CSSceneCollectMiZangOpen {
+    // 类型：0银1金
+    required int32 type=1;
+    required int64 npcId=2;
+
+}
+message SCSceneCollectMiZangOpen {
+    // 类型：0银1金
+    required int32 type=1;
+    required int64 npcId=2;
+    repeated DropInfo dropInfoList=3;
+}
+

@@ -1,0 +1,21 @@
+file="system_tongling_use_vo.go"
+pkg="template"
+class="SystemTongLingUseTemplateVO"
+comment = "附加通灵配置"
+[[variables]]
+name="Id"
+type="int"
+tag="id"
+comment="id"
+
+[[variables]]
+name="SysType"
+type="int32"
+tag="type"
+comment="系统类型"
+
+[[variables]]
+name="UseItem"
+type="int32"
+tag="item_id"
+comment="升级所需物品id"

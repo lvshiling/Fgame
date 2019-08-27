@@ -1,0 +1,137 @@
+syntax = "proto2";
+
+package ui;
+
+//仙体信基本信息息
+message XiantiInfo {
+    //阶数
+   required int32 advancedId=1;
+   //当前仙体id
+   required int32 xiantiId=2;
+   //食幻化丹食丹等级
+   required int32 unrealLevel=3;
+   //幻化丹培养进度值
+   required int32 unrealPro=4;
+   //皮肤信息列表
+   repeated XiantiSkinInfo skinList=5;
+}
+
+//仙体皮肤
+message XiantiSkinInfo {
+    //仙体皮肤id
+    required int32 xiantiId=1;
+    //升星等级
+    required int32 level=2;
+    //升星培养值
+    required int32 pro=3;
+}
+
+//仙体信息请求
+message CSXiantiGet {
+}
+
+//仙体信息应答
+message SCXiantiGet{
+   //阶数
+   required int32 advancedId=1;
+   //当前仙体id
+   required int32 xiantiId=2;
+   //食幻化丹食丹等级
+   required int32 unrealLevel=3;
+   //幻化丹培养进度值
+   required int32 unrealPro=4;
+   //幻化
+   repeated int32 unrealList=5;
+   //祝福值
+   optional int32 bless=6;
+   //祝福值开始时间
+   optional int64 blessTime=7;
+   //是否隐藏仙体
+   required bool hidden=8;
+   //仙体皮肤列表
+   repeated XiantiSkinInfo xiantiSkinList=9;
+}
+
+//食用幻化丹请求
+message CSXiantiUnrealDan {
+    required int32 num=1;
+}
+//食用幻化丹应答
+message SCXiantiUnrealDan {
+   //幻化丹食丹等级
+   required int32 level=1;
+   //进度值
+   required int32 progress=2;
+}
+
+//幻化请求
+message CSXiantiUnreal {
+    //幻化仙体id
+    required int32 xiantiId=1;
+}
+//幻化应答
+message SCXiantiUnreal {
+    optional int32 xiantiId=1;
+}
+
+//卸下请求
+message CSXiantiUnload {
+}
+
+//卸下应答
+message SCXiantiUnload {
+    //仙体id
+    required int32 xiantiId=1;
+}
+
+//进阶请求
+message CSXiantiAdvanced{
+    //是否自动进阶
+    required bool autoFlag=1;
+}
+//进阶应答
+message SCXiantiAdvanced{
+    //阶数
+    required int32 advancedId=1;
+    //仙体id
+    required int32 xiantiId=2;
+    //祝福值
+    optional int32 bless=3;
+    //祝福值开始时间
+    optional int64 blessTime=4;
+    //进阶方式 1进阶丹 2祝福丹 3直升券
+    required int32 advancedType=5;
+    // 是否暴击
+    optional bool isDouble=6 [default=false];
+    //总祝福值
+    optional int32 totalBless=7;
+}
+
+//仙体隐藏
+message CSXiantiHidden {
+    //是否隐藏 0展示  1隐藏
+    required bool hidden=1;
+}
+
+//仙体隐藏
+message SCXiantiHidden {
+    required bool hidden=1;
+}
+
+
+
+//仙体皮肤升星请求
+message CSXiantiUpstar {
+    //仙体皮肤id
+    required int32 xiantiId=1;
+}
+ 
+//仙体皮肤升星应答
+message SCXiantiUpstar {
+    //仙体皮肤id
+    required int32 xiantiId=1;
+    //皮肤星数
+    required int32 level=2;
+    //进度值
+    required int32 upPro=3;
+}

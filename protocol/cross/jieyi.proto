@@ -1,0 +1,35 @@
+syntax = "proto2";
+
+package cross;
+
+//结义同步
+message JieYiData{
+    required string jieYiName=1;
+    required int32 rank=2;
+    required int64 jieYiId=3;
+}
+
+//仙盟同步
+message SIPlayerJieYiSync{
+    required JieYiData jieYiData=1;
+}
+
+
+//声威掉落
+message ISShengWeiDrop{
+    //攻击者id
+    required int64 attackerId=1;
+    //攻击者名字
+    required string attackerName=2;
+}
+
+//声威掉落回复
+message SIShengWeiDrop{
+    //掉落物品ID
+    required int32 itemId=1;
+    //掉落物品数量
+    required int64 itemNum=2;
+    //攻击者id
+    required int64 attackerId=3;
+}
+ 

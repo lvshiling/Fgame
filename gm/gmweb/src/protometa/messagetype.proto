@@ -1,0 +1,16 @@
+syntax = "proto2";
+
+package messagetype;
+
+enum QiPaiMessageType {
+    SessionOpen =101;
+    SessionClose =102;
+    //登陆
+    CGLoginType = 1001;
+    GCLoginType =1002;
+    //ping
+    CGPingType =1003;
+    GCPingType=1004;
+    //错误信息
+    GCError = 1101;
+}

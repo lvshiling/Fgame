@@ -1,0 +1,43 @@
+{
+    "redis": {
+        "host": "127.0.0.1",
+        "port": 6379,
+        "maxIdle": 50,
+        "maxActive": 50,
+        "wait": true,
+        "idleTimeout": 240
+    },
+    "db": {
+        "debug": true,
+        "dialect": "mysql",
+        "user": "root",
+        "password": "123456",
+        "host": "127.0.0.1:3306",
+        "dbName": "gamegm",
+        "parseTime": true,
+        "charset": "utf8mb4",
+        "maxActive": 100,
+        "maxIdle": 50,
+        "maxLifeTime": 240
+    },
+    "centerDb": {
+        "debug": true,
+        "dialect": "mysql",
+        "user": "root",
+        "password": "123456",
+        "host": "127.0.0.1:3306",
+        "dbName": "game_center_line",
+        "parseTime": true,
+        "charset": "utf8mb4",
+        "maxActive": 100,
+        "maxIdle": 50,
+        "maxLifeTime": 240
+    },
+    "mongo": {
+        "addrs": [
+            "192.168.1.123:27017"
+        ],
+        "failFast": true,
+        "database": "game_log_master"
+    }
+}

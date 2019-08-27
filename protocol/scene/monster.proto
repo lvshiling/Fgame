@@ -1,0 +1,19 @@
+syntax = "proto2";
+
+package scene;
+
+import "common.proto";
+import "buff.proto";
+
+//怪物数据
+message SceneMonsterData {
+    required int64 uid =1;
+    required int32 tempID = 2;
+    required Position curPos = 3;
+    required float angle =5;
+    required int64 hp=6;
+    required int64 hpMax=7;
+    repeated ObjectBuffData buffList=8;
+    required bool enemy=9;
+    required string name=10;
+}

@@ -1,0 +1,11 @@
+// See README.txt for information and build instructions.
+syntax = "proto2";
+import "pkg.proto";
+package protobuf_util;
+
+option java_package = "com.example.tutorial";
+option java_outer_classname = "AddressBookProtos";
+
+extend Message {
+    optional int32 test = 101;
+}

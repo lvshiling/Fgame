@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package pb;
+
+
+//设置服务器时间 
+message SetTimeRequest{
+    int64 time=1;
+}
+
+//设置服务器时间
+message SetTimeResponse{
+    int64 time=1;
+}
+
+service SetTime{
+    //获取日志
+    rpc SetTime(SetTimeRequest) returns(SetTimeResponse){}
+}
+

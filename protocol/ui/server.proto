@@ -1,0 +1,24 @@
+syntax = "proto2";
+
+package ui;
+
+message CSServerList {
+}
+
+
+message Server{
+    required int32 id=1;
+    required string ip=2;
+    required string name=3;
+}
+
+message SCServerList {
+   repeated Server servers = 1;
+}
+
+ 
+
+
+
+
+

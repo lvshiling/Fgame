@@ -1,0 +1,12 @@
+syntax = "proto2";
+
+package  ui;
+
+//圣诞节采集物刷新推送
+message SCChristmasCollectRefreshBroadcast{
+    optional int32 groupId=1;
+}
+
+message SCChristmasCollectNumNotice {
+    required int32 collectNum=1;
+}

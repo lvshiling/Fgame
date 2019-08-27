@@ -1,0 +1,161 @@
+syntax = "proto3";
+
+package pb;
+
+message PlatformSetting {
+     int32 marryKindType =1; //结婚配置
+     int32 allianceFlag = 2; //仙盟开关
+     int32 tradeFlag=3; //交易行开关
+     int32 xianJinFlag=4; //现金提现
+     int32 neiWanJiaoYiFlag=5;//内玩交易开关
+     int32 zhiZuanFlag=6;//至尊会员开关
+}
+
+message PlatformChatSetting {
+    int32 minVip =1; //最低vip
+    int32 minPlayerLevel = 2; //最低等级
+    int32 worldVip =3; //最低vip
+    int32 worldPlayerLevel = 4; //最低等级
+    int32 allianceVip =5; //最低vip
+    int32 alliancePlayerLevel = 6; //最低等级
+    int32 teamVip =7; //最低vip
+    int32 teamPlayerLevel = 8; //最低等级
+    int32 pVip =9; //最低vip
+    int32 pPlayerLevel = 10; //最低等级
+
+}
+
+
+//服务器注册
+message ServerRegisterRequest{
+    int32 serverType=1; //服务器类型
+    int32 platform=2;  //平台
+    int32 serverId=3;  //服务器id
+    string serverIp=4; //服务器ip
+    int32 serverPort=5; //服务器端口
+    
+}
+
+//服务器注册回复
+message ServerRegisterResponse{
+    int32 id=1; //分配的服务器id
+    int64 startTime=2; //开始时间
+    int32 marryKindType=3; //结婚类型
+    string tradeServerIp=4; //交易服务器ip
+    repeated int32 sdkList=5; //sdk列表
+    PlatformSetting platformSetting =6; //平台配置
+    PlatformChatSetting platformChatSetting =7;//聊天配置
+}
+
+//服务器下线
+message ServerUnregisterRequest{
+    int32 serverId=1;
+}
+
+//服务器下线回复
+message ServerUnregisterResponse{
+    int32 serverId=1;
+}
+
+//获取跨服列表
+message ServerCrossListRequest{
+    int32 serverId=1;
+}
+
+message CrossServerInfo{
+    int32 serverType=1; //服务器类型
+    string serverIp =2; //服务器ip
+    int32 serverPort=3; //服务器端口
+}
+
+//获取跨服列表回复
+message ServerCrossListResponse{
+    repeated CrossServerInfo serverInfoList=1;
+}
+
+//获取
+message ServerInfo{
+    int32 id =1; //服务器索引
+    string name=2; //服务器名字
+    string ip=3;   //ip
+    int32 tag=4;   //标签
+    int32 status=5;  //状态
+    string remoteIp=6; //远程ip
+}
+
+message ServerInfoListRequest{
+    int32 platform=1;
+    int32 gm=2;
+}
+
+message ServerInfoListResponse{
+    repeated ServerInfo serverInfoList=1;
+}
+
+message RefreshServerInfoListRequest{
+    int32 platform=1;
+}
+
+message RefreshServerInfoListResponse{
+    int32 platform=1;
+}
+
+
+message RefreshSDKListRequest{
+
+}
+
+message RefreshSDKListResponse{
+
+}
+
+message ServerInfoRequest{
+    int32 platform=1;
+    int32 serverId=2;
+}
+
+message ServerInfoResponse{
+    ServerInfo serverInfo=1;
+}
+
+
+message ServerInfoByPlatformRequest{
+    int32 platform=1;
+    int32 serverId=2;
+}
+
+message ServerInfoByPlatformResponse{
+    ServerInfo serverInfo=1;
+}
+
+message RefreshMarryPriceListRequest{
+    int32 platform=1;
+}
+
+message RefreshMarryPriceListResponse{
+    int32 platform=1;
+}
+
+
+service ServerManage {
+    //注册
+    rpc Register(ServerRegisterRequest) returns(ServerRegisterResponse){}
+    //下线
+    rpc Unregister(ServerUnregisterRequest) returns(ServerUnregisterResponse){}
+    //获取
+    rpc GetCrossList(ServerCrossListRequest) returns(ServerCrossListResponse){}
+    //获取游戏服务器列表
+    rpc GetServerList(ServerInfoListRequest) returns(ServerInfoListResponse){}
+    //刷新服务器列表
+    rpc Refresh(RefreshServerInfoListRequest) returns(RefreshServerInfoListResponse){}
+    //刷新渠道
+    rpc RefreshSDK(RefreshSDKListRequest) returns(RefreshSDKListResponse){}
+    //获取单服数据
+    rpc GetServerInfo(ServerInfoRequest) returns(ServerInfoResponse){}
+    //获取单服数据
+    rpc GetServerInfoByPlatform(ServerInfoByPlatformRequest) returns(ServerInfoByPlatformResponse){}
+    //刷新结婚配置
+    rpc RefreshMarryPrice(RefreshMarryPriceListRequest) returns(RefreshMarryPriceListResponse){}
+   
+}
+

@@ -1,0 +1,48 @@
+syntax = "proto2";
+
+package cross;
+
+
+//参加炼狱
+message SILianYuAttend{
+   
+}
+
+//参加炼狱回复
+message ISLianYuAttend{
+    //是否需要排队
+    required bool isLineUp=1;
+    //排队位置
+    required int32 beforeNum=2;
+}
+
+//排队完成
+message ISLianYuLineUpSuccess {
+    
+}
+
+//排队完成
+message SILianYuLineUpSuccess {
+    
+}
+
+
+//取消排队
+message SILianYuCancleLineUp {
+
+}
+
+//取消排队回复
+message ISLianYuCancleLineUp {
+
+}
+
+//场景结束本服玩家取消排队
+message ISLianYuFinishLineUpCancle{
+
+}
+
+//场景结束本服玩家取消排队回复
+message SILianYuFinishLineUpCancle{
+
+}

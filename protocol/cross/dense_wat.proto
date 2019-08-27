@@ -1,0 +1,22 @@
+syntax = "proto2";
+
+package cross;
+
+import "item.proto";
+
+//金银密窟数据
+message DenseWatData{
+    required int32 num =1;
+    required int64 endTime=2;
+}
+
+
+//金银密窟数据同步
+message ISDenseWatSync{
+    required DenseWatData densWatData=1;
+}
+
+//金银密窟同步确认
+message SIDenseWatSync{
+
+}

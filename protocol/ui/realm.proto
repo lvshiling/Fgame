@@ -1,0 +1,153 @@
+syntax = "proto2";
+
+package ui;
+
+message RealmRank {
+    //名字
+    required string name=1;
+    //天劫塔等级
+    required int32 level=2;
+}
+
+
+//天劫塔等级
+message SCRealmLevel{
+   //天劫塔等级
+   required int32 level=1;
+}
+
+//前往击杀请求
+message CSRealmToKill {
+}
+
+//前往击杀回复
+message SCRealmToKill {
+    //前往天劫塔等级
+    required int32 level=1;
+}
+
+//前往击杀结果
+message SCRealmToKillResult {
+    //状态  0失败  1成功
+    required bool state=1;
+    //当前天劫塔等级
+    required int32 level=2;
+}
+
+//天劫塔下发场景信息
+message SCRealmSceneInfo {
+    //创建场景事件
+    required int64 createTime=1;
+    //天劫塔等级
+    required int32 level=2;
+    //玩家id
+    required int64 ownerId=3;
+    //配偶id
+    required int64 spouseId=4;
+}
+
+//排行榜请求
+message CSRealmRankGet {
+}
+
+//排行榜回复
+message SCRealmRankGet {
+    //排行榜
+    repeated RealmRank rankList=1;
+    //我的排名 pos=0 未上榜
+    required int32 pos=2;
+}
+
+//夫妻助战
+message CSRealmPair {
+
+}
+
+//夫妻助战回复
+message SCRealmPair {
+    //邀请时间
+    required int64 inviteTime=1;
+}
+
+//取消邀请
+message CSRealmPairCancle {
+
+}
+
+//取消邀请回复
+message SCRealmPairCancle{
+    // 1 已发送 2配偶已决策
+    required int32 result=1;
+}
+
+//邀请推送给配偶
+message SCRealmPairPushSpouse {
+    required int64 playerId=1;
+    required int32 level=2;   //天劫塔等级
+}
+
+//取消推送给配偶
+message SCRealmPairPushCancle{
+    required string name =1;
+}
+
+//玩家决策
+message CSRealmPairDeal {
+    //1 同意 2取消
+    required int32 result=1;
+}
+
+//玩家决策回复
+message SCRealmPairDeal {
+    // 1已发送  2对方取消邀请
+    required int32 result=1;
+}
+
+//配偶拒绝
+message SCRealmSpouseRefused {
+    required string name=1;
+}
+
+//夫妻助战结果
+message SCRealmPairResult  {
+    //身份 false 配偶  true 本人  
+    required bool identity=1;
+    //状态  0失败  1成功
+    required bool state=2;
+    //当前天劫塔等级
+    required int32 level=3;
+}
+
+//下一关
+message CSRealmNext {
+}
+
+message SCRealmNext {
+    //前往天劫塔等级
+    required int32 level=1;
+}
+
+//夫妻助战闯关者中途掉线
+message SCRealmInviteOffonline {
+    required string inviteName=1;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

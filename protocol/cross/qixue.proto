@@ -1,0 +1,23 @@
+syntax = "proto2";
+
+package cross;
+
+
+//泣血枪掉落
+message ISQiXueDrop{
+    //攻击者id
+    required int64 attackerId=1;
+    //攻击者名字
+    required string attackerName=2;
+}
+
+//泣血枪掉落回复
+message SIQiXueDrop{
+    //掉落物品ID
+    required int32 itemId=1;
+    //掉落物品数量
+    required int64 itemNum=2;
+    //攻击者id
+    required int64 attackerId=3;
+}
+ 

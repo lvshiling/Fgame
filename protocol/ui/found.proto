@@ -1,0 +1,47 @@
+syntax = "proto2";
+
+package ui;
+
+import "drop.proto";
+
+message FoundBriefInfo{
+    //模板Id
+    required int32 resId=1;
+    //追回次数
+    required int32 num=2;
+    required int32 isReceive=3;
+    //波数
+    required int32 group=4;
+}
+
+//资源找回列表
+message CSFoundResouceList{
+}
+
+//资源找回列表应答
+message SCFoundResouceList{
+    repeated FoundBriefInfo foundList=1;
+}
+
+//找回
+message CSFound{
+    required int32 resType=1;
+    //0普通1完美
+    required int32 typ=2;
+}
+//找回应答
+message SCFound{
+    required int32 resType=1;
+    repeated DropInfo dropInfoList=2; 
+} 
+
+//一键找回
+message CSFoundBatch{
+    //0普通1完美
+    required int32 typ=1;
+    
+}
+//一键找回应答
+message SCFoundBatch{
+    repeated DropInfo dropInfoList=2; 
+}

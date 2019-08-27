@@ -1,0 +1,100 @@
+syntax = "proto2";
+
+package ui;
+
+import "drop.proto";
+
+message MaterialInfo {
+    //材料类型:  1 坐骑副本 2 战翼副本 3 身法副本 4 法宝副本 5 仙体副本
+    required int32 materialType = 1;
+    //已挑战次数(包含免费)
+    required int32 useTimes = 2;
+    //波数
+    required int32 group=3;
+}
+
+message MaterialSweepDrop {
+    //掉落物品
+    repeated DropInfo dropList=1;
+}
+
+//材料副本界面信息请求
+message CSMaterialInfoGet{
+
+}
+message SCMaterialInfoGet{
+    repeated MaterialInfo infoList = 1;
+}
+
+//材料副本扫荡请求
+message CSMaterialSaoDang{
+    //材料类型
+    required int32 materialType=1;
+    //扫荡次数
+    required int32 num=2;
+}
+message SCMaterialSaoDang{
+    required int32 materialType=1;
+    //扫荡物品奖励
+    repeated MaterialSweepDrop sweepDropList=2;
+    //扫荡次数
+    required int32 saodangNum=3;
+}
+
+
+//材料副本挑战请求
+message CSMaterialChallenge{
+    required int32 materialType=1;
+}
+message SCMaterialChallenge{
+    required int32 materialType=1;
+    //请求是否成功：0否1是
+    required bool isSuccess=2;
+}
+
+//材料副本下发场景信息
+message SCMaterialSceneInfo{
+    //材料类型: 
+    required int32 materialType=1;
+    //怪物总波数
+    required int32 totalBiologyGroup=2;
+    //怪物波数
+    required int32 biologyGroup=3;
+    //创建场景时间
+    required int64 createTime=4;
+}
+
+//材料副本挑战结果
+message SCMaterialChallengeResult{
+    //材料类型: 
+    required int32 materialType = 1;
+    //挑战是否成功：0否1是
+    required bool isSuccess = 2;
+    //掉落物品
+    repeated DropInfo dropList=3;
+    //最终波数
+    required int32 group=4;
+}
+
+//材料副本怪物刷新波数
+message SCMaterialRefreshBiology{
+    //下一波数
+    required int32 nextBiologyGroup = 1;
+}
+
+
+// //材料副本一键完成
+// message CSMaterialFinishAll{
+//     //材料类型:0银两 1经验 2材料 3元宝 4双修
+//     required int32 materialType = 1;
+// }
+// //材料副本一键完成应答
+// message SCMaterialFinishAll{
+//     required int32 materialId  = 1;
+//     required int32 materialType = 2;
+//     //一键属性奖励
+//     required RewProperty rewAllProperty = 3;
+//     //一键物品奖励
+//     repeated MaterialSweepDrop rewAllItemArr = 4; 
+// }
+

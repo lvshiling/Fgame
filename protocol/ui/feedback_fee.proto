@@ -1,0 +1,46 @@
+syntax = "proto2";
+
+package  ui;
+
+message FeedbackRecordInfo {
+    required int32 status=1; //0:生成兑换码中 1:生成完 2:过期 3:兑换成功
+    //兑换码
+    required string code=2;
+    //当前兑换金额
+    required int32 exchangeMoney=3; //(分)
+    //兑换时间
+    required int64 exchangeTime=4;
+    //过期时间
+    required int64 expireTime=5;
+}
+
+message FeedbackFeeInfo {
+    //库存金额
+    required int32 money=1;//(分)
+    //今日已兑换信息
+    required int32 todayUseNum=2;//(分)
+  
+}
+
+//逆付费信息请求
+message CSFeedbackFeeInfo{
+}
+
+ //登录下发
+message SCFeedbackFeeInfo{ 
+    required FeedbackFeeInfo feeInfo=1;
+    required bool exchanged=2; //兑换中 0:非兑换中 1:兑换中
+    optional FeedbackRecordInfo recordInfo=3;
+    required bool xianJinFlag=4; //现金提现开关 
+} 
+ 
+//兑换
+message CSFeedbackFeeExchange{
+    required int32 exchangeMoney =1;
+}
+
+ //兑换下发
+message SCFeedbackFeeExchange{
+    required FeedbackFeeInfo feeInfo=1;
+} 
+ 

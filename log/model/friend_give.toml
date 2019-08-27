@@ -1,0 +1,21 @@
+file="friend_give.go"
+pkg="model"
+class="FriendGive"
+base="PlayerLogMsg"
+comment = "赠送好友装备"
+name="friend_give"
+
+[[variables]]
+name="Reason"
+type="int32"
+tag="reason"
+comment="变更原因编号" 
+show="normal"
+ 
+[[variables]]
+name="ReasonText"
+type="string"
+tag="reasonText"
+comment="变更原因"
+show="normal"
+

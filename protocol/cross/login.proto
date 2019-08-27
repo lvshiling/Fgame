@@ -1,0 +1,16 @@
+syntax = "proto2";
+
+package cross;
+
+//游戏服登陆
+message SILogin{
+    required int64 playerId=1;
+}
+
+//游戏服登入确认
+message ISLogin{
+    required int64 playerId=1;
+    required bool match=2;//匹配模式
+}
+
+

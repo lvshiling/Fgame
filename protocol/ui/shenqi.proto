@@ -1,0 +1,154 @@
+syntax = "proto2";
+
+package ui;
+
+//器灵槽位信息
+message ShenqiQilingInfo {
+    //神器类型
+    required int32 shenQiType=1;
+    //器灵类型
+    required int32 qiLingType=2;
+    //位置
+    required int32 slotId=3;
+    required int32 level=4;
+    required int32 upPro=5;
+    optional int32 itemId=6;
+    optional int32 bindType=7[default=0]; //0不绑定1绑定，默认0
+}
+
+//碎片槽位信息
+message ShenqiDebrisInfo {
+    //神器类型
+    required int32 shenQiType=1;
+    //位置
+    required int32 slotId=2;
+    //等级
+    required int32 level=3;
+    //进度值
+    required int32 upPro=4;
+}
+
+//淬炼槽位信息
+message ShenqiSmeltInfo {
+    //神器类型
+    required int32 shenQiType=1;
+    //位置
+    required int32 slotId=2;
+    //等级
+    required int32 level=3;
+    //进度值
+    required int32 upPro=4;
+}
+
+
+//获取全部神器信息
+message CSShenqiInfoGet {
+
+}
+//获取全部神器信息回复
+message SCShenqiInfoGet {
+    repeated ShenqiQilingInfo qiLingList=1;
+    repeated ShenqiDebrisInfo debrisList=2;
+    repeated ShenqiSmeltInfo smeltList=3;
+    required int64 lingQiNum=4;
+}
+
+// 灵气值变化推送
+message SCShenQiLingQiNumChanged {
+    required int64 lingQiNum=1;
+}
+ 
+//获取一种神器信息
+message CSShenqiKindInfoGet {
+    //神器类型
+    required int32 shenQiType=1;
+}
+//获取一种神器信息回复
+message SCShenqiKindInfoGet {
+    repeated ShenqiQilingInfo qiLingList=1;
+    repeated ShenqiDebrisInfo debrisList=2;
+    repeated ShenqiSmeltInfo smeltList=3;
+    //神器类型
+    required int32 shenQiType=4;
+}
+
+
+//使用器灵装备
+message CSShenqiUseQiling {
+    //神器类型
+    required int32 shenQiType=1;
+    //格子类型
+    required int32 subType=2;
+    //格子id
+    required int32 slotId=3;
+    //索引
+    required int32 index=4;
+}
+//使用器灵装备回复
+message SCShenqiUseQiling {
+    required ShenqiQilingInfo qiLing=1;
+}
+
+
+//器灵注灵
+message CSShenqiZhuling {
+    //神器类型
+    required int32 shenQiType=1;
+    //格子类型
+    required int32 subType=2;
+    //格子id
+    required int32 slotId=3;
+    //自动购买
+    optional bool auto=4;
+}
+//器灵注灵应答
+message SCShenqiZhuling {
+    required ShenqiQilingInfo qiLing=1;
+    required int64 lingQiNum=2;
+    //自动购买
+    optional bool auto=3;
+}
+
+
+//分解器灵
+message CSShenqiQilingResolve {
+    repeated int32 indexList=1;
+}
+//分解器灵应答
+message SCShenqiQilingResolve {
+    required int64 lingQiNum=1;
+}
+
+
+//碎片升级
+message CSShenqiDebrisUp {
+    //神器类型
+    required int32 shenQiType=1;
+    //升级对象
+    required int32 slotId=2;
+    //自动购买
+    optional bool auto=3;
+}
+//碎片升级应答
+message SCShenqiDebrisUp {
+    required ShenqiDebrisInfo debris=1;
+    //自动购买
+    optional bool auto=2;
+}
+
+
+//淬炼升级
+message CSShenqiSmeltUp {
+    //神器类型
+    required int32 shenQiType=1;
+    //升级对象
+    required int32 slotId=2;
+    //自动购买
+    optional bool auto=3;
+}
+//淬炼升级应答
+message SCShenqiSmeltUp {
+    required ShenqiSmeltInfo smelt=1;
+    //自动购买
+    optional bool auto=2;
+}

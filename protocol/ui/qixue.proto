@@ -1,0 +1,59 @@
+syntax = "proto2";
+
+package ui;
+
+//泣血枪信息
+message QiXueInfo{
+    //泣血枪等级
+    required int32 leve=1;
+    //泣血枪星级
+    required int32 star=2;
+    //当前杀戮心数量
+    required int64 shaLuNum=3;
+    //当前注入杀戮心数量
+    required int32 timesNum=4;
+} 
+
+//泣血枪信息请求 
+message CSQiXueGet {
+} 
+message SCQiXueGet{
+    //登录下发
+   //泣血枪信息
+   required QiXueInfo qiXueInfo=1;
+}
+ 
+
+//泣血枪进阶请求
+message CSQiXueAdvanced{
+}
+message SCQiXueAdvanced{
+    //泣血枪 
+    required QiXueInfo qiXueInfo=1;
+}
+
+//兵魂消失推送
+message SCQiXueWeaponLoseInfo{
+   //泣血枪信息
+   required QiXueInfo qiXueInfo=1;
+    //击杀者名字
+    required string killerName=2;
+}
+ 
+
+//泣血枪杀戮心推送
+message SCQiXueShaQiVary{
+    required int64 shaLuNum=1;
+}
+
+//泣血枪杀戮心掉落
+message SCQiXueShaQiDrop{
+    //掉落星数
+    required int32 dropStar=1;
+    //掉落杀戮心数量
+    required int32 dropNum=2;
+    //击杀者名字
+    required string killerName=3;
+    //泣血枪信息
+    required QiXueInfo qiXueInfo=4;
+}

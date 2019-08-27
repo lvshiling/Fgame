@@ -1,0 +1,12 @@
+{
+    "iOS":{
+        "gameId":"317",
+        "apiKey":"c16a8c19d547339bf773df1461105cc2",
+        "secretKey":"ca3cc465ebab917633d22b55f5a77b67"
+    },
+    "android":{
+        "gameId":"317",
+        "appKey":"c16a8c19d547339bf773df1461105cc2",
+        "secretKey":"ca3cc465ebab917633d22b55f5a77b67"
+    }
+}

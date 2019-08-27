@@ -1,0 +1,63 @@
+syntax = "proto2";
+
+package  ui;
+
+import "drop.proto";
+import "rewproperty.proto";
+import "common.proto";
+
+message YuXiCollect {
+    //生物id
+    required int64 ncpId=1;
+    //生物类型
+    required int32 typ =2;
+    //生物状态 
+    required bool isDead=3;
+    //状态时间 已刷新时为0
+    required int64 statusTime=4;
+    //生物位置
+    optional Position pos=5;
+    //生物id
+    required int32 biologyId=6;
+}
+
+message YuXiOwner {
+    required int64 keepStartTime=1; //持有玉玺开始时间
+    required Position pos=2;
+    required string playerName=3;
+    required int64 playerId=4;
+}
+
+//广播采集物信息
+message SCYuXiCollectInfoBroadcast {
+    required YuXiCollect collectInfo=1;
+    optional YuXiOwner ownerInfo=2;     //持有玉玺信息
+    required int32 rebornType=3;        //玉玺重生类型：0无 1玩家死亡后；2玩家进入安全区;3 玩家退出场景
+}
+
+//广播玉玺位置
+message SCYuXiPosBroadcast {
+    required YuXiOwner ownerInfo=1;     //持有玉玺信息
+}
+
+//玩家玉玺信息
+message CSYuXiGetInfo {
+}
+message SCYuXiGetInfo {
+    required int32 isReceive=1;     //是否领取每日奖励
+    required int64 winAllianceId=2; //获胜仙盟id
+    required string winAllianceName=3; //获胜仙盟名称
+    required string winMengName=4; //获胜盟主名称
+}
+
+//每日奖励领取
+message CSYuXiReceiveDayRew {
+}
+message SCYuXiReceiveDayRew {
+    repeated DropInfo dropInfo=1;
+}
+
+//广播获胜仙盟
+message SCYuXiWinnerBroadcast {
+    required int64 winAllianceId=1;    
+}

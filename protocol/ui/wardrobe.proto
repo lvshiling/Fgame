@@ -1,0 +1,60 @@
+syntax = "proto2";
+
+package ui;
+
+
+//衣橱基本信息息
+message WardrobeSuitInfo {
+    //套餐类型
+    required int32 type=1;
+    //套装子类型
+    required int32 subType=2;
+}
+
+//衣橱套装
+message WardrobeInfo {
+    //套装
+    required int32 type=1;
+    //资质丹
+    required int32 peiYangNum=2;
+    //子类型
+    repeated int32 subTypeList=3;
+}
+
+//衣橱请求
+message CSWardrobeGet {
+}
+
+//衣橱信息应答
+message SCWardrobeGet{
+    repeated WardrobeInfo wardrobeList=1;
+}
+
+//衣橱激活 (含失效后的再激活)
+message SCWardrobeActive{
+    required WardrobeSuitInfo suitInfo=1;
+}
+
+//衣橱失效 
+message SCWardrobeRemove{
+    required WardrobeSuitInfo suitInfo=1;
+}
+
+//资质丹培养
+message CSWardrobePeiYang {
+    //套装类型
+    required int32 type=1;
+    //数量
+    required int32 num=2;
+}
+
+//资质丹培养回复
+message SCWardrobePeiYang {
+    //套装类型
+    required int32 type=1;
+    //资质丹
+    required int32 peiYangNum=2;
+}
+
+
+

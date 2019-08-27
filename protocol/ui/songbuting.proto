@@ -1,0 +1,23 @@
+syntax = "proto2";
+
+package ui;
+
+//元宝送不停信息请求
+message CSSongBuTingGet {
+}
+
+//玩家领取奖励
+message CSSongBuTingReceive{
+    
+}
+
+//元宝送不停数据变化推送
+message SCSongBuTingChanged{
+   //能否领取
+   required bool isReceive=1;
+   //当前领取次数
+   required int32 times=2;
+}
+
+
+

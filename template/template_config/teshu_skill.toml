@@ -1,0 +1,21 @@
+file="teshu_skill_vo.go"
+pkg="template"
+class="TeShuSkillTemplateVO"
+comment = "锻魂技能对照表"
+[[variables]]
+name="Id"
+type="int"
+tag="id"
+comment="id"
+
+[[variables]]
+name="SkillType"
+type="int32"
+tag="skill_type"
+comment="技能类型"
+
+[[variables]]
+name="SkillId"
+type="int32"
+tag="skill_id"
+comment="技能id"

@@ -1,0 +1,410 @@
+syntax = "proto2";
+
+package ui;
+
+message ArenaPlayerShowData {
+    required int64 playerId =1;
+    optional int64 maxHp =2 [default=-1]; //最大血量
+    optional int64 hp =3 [default=-1];   //当前血量
+    optional int32 online = 4 [default=-1]; //0:离线 1:在线 2:已出局 3:已逃跑
+    optional int32 remainReliveTime=5 [default=-1]; //当前复活次数
+    optional int32 isDead=6 [default=-1]; //0:正常 1:死亡
+    optional int64 deadTime=7 [default=-1]; //死亡时间
+}
+
+//竞技场玩家
+message ArenaPlayer{
+    required int64 playerId=1;//玩家id
+    required string name=2; //玩家名字
+    required int32 role=3; //角色
+    required int32 sex=4;  //性别
+    required int64 force=5; //战力
+    required int32 level=6; //等级
+    required int32 fashionId=7;
+    required ArenaPlayerShowData playerShowData=8; //玩家变化数据
+}
+
+//竞技队伍
+message ArenaTeam{
+    required int64 teamId =1;
+    repeated ArenaPlayer playerList=2;
+    optional int32 currentLevel=3;
+    required int32 state =4; //队伍状态 0:初始化 1:匹配 2:比赛中 3:比赛结束 4:四圣兽等待选择 5:四圣兽进入中 6:四圣兽排队中 7:四神兽场景中
+    required int32 fourGodType=5;//圣兽场景
+}
+
+
+//玩家匹配
+message CSArenaMatch{
+
+}
+
+//玩家匹配回复
+message SCArenaMatch{
+
+}
+
+//玩家匹配广播 
+message SCArenaMatchBroadcast{
+}
+
+//匹配结果
+message SCArenaMatchResult{
+    required bool result=1;   //false:失败,true成功
+}
+
+//玩家停止匹配
+message CSArenaStopMatch{
+
+}
+
+//玩家停止匹配回复
+message SCArenaStopMatch{
+
+}
+
+//玩家停止匹配广播
+message SCArenaStopMatchBroadcast{
+
+}
+
+
+
+//玩家进入四圣兽场景
+message CSArenaSelectFourGod{
+    //0:青龙 1:白虎 2:朱雀 3:玄武
+    required int32 fourGodType=1;
+}
+
+//玩家进入四圣兽场景回复
+message SCArenaSelectFourGod{
+    //0:青龙 1:白虎 2:朱雀 3:玄武
+    required int32 fourGodType=1;
+}
+
+//玩家选择四圣兽场景广播
+message SCArenaSelectFourGodBroadcast{
+    //0:青龙 1:白虎 2:朱雀 3:玄武
+    required int32 fourGodType=1;
+}
+
+
+//队伍排队中
+message SCArenaFourGodQueue{
+    required int32 num =1; //排队数量
+    required int32 fourGodType=2; //四圣兽类型
+}
+
+//队伍取消排队
+message CSArenaFourGodCancelQueue{
+
+}
+
+//队伍取消排队回复
+message SCArenaFourGodCancelQueue{
+    repeated FourGodInfo fourGodList=1;
+}
+
+//队伍取消排队广播
+message SCArenaFourGodCancelQueueBroadcast{
+
+}
+
+
+
+//竞技场进入
+message SCArenaSceneInfo{
+    //队伍1
+    required ArenaTeam team1=1;
+    //队伍2
+    required ArenaTeam team2=2;
+    //状态
+    required int32 state=3; //0:等候开始 1:开始 2：结束
+    //上次时间
+    required int64 lastTime=4;
+    //获胜队伍
+    optional int64 winnerTeamId=5;
+    //获取宝箱的玩家id
+    optional int64 getTreasurePlayerId=6;
+    //场景开始时间
+    required int64 startTime=7;
+}
+
+//竞技场开始
+message SCArenaSceneStart{
+
+}
+
+//竞技场结束
+message SCArenaSceneEnd{
+    required int64 winnerTeamId =1; //获胜队伍id 0:代表平局
+    optional int64 getTreasurePlayerId=2; //获取宝箱的玩家id
+}
+
+//竞技场吆喝
+message CSArenaInvite{
+}
+
+//竞技场吆喝回复
+message SCArenaInvite{
+}
+
+//四神场景
+message SCArenaFourGodSceneInfo{
+    //四神类型
+    required int32 fourGodType=1;
+    //队伍
+    required ArenaTeam team=2;
+    //队伍数量
+    required int32 teamNum=3;
+    //圣兽死亡
+    required bool shengShouDead =4;
+    //圣兽死亡时间
+    optional int64 shengShouDeadTime=5;
+    //废弃:经验数
+    required bool expDead=6;
+    //废弃:经验数时间
+    optional int64 expDeadTime=7;
+    //圣兽血量
+    required int64 shengShouHp=8;
+    //圣兽最大血量
+    required int64 shengShouMaxHp=9;
+    //TODO 掉落信息
+}
+
+
+
+//玩家进行下一轮匹配
+message CSArenaNextMatch{
+
+}
+
+//玩家进行下一轮匹配
+message SCArenaNextMatch{
+
+}
+
+//玩家下一轮匹配广播
+message SCArenaNextMatchBroadcast{
+
+}
+
+
+//四圣兽信息
+message FourGodInfo{
+    //四神类型
+    required int32 fourGodType=1;
+    //队伍数量
+    required int32 teamNum=2;
+    //排队数量
+    required int32 queueNum=3;
+}
+
+//四圣兽信息
+message CSArenaFourGodList{
+  
+}
+
+//四圣兽信息
+message SCArenaFourGodList{
+    repeated FourGodInfo fourGodList=1;
+}
+
+//排队变化
+message SCArenaFourGodQueueChanged{
+    required int32 num =1; //排队数量
+}
+
+
+//竞技队伍简要信息
+message ArenaTeamSimpleInfo{
+    required int64 teamId =1; //队伍id 
+    required string teamName=2; //队伍名字
+    required int32 totalReliveTimes=3; //总复活次数
+}
+
+//查看队伍
+message CSArenaFourGodTeamInfoList {
+    required int32 fourGodType=1; //四圣兽
+}
+
+//查看队伍回复
+message SCArenaFourGodTeamInfoList{
+    repeated ArenaTeamSimpleInfo teamList=1;
+    required int32 fourGodType=2;
+}
+
+
+//正在采集
+message CSArenaFourGodSceneCollecting{
+    required int64 collectId=1;
+}
+
+//采集经验树
+message SCArenaFourGodSceneCollecting{
+    required int64 playerId=1;
+    required int64 collectId=2;
+}
+
+//采集经验树停止
+message SCArenaFourGodSceneCollectStop{
+    required int64 playerId=1;
+    required int64 collectId=2;
+}
+
+//采集经验树成功
+message SCArenaFourGodSceneCollect{
+    required int64 playerId=1;
+    required int64 collectId=2;
+}
+
+
+//3v3结束
+message SCArenaFinish{
+
+}
+
+//队伍信息变化
+message SCArenaFourGodTeamChanged{
+    required int32 teamNum =1;
+}
+
+
+
+//玩家信息变化
+message SCArenaPlayerDataChanged{
+    required ArenaPlayerShowData playerShowData=1;
+}
+ 
+//玩家退出队伍
+message SCArenaPlayerExit{
+    required int64 playerId=1;
+}
+
+//四神boss死亡
+message SCFourGodSceneBossDead {
+
+}
+
+
+//四圣兽boss重生
+message SCFourGodSceneBossReborn {
+
+}
+
+//四圣兽boss重生
+message SCFourGodSceneExpTreeReborn {
+
+}
+
+
+//经验树
+message SCFourGodSceneExpTreeDead {
+
+}
+
+//采集经验树
+message SCArenaFourGodSceneExpCollecting{
+    required int64 teamId=1;
+    required int64 playerId=2;
+}
+
+//采集经验树停止
+message SCArenaFourGodSceneExpCollectStop{
+    required int64 teamId=1;
+    required int64 playerId=2;
+}
+
+//采集经验树成功
+message SCArenaFourGodSceneExpCollect{
+    required int64 teamId=1;
+    required int64 playerId=2;
+}
+
+
+//圣兽hp变化
+message SCFourGodSceneBossHpChanged{
+    //圣兽血量
+    required int64 hp=1;
+}
+
+
+message PlayerArenaData{
+    optional int32 reliveTime=1 [default=-1];   //复活次数
+    optional int32 winTime=2[default=-1];       //连胜次数
+}
+
+//竞技场数据
+message SCPlayerArenaData{
+    required PlayerArenaData playerArenaData=1;
+}
+
+//竞技场变化
+message SCPlayerArenaDataChanged{
+    required PlayerArenaData playerArenaData=1;
+}
+
+//玩家3v3信息
+message CSPlayerArenaInfo{
+} 
+message SCPlayerArenaInfo {
+    // 登录下发
+    required int32 rewardTime=1;    //奖励次数（废弃）
+    required int32 curPoint=2;      //当前积分
+    required int32 dayPoint=3;      //当日已获取积分
+    required int32 winCount=4;      //连胜次数
+    required int32 failCount=5;     //连败次数
+    required int32 dayMaxWinCount=6;//当日历史最高连胜
+    required int32 dayWinCount=7;   //当日连胜
+    required int64 rankRewTime=8;   //排行榜奖励时间
+}  
+
+
+message ArenaRank {
+    //服务器id
+    required int32  serverId=1;
+    //玩家id
+    required int64 playerId =2;
+    //玩家名字
+    required string playerName = 3;
+    //连胜次数
+	required int32 winCount=4;     
+}
+
+//领取奖励
+message CSArenaGetReward{
+}
+message SCArenaGetReward {
+    //上次排行榜奖励领取时间排行榜时间戳
+    required int64 rankTime=1;
+}
+
+//请求我的排名
+message CSArenaMyRank {
+    //0 本周 1 上周
+    required int32 timeType=1;
+}
+message SCArenaMyRank {
+    //0 本周 1 上周 
+    required int32 timeType=1;
+    //排名 0 未上榜 1第一名
+    required int32 pos=2;
+    //排行时间
+    required int64 rankTime=3;
+    //我的连胜
+    required int32 winCount=4;
+}
+ 
+//排行榜请求
+message CSArenaRankGet {
+    //0 本周 1 上周
+    required int32 timeType=1;
+    //页数
+    required int32 page=2;
+}
+message SCArenaRankGet {
+    required int32 timeType=1;
+    required int32 page=2;
+    required int64 rankTime=3;
+    repeated ArenaRank rankList=4;
+}

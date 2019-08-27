@@ -1,0 +1,23 @@
+file="open_activity_merge_xunhuan_vo.go"
+pkg="template"
+class="OpenActivityMergeXunHuanTemplateVO"
+comment = "合服循环活动配置"
+
+[[variables]]
+name="Id"
+type="int"
+tag="id"
+comment="id"
+
+[[variables]]
+name="CycleDay"
+type="int32"
+tag="time" 
+comment="循环日"
+
+[[variables]]
+name="GroupId"
+type="string" 
+tag="group_id"
+comment="活动标识ID"
+

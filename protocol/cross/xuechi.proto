@@ -1,0 +1,24 @@
+syntax = "proto2";
+
+package cross;
+
+//血池数据
+message XueChiData{
+    required int32 bloodLine =1;
+    required int64 blood=2;
+}
+
+//血池同步
+message ISXueChiSync{
+    required XueChiData xueChiData=1;
+}
+
+//血池同步确认
+message SIXueChiSync{
+
+}
+
+//血池加血
+message SIXueChiAdd{
+    required int64 blood=3;
+}

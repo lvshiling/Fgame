@@ -1,0 +1,18 @@
+syntax = "proto2";
+
+package cross;
+
+//队伍数据
+message TeamData{
+    required int64 teamId =1;
+    required string teamName=2;
+    required int32 teamPurpose=3;
+}
+
+
+
+//队伍同步
+message SIPlayerTeamSync{
+    required TeamData teamData=1;
+}
+

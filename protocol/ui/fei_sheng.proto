@@ -1,0 +1,83 @@
+syntax = "proto2";
+
+package  ui;
+
+import "drop.proto";
+import "rewproperty.proto";
+
+message QnInfo {
+    required int32 ti=1;    //体质
+    required int32 li=2;    //力道
+    required int32 gu=3;    //根骨
+}
+
+//飞升信息请求
+message CSFeiShengInfo {
+}
+message SCFeiShengInfo{
+    //飞升等级
+    required int32 feiLevel=1;
+    //当前功德
+    required int64 curGongDe=2;
+    //额外的成功率
+    required int32 extralRate=3;
+    //未分配潜能
+    required int32 leftQn=4;
+    //潜能信息
+    required QnInfo qnInfo=5;
+} 
+
+//散功
+message CSFeiShengSanGong {
+    //散功类型:0初级1中级2高级
+    required int32 type=1;
+}
+message SCFeiShengSanGong {
+    required int64 addGongDe=1;
+}
+
+//渡劫
+message CSFeiShengDuJie {
+}
+message SCFeiShengDuJie {
+}
+
+//保存潜能
+message CSFeiShengSaveQn {
+    required QnInfo qnInfo=1; 
+}
+message SCFeiShengSaveQn {
+    required QnInfo qnInfo=1; 
+}
+
+//重置潜能
+message CSFeiShengResetQn {
+}
+message SCFeiShengRestQn{
+    required int32 leftQn=1;
+    required QnInfo qnInfo=2; 
+}
+
+//食概率丹
+message CSFeiShengEatDan {
+    required int32 eatNum=1;
+}
+message SCFeiShengEatDan{
+    required int32 eatNum=1;
+    required int32 extralRate=2;
+}
+
+
+//散功推送
+message SCFeiShengSanGongBroadcast {
+    //散功者名称
+    required string plName=1;
+    //获得的经验
+    required int64 addExp=2;
+}
+
+//渡劫结果推送
+message SCFeiShengDuJieNotice {
+    required bool isSuccess=1;
+    required int32 feiLevel=2;
+}

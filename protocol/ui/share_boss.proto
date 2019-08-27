@@ -1,0 +1,33 @@
+syntax = "proto2";
+
+package ui;
+import "common.proto";
+import "world_boss.proto";
+
+//跨服世界boss列表
+message CSShareBossList{
+
+}
+//跨服世界boss列表应答
+message SCShareBossList{
+    repeated BossInfo bossInfoList =1;
+}
+
+//跨服挑战世界boss
+message CSShareBossChallenge{
+    required int32 biologyId=1;
+}
+//跨服挑战世界boss应答
+message SCShareBossChallenge{
+    required Position pos=1;
+}
+
+
+//跨服boss信息推送
+message SCShareBossInfoBroadcast{
+    required BossInfo bossInfo =1;
+}
+//地图跨服boss列表信息推送
+message SCShareBossListInfoNotice{
+    repeated BossInfo bossInfoList =1;
+}

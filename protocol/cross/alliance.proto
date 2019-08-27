@@ -1,0 +1,17 @@
+syntax = "proto2";
+
+package cross;
+
+//仙盟数据
+message AllianceData{
+    required int64 allianceId =1;
+    required string allianceName=2;
+    required int64 mengZhuId=3;
+    required int32 memPos=4;
+}
+
+//仙盟同步
+message SIPlayerAllianceSync{
+    required AllianceData allianceData=1;
+}
+

@@ -1,0 +1,118 @@
+syntax = "proto2";
+
+package  ui;
+
+
+message OneArenaInfo {
+    //灵池等级
+    required int32 level=1;
+    //灵池位置标识
+    required int32 pos=2;
+    //灵池占领者名字
+    required string name=3;
+    //是否是vip 
+    required bool isVip = 4;
+    //是否正在抢夺
+    required bool isRobbing=5;
+    //玩家上次抢夺时间 0(没抢夺)
+    required int64 robTime=6;
+    //上次产出时间
+    required int64 lastTime=7;
+    //战力
+    required int64 force=8;
+        //灵池占领者id
+    required int64 ownerId=9;
+}
+
+message OneArenaRecord {
+    //抢夺名字
+    required string robName=1;
+    //抢夺时间
+    required int64 robTime=2;
+    //抢夺结果  0成功 1 失败
+    required bool status=3;
+}
+
+//出售鲲信息
+message OneArenaKunSell {
+    //总银两
+    required int64 totalSilver=1;
+    //总绑元
+    required int64 totalBindGold=2;
+}
+
+
+//灵池信息
+message CSOneArenaGet{
+
+}
+
+//灵池信息
+message SCOneArenaGet{
+    repeated OneArenaInfo oneArenaList=1;
+    required OneArenaKunSell kunSell=2;
+}
+
+//灵池抢夺
+message CSOneArenaRob {
+    //灵池等级
+    required int32 level=1;
+    //灵池位置标识
+    required int32 pos=2;
+}
+
+//灵池抢夺回复
+message SCOneArenaRob {
+    // 1 进入抢夺场景  2 抢夺中
+    required int32 result=1;
+}
+
+//被抢推送
+message SCOneArenaRobbedPush {
+    required string name=1;
+}
+
+//抢夺信息
+message CSOneArenaRecord{
+    required int64 logTime=1;
+}
+
+//抢夺信息回复
+message SCOneArenaRecord {
+    repeated OneArenaRecord recordList=1;
+}
+
+//一键卖出
+message CSOneArenaSell {
+
+}
+
+//一键卖出回复
+message SCOneArenaSell {
+    required OneArenaKunSell kunSell=1;
+}
+
+//推送抢夺结果
+message SCOneArenaRobResult {
+    //false 失败  true 成功
+    required bool sucess=1;
+    //名字
+    required string name=2;
+    //灵池等级
+    required int32 level=3;
+}
+
+//假人信息下发
+message SCOneArenaRobot {
+    required int64 playerId=1;
+    required string name=2;
+    required int32 level=3;
+    required int64 hp=4;
+    required int64 force=5;
+    required int32 role=6;
+    required int32 sex=7;
+}
+
+
+
+

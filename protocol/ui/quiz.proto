@@ -1,0 +1,21 @@
+syntax = "proto2";
+
+package ui;
+
+
+//仙尊问答答题
+message CSQuizAnswer{
+    required int32 answerIdx=1;
+}
+message SCQuizAnswer{
+    //结果0:答错 1:答对
+    required int32 result=1;
+    //正确答案索引
+    required int32 answerIdx=2;
+}
+
+//仙尊问答出题推送
+message SCQuizAssignInfo{
+    required int32 quizId=1;
+    repeated int32 answerOrder=2;
+}

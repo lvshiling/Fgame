@@ -1,0 +1,21 @@
+file="alliance_depot_setting.go"
+pkg="model"
+class="AllianceDepotSetting"
+base="AllianceLogMsg"
+comment = "仙盟仓库设置"
+name="alliance_depot_setting"
+
+[[variables]]
+name="Reason"
+type="int32"
+tag="reason"
+comment="变更原因编号" 
+show="normal"
+
+[[variables]]
+name="ReasonText"
+type="string"
+tag="reasonText"
+comment="变更原因"
+show="normal"
+

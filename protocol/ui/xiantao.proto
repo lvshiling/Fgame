@@ -1,0 +1,62 @@
+syntax = "proto2";
+
+package  ui;
+
+import "drop.proto";
+import "rewproperty.proto";
+
+
+message AttendInfo{
+    //采集次数
+    required int32 collectCount=1;
+    //百年仙桃数量
+    required int32 juniorPeachCount=2;
+    //千年仙桃数量
+    required int32 highPeachCount=3;
+    //抢夺次数
+    required int32 robCount=4;
+    //被抢夺次数
+    required int32 beRobCount=5;
+}
+
+//仙桃采集点信息
+message PeachPointInfo {
+    //id
+    required int32 biologyId=1;
+    //总次数
+    required int32 totalCount=2;
+    //已经采集次数
+    required int32 useCount=3;
+    //上次刷新数据
+    required int64 lastRecoverTime=4;
+}
+
+//仙桃大会信息
+message SCXiantaoGet {
+    required AttendInfo aInfo=1;
+    repeated PeachPointInfo pInfo=2;
+}
+
+//提交桃子
+message CSXiantaoPeachCommit {
+}
+//提交桃子回复
+message SCXiantaoPeachCommit {
+    required RewProperty rewInfo=1;
+    repeated DropInfo dropInfo=2;
+}
+
+
+//推送仙桃大会玩家信息
+message SCXiantaoPlayerAttendChange {
+    required AttendInfo aInfo=1;
+}
+
+//推送采集点信息
+message SCXiantaoPeachPointChange {
+    required PeachPointInfo pInfo=1;
+}
+
+//仙桃大会结束后推送
+message SCXiantaoResult {
+}

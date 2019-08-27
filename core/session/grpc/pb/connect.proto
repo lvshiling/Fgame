@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package pb;
+
+service Connection {
+   rpc Connect(stream Message) returns(stream Message){}
+}
+
+message Message {
+    bytes body=1;
+}
+

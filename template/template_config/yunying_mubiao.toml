@@ -1,0 +1,22 @@
+file="yunying_goal_vo.go"
+pkg="template"
+class="YunYingGoalTemplateVO"
+comment = "运营活动目标模板配置"
+[[variables]]
+name="Id"
+type="int"
+tag="id"
+comment="id"
+
+[[variables]]
+name="GroupId"
+type="int32"
+tag="groupId"
+comment="活动id"
+
+[[variables]]
+name="QuestId"
+type="string"
+tag="quest_id"
+comment="子任务"
+ 

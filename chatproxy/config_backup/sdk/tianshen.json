@@ -1,0 +1,12 @@
+{
+    "android":{
+        "game":203,
+        "key":"a2cc95f400853ea2e051bf41eb4ed2b2",
+        "url":"http://api.syyoo.com/mobilechat.php"
+    },
+    "ios":{
+        "game":204,
+        "key":"9f00dcbdcaa3d37100435358f1bd30f3",
+        "url":"http://api.syyoo.com/mobilechat.php"
+    }
+}

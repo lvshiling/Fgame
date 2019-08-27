@@ -1,0 +1,58 @@
+syntax = "proto2";
+
+package ui;
+import "drop.proto";
+import "world_boss.proto";
+import "common.proto";
+
+
+//幻境boss列表
+message CSUnrealBossList{
+
+}
+//幻境boss列表应答
+message SCUnrealBossList{
+    repeated BossInfo bossInfoList=1;
+    required int32 curPilao=2;
+    required int32 curBuyTimes=3;
+}
+
+//挑战幻境boss
+message CSUnrealBossChallenge{
+    required int32 biologyId=1;
+}
+message SCUnrealBossChallenge{
+    required Position pos=1;
+}
+
+//boss信息推送
+message SCUnrealBossInfoBroadcast{
+    required BossInfo bossInfo =1;
+}
+//地图boss列表信息推送
+message SCUnrealBossListInfoNotice{
+    repeated BossInfo bossInfoList =1;
+}
+
+//购买疲劳值
+message CSUnrealBossBuyPilaoNum{
+    required int32 buyNum=1;
+}
+message SCUnrealBossBuyPilaoNum{
+    required int32 curPilao=1;
+}
+
+//幻境boss死亡推送(对boss造成伤害)
+message SCUnrealBossEnemiesNotice{
+    required int64 attackId=1;
+    required string attackPlayerName=2;
+    required string  bossName=3;
+    repeated DropInfo dropInfoList=4;
+    required int32 biologyId=5;
+}
+
+//疲劳值信息推送
+message SCUnrealBossPilaoInfo{
+    required int32 curPilao=1;
+    required int32 curBuyTimes=2;
+}

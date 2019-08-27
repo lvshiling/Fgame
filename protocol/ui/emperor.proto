@@ -1,0 +1,118 @@
+syntax = "proto2";
+
+package ui;
+
+import "item.proto";
+
+message EmperorInfo {
+    //帝王id 0无主
+    required int64 emperorId=1;
+    //帝王名字 
+    required string name=2;
+    //帝王性别    //1 男   2 女
+    required int32 sex=3;
+    //配偶名字  ""无配偶
+    required string spouseName=4;
+    //帝王库存
+    required int64 storage=5;
+    //已争夺次数
+    required int64 robNum=6;
+    //抢夺时间
+    required int64 robTime=7;
+    //上次产出时间
+    required int64 lastTime=8;
+    //宝箱库存
+    required int64 boxNum=9;
+    //宝箱上次产出时间
+    required int64 boxLastTime=10;
+}
+
+message EmperorRecord {
+    //类型 type 1 抢夺 2 开宝箱
+    required int32 type=1;
+    //帝王名字
+    required string name=2;
+    //被抢名字
+    required string robbedName=3;
+    //操作时间
+    required int64 robTime=4;
+    //当type 为2有效
+    repeated ItemInfo itemList=5;
+}
+
+//抢龙椅界面信息
+message CSEmperorGet {
+}
+
+
+//抢龙椅界面信息
+message SCEmperorGet {
+    required EmperorInfo emperorInfo=1;
+    //今日膜拜次数
+    required int32 worshipNum=2;
+}
+
+//膜拜
+message CSEmperorWorship{
+}
+
+//膜拜回复
+message SCEmperorWorship {
+    //今日膜拜次数
+    required int32 num=1;
+    //国库银两
+    required int64 storage=2;
+}
+
+//领取库存
+message CSEmperorStorageGet {
+}
+
+//领取库存回复
+message SCEmperorStorageGet {
+    //false 龙椅被抢了 true领取成功
+    required  bool success=1;
+    //龙椅信息
+    required EmperorInfo emperorInfo=2;
+}
+
+//抢龙椅请求
+message CSEmperorRob {
+
+}
+
+//抢龙椅回复
+message SCEmperorRob {
+    // false 抢龙椅被人抢先一步了 true 成功
+    required  bool success=1;
+    //龙椅信息
+    required EmperorInfo emperorInfo=2;
+    //抢夺奖励
+    repeated ItemInfo itemList=3;
+}
+
+//抢夺记录请求
+message CSEmperorRecords {
+    required int64 logTime=1;
+}
+
+//抢夺记录回复
+message SCEmperorRecords {
+    repeated EmperorRecord recordList=1;
+}
+
+//龙椅被抢 推给前任帝王
+message SCEmperorRobbed {
+
+}
+
+//帝王开宝箱请求
+message CSEmperorOpenBox {
+
+}
+
+//帝王开宝箱推送
+message SCEmperorOPenBox {
+    required EmperorInfo emperorInfo=1;
+    repeated ItemInfo itemList=2;
+}

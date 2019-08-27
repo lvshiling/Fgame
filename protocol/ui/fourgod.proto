@@ -1,0 +1,82 @@
+syntax = "proto2";
+
+package  ui;
+
+import "item.proto";
+import "common.proto";
+
+message FourGodBio {
+    //生物id
+    required int64 ncpId=1;
+    //生物类型
+    required int32 typ =2;
+    //生物状态 1已刷新 2倒计时
+    required int32 status=3;
+    //状态时间 已刷新时为0
+    required int64 statusTime=4;
+    //生物位置
+    optional Position pos=5;
+    //生物id
+    required int32 biologyId=6;
+}
+
+
+//四神遗迹信息
+message SCFourGodGet {
+    //玩家钥匙数
+    required int32 keyNum=1;
+    //生物状态
+    repeated FourGodBio bioList=2;
+}
+
+//四神遗迹采集宝箱
+message CSFourGodOpenBox{
+    required int64 npcId=1;
+}
+
+//四神遗迹采集宝箱回复
+message SCFourGodOpenBox{
+    required int64 npcId=1;
+}
+
+//四神遗迹采集宝箱打断
+message SCFourGodOpenBoxStop {
+    required int64 npcId=1;
+}
+
+//四神遗迹采集宝箱完成
+message SCFourGodOpenBoxFinish{
+    required int64 npcId=1;
+}
+
+//四神遗迹钥匙变化
+message SCFourGodKeyNumChange {
+    required int32 keyNum=1;
+}
+
+//副本生物变化场景内广播(场景内)
+message SCFourGodBioBroadcast {
+    required FourGodBio  bio=1;
+}
+
+
+//累计获得
+message SCFourGodTotal {
+    //经验
+    required int64 exp=1;
+    //获得物品
+    repeated ItemInfo itemList=2;
+}
+
+//使用蒙面衣
+message CSFourGodUseMasked {
+    // false 拒绝使用 true 使用
+    required bool result=1;
+}
+
+
+//使用蒙面衣回复
+message SCFourGodUseMasked {
+    // false 拒绝使用 true 使用
+    required bool result=1;
+}

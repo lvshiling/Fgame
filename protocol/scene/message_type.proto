@@ -1,0 +1,39 @@
+syntax = "proto2";
+
+package scene;
+
+enum MessageType{
+    //场景模块 101-200
+    CS_PING_TYPE = 101;    //ping
+    SC_PING_TYPE = 102;    //ping回复
+    CS_ENTER_SCENE_TYPE = 103;  //进入场景
+    SC_ENTER_SCENE_TYPE = 104;  //进入场景回复
+    SC_OBJECT_ENTER_SCOPE_TYPE = 105;  //进入视野
+    SC_OBJECT_EXIT_SCOPE_TYPE = 106;   //进入视野回复
+    CS_OBJECT_MOVE_TYPE = 107;         //移动包
+    SC_OBJECT_MOVE_TYPE = 108;         //移动包回复
+    CS_OBJECT_ATTACK_TYPE=109;         //攻击包
+    SC_OBJECT_ATTACK_TYPE=110;         //攻击包回复
+    SC_OBJECT_DAMAGE_TYPE=111;          //伤害包回复
+    SC_OBJECT_BUFF_TYPE=112;             //buff包回复
+    SC_OBJECT_BATTLE_TYPE=113;           //战斗包回复
+    SC_PLAYER_DATA_CHANGED_TYPE=114;    //数据更新包回复
+    CS_PLAYER_RELIVE_TYPE=115;          //复活包
+    SC_PLAYER_RELIVE_TYPE=116;          //复活包回复
+    SC_OBJECT_BUFF_REMOVE_TYPE=117;             //buff移除
+    CS_ITEM_GET_TYPE=118;             //获得物品
+    SC_ITEM_GET_TYPE=119;             //获得物品反馈
+    SC_EXIT_SCENE_TYPE=120;            //玩家退出场景通知 
+    SC_OBJECT_FIXED_POSITION_TYPE=121; //修正位置包 
+    SC_MONSTER_CAMP_CHANGED_TYPE=122;  //生物阵营变化
+    SC_ITEM_OWNER_CHANGED_TYPE=123; //物品归属变化
+    CS_WORLD_ENTER_SCENE_TYPE = 124;  //世界地图传送
+    CS_ENTER_PORTAL_TYPE=125;     //进入传送阵
+    SC_ENTER_PORTAL_TYPE=126;   //进入传送阵回复
+    CS_REENTER_SCENE_TYPE=127; //重新进入场景
+    CS_SCENE_HEARTBEAT_TYPE = 128;    //心跳
+    SC_SCENE_HEARTBEAT_TYPE = 129;    //心跳回复
+    CS_PET_ATTACK_TYPE=130;//宠物攻击
+    SC_PET_ATTACK_TYPE=131;//宠物攻击
+}
+

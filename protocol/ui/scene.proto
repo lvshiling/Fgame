@@ -1,0 +1,130 @@
+syntax = "proto2";
+
+package ui;
+
+import "common.proto";
+
+//定义
+message DesPosition {
+    required float posX =1;
+    required float posY =2;
+    required float posZ =3;
+}
+
+message CSFuBenExit {
+}
+
+message SCFuBenExit {
+}
+
+
+message CSGoToNPC {
+    required int32 npcId=1;
+}
+
+message SCGoToNPC {
+    required int32 npcId=1;
+}
+
+//玩家被击杀
+message SCPlayerKilled {
+    required string killName = 1;
+}
+
+//玩家和平模式被攻击
+message SCPlayerAttacked{
+    required int64 attackId=1;
+}
+
+
+//场景玩家信息变化
+message SCScenePlayerDataChanged{
+    optional int64 tp=1; //体力值
+}
+
+
+//玩家被动技能触发
+message SCScenePlayerSkillUse{
+    required int32 skillId=1; //技能id
+}
+
+
+//玩家击杀
+message SCPlayerKill {
+    //玩家id
+    required int64 playerId=1;
+    //玩家角色
+    required int32 role=2;
+    //玩家性别
+    required int32 sex=3;
+    //玩家名字
+    required string name=4;
+    //玩家战力
+    required int64 force=5;
+}
+
+
+//飞鞋传送
+message CSPlayerFeiXieTransfer {
+    required int32 mapId=1;
+    required DesPosition pos=2;
+}
+
+message SCPlayerFeiXieTransfer{
+}
+
+
+//ui复活回复
+message SCPlayerRelive{
+}
+
+
+
+message SceneRankPlayerInfo{
+    required int64 playerId=1;
+    required string playerName=2;
+    required int64 value=3;
+}
+
+
+message SceneSelfRankInfo{
+    required int32 rank=1; //-1未上榜
+    required int64 value=2;
+}
+
+message SceneRankInfo{
+    required int32 rankType=1;
+    repeated SceneRankPlayerInfo playerList=2;
+    required SceneSelfRankInfo selfRankInfo=3;
+}
+
+//排行变化
+message SCSceneRankChanged{
+    required SceneRankInfo rankInfo=2;
+}
+
+
+//ui进入pvp
+message SCPlayerEnterPVP{
+}
+
+
+//ui进入pvp
+message SCPlayerExitPVP{
+}
+
+//采集物信息
+message GeneralCollectInfo {
+    //生物服务器Id
+    required int64 ncpId=1;
+    //生物类型
+    required int32 typ =2;
+    //生物状态 是否死亡
+    required bool isDead=3;
+    //状态时间 未死亡为0
+    required int64 deadTime=4;
+    //生物位置
+    optional Position pos=5;
+    //生物id
+    required int32 biologyId=6;
+}

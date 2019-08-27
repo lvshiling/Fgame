@@ -1,0 +1,22 @@
+syntax = "proto2";
+
+package scene;
+
+import "common.proto";
+
+
+//掉落物品数据
+message SceneItemData {
+    //掉落物品唯一id
+    required int64 uid =1;
+    //物品id
+    required int32 itemId = 2;
+    //物品数量
+    required int32 itemNum = 3;
+    //位置
+    required Position curPos = 4;
+    //可选的
+    optional int32 level=5;
+    //状态 
+    required bool state=6;
+}

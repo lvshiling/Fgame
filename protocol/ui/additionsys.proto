@@ -1,0 +1,296 @@
+syntax = "proto2";
+
+package ui;
+
+//装备槽位
+message AdditionSysSlotInfo {
+    //系统类型
+    required int32 sysType=1;
+    //位置
+    required int32 slotId=2;
+    required int32 level=3;
+    optional int32 itemId=4;
+    optional int32 bindType=5[default=0]; //0不绑定1绑定，默认0
+    required int32 shenZhuLev=6;
+    required int32 shenZhuPro=7;
+}
+
+//系统通灵信息
+message AdditionSysTongLingInfo {
+    //系统类型
+    required int32 sysType=1;
+    //通灵等级
+    required int32 tongLingLev=2;
+    //通灵进度
+	required int32 tongLingPro=3;
+}
+
+//系统等级信息
+message AdditionSysLevelInfo {
+    //系统类型
+    required int32 sysType=1;
+    //等级
+    required int32 level=2;
+    //进度值
+    required int32 progress=3;
+    //化灵等级
+    required int32 lingLevel=4;
+    //化灵进度
+	required int32 lingPro=5;
+    //系统觉醒
+    required int32 isAwake=6;
+}
+
+//使用装备
+message CSUseAdditionSysEquip {
+    //系统类型
+    required int32 sysType=1;
+    //索引
+    required int32 index=2;
+  }
+//使用装备成功
+message SCUseAdditionSysEquip {
+    //系统类型
+    required int32 sysType=1;
+    //索引
+    required int32 index=2;
+}
+
+//脱下装备
+message CSTakeOffAdditionSysEquip {
+    //系统类型
+    required int32 sysType=1;
+    //位置
+    required int32 slotId=2;
+}
+//脱下装备成功
+message SCTakeOffAdditionSysEquip {
+    //系统类型
+    required int32 sysType=1;
+    //位置
+    required int32 slotId=2;
+}
+    
+//强化槽位
+message CSAdditionSysStrengthenBody {
+    //系统类型
+    required int32 sysType=1;
+    //强化对象
+    required int32 slotId=2;
+    //自动购买
+    optional bool auto=3;
+    //是否使用防爆符
+    optional bool isProtect=4;
+}
+//强化槽位应答
+message SCAdditionSysStrengthenBody {
+    //系统类型
+    required int32 sysType=1;
+    //位置
+    required int32 slotId=2;
+    //强化结果 0:成功 1：失败 2:回退
+    required int32 result=3;
+    //自动购买
+    optional bool auto=4;
+    //是否使用防爆符
+    optional bool isProtect=5;
+}
+
+//槽位数据改变
+message SCAdditionSysSlotChanged {
+    //系统类型
+    required int32 sysType=1;
+    //改变的装备
+    repeated AdditionSysSlotInfo slotList=2;
+}
+
+//槽位数据回复
+message SCAdditionSysSlotInfo {
+    //多系统槽位数据
+    repeated AdditionSysSlotInfo slotList=1;
+    //多系统等级数据
+    repeated AdditionSysLevelInfo levelList=2;
+    //多系统通灵数据
+    repeated AdditionSysTongLingInfo tongLingList=3;
+}
+
+//系统升级请求
+message CSAdditionSysShengJi {
+    //系统类型
+    required int32 sysType=1;
+    //自动购买
+    optional bool auto=2;
+}
+//系统升级应答
+message SCAdditionSysShengJi {
+    //系统类型
+    required int32 sysType=1;
+    //等级
+    required int32 level=2;
+    //进度值
+    required int32 progress=3;
+    //结果 0 成功 1 失败
+    required int32 result=4;
+    //自动购买
+    optional bool auto=5;
+}
+
+
+//进阶
+message CSAdditionSysUpgrade{
+       //系统类型
+       required int32 sysType=1;
+    //位置
+    required int32 slotId=2;
+}
+  
+//进阶成功
+message SCAdditionSysUpgrade{
+       //系统类型
+       required int32 sysType=1;
+    //位置
+    required int32 slotId=2;
+    //进阶结果 0:成功 1：失败 
+    required int32 result=3;
+}
+
+
+
+//附加系统类装备缓存信息
+message AdditionSysSlotCacheInfo {
+	required int32 slotId=1;
+	required int32 level=2;
+	required int32 itemId=3;
+    required int32 shenZhuLev=4;
+    required int32 shenZhuPro=5;
+}
+
+//系统通灵信息
+message AdditionSysTongLingCacheInfo {
+    //通灵等级
+    required int32 tongLingLev=1;
+    //通灵进度
+	required int32 tongLingPro=2;
+}
+
+//附加系统类缓存信息
+message AdditionSysCacheInfo {
+	required           int32                sysType=1;
+	required           int32                level=2;
+	required           int32                upPro=3;
+    required           int32                lingLevel=4;
+	required           int32                lingPro=5;
+	repeated AdditionSysSlotCacheInfo       sysTypeSlotList=6;  
+    optional AdditionSysTongLingCacheInfo   tongLingInfo=7;
+    required           int32                isAwake=8;
+}
+
+//所有附加系统类信息
+message AllAdditionSysInfo {
+    repeated AdditionSysCacheInfo additionSysList=1;
+}
+
+
+//系统食用化灵丹请求
+message CSAdditionSysHualingEat {
+    //系统类型
+    required int32 sysType=1;
+    //系统类型
+    required int32 num=2;
+}
+//系统食用化灵丹应答
+message SCAdditionSysHualingEat {
+    //系统类型
+    required int32 sysType=1;
+    //等级
+    required int32 level=2;
+    //进度值
+    required int32 progress=3;
+}
+
+//神铸槽位
+message CSAdditionSysShenZhuBody {
+    //系统类型
+    required int32 sysType=1;
+    //部位
+    required int32 slotId=2;
+}
+//神铸槽位应答
+message SCAdditionSysShenZhuBody {
+    //系统类型
+    required int32 sysType=1;
+    //部位
+    required int32 slotId=2;
+    //等级
+    required int32 level=3;
+    //进度值
+    required int32 progress=4;
+}
+
+//系统使用觉醒丹请求
+message CSAdditionSysAwakeEat {
+    //系统类型
+    required int32 sysType=1;
+}
+//系统使用觉醒丹应答
+message SCAdditionSysAwakeEat {
+    //系统类型
+    required int32 sysType=1;
+    //觉醒等级
+    required int32 awakeLevel=2;
+}
+//通灵升级
+message CSAdditionSysTongLingUpgrade {
+    //系统类型
+    required int32 sysType=1;
+    //数量
+    required int32 num=2;
+}
+//通灵升级应答
+message SCAdditionSysTongLingUpgrade {
+    //系统类型
+    required int32 sysType=1;
+    //等级
+    required int32 level=2;
+    //进度值
+    required int32 progress=3;
+}
+
+//灵珠信息请求
+message CSAdditionSysLingTongLingZhuInfo {
+    //灵童类型
+    required int32 lingtongId=1;
+}
+
+message SCAdditionSysLingTongLingZhuInfo {
+    //灵童类型
+    required int32 lingtongId=1;
+    //灵珠信息
+    repeated LingTongLingZhuInfo lingzhuInfo=2;
+}
+
+message LingTongLingZhuInfo {
+    //灵珠类型
+    required int32 lingZhuType=1;
+    //灵珠等级
+    required int32 level=2;
+    //祝福值
+    required int64 bless=3;
+    //次数
+    required int32 times=4;
+}
+
+//灵珠升级请求
+message CSAdditionSysLingTongLingZhuUplevel {
+    //灵童类型
+    required int32 lingtongId=1;
+    //灵珠类型
+    required int32 lingZhuType=2;
+}
+
+message SCAdditionSysLingTongLingZhuUplevel {
+    //灵童类型
+    required int32 lingtongId=1;
+    //灵珠信息
+    required LingTongLingZhuInfo lingzhuInfo=2;
+}

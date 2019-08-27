@@ -1,0 +1,45 @@
+syntax = "proto2";
+
+package  ui;
+
+import "drop.proto";
+import "rewproperty.proto";
+
+// vip信息推送
+message SCVipInfoNotice {
+    //等级
+    required int32 vipLevel=1;
+    //星级
+    required int32 vipStar=2;
+    //历史充值
+    required int32 chargeNum=3;
+    //礼包购买记录(vip等级)
+    repeated int32 giftRecordList=4;
+    //免费礼包领取记录(vip等级) 
+    repeated int32 freeGiftRecordList=5;
+}
+
+// vip礼包购买
+message CSVipGiftBuy{
+    // vip等级 
+    required int32 giftLevel=1;
+    // vip星级 
+    required int32 giftStar=2;
+}
+message SCVipGiftBuy{
+    required int32 giftLevel=1;
+    required int32 giftStar=2;
+    repeated DropInfo dropList=3;
+}
+
+// 领取免费礼包
+message  CSReceiveFreeGift{
+    // vip等级
+    required int32 giftLevel=1;
+    required int32 giftStar=2;
+}
+message SCReceiveFreeGift{
+    repeated DropInfo dropList=1;
+    required int32 giftLevel=2;
+    required int32 giftStar=3;
+}

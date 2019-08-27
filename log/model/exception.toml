@@ -1,0 +1,15 @@
+file="exception.go"
+pkg="model"
+class="Exception"
+base="SystemLogMsg"
+comment = "异常"
+name="exception"
+
+[[variables]]
+name="Content"
+type="string"
+tag="content"
+comment="异常内容"
+show="normal"
+
+

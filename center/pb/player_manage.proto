@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+package pb;
+
+message PlayerServerInfo {
+    int64 userId=1;         //用户id
+    int32 serverId=2;       //服务器id
+    int64 playerId=3;       //玩家id
+    string playerName=4;    //玩家名字
+    int32 role=5;           //角色
+    int32 sex=6;            //性别
+    int32 level=7;          //等级
+    int32 zhuanShu=8;       //转数
+}
+
+//获取用户的角色列表
+message PlayerListRequest{
+    int64 userId=1; //用户id
+}
+
+//获取用户的角色列表回复
+message PlayerListResponse{
+    repeated PlayerServerInfo playerList=1;
+}
+
+//同步玩家的角色信息
+message PlayerInfoSyncRequest{
+    PlayerServerInfo playerInfo=1;
+}
+
+//同步玩家的角色信息回复
+message PlayerInfoSyncResponse{
+
+}
+
+service PlayerManage {
+    //获取用户的角色列表
+    rpc GetPlayerServerList(PlayerListRequest) returns(PlayerListResponse){}
+    //同步用户的玩家角色
+    rpc SyncPlayerServerInfo(PlayerInfoSyncRequest) returns(PlayerInfoSyncResponse){}
+}
+

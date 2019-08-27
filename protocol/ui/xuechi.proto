@@ -1,0 +1,41 @@
+syntax = "proto2";
+
+package ui;
+
+//血池界面信息
+message CSXueChiGet {
+    
+}
+
+//血池界面信息
+message SCXueChiGet {
+    required int32 bloodLine=1; 
+    required int64 blood=2;
+}
+
+//血池设置补血线
+message CSXueChiBloodLine {
+   required int32 bloodLine=1; 
+}
+
+//血池设置补血线回复
+message SCXueChiBloodLine {
+    required int32 bloodLine=1;
+}
+
+//购买后自动入血池(不入背包)
+message CSXueChiAutoBuy{
+    required int32 itemId=1;
+    required int32 itemNum=2;
+}
+message SCXueChiAutoBuy{
+    required int32 itemId=1;
+    required int32 itemNum=2;
+    required int64 addBlood=3;
+}
+
+//推送血池剩余血量
+message SCXueChiBlood{
+    required int64 blood=1;
+}
+

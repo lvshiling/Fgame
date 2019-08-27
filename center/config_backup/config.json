@@ -1,0 +1,50 @@
+{
+    "debug":false,
+    "server":{
+        "server":"./data/server",
+        "host":"0.0.0.0",
+        "port":10001,
+        "path":"",
+        "pprofPort":16060,
+        "tracePort":16000
+    },
+    "center":{
+        "gmDb":{
+            "debug":false,
+            "dialect":"mysql",
+            "user":"root",
+            "password":"root",
+            "host":"127.0.0.1:3306",
+            "dbName":"gamegm",
+            "parseTime":true,
+            "charset":"utf8mb4",
+            "maxActive":100,
+            "maxIdle":50,
+            "maxLifeTime":240
+        },
+        "db":{
+            "debug":false,
+            "dialect":"mysql",
+            "user":"root",
+            "password":"root",
+            "host":"127.0.0.1:3306",
+            "dbName":"game_center",
+            "parseTime":true,
+            "charset":"utf8mb4",
+            "maxActive":100,
+            "maxIdle":50,
+            "maxLifeTime":240
+        },
+        "redis":{
+            "host":"127.0.0.1",
+            "port":6379,
+            "maxIdle":50,
+            "maxActive":50,
+            "wait": true,
+            "idleTimeout":240
+        },
+        "key":"./config/key",
+        "expiredTime":2592000000
+    }
+ 
+}

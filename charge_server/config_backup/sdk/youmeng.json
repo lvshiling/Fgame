@@ -1,0 +1,12 @@
+{
+    "iOS":{
+        "appId":"157",
+        "appKey":"cc0285ea4f6f7e4f4",
+        "chargeKey":"f505374fb72c039b5e0b527729829a1c"
+    },
+    "android":{
+        "appId":"156",
+        "appKey":"c17f3675c66cdc663",
+        "chargeKey":"f505374fb72c039b5e0b527729829a1c"
+    }
+}

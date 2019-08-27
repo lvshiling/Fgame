@@ -1,0 +1,133 @@
+syntax = "proto2";
+
+package ui;
+
+
+message ZhenFaInfo {
+    //阵法类型
+    required int32 zhenFaType=1;
+    //阵法等级
+    required int32 level=2;
+}
+
+message ZhenQiPosInfo {
+    //阵旗部位
+    required int32 zhenQiPos=1;
+    //阶数
+    required int32 number=2;
+}
+
+
+message ZhenQiInfo {
+    //阵法类型
+    required int32 zhenFaType=1;
+    //阵旗部位信息
+    repeated ZhenQiPosInfo zhenQiPosList=2;
+}
+
+
+message ZhenQiXianHuoInfo {
+    //阵法类型
+    required int32 zhenFaType=1;
+    //等级
+    required int32 level=2;
+    //暴击幸运星
+    required int32 luckyStar=3;
+}
+
+//阵法
+message CSZhenFaGet {
+
+}
+
+
+//阵法回复
+message SCZhenFaGet {
+    repeated ZhenFaInfo zhenFaList=1;
+}
+
+
+//阵旗
+message CSZhenQiGet {
+
+}
+
+//阵旗回复
+message SCZhenQiGet {
+    repeated ZhenQiInfo zhenQiList=1;
+}
+
+
+//阵旗仙火信息
+message CSZhenQiXianHuoGet {
+    
+}
+
+
+//阵旗仙火信息回复
+message SCZhenQiXianHuoGet {
+    repeated ZhenQiXianHuoInfo zhenQiXianHuoList=1;
+}
+
+
+//阵法升级
+message CSZhenFaShengJi {
+    required bool autoFlag = 1;
+    required int32 zhenFaType=2;
+}
+
+
+//阵法升级回复
+message SCZhenFaShengJi {
+    required ZhenFaInfo zhenFaInfo=1;
+    required bool sucess=2;
+}
+
+
+
+//阵旗部位升阶
+message CSZhenQiAdvanced {
+    //阵法类型
+    required int32 zhenFaType=1;
+    //阵旗部位
+    required int32 zhenQiPos=2;
+}
+
+//阵旗部位升阶
+message SCZhenQiAdvanced  {
+    //阵法类型
+    required int32 zhenFaType=1;
+    //阵旗部位信息
+    required ZhenQiPosInfo zhenQiPosInfo=2;
+    //成功与失败
+    required bool sucess=3;
+}
+
+//阵旗仙火升级
+message CSZhenQiXianHuoShengJi {
+    //自动升级
+    required bool autoFlag=1;
+    //保护符
+    required bool protectFlag=2;
+    //阵法类型
+    required int32 zhenFaType=3;
+}
+
+
+//阵旗仙火升级
+message SCZhenQiXianHuoShengJi {
+    required ZhenQiXianHuoInfo  zhenQiXianHuoInfo=1;
+    required bool sucess = 2 ;
+}
+
+//阵法激活
+message CSZhenFaActivate {
+    required int32 zhenFaType=1;
+}
+
+//阵法激活回复
+message SCZhenFaActivate {
+    required ZhenFaInfo zhenFaInfo=1;
+}
+
+

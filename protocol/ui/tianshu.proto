@@ -1,0 +1,43 @@
+syntax = "proto2";
+
+package ui;
+
+// 激活天书
+message CSTianShuActivate{
+    required int32 type=1;
+}
+message SCTianShuActivate{
+    required int32 type=1;
+}
+
+// 领取奖励
+message CSTianShuGiftReceive{
+    required int32 type=1;
+}
+message SCTianShuGiftReceive{
+    required int32 type=2;
+}
+
+message TianShuInfo{
+    required int32 isReceive=1;
+    required int32 type=2;
+    required int32 level=3;
+}
+
+// 天书信息
+message SCTianShuInfoList{
+    repeated TianShuInfo infoList=1;
+    required int32 totalChargeNum=2;
+}
+
+// 天书升级
+message CSTianShuUplevel{
+    required int32 type=1;
+}
+message SCTianShuUplevel{
+    required bool isSuccess=1;
+    required int32 type=2;
+    required int32 level=3;
+}
+
+

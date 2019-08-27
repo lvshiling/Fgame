@@ -1,0 +1,9 @@
+syntax = "proto2";
+
+package ui;
+
+//gm命令
+message CSGMCommand {
+    //命令
+   required string command=1;
+}

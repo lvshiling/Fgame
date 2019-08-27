@@ -1,0 +1,100 @@
+syntax = "proto2";
+
+package ui;
+
+import "drop.proto";
+
+message LingShouInfo {
+    required int32 type=1;//灵兽类型
+    required int32 level=2;//等级
+    required int64 exp=3; //经验
+    required int32 rank=4; //阶级
+    required int64 uprankBless=5; //进阶祝福值
+    required int32 uprankTimes=6; //进阶尝试次数
+    repeated LingWenInfo lingwenList=7;//灵纹信息
+    repeated LingLianInfo linglianList=8;//灵炼信息
+    required int32 linglianTimes=9; //已经灵炼过的次数
+    required int64 receiveTime=10; //上一次领取时间
+}
+
+message LingWenInfo {
+    required int32 subType=1; //灵纹类型
+    required int32 level=2;
+    required int64 exp=3;
+}
+
+message LingLianInfo {
+    required int32 subType=1; //灵炼部位类型
+    required int32 poolMark=2; //灵炼部位属性池ID
+}
+
+//信息请求
+message CSShangguzhilingInfo {
+}
+
+message SCShangguzhilingInfo {
+    repeated LingShouInfo lingshouList=1;//上古之灵信息
+}
+
+//升级请求
+message CSShangguzhilingUplevel {
+    required int32 type=1;//灵兽类型
+    required int32 itemId=2; //喂养的物品Id
+    required bool autoFlag=3;
+}
+
+message SCShangguzhilingUplevel {
+    required int32 type=1;//灵兽类型
+    required int32 level=2;//等级
+    required int64 exp=3; //经验
+}
+
+//灵纹升级请求
+message CSShangguzhilingLingWenUplevel {
+    required int32 type=1;//灵兽类型
+    required int32 subType=2;//灵纹类型
+    required int32 itemId=3; //喂养的物品Id
+    required bool autoFlag=4;
+}
+
+message SCShangguzhilingLingWenUplevel {
+    required int32 type=1;//灵兽类型
+    required LingWenInfo lingwen=2;//灵纹信息
+}
+
+//进阶请求
+message CSShangguzhilingUpRank {
+    required int32 type=1;//灵兽类型
+    required bool autoFlag=2;
+}
+
+message SCShangguzhilingUpRank {
+    required int32 type=1;//灵兽类型
+    required int32 rank=2; //阶级
+    required int64 uprankBless=3; //进阶祝福值
+    required int32 uprankTimes=4; //进阶尝试次数
+}
+
+//灵炼请求
+message CSShangguzhilingLingLian {
+    required int32 type=1;//灵兽类型
+    repeated int32 changeStatusSubTypeList=2; //需要锁定的部位
+    required bool autoFlag=3;
+}
+
+message SCShangguzhilingLingLian {
+    required int32 type=1;//灵兽类型
+    repeated LingLianInfo linglian=2;//灵炼信息
+    required int32 linglianTimes=3; //已经灵炼过的次数
+}
+
+//定时奖励领取
+message CSShangguzhilingReceive {
+    required int32 type=1;//灵兽类型
+}
+
+message SCShangguzhilingReceive {
+    required int32 type=1;//灵兽类型
+    required int64 receiveTime=2; //上一次领取时间
+    required DropInfo dropInfo=3; //掉落信息
+}

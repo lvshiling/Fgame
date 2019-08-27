@@ -1,0 +1,69 @@
+syntax = "proto2";
+
+package ui;
+
+//暗器信息
+message AnqiInfo{
+    //阶数
+    required int32 advancedId=1;
+    //暗器丹食丹等级
+    required int32 anqiDanLevel=2;
+    //暗器丹培养进度值
+    required int32 progress=3;
+}
+
+//暗器信息请求
+message CSAnqiGet {
+}
+//暗器信息应答
+message SCAnqiGet{
+   //阶数
+   required int32 advancedId=1;
+   //暗器丹食丹等级
+   required int32 anqiDanLevel=2;
+   //祝福值
+   optional int32 bless=3;
+   //祝福值开始时间
+   optional int64 blessTime=4;
+   //暗器丹培养进度值
+   required int32 progress=5;
+}
+
+//食用暗器丹请求
+message CSAnqiEatDan {
+    required int32 num=1;
+}
+//食用暗器丹应答
+message SCAnqiEatDan {
+    //暗器丹食丹等级
+    required int32 level=1;
+    //培养进度值
+    required int32 progress=2;
+}
+
+
+//暗器进阶请求
+message CSAnqiAdvanced{
+    //是否自动进阶
+    required bool autoFlag=1;
+}
+//暗器进阶应答
+message SCAnqiAdvanced{
+    //阶数
+    required int32 advancedId=1;
+    //祝福值
+    optional int32 bless=2;
+    //祝福值开始时间
+    optional int64 blessTime=3;
+    //进阶方式 1进阶丹 2祝福丹 3直升券
+    required int32 advancedType=4;
+    //是否暴击
+    optional bool isDouble=5 [default=false];
+    //总祝福值
+    optional int32 totalBless=6;
+}
+
+//暗器信息推送
+message SCAnqiInfo{
+    required AnqiInfo anqiInfo=1;
+}

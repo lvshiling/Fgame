@@ -1,0 +1,244 @@
+syntax = "proto2";
+
+package  ui;
+
+import "drop.proto";
+import "rewproperty.proto";
+
+message DongFangInfo {
+    //怀孕时间
+    optional int64 pregnantTime=1;
+    //补品进度值
+    optional int32 tonicPro=2;
+    //当前宝宝数量
+    optional int32 babyNum=3;
+    //超生数量
+    optional int32 chaoshengNum=4;
+}
+
+message TalentInfo {
+    required int32 skillId=1;
+    // 0未锁定1锁定
+    required int32 status=2;
+}
+
+message BabyInfo{
+    //天赋激活次数
+    required int32 activateTimes=1;
+    //天赋列表
+    repeated TalentInfo talentList=2;
+    //宝宝名字
+    required string babyName=3;
+    //宝宝性别:1男2女
+    required int32 sex=4;
+    //宝宝属性单倍
+    required int32 danbei=5;
+    //宝宝品质
+    required int32 quality=6;
+    //宝宝读书等级
+    required int32 learnLevel=7;
+    //宝宝id
+    required int64 babyId=8;
+    //天赋锁定次数
+    required int32 lockTims=9;
+    //天赋洗练次数
+    required int32 refreshTimes=10;
+    // 宝宝读书经验
+    required int32 learnExp=11;
+}
+
+message ToySlotInfo {
+    // 玩具等级
+    required int32 level=1;
+    // 玩具位置
+    required int32 slotId=2;
+    // 玩具id
+    required int32 itemId=3;
+}
+
+message ToySuitInfo {
+    // 套装类型：
+    required int32 suitType=1;
+    repeated ToySlotInfo slotInfo=2;
+}
+
+//玩家宝宝信息
+message CSBabyInfo {
+}
+message SCBabyInfo {
+    required DongFangInfo dongfangInfo=1;
+    repeated BabyInfo babyInfoList=2;
+    repeated ToySuitInfo toySuitInfoList=3;
+}
+
+// 洞房
+message CSBabyDongFang {
+    // 是否使用道具
+    required bool isUseItem=1;
+}
+message SCBabyDongFang {
+    required bool isUseItem=1;
+    // 是否出生
+    required bool isBorn=2;
+    //返还物品
+    repeated DropInfo dropInfo=3;
+    optional BabyInfo babyInfo=4;
+}
+
+// 加速出生
+message CSBabyBornAccelerate {
+}
+message SCBabyBornAccelerate {
+}
+
+// 吃补品
+message CSBabyEatTonic {
+}
+message SCBabyEatTonic {
+    // 增加的补品进度值
+    required int32 addPro=1;
+}
+
+// 超生
+message CSBabyBornChaoSheng {
+}
+message SCBabyBornChaoSheng {
+}
+
+//出生推送
+message SCBabyBornNotice {
+    required BabyInfo babyInfo=1;
+}
+
+//配偶宝宝出生推送
+message SCBabyBornSpouseNotice {
+    required int64 emailId=1;   //宝宝卡邮件id
+}
+
+//宝宝出生前提醒
+message SCBabyBornMessageNotice {
+    required int64 bornTime=1;      //出生时间
+    required int64 noticeTime=2;    //提示时间
+}
+
+//改名
+message CSBabyChangeName {
+    //宝宝id
+    required int64 babyId=1;
+    //新的名字
+    required string newName=2;
+}
+message SCBabyChangeName {
+    required int64 babyId=1;
+    required string newName=2;
+}
+
+//激活天赋技能
+message CSBabyActivateSkill {
+    //宝宝id
+    required int64 babyId=1;
+}
+message SCBabyActivateSkill {
+    required int64 babyId=1;
+    //天赋列表
+    repeated TalentInfo talentList=2;
+}
+
+//锁定技能
+message CSBabyLockSkill {
+    required int64 babyId=1;
+    // 技能位置
+    required int32 skillIndex=2;
+    // 操作类型：0未锁定1锁定
+    required int32 operation=3;
+}
+message SCBabyLockSkill {
+    required int64 babyId=1;
+    required int32 skillIndex=2;
+    required int32 operation=3;
+}
+
+//洗练技能
+message CSBabyRefreshSkill {
+    required int64 babyId=1;
+}
+message SCBabyRefreshSkill {
+    required int64 babyId=1;
+    //天赋列表
+    repeated TalentInfo talentList=2;
+}
+
+//读书升级
+message CSBabyLearnUplevel {
+    // 是否自动购买
+    required bool isAuto=1;
+    // 学习物品
+    required int32 itemId=2;
+    // 学习数量
+    required int32 num=3;
+    // 宝宝id
+    required int64 babyId=4;
+}
+message SCBabyLearnUplevel {
+    // 是否自动购买
+    required bool isAuto=1;
+    // 学习物品
+    required int32 itemId=2;
+    // 学习数量
+    required int32 num=3;
+    // 宝宝id
+    required int64 babyId=4;
+    // 读书等级
+    required int32 learnLevel=5;
+    // 读书经验
+    required int32 learnExp=6;
+}
+
+// 宝宝转世
+message CSBabyZhuanShi {
+    required int64 babyId=1;
+}
+message SCBabyZhuanShi {
+    required int64 babyId=1;
+    repeated DropInfo dropInfo=2;
+    required int32 babyNum=3;
+}
+
+
+
+//玩具激活
+message CSBabyEquipToy {
+    //索引
+    required int32 index=1;
+    // 0:套装1；1:套装2 .....
+    required int32 suitType=2;
+}
+message SCBabyEquipToy {
+    required int32 index=1;
+    required int32 suitType=2;
+}
+
+//玩具升级
+message CSBabyToyUplevel{
+    // 0:套装1；1:套装2 .....
+    required int32 suitType=1;
+    // 装槽备位置
+    required int32 slotId=2; 
+}
+message SCBabyToyUplevel{
+    //强化结果 0:成功 1：失败 2回退
+    required int32 result=1;
+    required int32 level=2;
+    required int32 slotId=3; 
+    required int32 suitType=4;
+}
+
+//玩具槽位数据改变
+message SCBabyToySlotChanged {
+    repeated ToySuitInfo infoList=1; 
+} 
+
+//宝宝战力推送
+message SCBabyPowerNotice{
+    required int64 power=1;
+}

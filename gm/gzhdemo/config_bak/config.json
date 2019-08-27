@@ -1,0 +1,26 @@
+{
+    "key":"./cert/dtmj_ezwalk.key",
+    "cert":"./cert/dtmj_ezwalk.pem", 
+    "host":"0.0.0.0",
+    "port":80,
+    "redis":{
+        "host":"127.0.0.1",
+        "port":6379,
+        "maxIdle":50,
+        "maxActive":50,
+        "wait": true,
+        "idleTimeout":240
+    },
+    "gzh":{
+        "appid":"wx01f29f912291035b",
+        "appsecret":"6e437febdf422ed5c1246ba459447913",
+        "token":"zscjx0wupydheua1lq0qs5os3akg40pj",
+        "encodingaeskey":"sBhCoBxfbeJmmymqPmD8B18ZgjjSIDhM9kEAQpLD751"
+    },
+    "wxredbagpay":{
+        "key":"dingdingdawanjiadingdingdawanjia",
+        "mch_appid":"wx01f29f912291035b",
+        "mchid":"1483822132",
+        "certpath":"./config/redbagcerts"
+    }
+}	

@@ -1,0 +1,10 @@
+{
+    "iOS":{
+        "appId":"6046",
+        "appKey":"c2fc43e5342e216a2246ae4e849fb3c3"
+    },
+    "android":{
+        "appId":"6045",
+        "appKey":"a33fe56005f5db6bbaf885f8c658b1db"
+    }
+}

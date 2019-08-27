@@ -1,0 +1,59 @@
+syntax = "proto2";
+
+package ui;
+
+//至尊称号信息请求
+message CSSupremeTitleGet {
+}
+//至尊称号信息应答
+message SCSupremeTitleGet{
+   //至尊称号穿戴id
+   required int32 titleWear=1;
+   //至尊称号信息
+   repeated int32 titleList=2;
+}
+
+//激活至尊称号请求
+message CSSupremeTitleActive {
+    //至尊称号id
+   required int32 titleId=1;
+}
+//激活至尊称号应答
+message SCSupremeTitleActive {
+   //至尊称号id
+   required int32 titleId=1;
+}
+
+//穿戴至尊称号请求
+message CSSupremeTitleWear {
+   //至尊称号id
+   required int32 titleId=1;
+}
+//穿戴至尊称号应答
+message SCSupremeTitleWear {
+    //至尊称号id
+    required int32 titleId=1;
+}
+
+//至尊称号卸下请求
+message CSSupremeTitleUnLoad {
+}
+
+//至尊称号卸下回复
+message SCSupremeTitleUnLoad {
+   //至尊称号穿戴id
+   required int32 titleWear=1;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

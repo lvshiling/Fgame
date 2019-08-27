@@ -1,0 +1,112 @@
+syntax = "proto2";
+
+package ui;
+import "common.proto";
+import "drop.proto";
+
+
+//个人押镖
+message CSPersonalTransportation{
+    //1银两2元宝
+    required int32 typ =1;
+}
+//个人押镖应答
+message SCPersonalTransportation{
+    //开始时间
+    required int64 startTime=1;
+}
+
+//仙盟押镖
+message CSAllianceTransportation{
+
+}
+//仙盟押镖应答
+message SCAllianceTransportation{
+    //开始时间
+    required int64 startTime=1;
+}
+
+//穿云箭
+message CSDistressSignal{
+
+}
+//穿云箭应答
+message SCDistressSignal{
+
+}
+//穿云箭推送
+message SCDistressSignalBroadcast{
+    //求救玩家id
+    required int64 targetId = 1;
+}
+//穿云箭推送处理
+message CSAgreeDistressSignal{
+    //求救玩家id
+    required int64 targetId =2;
+}
+//穿云箭推送处理应答
+message SCAgreeDistressSignal{
+    required Position targetPosition=1;
+}
+
+//个人镖车信息
+message CSPlayerTransportInfo{
+
+}
+//个人镖车信息应答
+ message SCPlayerTransportInfo{
+  //个人镖次数
+  required int32 personalTransportTimes=1;
+  //仙盟镖次数
+  required int32 allianceTransportTimes=2;
+ }
+
+//护镖推送
+message SCTransportationProtectNotice{
+    required Position targetPosition=1;
+
+}
+//护镖
+message CSTransportationProtect{
+
+}
+//护镖应答
+message SCTransportationProtect{
+
+}
+
+//推送镖车信息
+message SCTransportBriefInfoNotice{
+    //劫镖人
+    required string robName=1;
+    //镖车状态:0运输中1被劫镖2完成
+    required int32 state=2;
+    //镖车类型:1银两2元宝3仙盟
+    required int32 transportType=3;
+    //镖车坐标
+    required Position targetPosition=4;
+    //镖车移动模板id
+    required int32 moveId=5;
+    //镖车开始时间
+    required int64 startTime=6;
+}
+
+//领取奖励
+message CSReceiveTransportRew{
+
+}
+//领取奖励应答
+message SCReceiveTransportRew{
+    required int32 rewGold=1;
+    required int32 rewSilver=2;
+    //镖车类型:1银两2元宝3仙盟
+    required int32 transportType=3;
+}
+
+//劫镖成功消息推送
+message SCRobSuccessNotice{
+    required int32 rewGold=1;
+    required int32 rewSilver=2;
+    //镖车类型:1银两2元宝3仙盟
+    required int32 transportType=3;
+}

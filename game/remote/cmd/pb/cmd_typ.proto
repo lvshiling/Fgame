@@ -1,0 +1,35 @@
+syntax = "proto2";
+
+package pb;
+ 
+enum CmdType{
+    CMD_KICK_OUT_PLAYER_TYPE=1; //踢人
+    CMD_FORBID_PLAYER_TYPE=2;//封号
+    CMD_UNFORBID_PLAYER_TYPE=3; //解封
+    CMD_FORBID_PLAYER_CHAT_TYPE=4; //禁言
+    CMD_UNFORBID_PLAYER_CHAT_TYPE=5; //解禁
+    CMD_IGNORE_PLAYER_CHAT_TYPE=6; //禁默
+    CMD_UNIGNORE_PLAYER_CHAT_TYPE=7; //解禁默
+    CMD_FORBID_USER_TYPE=8;//封账号
+    CMD_UNFORBID_USER_TYPE=9; //解封账号
+    CMD_CHAT_SET_TYPE=10; //聊天设置
+    CMD_REGISTER_SET_TYPE=11;//注册设置
+    CMD_SEND_SERVER_COMPENSATE_TYPE=12;         //发全服补偿邮件
+    CMD_SEND_PLAYER_COMPENSATE_TYPE=13;         //发个人补偿邮件
+    CMD_PRIVILEGE_SET_TYPE=14;                  //设置权限
+    CMD_PRIVILEGE_CHARGE_TYPE=15;               //扶持号充值 
+    CMD_CHARGE_TYPE=16;                        //充值
+    CMD_BROADCAST_NOTICE=17;                    //公告
+    CMD_TRADE_SELL_TYPE=18;  //商品交易
+    CMD_MARRY_SET_TYPE=19; //结婚付费配置切换设置
+    CMD_CREATE_ROLE_TYPE=20; //创建角色 
+    CMD_ALLIANCE_NOTICE_TYPE=21; //设置仙盟公告
+    CMD_CUSTOM_TRADE_RECYCLE_GOLD_TYPE=22; //自定义交易回购池
+    CMD_PING_TYPE=23;//ping
+    CMD_EXCHANGE_TYPE=24;//兑换
+    CMD_FIRST_CHARGE_RESET_TYPE=25;//首冲重置
+    CMD_ALLIANCE_DISMISS_TYPE=26; //解散
+}
+
+
+

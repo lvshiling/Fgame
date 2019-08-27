@@ -1,0 +1,21 @@
+file="money_vo.go"
+pkg="template"
+class="MoneyTemplateVO"
+comment = "兑换配置"
+[[variables]]
+name="Id"
+type="int"
+tag="id"
+comment="id"
+
+[[variables]]
+name="Money"
+type="int32"
+tag="money"
+comment="money"
+
+[[variables]]
+name="Gold"
+type="int32"
+tag="gold"
+comment="gold"

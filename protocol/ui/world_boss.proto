@@ -1,0 +1,58 @@
+syntax = "proto2";
+
+package ui;
+import "common.proto";
+
+message BossInfo {
+    required int32 biologyId=1;
+    required bool isDead=2;
+    required int64 deadTime=3;
+    required Position pos=4; 
+}
+
+//世界boss列表
+message CSWorldBossList{
+    // 0世界boss1跨服boss2幻境boss3外域boss4藏经阁boss
+    optional int32 bossType=1;
+}
+//世界boss列表应答
+message SCWorldBossList{
+    repeated BossInfo bossInfoList=1;
+    optional int32 curPilao=2;
+    optional int32 curBuyTimes=3;
+    optional int32 curZhuoQi=4;
+    optional int32 bossType=5;
+}
+
+//挑战世界boss
+message CSChallengeWorldBoss{
+    required int32 biologyId=1;
+    // 0世界boss1跨服boss2幻境boss3外域boss4藏经阁boss
+    optional int32 bossType=2;
+}
+//挑战世界boss应答
+message SCChallengeWorldBoss{
+    required Position pos=1;
+    optional int32 bossType=2;
+}
+
+//boss信息推送
+message SCWorldBossInfoBroadcast{
+    required BossInfo bossInfo =1;
+    required int32 bossTyp=2;
+
+}
+//地图boss列表信息推送
+message SCWorldBossListInfoNotice{
+    repeated BossInfo bossInfoList =1;
+    required int32 bossTyp =2;
+    optional int32 reliveTime=3;
+}
+
+//地图boss列表信息推送
+message SCWorldBossReliveTimeNotice{
+    required int32 bossTyp =1;
+    required int32 reliveTime=2;
+}
+
+

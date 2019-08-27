@@ -1,0 +1,85 @@
+package common
+
+import (
+	additionsyscommon "fgame/fgame/game/additionsys/common"
+	anqitypes "fgame/fgame/game/anqi/types"
+	babytypes "fgame/fgame/game/baby/types"
+	baguacommon "fgame/fgame/game/bagua/common"
+	bodyshieldtypes "fgame/fgame/game/bodyshield/types"
+	dianxingcommon "fgame/fgame/game/dianxing/common"
+	fabaocommon "fgame/fgame/game/fabao/common"
+	goldequiptypes "fgame/fgame/game/goldequip/types"
+	inventorytypes "fgame/fgame/game/inventory/types"
+	lingtongcommon "fgame/fgame/game/lingtong/common"
+	lingtongdevcommon "fgame/fgame/game/lingtongdev/common"
+	lingyutypes "fgame/fgame/game/lingyu/types"
+	marrytypes "fgame/fgame/game/marry/types"
+	massacretypes "fgame/fgame/game/massacre/types"
+	mountcommon "fgame/fgame/game/mount/common"
+	playertypes "fgame/fgame/game/player/types"
+	ringcommon "fgame/fgame/game/ring/common"
+	shenfatypes "fgame/fgame/game/shenfa/types"
+	shihunfancommon "fgame/fgame/game/shihunfan/common"
+	skillcommon "fgame/fgame/game/skill/common"
+	soultypes "fgame/fgame/game/soul/types"
+	sysskillcommon "fgame/fgame/game/systemskill/common"
+	tianmotypes "fgame/fgame/game/tianmo/types"
+	viptypes "fgame/fgame/game/vip/types"
+	weapontypes "fgame/fgame/game/weapon/types"
+	wingcommon "fgame/fgame/game/wing/common"
+	wushuangweapontypes "fgame/fgame/game/wushuangweapon/types"
+	xianticommon "fgame/fgame/game/xianti/common"
+	xianzuncardcommon "fgame/fgame/game/xianzuncard/common"
+	xueduncommon "fgame/fgame/game/xuedun/common"
+)
+
+//玩家信息
+type PlayerInfo struct {
+	ServerId           int32
+	PlayerId           int64
+	Name               string
+	Role               playertypes.RoleType
+	Sex                playertypes.SexType
+	Level              int32
+	Force              int64
+	AllianceId         int64
+	AllianceName       string
+	TeamId             int64
+	OnlineState        playertypes.PlayerOnlineState
+	BaseProperty       map[int32]int64
+	BattleProperty     map[int32]int64
+	EquipmentList      []*inventorytypes.EquipmentSlotInfo
+	GoldEquipList      []*goldequiptypes.GoldEquipSlotInfo
+	MountInfo          *mountcommon.MountInfo
+	WingInfo           *wingcommon.WingInfo
+	BodyShieldInfo     *bodyshieldtypes.BodyShieldInfo
+	AnqiInfo           *anqitypes.AnqiInfo
+	AllSoulInfo        *soultypes.AllSoulInfo
+	AllWeaponInfo      *weapontypes.AllWeaponInfo
+	FashionId          int32
+	MarryInfo          *marrytypes.MarryInfo
+	ShenfaInfo         *shenfatypes.ShenfaInfo
+	LingyuInfo         *lingyutypes.LingyuInfo
+	ShieldInfo         *bodyshieldtypes.ShieldInfo
+	FeatherInfo        *wingcommon.FeatherInfo
+	RealmLevel         int32
+	SkillList          []*skillcommon.SkillObjectImpl
+	VipInfo            *viptypes.VipInfo
+	MassacreInfo       *massacretypes.MassacreInfo
+	FaBaoInfo          *fabaocommon.FaBaoInfo
+	XueDunInfo         *xueduncommon.XueDunInfo
+	XianTiInfo         *xianticommon.XianTiInfo
+	BaGuaInfo          *baguacommon.BaGuaInfo
+	DianXingInfo       *dianxingcommon.DianXingInfo
+	TianMoTiInfo       *tianmotypes.TianMoInfo
+	ShiHunFanInfo      *shihunfancommon.ShiHunFanInfo
+	AllLingTongDevInfo *lingtongdevcommon.AllLingTongDevInfo
+	LingTongInfo       *lingtongcommon.LingTongInfo
+	AllSystemSkillInfo *sysskillcommon.AllSystemSkillInfo
+	AllAdditionSysInfo *additionsyscommon.AllAdditionSysInfo
+	IsHuiYuan          int32
+	PregnantInfo       *babytypes.PregnantInfo
+	WushuangList       []*wushuangweapontypes.WushuangInfo
+	XianZunCardList    []*xianzuncardcommon.XianZunCardInfo
+	RingList           []*ringcommon.RingInfo
+}

@@ -1,0 +1,190 @@
+syntax = "proto2";
+
+package ui;
+
+import "drop.proto";
+import "rewproperty.proto";
+
+message SoulRuinsChapter{
+    //章节数
+    required int32 chapter=1;
+    //类型 1普通 2困难
+    required int32 typ=2;
+}
+
+
+message SoulRuinsNum {
+   //已挑战次数
+   required int32 num=1;
+   //已购买挑战次数
+   required int32 buyNum=2;
+   //挑战额外次数
+   required int32 ExtraNum=3;
+}
+
+message SoulRuins {
+    //章节
+    required SoulRuinsChapter chapterInfo=1;
+    //关卡
+    required int32 level=2;
+    //星数
+    required int32 star=3;
+}
+
+
+message SoulRuinsSweepDrop {
+    //掉落物品
+    repeated DropInfo dropList=1;
+}
+
+message SoulRuinsResult {
+    //章节
+    required SoulRuinsChapter chapterInfo=1;
+    //关卡
+    required int32 level=2;
+    //时间
+    required  int32 usedTime=3;
+    //奖励物品
+    repeated  DropInfo dropList=4;
+    //是否成功
+    required bool sucess=5;
+}
+
+
+//帝陵遗迹信息请求
+message CSSoulRuinsGet {
+}
+//帝陵遗迹信息应答
+message SCSoulRuinsGet{
+   //挑战次数信息
+   required SoulRuinsNum numInfo=1;
+   //星级奖励已领取章节
+   repeated SoulRuinsChapter rewList=2;
+   //闯关成功的帝陵遗迹
+   repeated SoulRuins ruinsList=3;
+}
+
+//帝陵遗迹挑战请求
+message CSSoulRuinsChallenge {
+    //章节
+    required SoulRuinsChapter chapterInfo=1;
+    //关卡
+    required int32 level=2;
+}
+
+//帝陵遗迹挑战回复
+message SCSoulRuinsChallenge {
+    //挑战次数信息
+    required SoulRuinsNum numInfo=1;
+}
+
+//帝陵遗迹挑战触发事件
+message SCSoulRuinsEvent {
+    //触发事件类型 1隐藏boss 2帝魂降临 3马贼
+    required int32 eventType=1;
+}
+
+//帝陵遗迹触发事件处理请求
+message CSSoulRuinsDealEvent {
+    //事件类型
+    required int32 eventType=1;
+    //接受与否
+    required bool accept=2;
+}
+
+//帝陵遗迹触发事件处理回复
+message SCSoulRuinsDealEvent {
+    //事件类型
+    required int32 eventType=1;
+    //接受与否
+    required bool accept=2;
+}
+
+//帝陵遗迹帝魂降临传功完成请求
+message CSSoulRuinsForceGet {
+
+}
+
+//帝陵遗迹下发场景信息
+message SCSoulRuinsSceneInfo {
+    //帝陵遗迹场景状态 1.打阶段1的怪 2.触发出特殊事件  3.打阶段2的怪  4.完成
+    required int32 state=1;
+    //事件类型 当state=2时有效  1 boss事件  2 帝魂降临事件  3 马贼
+    required int32 eventType=2;
+    //创建场景事件
+    required int64 createTime=3;
+    //章节
+    required SoulRuinsChapter chapterInfo=4;
+    //关卡
+    required int32 level=5;
+}
+
+
+//帝陵遗迹挑战首次通关
+message SCSoulRuinsFirstPass {
+    //结果
+    required SoulRuinsResult result=1;
+    //挑战次数
+    required SoulRuinsNum numInfo=2;
+}
+
+//帝陵遗迹挑战结果
+message SCSoulRuinsResult {
+    //结果
+    required SoulRuinsResult result=1;
+}
+
+//帝陵遗迹扫荡请求
+message CSSoulRuinsSweep {
+    //章节
+    required SoulRuinsChapter chapterInfo=1;
+    //关卡
+    required int32 level=2;
+    //扫荡次数
+    required int32 num=3;
+}
+
+//帝陵遗迹扫荡回复
+message SCSoulRuinsSweep {
+    //挑战次数信息
+    required SoulRuinsNum numInfo=1;
+    //扫荡奖励固定属性
+    required RewProperty rewInfo=2;
+    //扫荡掉落物品列表
+    repeated SoulRuinsSweepDrop sweepList=3;
+}
+
+//星级奖励领取请求
+message CSSoulRuinsRewReceive {
+    required SoulRuinsChapter chapterInfo=1;
+}
+
+//星级奖励领取回复
+message SCSoulRuinsRewReceive {
+    required SoulRuinsChapter chapterInfo=1;
+}
+
+//购买挑战次数请求
+message CSSoulRuinsBuyNum {
+    //购买次数
+    required int32 num=1;
+}
+
+//购买挑战次数回复
+message SCSoulRuinsBuyNum {
+    required SoulRuinsNum numInfo=1;
+}
+
+//一键完成
+message CSSoulRuinsFinishAll {
+    
+}
+
+
+//下一关
+message CSSoulRuinsNext {
+}
+
+
+
+

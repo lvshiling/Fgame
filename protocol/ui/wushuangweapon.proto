@@ -1,0 +1,73 @@
+syntax = "proto2";
+
+package  ui;
+
+enum WushuangWeaponBodyPos {
+    Weapon=1;
+    Clothes=2;
+    Head=3;
+    Shoes=4;
+    Necklace=5;
+    Pendant=6;
+}
+
+// 吞噬请求
+message CSWushuangWeaponDevouring {
+    required WushuangWeaponBodyPos bodyPos=1; //身体部位
+}
+
+//吞噬请求回复
+message SCWushuangWeaponDevouring {
+    required WushuangWeaponBodyPos bodyPos=1;  //身体部位
+    required int32 level=2;  //装备等级
+    required int64 experience=3;  //装备经验
+}
+
+//突破请求
+message CSWushuangWeaponBreakthrough {
+    required WushuangWeaponBodyPos bodyPos=1; //身体部位
+    repeated int32 indexList=2; //突破需要吃掉的装备列表
+}
+
+//突破请求回复
+message SCWushuangWeaponBreakthrough {
+    required WushuangWeaponBodyPos bodyPos=1;  //身体部位
+    required int32 level=2;    //装备等级
+}
+
+//穿上请求
+message CSWushuangWeaponPutOn {
+    required int32 index=1;
+}
+
+//穿上请求回复
+message SCWushuangWeaponPutOn {
+    required WushuangWeaponBodyPos bodyPos=1;  //身体部位
+    required int32 level=2;
+    required int64 experience=3;
+}
+
+//脱下请求
+message CSWushuangWeaponTakeOff {
+    required WushuangWeaponBodyPos bodyPos=1;
+}
+
+//脱下请求回复
+message SCWushuangWeaponTakeOff {
+}
+
+//信息请求
+message CSWushuangWeaponInfo {
+}
+
+//信息请求回复
+message SCWushuangWeaponInfo {
+    repeated WushuangWeaponBodyPosInfo allBodyPosInfo=1;
+}
+
+message WushuangWeaponBodyPosInfo {
+    required WushuangWeaponBodyPos bodyPos=1;
+    required int32 itemId=2;
+    required int32 level=3;
+    required int64 experience=4;
+}

@@ -1,0 +1,118 @@
+syntax = "proto2";
+
+package ui;
+
+message SoulInfo {
+    //帝魂标签
+    required int32 soulTag=1;
+    //帝魂吞噬等级
+    required int32 level=2;
+    //吞噬经验值
+    required int32 experience=3;
+    //技能等级
+    required int32 awakenOrder=4;
+    //是否觉醒
+    required bool isAwaken=5;
+    //强化等级
+    required int32  strengthenLevel=6;
+    //强化经验值
+    required int32 strengthenExp =7;
+}
+
+message AllSoulInfo {
+    repeated int32 embedIdList=1;
+    repeated SoulInfo soulList=2;
+}
+
+
+//帝魂信息请求
+message CSSoulGet {
+}
+//帝魂信息应答
+message SCSoulGet{
+   //帝魂镶嵌id
+   repeated int32 embedIdList=1;   
+   //帝魂信息
+   repeated SoulInfo soulList=2;
+}
+
+//帝魂激活请求
+message CSSoulActive {
+    //帝魂标签
+   required int32 soulTag=1;
+}
+//帝魂激活应答
+message SCSoulActive {
+  required SoulInfo soulInfo=1;
+
+}
+
+//帝魂镶嵌请求
+message CSSoulEmbed {
+    //镶嵌帝魂标签
+    required int32 soulTag=1;
+}
+//帝魂镶嵌应答
+message SCSoulEmbed{
+    //镶嵌帝魂id 对应觉醒配置表id
+    required int32 soulId=1;
+}
+
+
+
+//帝魂喂养请求
+message CSSoulFeed {
+   //帝魂标签
+   required int32 soulTag=1;
+}
+//帝魂喂养应答
+message SCSoulFeed {
+   //帝魂标签
+   required int32 soulTag=1;
+   //吞噬等级
+   required int32 level=2;
+   //经验值
+   required int32 experience=3;
+}
+
+//帝魂觉醒请求
+message CSSoulAwaken {
+   //帝魂标签
+   required int32 soulTag=1;
+}
+ 
+ //帝魂觉醒应答
+ message SCSoulAwaken {
+     //帝魂标签
+    required int32 soulTag=1;
+    required bool isAwaken=2;
+  }
+
+  //帝魂强化
+  message CSSoulStrengthen {
+    //帝魂标签
+    required int32 soulTag=1;
+  }
+
+  //帝魂强化
+  message SCSoulStrengthen {
+    //帝魂标签
+    required int32 soulTag=1; 
+    //强化等级
+    required int32 level=2;
+    //培养值
+    required int32 process=3;
+  }
+
+  //帝魂升级
+  message CSSoulUpgrade {
+    required int32 soulTag=1;
+  }
+
+  //帝魂升级回复
+  message SCSoulUpgrade {
+    //帝魂
+    required int32 soulTag=1;
+    //帝魂等级
+    required int32 level=2;
+  }

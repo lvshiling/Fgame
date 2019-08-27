@@ -1,0 +1,72 @@
+syntax = "proto2";
+
+package ui;
+
+//拥有英灵普图鉴信息
+message YingLingPuInfo {
+    //图鉴类型，0英灵图鉴，1至尊图鉴
+    required int32 tuJianType=1;
+    //图鉴Id序号
+    required int32 tuJianId=2;
+    //图鉴等级，从0开始
+    required int32 level=3;
+}
+
+//拥有的英灵普图鉴碎片信息
+message YingLingPuSpInfo{
+    //图鉴类型，0英灵图鉴，1至尊图鉴
+    required int32 tuJianType=1;
+    //图鉴Id序号
+    required int32 tuJianId=2;
+    //图鉴位置序号
+    required int32 suiPianId=3;
+}
+
+//请求图鉴信息请求
+message CSYingLingPuQuery{
+
+}
+
+//返回图鉴信息请求
+message SCYingLingPuQuery{
+    repeated YingLingPuInfo tuJianList=1;
+    repeated YingLingPuSpInfo suiPianList=2;
+}
+
+//镶嵌碎片请求
+message CSYingLingPuSpXiangQian{
+    //图鉴类型，0英灵图鉴，1至尊图鉴
+    required int32 tuJianType=1;
+    //图鉴Id序号
+    required int32 tuJianId=2;
+    //图鉴位置序号
+    required int32 suiPianId=3;
+}
+
+//镶嵌碎片请求回复
+message SCYingLingPuSpXiangQian{
+    //图鉴类型，0英灵图鉴，1至尊图鉴
+    required int32 tuJianType=1;
+    //图鉴Id序号
+    required int32 tuJianId=2;
+    //图鉴位置序号
+    required int32 suiPianId=3;
+}
+
+//英灵普升级图鉴请求
+message CSYingLingPuUpLevel{
+    //图鉴类型，0英灵图鉴，1至尊图鉴
+    required int32 tuJianType=1;
+    //图鉴Id序号
+    required int32 tuJianId=2;
+}
+
+//英灵普升级图鉴请求回复
+message SCYingLingPuUpLevel{
+    //图鉴类型，0英灵图鉴，1至尊图鉴
+    required int32 tuJianType=1;
+    //图鉴Id序号
+    required int32 tuJianId=2;
+    //升级后图鉴等级，从0开始
+    required int32 level=3;
+}

@@ -1,0 +1,29 @@
+syntax = "proto2";
+
+package  ui;
+
+import "drop.proto";
+import "scene.proto";
+
+
+//场景信息推送
+message SCShenYuSceneInfoNotice {
+    //玩家钥匙数
+    required int32 keyNum=1;
+    //参赛轮 
+    required int32 round=2; 
+    //排名信息
+    repeated SceneRankInfo rankInfoList=3; //排行信息
+}
+
+//神域钥匙变化
+message SCShenYuKeyNumChangeNotice {
+    required int32 keyNum=1;
+}
+
+// 神域结束奖励推送
+message SCShenYuFinishRew {  
+    repeated DropInfo dropList=1;
+    required int32 ranking=2;       //排名
+    required int32 round=3;         //参赛轮
+}

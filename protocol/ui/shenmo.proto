@@ -1,0 +1,124 @@
+syntax = "proto2";
+
+package ui;
+import "common.proto";
+import "scene.proto";
+
+message ShenMoRank {
+    //服务器id
+    required int32  serverId=1;
+    //仙盟id
+    required int64 allianceId =2;
+    //仙盟名字
+    required string allianceName = 3;
+    //仙盟积分
+	required int32 jiFenNum=4;     
+}
+
+//神魔战场
+message SCShenMoSceneInfo {
+    //功勋
+    required int32 gongXun=1;
+    //本次击杀
+    required int32 killNum=2;
+    //仙盟积分
+    optional int32 jiFenNum=3 [default=0];
+    //大旗信息
+    repeated GeneralCollectInfo daQiList=4;
+}
+
+//场景信息变化推送
+message SCShenMoSceneDataChanged {
+    //-1 代表未变化
+    optional int32 gongXun = 1 [default=-1];
+    optional int32 killNum = 2 [default=-1];
+    optional int32 jiFenNum = 3 [default=-1];
+}
+
+
+//场景结束
+message SCShenMoSceneEnd{
+
+}
+
+
+//取消排队
+message CSShenMoCancleLineUp {
+
+}
+
+//取消排队回复
+message SCShenMoCancleLineUp {
+
+}
+
+//排队变更回复
+message SCShenMoLineUp {
+    //前面人数
+    required int32 beforeNum=1;
+}
+
+//排队成功回复
+message SCShenMoLineUpSuccess {
+}
+
+//场景结束推送给排队
+message SCShenMoFinishToLineUp{
+}
+
+
+//领取奖励
+message CSShenMoGetReward{
+
+}
+
+//领取奖励回复 (会登录下发 0代表从未领取过奖励)
+message SCShenMoGetReward {
+    //上次排行榜奖励领取时间排行榜时间戳
+    required int64 rankTime=1;
+}
+
+//请求我的排名
+message CSShenMoMyRank {
+    //true 本周 false 上周
+    required bool isThis=1;
+}
+
+//我的排名回复
+message SCShenMoMyRank {
+    //true 本周 false 上周
+    required bool isThis=1;
+    //排名 0 未上榜 1第一名
+    required int32 pos=2;
+    //排行时间
+    required int64 rankTime=3;
+}
+
+
+//排行榜请求
+message CSShenMoRankGet {
+    //true 本周 false 上周
+    required bool isThis=1;
+    //页数
+    required int32 page=2;
+}
+
+
+
+//排行榜请求回复
+message SCShenMoRankGet {
+    required bool isThis=1;
+    required int32 page=2;
+    required int64 rankTime=3;
+    repeated ShenMoRank rankList=4;
+}
+
+//功勋值改变
+message SCPlayerGongXunChanged{
+    required int32 gongXunNum =1;
+}
+
+//副本生物变化场景内广播(场景内)
+message SCShenMoBioBroadcast {
+    required GeneralCollectInfo  bio=1;
+}

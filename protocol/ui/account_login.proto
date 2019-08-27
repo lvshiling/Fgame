@@ -1,0 +1,563 @@
+syntax = "proto2";
+
+package ui;
+
+
+//pc登陆数据
+message PCLoginData{
+    required string name=1;
+}
+
+//享哥玩
+message HengGeWan{
+    required string msg=1;
+    required string userid=2;
+    required string time=3;
+    required string sign=4;
+}
+
+// 飞扬
+message FeiYang{
+    required string memId=1;
+    required string userToken=2;
+}
+
+//征服
+message ZhengFu {
+    required string userId=1;
+    required string token=2;
+}
+
+//非凡
+message FeiFan {
+    required string userId=1;
+    required string token=2;
+}
+
+//巨都
+message JuDu {
+    required string userName=1;
+    required string loginTime=2;
+    required string sign=3;
+}
+
+//顺游
+message ShunYou {
+    required string userId=1;
+    required string token=2;
+}
+
+
+// 飞扬-梦缘问仙
+message FeiYangMengYuanWenXian{
+    required string memId=1;
+    required string userToken=2;
+}
+
+// 萝莉玩
+message LuoLiWan{
+    required string userId=1;
+}
+
+// 新蜂
+message XinFeng{
+    required string userId=1;
+}
+
+//星月
+message XingYue{
+    required string sid=1;
+}
+
+//菠菜
+message BoCai{
+    required string sid=1;
+}
+
+//嘻嘻游
+message XiXiYou{
+    required string msg=1;
+    required string userid=2;
+    required string time=3;
+    required string sign=4;
+}
+
+//7A
+message QiA{
+    required string userName=1;
+    required string loginTime=2;
+    required string sign=3;
+}
+
+//佐玩
+message ZuoWan{
+    required string sid=1;
+    required string token=2; 
+}
+
+//自己账户
+message SelfAccount{
+    required string name=1; //用户名
+    required string password=2; //密码
+}
+
+//启灵
+message QiLing{
+    required string msg=1;
+    required string userid=2;
+    required string time=3;
+    required string sign=4;
+}
+
+//泰逢
+message TaiFeng{
+    required string token=1; 
+    required string time=2;
+}
+
+
+
+//吧唧
+message BaJi{
+    required string msg=1;
+    required string userid=2;
+    required string time=3;
+    required string sign=4;
+}
+
+
+//起灵
+message LingQi{
+    required string msg=1;
+    required string userid=2;
+    required string time=3;
+    required string sign=4;
+}
+
+//九零
+message JiuLing{
+    required string userName=1;
+    required string loginTime=2;
+    required string sign=3;
+} 
+
+//傲天
+message AoTian{
+    required string userName=1;
+    required string loginTime=2;
+    required string sign=3;
+} 
+
+//缥缈
+message PiaoMiao{
+    required string userId=1;
+    required string token=2;
+} 
+
+//夜雨笙歌
+message YeYu{
+    required string msg=1;
+    required string userid=2;
+    required string time=3;
+    required string sign=4;
+}
+
+// 仗剑
+message ZhangJian{
+    required string msg=1;
+    required string userid=2;
+    required string time=3;
+    required string sign=4;
+}
+
+// 天神
+message TianShen{
+    required string msg=1;
+    required string userid=2;
+    required string time=3;
+    required string sign=4;
+}
+
+// 神域
+message ShenYu{
+    required string msg=1;
+    required string userid=2;
+    required string time=3;
+    required string sign=4;
+}
+
+// 问剑
+message WenJian{
+    required string msg=1;
+    required string userid=2;
+    required string time=3;
+    required string sign=4;
+}
+
+// 雄威大世
+message XiongWei{
+    required string msg=1;
+    required string userid=2;
+    required string time=3;
+    required string sign=4;
+}
+
+// 地随世渊
+message DiSui{
+    required string msg=1;
+    required string userid=2;
+    required string time=3;
+    required string sign=4;
+}
+
+// 若紫言诺
+message RuoZi{
+    required string msg=1;
+    required string userid=2;
+    required string time=3;
+    required string sign=4;
+}
+
+// 剑道问情
+message JianDao{
+    required string userid=1;
+    required string userName=2;
+    required string token=3;
+}
+
+// 晨曦仙道
+message ChenXi{
+    required string msg=1;
+    required string userid=2;
+    required string time=3;
+    required string sign=4;
+}
+
+// 天行战歌
+message TianXing{
+    required string msg=1;
+    required string userid=2;
+    required string time=3;
+    required string sign=4;
+}
+
+// 天机
+message TianJi{
+    required string msg=1;
+    required string userid=2;
+    required string time=3;
+    required string sign=4;
+}
+
+// 妖精仙魔录
+message YaoJing{
+    required string msg=1;
+    required string userid=2;
+    required string time=3;
+    required string sign=4;
+}
+
+// 侠客行
+message XiaKeXing{
+    required string msg=1;
+    required string userid=2;
+    required string time=3;
+    required string sign=4;
+}
+
+// 三界天书
+message SanJie{
+    required string msg=1;
+    required string userid=2;
+    required string time=3;
+    required string sign=4;
+}
+
+// 游梦江湖
+message YouMeng{
+    required string userid=1;
+}
+
+// 九梦天书
+message JiuMeng{
+    required string userid=1;
+    required string sign=2;
+    required string logintime=3;
+}
+
+// 龙语大陆
+message LongYu{
+    required string username=1;
+    required string logintime=2;
+    required string sign=3;
+}
+
+// 晨曦2
+message ChenXi2{
+    required string msg=1;
+    required string userid=2;
+    required string time=3;
+    required string sign=4;
+}
+
+// 仙凡
+message XianFan{
+    required string msg=1;
+    required string userid=2;
+    required string time=3;
+    required string sign=4;
+}
+
+// 江湖
+message JiangHu{
+    required string userName=1;
+    required string loginTime=2;
+    required string sign=3;
+}
+
+// 风渊
+message FengYuan{
+    required string msg=1;
+    required string userid=2;
+    required string time=3;
+    required string sign=4;
+}
+
+// 启灵2
+message QiLing2{
+    required string msg=1;
+    required string userid=2;
+    required string time=3;
+    required string sign=4;
+}
+
+// 启灵3
+message QiLing3{
+    required string msg=1;
+    required string userid=2;
+    required string time=3;
+    required string sign=4;
+}
+
+// 梦幻
+message MengHuan{
+    required string msg=1;
+    required string userid=2;
+    required string time=3;
+    required string sign=4;
+}
+
+// 逍遥
+message XiaoYao{
+    required string scode=1;
+}
+
+// 梦幻2
+message MengHuan2{
+    required string msg=1;
+    required string userid=2;
+    required string time=3;
+    required string sign=4;
+}
+
+// 火鸟游-逍遥江湖
+message XiaoYaoJiangHu{
+    required string msg=1;
+    required string userid=2;
+    required string time=3;
+    required string sign=4;
+}
+
+// 太古纪元
+message TaiGu{
+    required string msg=1;
+    required string userid=2;
+    required string time=3;
+    required string sign=4;
+}
+
+// 齐齐乐-亦云间
+message YiYun{
+    required string token=1;
+    required string ugid=2;
+}
+
+// 6亿游-万界奇谭
+message WanJie{
+    required string msg=1;
+    required string userid=2;
+    required string time=3;
+    required string sign=4;
+}
+
+// 天启-灵梦仙界
+message LingMeng{
+    required string memId=1;
+    required string userToken=2;
+}
+
+// 烈焰神尊
+message LieYan{
+    required string msg=1;
+    required string userid=2;
+    required string time=3;
+    required string sign=4;
+}
+
+// 鸣剑仙录
+message MingJian{
+    required string msg=1;
+    required string userid=2;
+    required string time=3;
+    required string sign=4;
+}
+
+// 九天凌云
+message JiuTian{
+    required string msg=1;
+    required string userid=2;
+    required string time=3;
+    required string sign=4;
+}
+
+// 7亿游-仗剑凡尘
+message QiYiYouZhangJian{
+    required string msg=1;
+    required string userid=2;
+    required string time=3;
+    required string sign=4;
+}
+
+// 牛叉游-浮屠幻境
+message NiuChaYouFuTu{
+    required string msg=1;
+    required string userid=2;
+    required string time=3;
+    required string sign=4;
+}
+
+// 魔方游戏-封魔录
+message MoFangYouXiFengMo{
+    required string msg=1;
+    required string userid=2;
+    required string time=3;
+    required string sign=4;
+}
+
+// 派趣游戏-仙路争锋
+message PaiQuYouXiXianLu{
+    required string msg=1;
+    required string userid=2;
+    required string time=3;
+    required string sign=4;
+}
+
+message CSAccountLogin {
+    required int32 platform=1;          //平台 1:pc 2:亨哥玩 3飞扬 4征服 5非凡 6顺游 7巨都 8飞扬-梦缘问仙 9萝莉玩 10 新蜂 11 星月 12菠菜 13嘻嘻游 14 7A 15佐玩 16启灵 17泰逢 18 吧唧 19 起灵 20九零 21傲天 22缥缈 23夜雨笙歌
+    required int32 devicePlatform=2;    //设备平台 1:windows 2:android 3:ios
+    optional HengGeWan hengGeWan=3;     //享哥玩
+    optional PCLoginData pcLoginData=4; //pc登陆
+    optional FeiYang feiYang=5;         //飞扬
+    optional ZhengFu zhengFu=6;         //征服
+    optional FeiFan feiFan=7;           //非凡
+    optional ShunYou shunYou=8;         //顺游
+    optional JuDu juDu=9;               //巨都
+    optional FeiYangMengYuanWenXian feiYangMengYuanWenXian=10;  //飞扬梦缘问仙
+    optional LuoLiWan luoLiWan=11;      //萝莉玩
+    optional XinFeng xinFeng=12;        //新蜂
+    optional XingYue xingYue=13;        //星月
+    optional BoCai boCai=14;            //菠菜
+    optional XiXiYou xiXiYou=15;        //嘻嘻游
+    optional QiA qiA=16;                //7A
+    optional ZuoWan zuoWan=17;          //佐玩
+    optional QiLing qiLing=18;          //启灵
+    optional TaiFeng taiFeng=19;        //泰逢
+    optional BaJi baJi=20;              //吧唧
+    optional LingQi lingQi=21;          //起灵
+    optional JiuLing jiuLing=22;        //九零
+    optional AoTian aoTian=23;          //傲天
+    optional PiaoMiao piaoMiao=24;      //缥缈
+    optional YeYu yeYu=25;              //夜雨笙歌
+    optional ZhangJian zhangJian=26;    //仗剑
+    optional TianShen tianShen=27;      //天神决游
+    optional ShenYu shenYu=28;          //神域
+    optional WenJian wenJian=29;        //问剑
+    optional XiongWei xiongWei=30;      //雄威大世
+    optional DiSui diSui = 31;          //地随世渊
+    optional RuoZi ruoZi = 32;          //若紫言诺
+    optional JianDao jianDao=33;        //剑道问情
+    optional ChenXi chenXi=34;          //晨曦仙道
+    optional TianXing tianXing=35;          //天行战歌
+    optional TianJi tianJi=36;          //天机
+    optional YaoJing yaoJing=37;        //妖精仙魔录
+    optional XiaKeXing xiaKeXing=38;    //侠客行
+    optional SanJie sanJie=39;        //三界天书
+    optional YouMeng youMeng=40;        //游梦江湖
+    optional JiuMeng jiuMeng=41;        //九梦天书
+    optional LongYu longYu=42;          //龙语大陆
+    optional ChenXi2 chenXi2=43;          //晨曦2
+    optional XianFan xianFan=44;          //仙凡
+    optional JiangHu jiangHu=45;        //江湖
+    optional FengYuan fengYuan=46;          //风渊
+    optional QiLing2 qiLing2=47;            //启灵2
+    optional QiLing3 qiLing3=48;            //启灵3
+    optional MengHuan mengHuan=49;          //梦幻
+    optional XiaoYao xiaoYao=50;            //逍遥
+    optional MengHuan2 mengHuan2=51;        //梦幻2
+    optional XiaoYaoJiangHu xiaoYaoJiangHu=52;            //火鸟游-逍遥江湖
+    optional TaiGu taiGu=53;                //i5sy-太古纪元
+    optional YiYun yiYun=54;                //齐齐乐-亦云间
+    optional WanJie wanJie=55;              //6亿游-万界奇谭
+    optional LingMeng lingMeng=56;          //天启-灵梦仙界
+    optional LieYan lieYan=57;              //乐趣游-烈焰神尊
+    optional MingJian mingJian=58;          //枭娱游戏-鸣剑仙录
+    optional JiuTian jiuTian=59;            //起灵-九天凌云
+    optional QiYiYouZhangJian qiYiYouZhangJian=60; //7亿游-仗剑凡尘
+    optional NiuChaYouFuTu niuChaYouFuTu=61;    //牛叉游-浮屠幻境
+    optional MoFangYouXiFengMo moFangYouXiFengMo=62; //魔方游戏-封魔录
+    optional PaiQuYouXiXianLu paiQuYouXiXianLu=63;    //派趣游戏-仙路争锋
+    optional SelfAccount selfAccount=999; //自己的账户
+}  
+
+//服务器信息
+message ServerInfo{
+    required int32 id=1;  //id
+    required string ip=2; //ip
+    required string name=3; //名字
+    required int32 tag=4; //标签 0:无 1:新 2：热
+    required int32 status=5; //服务器状态 0:流畅 1:爆满 2:维护
+}
+
+
+//角色信息
+message ServerPlayerInfo{
+    required int64 userId=1;
+    required int32 serverId=2;
+    required int64 playerId=3;
+    required int32 role=4;
+    required int32 sex=5;
+    required int32 level=6;
+    required int32 zhuanShu=7;
+}
+ 
+
+//账户登陆
+message SCAccountLogin {
+   required int64 userId=1;
+   required string token=2;       //token  
+   required int64 expiredTime=3;    //过期时间
+   repeated ServerInfo serverList=4;  //服务器列表
+   repeated ServerPlayerInfo serverPlayerInfoList=5; //玩家角色列表
+   required string notice=6; //更新公告
+   optional string platformUserId=7; //平台用户id
+}
+
+
+ 
+
+
+
+
+
+
+

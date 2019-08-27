@@ -1,0 +1,139 @@
+syntax="proto2";
+
+package ui;
+
+
+//领域基本信息
+message LingyuInfo {
+    //进阶等级
+    required int32 advancedId=1;
+    //当前领域id
+    required int32 lingyuId=2;
+    //食幻化丹食丹等级
+    required int32 unrealLevel=3;
+    //幻化丹培养进度值
+    required int32 unrealPro=4;
+    //皮肤信息列表
+    repeated LingYuSkinInfo skinList=5;
+}
+
+
+//领域皮肤
+message LingYuSkinInfo {
+    //领域皮肤id
+    required int32 lingYuId=1;
+    //升星等级
+    required int32 level=2;
+    //升星培养值
+    required int32 pro=3;
+}
+
+//领域信息请求
+message CSLingyuGet {
+}
+//领域信息应答
+message SCLingyuGet{
+   //进阶等级
+   required int32 advancedId=1;
+   //当前领域id
+   required int32 lingyuId=2;
+   //食幻化丹食丹等级
+   required int32 unrealLevel=3;
+   //食幻化丹培养进度值
+   required int32 unrealPro=4;
+   //幻化
+   repeated int32 unrealList=5;
+   //祝福值
+   optional int32 bless=6;
+   //祝福值开始时间
+   optional int64 blessTime=7;
+   //是否隐藏
+   required bool hidden=8;
+    //领域皮肤列表
+   repeated LingYuSkinInfo lingYuSkinList=11;
+}
+
+//食用幻化丹请求
+message CSLingyuUnrealDan {
+    required int32 num=1;
+}
+//食用幻化丹应答
+message SCLingyuUnrealDan {
+   //幻化丹食丹等级
+   required int32 level=1;
+    //进度值
+    required int32 progress=2;
+}
+
+
+//幻化请求
+message CSLingyuUnreal {
+    //幻化领域id
+    required int32 lingyuId=1;
+}
+//幻化应答
+message SCLingyuUnreal {
+    //幻化
+    optional int32 lingyuId=1;
+}
+
+//卸下请求
+message CSLingyuUnload {
+}
+
+//卸下应答
+message SCLingyuUnload {
+    //领域id
+    required int32 lingyuId=1;
+}
+
+//进阶请求
+message CSLingyuAdvanced{
+    //是否自动进阶
+    required bool autoFlag=1;
+}
+//进阶应答
+message SCLingyuAdvanced{
+    //进阶后id
+    required int32 advancedId=1;
+    //领域id
+    required int32 lingyuId=2;
+    //祝福值
+    optional int32 bless=3;
+    //祝福值开始时间
+    optional int64 blessTime=4;
+    //进阶方式 1进阶丹 2祝福丹 3直升券
+    required int32 advancedType=5; 
+    // 是否暴击
+    optional bool isDouble=6[default=false];   
+   //总祝福值
+   optional int32 totalBless=7;
+}
+
+//身法隐藏
+message CSLingyuHidden {
+    //是否隐藏 0展示  1隐藏
+    required bool hidden=1;
+}
+
+//身法隐藏
+message SCLingyuHidden {
+    required bool hidden=1;
+}
+
+
+//领域皮肤升星请求
+message CSLingYuUpstar {
+    //领域皮肤id
+    required int32 lingYuId=1;
+ }
+ 
+ //领域皮肤升星应答
+ message SCLingYuUpstar {
+     //领域皮肤id
+     required int32 lingYuId=1;
+     //皮肤星数
+     required int32 level=2;
+     //进度值
+     required int32 upPro=3;
+}

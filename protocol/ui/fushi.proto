@@ -1,0 +1,41 @@
+syntax = "proto2";
+
+package ui;
+
+// 八卦符石信息
+message FushiInfo{
+    // 甲木0 乙木1 丙火2 丁火3 戊土4 己土5 庚金6 辛金7 壬水8 癸水9
+    required int32 typ=1;
+    // 符石等级
+    required int32 level=2;
+}
+
+// 八卦符石信息请求
+message CSFushiInfo{
+}
+// 八卦符石信息回复
+message SCFushiInfo{
+    repeated FushiInfo fushiList=1;
+}
+
+// 激活八卦符石请求
+message CSFuShiActivite{
+    // 甲木0 乙木1 丙火2 丁火3 戊土4 己土5 庚金6 辛金7 壬水8 癸水9
+    required int32 typ=1;
+}
+// 激活八卦符石回复
+message SCFuShiActivite{
+    required int32 typ=1;
+}
+
+// 升级八卦符石请求
+message CSFuShiUplevel{
+    // 甲木0 乙木1 丙火2 丁火3 戊土4 己土5 庚金6 辛金7 壬水8 癸水9
+    required int32 typ=1;
+}
+// 升级八卦符石回复
+message SCFuShiUplevel{
+    required int32 typ=1;
+    // 符石等级
+    required int32 level=2;
+}

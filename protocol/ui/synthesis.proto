@@ -1,0 +1,24 @@
+syntax ="proto2";
+
+package ui;
+
+
+//合成请求
+message CSSynthesisStart{
+    //合成Id
+    required int32 synthesisId = 1;
+    //合成数量
+    required int32 num = 2;
+    //是否使用防爆符
+    required bool isAvoidBomb=3;
+}
+
+//合成应答
+message SCSynthesisStart{
+    //合成Id
+    required int32 synthesisId = 1;
+    //合成数量
+    required int32 num = 2;
+    //合成结果
+    repeated bool isSuccess = 3;
+}

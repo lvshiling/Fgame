@@ -1,0 +1,14 @@
+{
+    "iOS":{
+        "appId":"4",
+        "gameId":"4",
+        "agent":"cps001",
+        "appKey":"f1ecc3af9346d2e8161821ac15a5c420"
+    },
+    "android":{
+        "appId":"4",
+        "gameId":"4",
+        "agent":"cps001",
+        "appKey":"f1ecc3af9346d2e8161821ac15a5c420"
+    }
+}

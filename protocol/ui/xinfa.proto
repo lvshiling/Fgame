@@ -1,0 +1,52 @@
+syntax = "proto2";
+
+package ui;
+
+message XinFaInfo {
+    //心法类型
+    required int32 typ=1;
+    //心法等级
+    required int32 level=2;
+}
+
+//心法信息应答
+message SCXinFaGet{
+   //心法信息
+   repeated XinFaInfo xinFaList=1;
+}
+
+//激活心法请求
+message CSXinFaActive {
+    //心法类型
+   required int32 typ=1;
+}
+//激活心法应答
+message SCXinFaActive {
+    //模板id
+    required int32 id=1;
+}
+
+
+//心法升级请求
+message CSXinFaUpgrade {
+   //心法类型
+   required int32 typ=1;
+}
+
+//心法升级应答
+message SCXinFaUpgrade {
+    //模板id
+    required int32 id=1;
+ }
+
+ 
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,36 @@
+
+syntax = "proto2";
+
+package ui;
+
+import "drop.proto";
+import "inventory.proto";
+
+message HuntFreeInfo {
+    // 寻宝类型
+    required int32 huntType=1;         
+    // 已参与免费寻宝次数
+    required int32 huntCount=2;
+    // 上次免费寻宝时间
+    required int64 lastHuntTime=3;
+}
+
+//寻宝请求
+message CSHuntXunBao {
+    // 0命格1神器2圣痕3屠龙装 
+    required int32 huntType=1;
+    // 寻宝次数
+    required int32 xunBaoTimes=2;
+}
+message SCHuntXunBao {
+    required int32 huntType=1;
+    required int64 lastFreeHuntTime=2;
+    repeated DropInfo dropInfo=3;
+    // 已参与免费寻宝次数
+    required int32 huntCount=4; 
+}
+
+//寻宝信息推送
+message SCHuntInfoNotice {
+    repeated HuntFreeInfo infoList=1;
+}

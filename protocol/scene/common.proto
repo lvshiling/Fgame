@@ -1,0 +1,10 @@
+syntax = "proto2";
+
+package scene;
+
+//定义
+message Position {
+    required float posX =1;
+    required float posY =2;
+    required float posZ =3;
+}

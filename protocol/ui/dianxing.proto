@@ -1,0 +1,100 @@
+syntax = "proto2";
+
+package ui;
+
+
+//点星信息
+message DianXingInfo {
+    //当前点星星谱
+    required int32 xingPu=1;
+    //当前点星等级
+    required int32 level=2;
+    //祝福值
+    optional int32 bless=3;
+    //祝福值开始时间
+    optional int64 blessTime=4;
+}
+
+//解封信息
+message JieFengInfo {
+    //当前解封等级
+    required int32 level=1;
+    //祝福值
+    optional int32 bless=2;
+}
+
+
+//点星系统信息请求
+message CSDianxingGet {
+}
+//点星系统信息应答
+message SCDianxingGet{
+   //点星信息
+   required DianXingInfo dianXingInfo=1;
+   //解封信息
+   required JieFengInfo jieFengInfo=2;
+   //星尘值
+   required int64 xingChenNum=3;
+}
+
+
+//星尘值推送
+message SCDianxingXingchenVary{
+    required int64 xingChenNum=1;
+}
+
+
+//点星升级请求
+message CSDianxingAdvanced{
+    //是否自动购买
+    required bool buyFlag=1;
+    //是否使用星云符
+    required bool fuFlag=2;
+}
+//点星升级应答
+message SCDianxingAdvanced{
+    //点星信息
+    required DianXingInfo dianXingInfo=1;
+    //是否暴击
+    optional bool isDouble=2 [default=false]; 
+    //进阶方式
+    required int32 advancedType=3;
+    //当前星尘值
+    required int64 xingChenNum=4;
+    //是否自动购买
+    optional bool buyFlag=5 [default=false];
+    //是否使用星云符
+    optional bool fuFlag=6 [default=false];
+
+}
+
+
+//点星解封请求
+message CSDianxingJiefengAdvanced{
+    //是否自动购买
+    required bool buyFlag=1;
+}
+//点星解封应答
+message SCDianxingJiefengAdvanced{
+    //解封信息
+    required JieFengInfo jieFengInfo=1;
+    //是否暴击
+    optional bool isDouble=2 [default=false]; 
+    //进阶方式
+    required int32 advancedType=3;
+    //是否自动购买
+    optional bool buyFlag=4 [default=false];
+}
+
+
+//点星缓存信息
+message DianXingCacheInfo {
+    //当前点星星谱
+    required int32 xingPu=1;
+    //当前点星等级
+    required int32 level=2;
+    //解封等级
+    required int32 jieFengLev=3;
+    //解封祝福值
+    required int32 jieFengBless=4;
+}

@@ -1,0 +1,15 @@
+file="houtai_msg_vo.go"
+pkg="template"
+class="HoutaiMsgTemplateVO"
+comment = "后台配置"
+[[variables]]
+name="Id"
+type="int"
+tag="id"
+comment="id"
+
+[[variables]]
+name="MsgText"
+type="string"
+tag="msg_text"
+comment="消息"

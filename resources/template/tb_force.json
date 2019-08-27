@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "name": "角色",
+    "nexus_id1": 2,
+    "nexus_ condition1": 0,
+    "nexus_id2": 3,
+    "nexus_ condition2": 1,
+    "nexus_id3": 0,
+    "nexus_ condition3": 0
+  },
+  {
+    "id": 2,
+    "name": "npc",
+    "nexus_id1": 1,
+    "nexus_ condition1": 0,
+    "nexus_id2": 3,
+    "nexus_ condition2": 0,
+    "nexus_id3": 0,
+    "nexus_ condition3": 0
+  },
+  {
+    "id": 3,
+    "name": "怪物",
+    "nexus_id1": 1,
+    "nexus_ condition1": 1,
+    "nexus_id2": 2,
+    "nexus_ condition2": 0,
+    "nexus_id3": 0,
+    "nexus_ condition3": 0
+  }
+]

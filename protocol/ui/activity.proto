@@ -1,0 +1,29 @@
+syntax  = "proto2";
+
+package ui;
+
+//进入活动请求
+message CSActivityAttend{
+	//活动类型
+	required int32 activeId = 1;
+	//参数
+	optional string args=2 [default=""];
+}
+//进入活动请求应答
+message SCActivityAttend{
+	//活动类型
+	required int32 activeId = 1;
+	//是否成功
+	required bool isSuccess = 2;
+}
+
+message ActivityCollectInfo {
+    required int32 npcId=1; //怪物id
+    required int32 count=2; //采集次数
+} 
+//采集物次数推送 
+message SCActivityCollectInfoNotice{
+	//活动类型
+	required int32 activeId=1;
+    repeated ActivityCollectInfo infoList=2;
+}

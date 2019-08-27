@@ -1,0 +1,25 @@
+syntax = "proto2";
+
+package ui;
+
+
+//pk状态改变 
+message CSPkStateSwitch{
+    //pk状态 1:和平 2:组队 3:帮派 4:全体 5:阵营
+    required int32 pkState =1;
+}
+
+//pk状态改变 
+message SCPkStateSwitch{
+    required int32 pkState=1;
+}
+
+//红名值变化推送
+message SCPKValueChanged{
+    // -1 没有变化
+    optional int32 pkValue=1 [default=-1];
+    // -1 没有变化
+    optional int64 onlineTime=2 [default=-1]; 
+    // 
+    optional int64 loginTime=3 [default=-1];
+}

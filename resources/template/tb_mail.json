@@ -1,0 +1,12 @@
+[
+  {
+    "id": 1,
+    "mail_name": "月下情缘土豪榜",
+    "mail_content": "恭喜您获得[color=#4377ef]第%d名[/color],送您一个超级大礼包"
+  },
+  {
+    "id": 2,
+    "mail_name": "月下情缘魅力榜",
+    "mail_content": "恭喜您获得[color=#4377ef]第%d名[/color],送您一个超级大礼包"
+  }
+]

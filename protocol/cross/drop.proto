@@ -1,0 +1,22 @@
+syntax = "proto2";
+
+package cross;
+
+//玩家获取物品
+message ISPlayerGetDropItem{
+    required int32 itemId=1;
+    required int32 num=2;
+    optional int32 level=3;
+    repeated int32 attrList=4;
+    optional int32 upstar=5;
+}
+
+
+//玩家获取物品回复
+message SIPlayerGetDropItem{
+    required int32 itemId=1;
+    required int32 num=2;
+    optional int32 level=3;
+    repeated int32 attrList=4;
+    optional int32 upstar=5;
+}

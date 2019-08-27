@@ -1,0 +1,27 @@
+file="system_trade_recycle.go"
+pkg="model"
+class="SystemTradeRecycle"
+base="SystemLogMsg"
+comment = "系统交易回购池日志"
+name="system_trade_recycle"
+
+[[variables]]
+name="RecycleGold"
+type="int64"
+tag="recycleGold"
+comment="回购池金额" 
+show="normal"
+
+[[variables]] 
+name="Reason"
+type="int32"
+tag="reason"
+comment="原因编号"
+show="normal" 
+
+[[variables]]
+name="ReasonText"
+type="string"
+tag="reasonText"
+comment="原因"
+show="normal"

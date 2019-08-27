@@ -1,0 +1,233 @@
+syntax = "proto2";
+
+package ui;
+
+import "inventory.proto";
+import "mount.proto";
+import "body_shield.proto";
+import "wing.proto";
+import "weapon.proto";
+import "soul.proto";
+import "shenfa.proto";
+import "lingyu.proto";
+import "goldequip.proto";
+import "anqi.proto";
+import "lingtong_dev.proto";
+import "lingtong.proto";
+import "systemskill.proto";
+import "additionsys.proto";
+import "baby.proto";
+import "dianxing.proto";
+import "wushuangweapon.proto";
+import "ring.proto";
+
+//属性
+message Property {
+    required int32 key=1;
+    required int64 value=2;
+}
+
+//属性包
+message SCPlayerProperty{
+    //基础属性
+    repeated Property basePropertyList = 1;
+    //战斗属性
+    repeated Property battlePropertyList=2;
+    //战力
+    optional int64 force=3;
+}
+
+
+//玩家自己基础信息
+message SCPlayerInfo{
+    //玩家id
+    required int64 playerId=1;
+    //名字
+    required string name =2;
+    //角色
+    required int32 role=3;
+    //性别
+    required int32 sex=4;
+    //在线时间
+    required int64 onlineTime=5;
+    //总在线时间
+    required int64 totalOnlineTime=6;
+    //是否播放开场动画
+    required bool isOpenVideo=7;
+    //创号时间
+    required int64 createTime=8;
+    //今日在线时间
+    required int64 todayOnlineTime=9;
+    //0:没有权限 1:普通扶持 2:研发扶持
+    required int32 privilegeTypeInt=10; 
+    //仙盟仓库开关
+    required bool allianceDepotFlag=11;
+    //交易市场开关
+    required bool tradeFlag=12;
+} 
+
+
+//玩家基本信息
+message PlayerBasicInfo{
+    //玩家id
+    required int64 playerId=1;
+    //在线状态 0:离线 1:在线
+    required int32 onlineState=2;
+    //名字
+    required string name =3;
+    //性别
+    required int32 role=4;
+    //战力
+    required int32 sex=5;
+    //等级
+    required int32 level=6;
+    //战力
+    required int64 force=7;
+    //仙盟id
+    required int64 allianceId=8;
+    //仙盟名称
+    required string allianceName=9;
+    //组队id
+    required int64 teamId=10;
+    //时装id
+    required int32 fashionId=11;
+    //兵魂id
+    required int32 weaponId=12;
+    //坐骑
+    required int32 mountId=13;
+    //战翼
+    required int32 wingId=14;
+    //配偶id
+    required int64 spouseId=15;
+    //配偶名字
+    required string spouseName=16;
+    //天劫塔等级
+    required int32 realmLevel=17;
+    //婚戒
+    required int32 ring=18;
+    //婚戒等级
+    required int32 ringLevel=19;
+    //灵童id
+    required int32 lingTongId=20;
+    //灵童时装id
+    required int32 lingTongFashionId=21;
+    //灵童兵魂id
+    required int32 lingTongWeaponId=22;
+    //灵童战翼id
+    required int32 lingTongWingId=23;
+    //是否永久至尊会员
+    required bool isHuiYuan=24;
+    //开通的仙尊特权卡类型
+    repeated int32 xianZunCard=25;
+} 
+
+//获取玩家基本信息
+message CSPlayerBasicInfoGet{
+    //玩家id
+    required int64 playerId = 1;
+}
+
+//获取玩家基本信息回复
+message SCPlayerBasicInfoGet{
+    //玩家id
+    required PlayerBasicInfo playerBasicInfo = 1;
+}
+
+
+//获取玩家基本信息
+message CSPlayerBasicInfoBatchGet{
+    //玩家id
+    repeated int64 playerIdList = 1;
+}
+
+//获取玩家基本信息回复
+message SCPlayerBasicInfoBatchGet{
+    //玩家id
+    repeated PlayerBasicInfo playerBasicInfoList = 1;
+}
+
+
+message CSPlayerInfoGet {
+   required int64 playerId = 1;        // token string
+}
+
+message SCPlayerInfoGet {
+    required PlayerBasicInfo basicInfo =1;
+    //基础属性
+    repeated Property basePropertyList = 2;
+    //战斗属性
+    repeated Property battlePropertyList=3;
+    //装备
+    repeated EquipmentSlot equipmentList=4;
+    //坐骑
+    required MountInfo mountInfo=5;
+    //战翼
+    required WingInfo wingInfo=6;
+    //护体盾
+    required  BodyShieldInfo bodyShieldInfo=7;
+    //古魂
+    required AllSoulInfo allSoulInfo=8;
+    //冰魂
+    required AllWeaponInfo allWeaponInfo=9;
+    //时装id
+    required int32 fashionId=10;
+    //身法
+    required ShenfaInfo shenfaInfo=11;
+    //领域
+    required LingyuInfo lingyuInfo=12;
+    //元神金装
+    repeated GoldEquipSlot goldEquipList=13;
+    //神盾尖刺
+    required ShieldInfo shieldInfo=14;
+    //护体仙羽
+    required FeatherInfo FeatherInfo=15;
+    //暗器
+    required AnqiInfo anqiInfo=16;
+    //灵童养成类型信息
+    required AllLingTongDevInfo allLingTongDevInfo=17;
+    //灵童信息
+    required LingTongCacheInfo lingTongInfo=18;
+    //系统技能信息
+    required AllSystemSkillInfo allSystemSkillInfo=19;
+    //附加系统类信息
+    required AllAdditionSysInfo allAdditionSysInfo=20;
+    //洞房怀孕信息
+    required DongFangInfo pregnantInfo=21;
+    //点星
+    required DianXingCacheInfo dianXingInfo=22;
+    //无双神器
+    repeated WushuangWeaponBodyPosInfo wushuangSlotList=23;
+    //特戒
+    repeated RingInfo ringInfoList=24;
+}
+
+// 开场动画播放确认
+message CSPlayerOpenVedio{
+
+}
+message SCPlayerOpenVedio{
+
+}
+
+// 玩家性别变更
+message SCPlayerSexChanged{
+    required int32 newSex=1;
+}
+
+// 玩家姓名变更
+message SCPlayerNameChanged{
+    required string newName=1;
+}
+
+message CountData {
+    required string key=1;
+    required int64 value=2;
+}
+
+//数据统计
+message CSPlayerCountData{
+    repeated CountData countList=1;
+}
+message SCPlayerCountData{  
+    
+}

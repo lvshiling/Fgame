@@ -1,0 +1,391 @@
+
+syntax = "proto2";
+
+package ui;
+
+import "drop.proto";
+import "inventory.proto";
+
+
+// 元神金装日志
+message GoldEquipLog{
+    required int64 createTime=1;
+    required string rewItemStr=2;        //分解的装备奖励
+    repeated int32 itemIdList=3;        //分解的物品id
+}  
+  
+//装备槽位
+message GoldEquipSlot {
+    //位置 0:武器 1:战袍 2:头盔 3:战靴 4:腰带 5:护手 6:玉坠 7:项链
+    required int32 slotId=1;
+    //星级
+    required int32 level=2; 
+    optional int32 itemId=4[default=0];
+    optional int32 bindType=5[default=0]; //0不绑定1绑定，默认0
+    //属性
+    optional ItemPropertyData propertyData=6;
+    //宝石
+    repeated GemSlot gems=7;
+    //解锁宝石号
+    repeated int32 gemsUnlockList=8;
+    //新强化等级
+    required int32 newStLevel=9; 
+    //铸灵信息
+    repeated CastingSpiritInfo spiritInfo=10;
+    //锻魂信息
+    repeated ForgeSoulInfo soulInfo=11;
+}
+
+//铸灵信息
+message CastingSpiritInfo {
+    required int32 spiritType=1; //铸灵类型 与配置表备注一致
+    required int32 level=2;
+    required int32 times=3; //本阶已强化次数
+    required int32 bless=4; //祝福值
+}
+
+//锻魂信息
+message ForgeSoulInfo {
+    required int32 soulType=1; //锻魂类型 与配置表备注一致
+    required int32 level=2;
+    required int32 times=3; //本阶已强化次数
+}
+
+//使用装备
+message CSUseGoldEquip {
+    //索引
+     required int32 index=1;
+  }
+//使用装备成功
+message SCUseGoldEquip {
+    //索引
+    required int32 index=1;
+}
+
+//脱下装备
+message CSTakeOffGoldEquip {
+    //位置 0:武器 1:战袍 2:头盔 3:战靴 4:腰带 5:护手 6:玉坠 7:项链
+    required int32 slotId=1;
+}
+//脱下装备成功
+message SCTakeOffGoldEquip {
+    //位置
+    required int32 slotId=1;
+}
+    
+//升星背包
+message CSGoldEquipStrengthenBag {
+    //强化对象
+    required int32 targetIndex=1;
+    //材料数量
+    required int32 itemNum=2;
+}
+//升星背包应答
+message SCGoldEquipStrengthenBag {
+    //强化对象
+    required int32 index=1;
+    //强化结果 0:失败 1:成功
+    required bool result=2;
+}
+
+//升星身上
+message CSGoldEquipStrengthenBody {
+    //强化对象
+    required int32 targetSlotId=1;
+    //材料数量
+    required int32 itemNum=2;
+}
+//升星身上应答
+message SCGoldEquipStrengthenBody {
+    //位置
+    required int32 slotId=1;
+    //强化结果 0:失败 1:成功
+    required bool result=2;
+}
+
+//重铸
+message CSGoldEquipChongzhu{
+    //材料索引
+    repeated int32 itemIndex =1;
+}
+//重铸回复
+message SCGoldEquipChongzhu{
+    required int32 itemId=1;
+    required int32 level=2;
+}
+
+//金装槽位数据改变
+message SCGoldEquipSlotChanged {
+    //改变的装备
+    repeated GoldEquipSlot slotList=1;
+}
+
+//金装信息推送  
+message SCGoldEquipSlotInfo{
+    repeated GoldEquipSlot slotList=1; //装备槽位数据
+}
+
+//转生请求
+message CSZhuanSheng{
+
+}
+
+//转生回复
+message SCZhuanSheng{
+    required int32 zhuanShengShu=1;
+}
+
+//吞噬金装（分解）
+message CSEatGoldEquip{
+    repeated int32 indexList=1;
+}
+message SCEatGoldEquip{
+    required int32 goldYuanLevel=1;
+    required int64 goldYuanExp=2;
+}  
+
+//金装开光身上
+message CSGoldEquipOpenLightBody{
+    // 装备槽位置
+    required int32 slotId=1;
+    // 是否自动购买
+    required bool isAuto=2;
+}
+message SCGoldEquipOpenLightBody{
+    required bool isSuccess=1;
+    required int32 openLevel=2;
+    required int32 slotId=3;
+}
+
+//金装开光背包
+message CSGoldEquipOpenLightBag{
+    // 背包物品索引
+    required int32 itemIdex=1;
+    // 是否自动购买
+    required bool isAuto=2;
+}
+message SCGoldEquipOpenLightBag{
+    required bool isSuccess=1;
+    required int32 openLevel=2;
+    required int32 index=3;
+}
+
+//金装强化升星身上
+message CSGoldEquipUpstarBody{
+    // 装槽备位置
+    required int32 slotId=1;
+    //是否防爆
+    required bool isAvoid=2;
+}
+message SCGoldEquipUpstarBody{
+    //强化结果 0:成功 1：失败 2:回退
+    required int32 result=1;
+    required int32 starLevel=2;
+    required int32 slotId=3;
+    required bool isAvoid=4;
+}
+
+//金装化升星背包
+message CSGoldEquipUpstarBag{
+    // 背包索引
+    required int32 itemIdex=1;
+    //是否防爆
+    required bool isAvoid=2;
+}
+message SCGoldEquipUpstarBag{
+     //强化结果 0:成功 1：失败 2:回退
+    required int32 result=1;
+    required int32 starLevel=2;
+    required int32 index=3;
+    required bool isAvoid=4;
+} 
+
+
+//使用宝石
+message CSGoldEquipUseGem {
+    //索引
+    required int32 index=1;
+    //位置
+    required int32 slotId =2;
+    //宝石槽位
+    required int32 order=3;
+}
+  
+//使用宝石成功
+message SCGoldEquipUseGem {
+    //索引
+    required int32 index=1;
+    //位置
+    required int32 slotId=2;
+    //宝石槽位
+    required int32 order=3;
+}
+  
+
+//脱下宝石 
+message CSGoldEquipTakeOffGem {
+    //位置 0:武器 1:战袍 2:头盔 3:战靴 4:腰带 5:护手 6:玉坠 7:项链
+    required int32 slotId=1;
+    required int32 order =2;
+}
+
+//脱下宝石成功
+message SCGoldEquipTakeOffGem {
+    //位置
+    required int32 slotId=1;
+    required int32 order =2;
+}
+
+// message UseGem{
+//     //位置
+//     required int32 slotId=1;
+//     //索引
+//     repeated int32 indexList=2; 
+//     //宝石槽位
+//     repeated int32 orderList=3; 
+// }
+// 一键镶嵌宝石
+message CSGoldEquipUseGemAll{
+    repeated UseGem useGemList=1;
+}
+message SCGoldEquipUseGemAll{
+}
+
+//身上·装备继承
+message CSGoldEquipExtendBody{
+    // 身体位置
+    required int32 slotId=1;
+    required int32 useItemIndex=2;
+}
+message SCGoldEquipExtendBody{ 
+    required int32 slotId=1;
+    required int32 useItemIndex=2;
+    required int32 ItemUpstarLevel=3;
+}
+
+//背包·装备继承
+message CSGoldEquipExtendBag{
+    // 继承物品
+    required int32 itemIndex=1;
+    // 消耗物品
+    required int32 useItemIndex=2; 
+}
+message SCGoldEquipExtendBag{
+    // 继承物品
+    required int32 itemIndex=1;
+    // 消耗物品
+    required int32 useItemIndex=2;
+    // 继承等级
+    required int32 ItemUpstarLevel=3;
+}
+
+
+//解锁宝石槽位
+message CSGoldEquipUnlockGem {
+    //位置
+    required int32 slotId =1;
+    //宝石槽位
+    required int32 order=2;
+}
+  
+//解锁宝石槽位成功
+message SCGoldEquipUnlockGem {
+    //位置
+    required int32 slotId =1;
+    //宝石槽位
+    required int32 order=2;
+}
+
+//金装日志
+message CSGoldEquipLog{
+}
+message SCGoldEquipLog{
+    repeated GoldEquipLog logList=1;    //分解日志 
+}  
+
+//自动吞噬装备（分解）
+message CSGoldEquipAutoFenJie{
+    required int32 isAuto=1; //0否1是
+    required int32 maxQuality=2;  //品质
+    optional int32 zhuanShu=3; //转数
+   
+}
+message SCGoldEquipAutoFenJie{
+    required int32 isAuto=1;
+    required int32 maxQuality=2; 
+    required int32 zhuanShu=3; //转数
+} 
+
+
+//金装新强化身上
+message CSGoldEquipStrengthenBuwei{
+    // 装槽备位置
+    required int32 slotId=1;
+    //是否防爆
+    required bool isAvoid=2;
+}
+message SCGoldEquipStrengthenBuwei{
+    //强化结果 0:成功 1：失败 2:回退
+    required int32 result=1;
+    required int32 level=2;
+    required int32 slotId=3;
+    required bool isAvoid=4;
+}
+
+
+message SCGoldEquipUseItemWithGrowUp{
+    required int32 itemId=1;
+    required int32 slotId=2;
+    required int32 level=3;
+}
+
+//神铸装备进阶请求
+message CSGodCastingEquipUplevel {
+    required int32 bodyPos=1; //身体部位  与配置表一致
+}
+
+message SCGodCastingEquipUplevel {
+    required int32 bodyPos=1; 
+    required int32 times=2; //本阶尝试强化次数
+    required int32 itemId=3; //神铸装备物品ID
+    required int32 isSuccess=4;
+}
+
+//神铸铸灵进阶请求
+message CSGodCastingCastingSpiritUplevel {
+    required int32 bodyPos=1;
+    required int32 spiritType=2;//铸灵类型  与配置表一致
+    required bool autoFlag=3;
+}
+
+message SCGodCastingCastingSpiritUplevel {
+    required int32 bodyPos=1;
+    required int32 spiritType=2;
+    required int32 level=3; //等级
+    required int32 times=4;
+    required int32 bless=5;
+    required int32 isSuccess=6;
+}
+
+//神铸锻魂进阶请求
+message CSGodCastingForgeSoulUplevel {
+    required int32 bodyPos=1;
+    required int32 soulType=2;//锻魂类型  与配置表一致
+}
+
+message SCGodCastingForgeSoulUplevel {
+    required int32 bodyPos=1;
+    required int32 soulType=2;
+    required int32 level=3;
+    required int32 times=4;
+    required int32 isSuccess=5;
+}
+
+//神铸装备继承请求
+message CSGodCastingEquipInherit {
+    required int32 bodyPos=1;
+    required int32 equipIndex=2; //背包内装备位置
+}
+
+message SCGodCastingEquipInherit {
+}

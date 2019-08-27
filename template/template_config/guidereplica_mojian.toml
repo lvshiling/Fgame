@@ -1,0 +1,27 @@
+file="guide_replica_mojian_vo.go"
+pkg="template"
+class="GuideReplicaMoJianTemplateVO"
+comment = "魔剑副本配置"
+[[variables]]
+name="Id"
+type="int"
+tag="id"
+comment="id"
+
+[[variables]]
+name="BossId"
+type="int32"
+tag="biology_id"
+comment="bossid"
+
+[[variables]]
+name="RetinueId"
+type="int32"
+tag="biology_id2"
+comment="随从id"
+
+[[variables]]
+name="BuffId"
+type="int32"
+tag="buff_id"
+comment="buffid"

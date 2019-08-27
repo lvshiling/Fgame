@@ -1,0 +1,159 @@
+syntax = "proto3";
+
+package rank;
+
+message RankForceInfo{
+    int32 serverId=1;
+    int64 playerId=2;
+    string playerName=3;
+    string gangName=4;
+    int64 power=5;
+    int32  role=6;   //1 开天 2 奕剑 3 破月
+    int32 sex=7;    //1 男   2 女
+}
+
+message RankOrderInfo {
+    int32 serverId=1 ;
+    int64 playerId=2;
+    string playerName=3;
+    int32  order= 4;
+    int64  power=5;
+}
+
+message RankWeaponInfo {
+    int32 serverId=1 ;
+    int64 playerId=2;
+    string playerName=3;
+    int32 star=4;
+    int32 wearId=5;
+    int64 power=6; 
+    int32 role=7;
+    int32 sex=8;
+}
+
+message RankGangInfo {
+    int32 serverId=1 ;  
+    int64 gangId=2; 
+    string gangName=3;
+    int64  leaderId=4;
+    string leaderName=5;
+    int64 power=6;
+    int32 role=7;
+    int32 sex=8;   
+}
+
+message RankGoldInfo{
+    int32 serverId=1 ;   
+    int32 goldNum=2;
+    int64 playerId=3;
+    string playerName=4;
+    int64 power=5;
+}
+
+
+//战力信息
+message AreaRankForce {
+    int64 rankTime=1;
+    repeated RankForceInfo forceList=2;
+}
+
+//仙盟信息
+message AreaRankGang {
+    int64 rankTime=1;
+    repeated RankGangInfo gangList=2; 
+}
+
+//坐骑信息
+message AreaRankMount {
+    int64 rankTime=1;
+    repeated RankOrderInfo mountList=2;
+}
+
+//战翼信息
+message AreaRankWing {
+    int64 rankTime=1;
+    repeated RankOrderInfo wingList=2;
+}
+
+//兵魂信息
+message AreaRankWeapon {
+    int64 rankTime=1;
+    repeated RankWeaponInfo weaponList=2;
+}
+
+//护体盾
+message AreaRankBodyShield {
+    int64 rankTime=1;
+    repeated RankOrderInfo bodyShieldList=2;
+}
+
+//身法
+message AreaRankShenFa {
+    int64 rankTime=1;
+    repeated RankOrderInfo shenFaList=2;
+}
+
+//领域
+message AreaRankLingYu {
+    int64 rankTime=1;
+    repeated RankOrderInfo lingYuList=2;
+}
+
+//护体仙羽
+message AreaRankFeather {
+    int64 rankTime=1;
+    repeated RankOrderInfo featherList=2;
+}
+
+//神盾尖刺
+message AreaRankShield {
+    int64 rankTime=1;
+    repeated RankOrderInfo shieldList=2;
+}
+
+//暗器
+message AreaRankAnQi {
+    int64 rankTime=1;
+    repeated RankOrderInfo anQiList=2;
+}
+
+//刷新排行榜 (指令刷)
+message RankRefreshRequest {
+
+}
+
+message RankRefreshResponse {
+    
+}
+
+//获取排行榜
+message RankListRequest{
+}
+
+//排行榜回复
+message RankListResponse{
+    AreaRankForce force=1;
+    AreaRankGang gang=2;
+    AreaRankMount mount=3;
+    AreaRankWing wing=4;
+    AreaRankWeapon weapon=5;
+    AreaRankBodyShield bodyShield=6;
+    AreaRankShenFa shenFa=7;
+    AreaRankLingYu lingYu=8;
+    AreaRankFeather feather=9;
+    AreaRankShield shield=10;
+    AreaRankAnQi anQi=11;
+}
+
+service Rank{
+    //获取排行
+    rpc GetRankList(RankListRequest) returns(RankListResponse){}
+    //刷新排行榜
+    rpc RefreshRank(RankRefreshRequest) returns(RankRefreshResponse){}
+}
+
+
+
+
+
+

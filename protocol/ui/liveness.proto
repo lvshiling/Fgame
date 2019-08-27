@@ -1,0 +1,52 @@
+syntax = "proto2";
+
+package ui;
+
+
+message LivenessInfo{
+    required int32 questId=1;
+    required int32 num=2;
+}
+
+
+message CSLivenessGet {
+
+}
+//活跃度界面信息
+message SCLivenessGet {
+    //只发次数大于0
+    repeated LivenessInfo livenessList=1;
+    //活跃度值
+    required int64 liveness=2;
+    //宝箱开启
+    repeated int32 openBoxList=3;
+}
+
+//次数改变推送
+message SCLivenessNumChanged {
+    required LivenessInfo LivenessInfo=1;
+    //总活跃度
+    required int64 liveness=2;
+}
+
+
+//开活跃度宝箱
+message CSLivenessOpen {
+    required int32 boxId=1;
+} 
+
+//开活跃度宝箱回复
+message SCLivenessOpen {
+    //活跃度值
+    required int64 liveness=1;
+    //宝箱开启
+    repeated int32 openBoxList=2;
+    //宝箱id
+    required int32 boxId=3;
+}
+
+
+
+
+
+

@@ -1,0 +1,26 @@
+file="gift_code_vo.go"
+pkg="template"
+class="GiftCodeTemplateVO"
+comment = "礼包激活码配置"
+[[variables]]
+name="Id"
+type="int"
+tag="id"
+comment="id"
+
+[[variables]]
+name="ItemId"
+type="string"
+tag="item_id"
+comment="物品"
+
+[[variables]]
+name="ItemCount"
+type="string"
+tag="item_count"
+comment="数量"
+
+
+
+
+

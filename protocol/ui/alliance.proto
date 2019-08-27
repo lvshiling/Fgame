@@ -1,0 +1,708 @@
+syntax = "proto2";
+
+package ui;
+import "inventory.proto";
+
+//定义
+message AlliancePosition {
+    required float posX =1;
+    required float posY =2;
+    required float posZ =3;
+}
+
+//成员位置
+message AllianceMemberPos {
+    //玩家id
+    required int64 playerId=1;
+     //当前位置
+     required AlliancePosition pos=2;
+}
+
+//仙盟成员信息
+message AllianceMemberInfo{
+    required int64 memberId=1;
+    required string name=2;
+    required int32 role=3;
+    required int32 sex=4;
+    //0:会员 1:堂主 2:副盟主 3:盟主
+    required int32 position=5;
+    required int32 level =6;
+    required int64 force=7;
+    required int64 gongXian=8;
+    required int32 zhuanSheng=9;
+    //0:离线 1:在线
+    required int32 onlineStatus=10;
+    required int64 joinTime = 11;
+    required int32 memberVip=12;
+    //离线时间
+    required int64 time=13;
+}
+
+// 盟主缓存信息
+message MengZhuInfo {
+    //盟主时装id
+    required int32 fashionId=1;
+    //盟主兵魂id
+    required int32 weaponId=2;
+    //盟主战翼id
+    required int32 wingId=3;
+}
+
+//仙盟信息
+message AllianceBriefInfo {
+    //仙盟id
+    required int64 allianceId = 1;
+    //等级
+    required int32 level =2;
+    //建设
+    required int64 jianShe=3;
+    //成员数
+    required int32 num =4;
+    //虎符
+    required int64 huFu=5;
+    //总战力
+    required int64 totalForce=6;
+    //名字
+    required string name=7;
+    //盟主id
+    required int64 createId=8;
+    //盟主名字 
+    required string createName =9;
+    //公告
+    required string notice=10;
+    //创建时间
+    required int64 createTime=11;
+    //是否自动审核入盟申请
+    required int32 isAuto=12;
+    //是否自动销毁仓库物品
+    required int32 isAutoRemoveDepot=13;
+    //自动销毁最大品质
+    required int32 maxQuality=14;
+    //自动销毁最大转数
+    required int32 maxZhuanSheng=15;
+    //盟主vip
+    required int32 mengzhuVip=16;
+    // 盟主缓存
+    required MengZhuInfo mengzhuInfo=17;
+    //合盟时间
+    required int64 mergeAllianceTime=18;
+}
+
+//仙术信息
+message AllianceSkillInfo{
+    //等级
+    required int32 level=1;
+    //类型
+    required int32 skillType=2;
+}
+
+//仙盟申请数据
+message AllianceJoinApplyInfo{
+    //用户id
+    required int64 memberId=1;
+    //用户名字
+    required string name=2;
+    //战力
+    required int64 force=3;
+    //角色
+    required int32 role=4;
+    //性别
+    required int32 sex=5;
+    //等级
+    required int32 level=6;
+}
+
+
+//物品
+message AllianceSlotItem {
+    //物品索引
+    required int32 index=1;
+    //道具id
+    required int32 itemId=2;
+    //数量
+    required int32 num=3;
+    //等级
+    optional int32 level=4 [default=-1]; //-1 没有变化
+    //绑定属性 0否 1是
+    optional int32 bindType=5 [default=0];
+    //物品属性
+    optional ItemPropertyData propertyData=6;
+}
+
+//仙盟详细信息
+message AllianceInfo {
+    //仙盟基本信息
+    required AllianceBriefInfo briefInfo=1;
+    //仙盟成员列表
+    repeated AllianceMemberInfo members=2;
+    //仙盟仓库列表
+    repeated AllianceSlotItem depotItemList=3;
+}
+
+//仙盟日志信息
+message AllianceLog{
+    required string content=1;
+    required int64 createTime=2;
+}
+
+//仙盟列表
+message CSAllianceList{
+}
+
+//仙盟列表回复
+message SCAllianceList{
+    repeated AllianceBriefInfo allianceList=1;
+}
+
+//仙盟信息
+message CSAlliance{
+}
+//仙盟信息回复
+message SCAlliance{
+    required AllianceBriefInfo allianc=1;
+}
+
+//仙盟成员列表
+message CSAllianceMemberList{
+}
+//仙盟成员列表回复
+message SCAllianceMemberList{
+    repeated AllianceMemberInfo members=1;
+}
+//仙盟成员变化推送
+message SCAllianceMemberChanged{
+    repeated AllianceMemberInfo members=1;
+}
+
+//创建仙盟
+message CSAllianceCreate {
+    required string name =1;
+    //0老版本仙盟  1新版本仙盟
+    required int32 versionType=2;
+    //0低级  1高级
+    optional int32 allianceType=3;
+}
+
+//创建仙盟回复
+message SCAllianceCreate{
+    required AllianceInfo info=1;
+}
+
+//仙盟申请加入
+message CSAllianceJoinApply {
+    required int64 allianceId=1;
+}
+
+//仙盟申请加入回复
+message SCAllianceJoinApply{
+    required int64 allianceId=1;
+}
+
+//仙盟申请加入推送
+message SCAllianceJoinApplyBroadcast{
+    required AllianceJoinApplyInfo applyInfo=1;
+}
+
+//仙盟处理申请
+message CSAllianceAgreeJoinApply {
+    //申请者id
+    required int64 joinId=1;
+    //同意
+    required bool agree=2;
+}
+
+//仙盟处理申请回复
+message SCAllianceAgreeJoinApply{
+    //申请者id
+    required int64 joinId=1;
+    //同意
+    required bool agree=2;
+}
+
+//仙盟批量处理申请
+message CSAllianceAgreeJoinApplyBatch{
+    required bool agree=1;
+}
+//仙盟批量处理申请回复
+message SCAllianceAgreeJoinApplyBatch{
+    
+}
+
+//仙盟处理申请通知
+message SCAllianceAgreeJoinApplyToApply{
+    //仙盟id
+    required int64 allianceId=1;
+    //仙盟名字
+    required string name=2;
+    //同意
+    required bool agree=3;
+}
+
+//仙盟处理申请通知管理层
+message SCAllianceAgreeJoinApplyToManager{
+    //申请者id
+    required int64 joinId=1;
+    //同意
+    required bool agree=2;
+}
+
+
+//仙盟解散
+message CSAllianceDismiss {
+}
+
+//仙盟解散回复
+message SCAllianceDismiss{
+    required int64 allianceId=1;
+}
+//仙盟解散推送
+message SCAllianceDismissBroadcast{
+    required int64 allianceId=1;
+}
+
+//仙盟推送
+message SCAllianceInfo{
+    //仙盟信息
+    required AllianceInfo info=1;
+    //申请数量
+    required int32 applyNum=2;
+}
+
+//获取申请列表
+message CSAllianceJoinApplyList {
+}
+
+//获取申请列表回复
+message SCAllianceJoinApplyList {
+    repeated AllianceJoinApplyInfo applyList=1;
+}
+
+
+
+//仙盟退出
+message CSAllianceExit{
+}
+
+//仙盟退出成功
+message SCAllianceExit{
+}
+
+
+//一键找人
+message CSAllianceCharm{
+
+}
+
+//一键找人回复
+message SCAllianceCharm{
+    
+}
+
+
+//逐出仙盟
+message CSAllianceKick{
+    required int64 kickMemberId=1;
+}
+
+//逐出仙盟
+message SCAllianceKick{
+    required int64 kickMemberId=1;
+    required string kickMemberName=2;
+}
+
+//逐出仙盟通知
+message SCAllianceKickNotice{
+    required int64 memberId=1;
+    required string memberName=2;
+}
+
+//任命
+message CSAllianceCommit{
+    //任命成员id
+    required int64 commitMemberId=1;
+    required int32 position=2;
+}
+
+//任命
+message SCAllianceCommit{
+     //任命成员id
+     required int64 commitMemberId=1;
+     required int32 position=2;
+}
+//任命通知
+message SCAllianceCommitNotice{
+    //任命者id
+    required int64 memberId=1;
+    //任命者名称
+    required string memberName=2;
+    required int32 positio=3;
+}
+
+
+//转让
+message CSAllianceTransfer{
+    //转让id
+    required int64 transferMemberId=1;
+}
+
+//转让
+message SCAllianceTransfer{
+     //转让id
+     required int64 transferMemberId=1;
+}
+//转让推送
+message SCAllianceTransferBroadcast{
+    //转让者id
+    required int64 memberId=1;
+    //转让者名称
+    required string memberName=2;
+    //被转让者id
+    required int64 transferId=3;
+    //转让者名称
+    required string transferName=4;
+}
+
+ 
+
+//弹劾
+message CSAllianceImpeach{
+}
+message SCAllianceImpeach{
+}
+
+//弹劾推送
+message SCAllianceImpeachBroadcast{
+    //弹劾id
+    required int64 memberId=1;
+    //弹劾名称
+    required string memberName=2;
+}
+
+
+//邀请
+message CSAllianceInvitation{
+    required int64 invitationId = 1;
+}
+//邀请应答
+message SCAllianceInvitation{
+    required int64 invitationId = 1;
+}
+//邀请推送
+message SCAllianceInvitationNotice{
+    required int32 allianceId = 1;
+    required string allianceName = 2;
+    required int64 memberId = 3;
+    required string memberName =4;
+    //邀请时间
+    required int64 invitationTime = 5;
+}
+//处理邀请
+message CSAllianceAgreeInvitation{
+    //邀请者id
+    required int64 memberId = 1;
+    //同意
+    required bool agree =2;
+}
+//处理邀请应答
+message SCAllianceAgreeInvitation{
+   required int64 memberId = 1;
+   required bool agree =2;
+}
+//处理邀请应答推送
+message SCAllianceAgreeInvitationNotice{
+    required int64 invitationId = 1;
+    required string invitationName =2;
+    //同意
+    required bool agree =3;
+}
+
+//仙术升级
+message CSAllianceSkillUpgrade{
+    //仙术类型:1血量2攻击3防御
+    required int32 skillType=1;
+}
+
+//仙术升级应答
+message SCAllianceSkillUpgrade{
+   //仙术模板id
+   required int32 temId = 1;
+}
+
+//捐献
+message CSAllianceDonate{
+    //捐献类型 1:道具 2:银两 3:元宝
+    required int32 typ = 1;
+}
+
+//捐献
+message SCAllianceDonate{
+    required int32 typ = 1;
+}
+
+//捐献虎符
+message CSAllianceDonateHuFu{
+}
+
+//捐献虎符
+message SCAllianceDonateHuFu{
+}
+
+//虎符广播
+message SCAllianceDonateHuFuBroadcast{
+    required int64 huFu=1;
+    required int64 donorId=2; 
+    required string donorName=3;
+}
+
+
+message AllianceDonate {
+    required int32 typ=1;
+    required int32 num=2;
+}
+
+
+//获取个人仙盟信息信息
+message CSAlliancePlayerInfo{
+  
+}
+
+//个人仙盟信息信息
+message SCAlliancePlayerInfo{
+    //捐献列表
+    repeated AllianceDonate donateList=1;
+    //当前贡献
+    required int64 currentGongXian=2;
+    //仙术信息
+    repeated AllianceSkillInfo skillInfoList=3;
+    //腰牌
+    required int32 currentYaoPai=4;
+    //腰牌已兑换次数
+    required int32 hadConvertTimes=5;
+    //当前仓库积分
+    required int32 curDepotPoint=6;
+    //上次仙盟召集时间
+    required int64 lastMemberCallTime=7;
+}
+
+//编辑仙盟公告
+message CSAllianceNoticeChange{
+    required string content = 1;
+}
+//编辑仙盟公告应答
+message SCAllianceNoticeChange{
+    required string content=1;
+}
+//仙盟公告推送
+message SCAllianceNoticeBroadcast{
+    required string content=1;
+}
+
+
+//仙盟日志
+message CSAllianceLog{
+    
+}
+//仙盟日志应答
+message SCAllianceLog{
+    repeated AllianceLog logList=1;
+}
+
+//腰牌变化
+message SCAlliancePlayerYaoPaiChanged{
+    //腰牌
+    required int32 currentYaoPai=1;
+}
+
+//腰牌兑换
+message CSYaoPaiConvert{
+    
+}
+//腰牌兑换应答
+message SCYaoPaiConvert{
+    required int32 itemId = 1;
+    required int32 num = 2;
+}
+
+//斗神信息
+message DouShenInfo{
+    //玩家id
+    required int64 playerId=1;
+    //玩家名称
+    required string name=2;
+    //玩家战力
+    required int64 force=3;
+    //领域id
+    required int32 lingyuId=4;
+    //角色
+    required int32 role=5;
+    //性别
+    required int32 sex=6;
+    //等级
+    required int32 level=7;
+}
+
+//斗神殿列表
+message CSAllianceDouShenList{
+}
+//斗神殿列表应答
+message SCAllianceDouShenList{
+    repeated DouShenInfo doushen=1;
+}
+
+//斗神领域变更推送
+message SCAllianceDouShenLingyuChangedBroadcast{
+    required int64 playerId=1;
+    required string name=2;
+    required int32 lingyuId=3;
+    required int32 role=4;
+    required int32 sex=5;
+}
+
+// 仙盟仓库存入
+message CSSaveInAllianceDepot{
+    //背包索引
+    required int32 index=1;
+    //数量
+    required int32 num=2;
+}
+message SCSaveInAllianceDepot{
+    //仓库积分
+    required int32 totalPoint=1;
+}
+
+// 仙盟仓库取
+message CSTakeOutAllianceDepot{
+    //仓库索引
+    required int32 index=1;
+    //物品id
+    required int32 itemId=2;
+    //数量
+    required int32 num=3;
+}
+message SCTakeOutAllianceDepot{
+    //仓库积分
+    required int32 totalPoint=1;
+}
+
+// 仙盟仓库整理
+message CSAllianceDepotMerge {
+    //删除的物品索引(为空的时候仅做排序)
+    repeated int32 indexList=1;
+}
+message SCAllianceDepotMerge {
+}
+
+// 仙盟仓库变更推送 
+message SCAllianceDepotChangedNotice{
+    repeated AllianceSlotItem changedItemList=1;
+} 
+
+// 仙盟仓库合并推送
+message SCAllianceDepotMergeNotice{
+    repeated AllianceSlotItem changedItemList=1;
+} 
+
+// 仙盟召集
+message CSAllianceMemberCall{
+    optional int32 callType=1; //0普通仙盟召集1玉玺之战召集
+}
+message SCAllianceMemberCall{
+    required int64 lastMemberCallTime=1;
+    optional int32 callType=2;
+}
+
+// 仙盟召集推送
+message SCAllianceMemberCallBroadcast{
+    required string callPlayerName=1;
+    required int32 mapId=2;
+    required AlliancePosition pos=3;
+    optional int32 callType=4;
+}
+
+// 仙盟救援
+message CSAllianceMemberRescue{
+    required int32 mapId=1;
+    required AlliancePosition pos=2;
+}
+message SCAllianceMemberRescue{
+}
+
+
+
+//盟友位置信息请求
+message CSAllianceMemberPos {
+
+}
+
+//盟友位置
+message SCAllianceMemberPos {
+    repeated AllianceMemberPos memberPosList=1;
+}
+
+// 设置自动审核申请
+message CSAllianceAutoAgreeJoin{ 
+    required int32 isAuto=1;
+}
+message SCAllianceAutoAgreeJoin{
+    required int32 isAuto=1;
+}
+
+
+//一键申请加入
+message CSAllianceJoinApplyBatch{
+}
+message SCAllianceJoinApplyBatch{
+
+}
+
+//仙盟仓库自动销毁
+message CSAllianceDepotAutoRemove{
+    required int32 isAuto=1;
+    required int32 maxZhuanSheng=2;
+    required int32 maxQuality=3;
+}
+message SCAllianceDepotAutoRemove{
+    required int32 isAuto=1;
+    required int32 maxZhuanSheng=2;
+    required int32 maxQuality=3;
+} 
+
+//仙盟仓库设置推送
+message SCAllianceDepotSettingNotice{
+    required int32 isAuto=1;
+    required int32 maxZhuanSheng=2;
+    required int32 maxQuality=3;
+}
+
+//盟主缓存信息推送
+message SCAllianceMengZhuInfoNotice {
+    required MengZhuInfo mengzhuInfo=1;
+}
+
+
+//仙盟合并邀请
+message CSAllianceInviteMerge {
+    required int64 inviteAllianceId=1;
+}
+message SCAllianceInviteMerge {
+    required int64 inviteAllianceId=1;
+    required string inviteAllianceName=2;
+}
+// 合并邀请推送
+message SCAllianceInviteMergeNotice {
+    required string playerName=1;
+    required string allianceName=2;
+    required int64 allianceId=3;
+} 
+
+//处理仙盟合并邀请
+message CSAllianceInviteMergeFeedback {
+    required bool agree=1;
+    required bool clearAllianceDepot=2; 
+    required bool clearAllianceHuFu=3;
+    required int64 inviteAllianceId=4;
+}
+message SCAllianceInviteMergeFeedback {
+}
+
+

@@ -1,0 +1,115 @@
+syntax = "proto2";
+
+package ui;
+
+//护体盾信息
+message BodyShieldInfo{
+    //阶数
+    required int32 advancedId=1;
+    //护体金甲丹食丹等级
+    required int32 jinjiadanLevel=2;
+    //金甲丹培养进度值
+    required int32 progress=3;
+}
+
+//神盾尖刺
+message ShieldInfo{
+    //阶数
+    required int32 shieldId=1;
+    //培养值
+    required int32 progress=2;
+}
+
+//护体盾信息请求
+message CSBodyShieldGet {
+}
+//护体盾信息应答
+message SCBodyShieldGet{
+   //阶数
+   required int32 advancedId=1;
+   //护体金甲丹食丹等级
+   required int32 jinjiadanLevel=2;
+   //祝福值
+   optional int32 bless=3;
+   //祝福值开始时间
+   optional int64 blessTime=4;
+   //金甲丹培养进度值
+   required int32 progress=5;
+}
+
+//食用护体金甲丹请求
+message CSBodyShieldJJDan {
+    required int32 num=1;
+}
+//食用护体金甲丹应答
+message SCBodyShieldJJDan {
+    //护体金甲丹食丹等级
+    required int32 level=1;
+    //培养进度值
+    required int32 progress=2;
+}
+
+
+//护体盾进阶请求
+message CSBodyShieldAdvanced{
+    //是否自动进阶
+    required bool autoFlag=1;
+}
+//护体盾进阶应答
+message SCBodyShieldAdvanced{
+    //阶数
+    required int32 advancedId=1;
+    //祝福值
+    optional int32 bless=2;
+    //祝福值开始时间
+    optional int64 blessTime=3;
+    //进阶方式 1进阶丹 2祝福丹 3直升券
+    required int32 advancedType=4;
+    //是否暴击
+    optional bool isDouble=5[default=false]; 
+    //总祝福值
+    optional int32 totalBless=6;
+} 
+
+
+//神盾尖刺信息
+message CSShieldGet {
+
+}
+
+//神盾尖刺信息应答
+message SCShieldGet{
+    //阶数
+    required int32 shieldId=1;
+    //培养值
+    required int32 progress=2;
+ }
+
+
+ //进阶请求
+message CSShieldAdvanced{
+    //是否自动进阶
+    required bool autoFlag=1;
+}
+
+//进阶应答
+message SCShieldAdvanced{
+    //进阶后阶数
+    required int32 shieldId=1;
+    //培养值
+    required int32 progress=2;
+    //进阶方式 1进阶丹 2祝福丹 3直升券
+    required int32 advancedType=3;
+    //是否暴击
+    optional bool isDouble=4[default=false];
+}
+
+
+
+
+
+
+
+
+
+

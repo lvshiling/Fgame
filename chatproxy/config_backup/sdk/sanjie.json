@@ -1,0 +1,12 @@
+{
+    "android":{
+        "game":199,
+        "key":"939be175f048818a9df51b6a79fb1bdc",
+        "url":"http://api.6xwan.com/mobilechat.php"
+    },
+    "ios":{
+        "game":200,
+        "key":"22613c0ed40b789afd10dac3d8f86364",
+        "url":"http://api.6xwan.com/mobilechat.php"
+    }
+}

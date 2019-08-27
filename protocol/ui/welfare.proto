@@ -1,0 +1,2307 @@
+syntax = "proto2";
+
+package  ui;
+
+import "drop.proto";
+import "rewproperty.proto";
+import "rank.proto";
+import "scene.proto";
+
+message TimesInfo{
+    required int32 key=1;
+    required int32 value=2;
+}
+
+message WelfareLoginInfo{
+    //当前登录天数
+    required int32 dayNum=1;
+    //登录领取记录
+    repeated int32 loginRecordList=2;
+    //活动id
+    required int32 groupId=3;
+}
+
+message WelfareUplevelInfo{
+    //当前等级
+    required int32 level=1;
+    //升级领取记录
+    repeated int32 uplevelRecordList=2;
+    //活动id
+    required int32 groupId=3;
+   //活动开始时间
+   required int64 startTime=4;
+   //活动结束时间
+   required int64 endTime=5; 
+}
+message WelfareOnlineInfo{
+    //在线时长(时间戳)
+    required int64  onlineTime=1;
+    //在线领取记录
+    repeated int32 onlineRecordList=2;
+    //已抽奖次数
+    required int32 drewTimes=3;
+    //活动id
+    required int32 groupId=4;
+}
+
+message InvestLevelInfo{
+    //投资计划领取记录
+    required int32 investLevelRecord=1;
+    //投资类型 0初级1高级
+    required int32 typ=2;
+    //活动id
+    required int32 groupId=3;
+}
+
+message InvestNewLevelInfo{
+    //投资计划领取记录
+    repeated int32 investLevelRecord=1;
+    //投资类型
+    required int32 typ=2;
+    //活动id
+    required int32 groupId=3;
+}
+
+message InvestDayInfo{
+    //是否七日投资
+    required bool isBuyInvestDay=1;
+    //七日投资领取记录
+    required int32 investDayRecord=2;
+    //活动id
+    required int32 groupId=3;
+    //购买时间
+    required int64 buyTime=4;
+}
+
+message FeedbackChargeInfo{
+    //返利充值
+    required int32 chargeNum=1;
+    //充值领取记录
+    repeated int32 chargeRecordList=2;
+    //活动id
+    required int32 groupId=3;
+    //活动开始时间
+    required int64 startTime=4;
+    //活动结束时间
+    required int64 endTime=5;
+}
+
+message FeedbackCostInfo{
+    //返利消费
+    required int32 costNum=1;
+    //消费领取记录
+    repeated int32 costRecordList=2;
+    //活动id
+    required int32 groupId=3;
+   //活动开始时间
+   required int64 startTime=4;
+   //活动结束时间
+   required int64 endTime=5;
+}
+
+//首充信息推送
+message SCOpenActivityFirstChargeNotice{
+    //是否首充
+    required bool isFirst=1;
+    //是否领取
+    required bool isReceive=2;
+}
+
+//首冲领取
+message CSOpenActivityFirstCharge {
+    
+}
+//首冲领取回复
+message SCOpenActivityFirstCharge{
+    required RewProperty rewInfo=1;
+    repeated DropInfo dropInfo=2;
+}
+
+//登录信息请求
+message CSOpenActivityLoginInfo{
+    required int32 groupId =1;
+}
+message SCOpenActivityLoginInfo{
+  // 福利-登录奖励信息
+  required WelfareLoginInfo welfareLoginInfo=1;
+}
+
+//领取登录奖励
+message CSOpenActivityWelfareLoginReceiveRew{
+    // 奖励模板id
+    required int32 rewId=1;
+}
+message SCOpenActivityWelfareLoginReceiveRew{
+    required RewProperty rewInfo=1;
+    repeated DropInfo dropInfo=2;
+}
+
+//升级信息请求
+message CSOpenActivityUplevelInfo{
+    required int32 groupId =1;
+}
+message SCOpenActivityUplevelInfo{
+    // 福利-升级奖励信息
+    required WelfareUplevelInfo welfareUplevelInfo=1;
+}
+
+//领取升级奖励
+message CSOpenActivityWelfareUplevelReceiveRew{
+    // 奖励模板id
+    required int32 rewId=1;
+}
+message SCOpenActivityWelfareUplevelReceiveRew{
+    required RewProperty rewInfo=1;
+    repeated DropInfo dropInfo=2;
+}
+
+//在线信息下发
+message SCOpenActivityWelfareOnlineDataNotice{
+    required int32 groupId=1;
+    // 在线时间抽奖次数
+    required int32 onlineDrewTimes=2;
+}
+
+//在线信息请求
+message CSOpenActivityOnlineInfo{
+    required int32 groupId =1;
+}
+message SCOpenActivityOnlineInfo{
+    // 福利-在线奖励信息
+    required WelfareOnlineInfo welfareOnlineInfo=1;
+}
+//领取在线奖励
+message CSOpenActivityWelfareOnlineReceiveRew{
+    // 奖励模板id
+    required int32 rewId=1;
+}
+message SCOpenActivityWelfareOnlineReceiveRew{
+    required RewProperty rewInfo=1;
+    repeated DropInfo dropInfo=2;
+}
+
+//在线抽奖
+message CSOpenActivityWelfareOnlineDrew{
+    //0银两1元宝
+    required int32 typ=1;
+    //活动ID
+    required int32 groupId=2;
+}
+message SCOpenActivityWelfareOnlineDrew{
+    //抽奖结果
+    required DropInfo dropInfo=1;
+}
+
+
+//投资计划信息请求
+message CSOpenActivityInvestLevelInfo{
+    required int32 groupId =1;
+}
+message SCOpenActivityInvestLevelInfo{
+    // 投资-投资计划
+    repeated InvestLevelInfo investLevelInfo=1;
+}
+
+//新等级投资计划信息请求
+message CSOpenActivityInvestNewLevelInfo{
+    required int32 groupId =1;
+}
+message SCOpenActivityInvestNewLevelInfo{
+    // 投资-投资计划
+    repeated InvestNewLevelInfo investLevelInfo=1;
+}
+
+//七日投资信息请求
+message CSOpenActivityInvestDayInfo{
+    required int32 groupId =1;
+}
+message SCOpenActivityInvestDayInfo{
+    // 投资-七日投资
+    required InvestDayInfo investDayInfo=1;
+}
+ 
+//购买投资计划
+message CSOpenActivityInvestLevelBuy{
+    //0初级1高级
+    required int32 typ=1;
+    //活动id
+    required int32 groupId=2;
+}
+message SCOpenActivityInvestLevelBuy{
+
+}
+
+//购买新等级投资计划
+message CSOpenActivityInvestNewLevelBuy{
+    //0初级1中级2高级3顶级
+    required int32 typ=1;
+    //活动id
+    required int32 groupId=2;
+}
+message SCOpenActivityInvestNewLevelBuy{
+
+}
+
+//升级新等级投资计划
+message CSOpenActivityInvestUpLevel{
+    //0初级1中级2高级3顶级(需要升级的)
+    required int32 typ=1;
+    //活动id
+    required int32 groupId=2;
+}
+message SCOpenActivityInvestUpLevel{
+
+}
+
+//购买七日投资
+message CSOpenActivityInvestDayBuy{
+    //活动id
+    required int32 groupId=1;
+}
+message SCOpenActivityInvestDayBuy{
+
+}
+
+//领取投资计划奖励
+message CSOpenActivityInvestLevelReceiveRew{
+    //0初级1高级
+    required int32 typ=1;
+    //活动id
+    required int32 groupId=2;
+}
+message SCOpenActivityInvestLevelReceiveRew{
+    required RewProperty rewInfo=1;
+    repeated DropInfo dropInfo=2;
+}
+
+//领取新等级投资计划奖励
+message CSOpenActivityInvestNewLevelReceiveRew{
+    //活动id
+    required int32 rewId=1;
+}
+message SCOpenActivityInvestNewLevelReceiveRew{
+    required RewProperty rewInfo=1;
+    repeated DropInfo dropInfo=2;
+    required int32 rewId=3;
+}
+
+//领取七日投资奖励
+message CSOpenActivityInvestDayReceiveRew{
+    //活动id
+    required int32 groupId=1;
+}
+message SCOpenActivityInvestDayReceiveRew{
+    required RewProperty rewInfo=1;
+    repeated DropInfo dropInfo=2;
+}
+
+//充值返利信息请求
+message CSOpenActivityFeedbackChargeInfo{
+    required int32 groupId =1;
+}
+message SCOpenActivityFeedbackChargeInfo{
+    // 返利-充值
+    required FeedbackChargeInfo feedbackChargeInfo=1;
+}
+
+//消费返利信息请求
+message CSOpenActivityFeedbackCostInfo{
+    required int32 groupId =1;
+}
+message SCOpenActivityFeedbackCostInfo{
+    // 返利-消费
+    required FeedbackCostInfo feedbackCostInfo=1;
+}
+
+//领取充值返利奖励
+message CSOpenActivityFeedbackChargeReceiveRew{
+    // 奖励模板id
+    required int32 rewId=1;
+}
+message SCOpenActivityFeedbackChargeReceiveRew{
+    required RewProperty rewInfo=1;
+    repeated DropInfo dropInfo=2;
+    required int32 rewId=3;
+}
+
+//领取消费返利奖励
+message CSOpenActivityFeedbackCostReceiveRew{
+    // 奖励模板id
+    required int32 rewId=1;
+}
+message SCOpenActivityFeedbackCostReceiveRew{
+    required RewProperty rewInfo=1;
+    repeated DropInfo dropInfo=2;
+}
+
+//返利-消费元宝推送()
+message SCOpenActivityFeedbackCostNotice{
+    required int32 groupId=1;
+    required int32 curCostGold=2;
+}
+
+//充值元宝推送(共用)
+message SCOpenActivityFeedbackChargeNotice{
+    required int32 groupId=1;
+    required int64 curChargeGold=2;
+}
+ 
+ 
+//我的排名请求
+message CSOpenActivityRankMyGet {
+    required int32 groupId=1;
+}
+
+//我的排名回复
+message SCOpenActivityRankMyGet { 
+    required int32 groupId=1;
+    //我的排名 0 未上榜
+    required int32 pos=2;
+}
+
+//充值排行榜元宝推送
+message SCOpenActivityRankChargeNotice{
+    required int32 groupId=1;
+    required int32 curChargeGold=2;
+}
+
+//消费排行榜元宝推送
+message SCOpenActivityRankCostNotice{
+    required int32 groupId=1;
+    required int32 curCostGold=2;
+}
+
+ //充值排行榜
+ message CSOpenActivityRankChargeList{
+    //page  0第一页
+    required int32 page=1;
+    //活动id
+    required int32 groupId=2;
+ }
+ 
+ //充值排行榜回复
+ message SCOpenActivityRankChargeList{
+    //page 
+    required int32 page=1;
+    //榜单list
+    repeated RankProperty chargeList=2;
+    //排行榜更新时间
+    required int64 rankTime=3;
+    //活动开始时间
+    required int64 startTime=4;
+    //活动结束时间
+    required int64 endTime=5;
+    //我的充值
+    required int32 chargeGold=6;
+}
+
+ //消费排行榜
+ message CSOpenActivityRankCostList{
+    //page  0第一页
+    required int32 page=1;
+    //活动id
+    required int32 groupId=2;
+ }
+ 
+ //消费排行榜回复
+ message SCOpenActivityRankCostList{
+    //page 
+    required int32 page=1;
+    //榜单list
+    repeated RankProperty costList=2;
+    //排行榜更新时间
+    required int64 rankTime=3;
+    //活动开始时间
+    required int64 startTime=4;
+    //活动结束时间
+    required int64 endTime=5;
+    //我的消费
+    required int32 costGold=6;
+}
+
+
+ //魅力排行榜
+ message CSOpenActivityRankCharmList{
+    //page  0第一页
+    required int32 page=1;
+    //活动id
+    required int32 groupId=2;
+ }
+ 
+ //魅力排行榜回复
+ message SCOpenActivityRankCharmList{
+    //page 
+    required int32 page=1;
+    //榜单list
+    repeated RankProperty charmList=2;
+    //排行榜更新时间
+    required int64 rankTime=3;
+    //活动开始时间
+    required int64 startTime=4;
+    //活动结束时间
+    required int64 endTime=5;
+    //当前增长值
+    required int32 curAddNum=6;
+    //活动id
+    required int32 groupId=7;
+}
+
+ //表白排行榜
+ message CSOpenActivityRankMarryDevelopList{
+    //page  0第一页
+    required int32 page=1;
+    //活动id
+    required int32 groupId=2;
+ }
+ 
+ //表白排行榜回复
+ message SCOpenActivityRankMarryDevelopList{
+    //page 
+    required int32 page=1;
+    //榜单list
+    repeated RankProperty marryDevelopList=2;
+    //排行榜更新时间
+    required int64 rankTime=3;
+    //活动开始时间
+    required int64 startTime=4;
+    //活动结束时间
+    required int64 endTime=5;
+    //当前增长经验
+    required int32 curAddExp=6;
+    //活动id
+    required int32 groupId=7;
+}
+
+ //护体盾排行榜
+ message CSOpenActivityRankBodyShieldList{
+    //page 0第一页
+    required int32 page=1;
+    //活动id
+    required int32 groupId=2;    
+ }
+ 
+ //护体盾排行榜回复
+ message SCOpenActivityRankBodyShieldList{
+    //page 
+    required int32 page=1;
+    //玩家护体盾
+    repeated RankOrder bodyShieldList=2;
+    //排行榜时间
+    required int64 rankTime=3;
+    //活动开始时间
+    required int64 startTime=4;
+    //活动结束时间
+    required int64 endTime=5;     
+}
+
+
+ //战翼排行榜
+ message CSOpenActivityRankWingList{
+    //page 0第一页
+    required int32 page=1;
+    //活动id
+    required int32 groupId=2;   
+ }
+ 
+ //战翼排行榜回复
+ message SCOpenActivityRankWingList{
+    //page 
+    required int32 page=1;
+    //榜单list
+    repeated RankOrder wingList=2;
+    //排行榜时间
+    required int64 rankTime=3;
+    //活动开始时间
+    required int64 startTime=4;
+    //活动结束时间
+    required int64 endTime=5;     
+}
+
+ //坐骑排行榜
+ message CSOpenActivityRankMountList{
+    //page  0第一页
+    required int32 page=1;
+    //活动id
+    required int32 groupId=2;       
+ }
+ 
+ //坐骑排行榜回复
+ message SCOpenActivityRankMountList{
+    //page 
+    required int32 page=1;
+    //榜单list
+    repeated RankOrder mountList=2;
+    //排行榜时间
+    required int64 rankTime=3;
+    //活动开始时间
+    required int64 startTime=4;
+    //活动结束时间
+    required int64 endTime=5;    
+}
+
+ //身法排行榜
+ message CSOpenActivityRankShenFaList{
+    //page 0第一页
+    required int32 page=1;
+    //活动id
+    required int32 groupId=2;       
+ }
+ //身法排行榜回复
+ message SCOpenActivityRankShenFaList{
+    //page
+    required int32 page=1;
+    //身法
+    repeated RankOrder shenFaList=2;
+    //排行榜时间
+    required int64 rankTime=3;
+    //活动开始时间
+    required int64 startTime=4;
+    //活动结束时间
+    required int64 endTime=5;     
+}
+
+ //领域排行榜
+ message CSOpenActivityRankLingYuList{
+    //page 0第一页
+    required int32 page=1;
+    //活动id
+    required int32 groupId=2;       
+ }
+ //领域排行榜回复
+ message SCOpenActivityRankLingYuList{
+    //page
+    required int32 page=1;
+    //领域
+    repeated RankOrder lingYuList=2;
+    //排行榜时间
+    required int64 rankTime=3;
+    //活动开始时间
+    required int64 startTime=4;
+    //活动结束时间
+    required int64 endTime=5; 
+}
+
+ //护体仙羽排行榜(不使用)
+ message CSOpenActivityRankFeatherList{
+    //page 0第一页
+    required int32 page=1;
+    //活动id
+    required int32 groupId=2;       
+ }
+ //护体仙羽排行榜回复
+ message SCOpenActivityRankFeatherList{
+    //page
+    required int32 page=1;
+    //护体仙羽
+    repeated RankOrder FeahterList=2;
+    //排行榜时间
+    required int64 rankTime=3;
+    //活动开始时间
+    required int64 startTime=4;
+    //活动结束时间
+    required int64 endTime=5;     
+}
+
+ //神盾尖刺排行榜
+ message CSOpenActivityRankShieldList{
+    //page 0第一页
+    required int32 page=1;
+    //活动id
+    required int32 groupId=2;      
+ }
+ //神盾尖刺排行榜回复
+ message SCOpenActivityRankShieldList{
+    //page 
+    required int32 page=1;
+    //神盾尖刺
+    repeated RankOrder ShieldList=2;
+    //排行榜时间
+    required int64 rankTime=3;
+    //活动开始时间
+    required int64 startTime=4;
+    //活动结束时间
+    required int64 endTime=5;      
+}
+
+ //暗器排行榜
+ message CSOpenActivityRankAnqiList{
+    //page 0第一页
+    required int32 page=1;
+    //活动id
+    required int32 groupId=2;      
+ }
+ //暗器排行榜回复
+ message SCOpenActivityRankAnqiList{
+    //page 
+    required int32 page=1;
+    //暗器
+    repeated RankOrder anqiList=2; 
+    //排行榜时间
+    required int64 rankTime=3;
+    //活动开始时间
+    required int64 startTime=4;
+    //活动结束时间
+    required int64 endTime=5;      
+}
+
+ //法宝排行榜
+ message CSOpenActivityRankFaBaoList{
+    //page 0第一页
+    required int32 page=1;
+    //活动id
+    required int32 groupId=2;      
+ }
+ //法宝排行榜回复
+ message SCOpenActivityRankFaBaoList{
+    //page 
+    required int32 page=1;
+    //法宝
+    repeated RankOrder fabaoList=2; 
+    //排行榜时间
+    required int64 rankTime=3;
+    //活动开始时间
+    required int64 startTime=4; 
+    //活动结束时间
+    required int64 endTime=5;     
+}
+
+ //进阶排行榜
+ message CSOpenActivityRankAdvancedList{
+    //page 0第一页
+    required int32 page=1;
+    //活动id
+    required int32 groupId=2;
+ }
+ //进阶排行榜回复
+ message SCOpenActivityRankAdvancedList{
+    //page 
+    required int32 page=1;
+    //进阶
+    repeated RankOrder advancedList=2; 
+    //排行榜时间
+    required int64 rankTime=3;
+    //活动开始时间
+    required int64 startTime=4;
+    //活动结束时间
+    required int64 endTime=5;
+    //活动id
+    required int32 groupId=6;
+    //活动类型
+    required int32 type=7;
+    //活动子类型
+    required int32 subType=8;
+}
+
+// 魅力榜、等级榜、次数（每日）
+ //属性排行榜
+ message CSOpenActivityRankPropertyList{
+    //page 0第一页
+    required int32 page=1;
+    //活动id
+    required int32 groupId=2;      
+ }
+ //属性排行榜回复
+ message SCOpenActivityRankPropertyList{
+    //page 
+    required int32 page=1;
+    //属性
+    repeated RankProperty propertyList=2; 
+    //排行榜时间
+    required int64 rankTime=3;
+    //活动开始时间
+    required int64 startTime=4;
+    //活动结束时间
+    required int64 endTime=5;
+    //活动id
+    required int32 groupId=6;
+    //活动类型 
+    required int32 type=7;
+    //活动子类型
+    required int32 subType=8;
+}
+
+ //次数排行榜
+ message CSOpenActivityRankCountList{
+    //page 0第一页
+    required int32 page=1;
+    //活动id
+    required int32 groupId=2;      
+ }
+ message SCOpenActivityRankCountList{
+    //page 
+    required int32 page=1;
+    //次数
+    repeated RankProperty countList=2; 
+    //排行榜时间
+    required int64 rankTime=3;
+    //活动开始时间
+    required int64 startTime=4;
+    //活动结束时间
+    required int64 endTime=5;     
+    //活动id
+    required int32 groupId=6;
+    //当前已使用次数
+    required int32 useTimes=7;
+}
+
+//激活码兑换
+message CSOpenActivityGiftCode{
+    //激活码
+    required string code=1;
+}
+message SCOpenActivityGiftCode{
+    required RewProperty rewInfo=1;
+    repeated DropInfo dropInfo=2;
+}
+
+
+//每日充值-元宝推送
+message SCOpenActivityCycleChargeNotice{
+    required int32 groupId=1;
+    required int32 curChargeGold=2;
+}
+
+//每日首充-信息请求
+message CSOpenActivityCycleChargeInfo{
+    //活动id  
+    required int32 groupId=1;
+}
+message SCOpenActivityCycleChargeInfo{
+    //活动id
+    required int32 groupId=1;
+    //充值元宝数量
+    required int32 goldNum=2;
+    //领奖记录（档次条件）
+    repeated int32 rewRecordList=3;
+}
+
+//每日首充-领取奖励
+message CSOpenActivityCycleChargeRewards{
+    // 奖励模板id
+    required int32 rewId=1;
+}
+message SCOpenActivityCycleChargeRewards{
+    required RewProperty rewInfo=1;
+    repeated DropInfo dropInfo=2;
+    required int32 rewId=3;
+}
+
+message RewardsTimesInfo{
+    // 奖励等级/档次
+    required int32 level=1;
+    // 已领取次数
+    required int32 receiveTimes=2;
+}
+
+message BuyTimesInfo{
+    required int32 type=1;
+    required int32 buyTimes=2;
+}
+
+//天劫塔冲刺信息
+message CSOpenActivityRealmInfo{
+    //活动id
+    required int32 groupId=1;
+}
+message SCOpenActivityRealmInfo{
+    //活动id
+    required int32 groupId=1;
+    //天劫塔等级
+    required int32 level=2;
+    //领奖记录
+    repeated int32 rewRecordList=3;
+    //活动开始时间
+    required int64 startTime=4;
+    //活动结束时间
+    required int64 endTime=5;   
+    //领取次数
+    repeated RewardsTimesInfo timesInfo=6;
+}
+
+//天劫塔冲刺领奖
+message CSOpenActivityRealmRewards{
+    // 奖励模板id
+    required int32 rewId=1;
+}
+message SCOpenActivityRealmRewards{
+    required RewProperty rewInfo=1;
+    repeated DropInfo dropInfo=2;
+   //领取次数
+   repeated RewardsTimesInfo timesInfo=6;
+} 
+
+//单笔充值推送(共用) 
+message SCMergeActivitySingleChargeNotice{
+    required int32 maxSingleChargeNum=1;
+    optional int32 groupId=2;
+}
+
+//返利-单笔充值信息
+message CSMergeActivitySingleChargeInfo{
+    //活动id
+    required int32 groupId=1;
+}
+message SCMergeActivitySingleChargeInfo{
+    //活动id
+    required int32 groupId=1;
+    //最大单笔数
+    required int32 maxSingleChargeNum=2;
+    //领奖记录
+    repeated int32 rewRecordList=3;
+    //活动开始时间
+    required int64 startTime=4;
+    //活动结束时间
+    required int64 endTime=5;
+}
+
+//返利-单笔信息领奖
+message CSMergeActivitySingleChargeRewards{
+    // 奖励模板id
+    required int32 rewId=1;
+}
+message SCMergeActivitySingleChargeRewards{ 
+    required RewProperty rewInfo=1;
+    repeated DropInfo dropInfo=2;
+}
+
+//聚宝盆信息
+message CSMergeActivityGoldBowlInfo{
+    //活动id  
+    required int32 groupId=1;
+}
+message SCMergeActivityGoldBowlInfo{
+    //活动id
+    required int32 groupId=1;
+    //已消费元宝
+    required int32 costNum=2;
+    //活动开始时间 
+    required int64 startTime=4;
+    //活动结束时间
+    required int64 endTime=5;
+}
+
+//幸运转盘抽奖
+message CSMergeActivityLuckDrewAttend{
+    //活动id
+    required int32 groupId=1;
+    //抽奖方式：0单次1十连
+    required int32 attendType=2;
+}
+message SCMergeActivityLuckDrewAttend{
+    //掉落
+    repeated DropInfo dropList=1;
+    required int32 groupId=2;
+    repeated DropInfo extraDropList=3;
+}
+
+//炸矿
+message CSMergeActivityLuckBombOreAttend{
+    //活动id
+    required int32 groupId=1;
+    //抽奖方式：0单次1十连
+    required int32 attendType=2;
+}
+message SCMergeActivityLuckBombOreAttend{
+    //掉落
+    repeated DropInfo dropList=1;
+    //额外掉落
+    repeated DropInfo extraDropList=2;
+}
+
+//升阶返还-信息请求
+message CSMergeActivityAdvancedInfo{
+    //活动id  
+    required int32 groupId=1;
+}
+message SCMergeActivityAdvancedInfo{
+    //活动id
+    required int32 groupId=1;
+    //使用进阶丹数量
+    required int32 danNum=2;
+    //领奖记录（档次条件）
+    repeated int32 rewRecordList=3;
+    //活动开始时间
+    required int64 startTime=4;
+    //活动结束时间
+    required int64 endTime=5;     
+}
+
+//升阶返还-领取奖励
+message CSMergeActivityAdvancedRewards{
+    // 奖励模板id
+    required int32 rewId=1;
+}
+message SCMergeActivityAdvancedRewards{
+    required RewProperty rewInfo=1;
+    repeated DropInfo dropInfo=2;
+}
+
+message DiscountBuyInfo{
+    //物品位置
+    required int32 index=1;
+    //我的购买次数
+    required int32 buyTimes=2;
+}
+message DiscountGlobalTimesInfo{
+    //物品位置
+    required int32 index=1;
+    //全服次数
+    required int32 globalTimes=2;
+}
+
+//限时礼包信息
+message CSMergeActivityDiscountInfo{
+    //活动id  
+    required int32 groupId=1;
+}
+message SCMergeActivityDiscountInfo{
+    //活动id
+    required int32 groupId=1;
+    //折扣日
+    required int32 discountDay=2;
+    //商品次数信息
+    repeated DiscountBuyInfo buyRecordList=3;
+    //活动开始时间
+    required int64 startTime=4;
+    //活动结束时间
+    required int64 endTime=5; 
+    // 全服次数
+    repeated DiscountGlobalTimesInfo globalTimesList=6;
+}
+
+//限时礼包购买
+message CSMergeActivityDiscountBuy{
+    // 活动id
+    required int32 groupId=1;
+    // 礼包模板id
+    required int32 discountId=2;
+    // 数量
+    required int32 num=3;
+}
+message SCMergeActivityDiscountBuy{
+    required int32 groupId=1;
+    required int32 discountId=2;
+    required int32 num=3;
+    repeated DropInfo dropInfo=4;
+    // 全服次数
+    repeated DiscountGlobalTimesInfo globalTimesList=5;
+}  
+ 
+
+//沙滩商店商品信息
+message OpenActivityBeachShopInfo{ 
+    // 购买的商品
+    required int32 typ=1;
+    // 购买数量
+    required int32 num=2;
+}
+
+//沙滩商店激活
+message CSOpenActivityBeachShopActivate{
+    // 活动id
+    required int32 groupId=1;
+}
+message SCOpenActivityBeachShopActivate{
+    required int32 groupId=1;
+}
+
+//购买沙滩商店内商品
+message CSOpenActivityBeachBuy{
+    // 活动id
+    required int32 groupId=1;
+    // 商品类型
+    required int32 type=2;
+    // 商品数量
+    required int32 num=3;
+}
+message SCOpenActivityBeachBuy{
+    required int32 groupId=1;
+    required int32 type=2;
+    required int32 num=3;
+    repeated DropInfo dropInfo=4;
+}
+
+//活动结束推送
+message SCOpenActivityEndBroadcast{
+    required int32 groupId=1;
+}
+
+//返利-连续充值推送
+message SCOpenActivityFeedbackCycleChargeNotice{
+    required int32 curChargeNum=1;
+}
+
+//返利-连续充值信息
+message CSOpenActivityFeedbackCycleChargeInfo{
+    //活动id
+    required int32 groupId=1;
+}
+message SCOpenActivityFeedbackCycleChargeInfo{
+    //活动id
+    required int32 groupId=1;
+    //当前充值数
+    required int32 curChargeNum=2;
+    //累计充值天数
+    required int32 dayNum=3;
+    //累计领奖记录(天数)
+    repeated int32 rewRecordList=4;
+    //当天领取记录
+    required bool isReceive=5;
+    //活动开始时间
+    required int64 startTime=6;
+    //活动结束时间
+    required int64 endTime=7;
+}
+
+//返利-连续信息领奖
+message CSOpenActivityFeedbackCycleChargeRewards{
+    // 奖励模板id
+    required int32 rewId=1;
+}
+message SCOpenActivityFeedbackCycleChargeRewards{ 
+    required RewProperty rewInfo=1;
+    repeated DropInfo dropInfo=2;
+}
+
+//期间累充推送
+message SCOpenActivityFeedbackChargeReturnMultipleNotice{ 
+    required int32 periodChargeNum=1;
+}
+
+//期间充值推送
+message SCOpenActivityPeriodChargeNotice{ 
+    required int32 groupId=1;
+    required int32 periodChargeNum=2;
+}
+
+//升阶祝福丹放送-信息请求
+message CSMergeActivityAdvancedBlessInfo{
+    //活动id  
+    required int32 groupId=1;
+}
+message SCMergeActivityAdvancedBlessInfo{
+    //活动id
+    required int32 groupId=1;
+    //领奖记录（档次条件）
+    repeated int32 rewRecordList=2;
+    //活动开始时间
+    required int64 startTime=3;
+    //活动结束时间
+    required int64 endTime=4;     
+}
+
+//升阶祝福丹放送-领取奖励
+message CSMergeActivityAdvancedBlessRewards{
+    // 奖励模板id
+    required int32 rewId=1;
+} 
+message SCMergeActivityAdvancedBlessRewards{
+    required RewProperty rewInfo=1;
+    repeated DropInfo dropInfo=2;
+}
+
+
+//转生大礼包信息
+message CSOpenActivityDiscountZhuanShengInfo{
+    //活动id  
+    required int32 groupId=1;
+}
+message SCOpenActivityDiscountZhuanShengInfo{
+    //活动id
+    required int32 groupId=1;
+    //购买记录 key:礼包位置 val:购买次数
+    repeated BuyTimesInfo buyRecordList=2;
+    //活动开始时间
+    required int64 startTime=3; 
+    //活动结束时间
+    required int64 endTime=4;
+    //充值数
+    required int64 chargeNum=5;
+    //赠品领取记录 key：礼包位置 val：领取次数
+    repeated BuyTimesInfo receiveRecordList=6;
+    //已使用积分
+    optional int32 usePoint=7;
+}
+ 
+//转生大礼包购买
+message CSOpenActivityDiscountZhuanShengBuy{
+    // 活动id
+    required int32 groupId=1;
+    // 礼包位置
+    required int32 typ=2;
+    // 数量
+    required int32 num=3;
+    
+}
+message SCOpenActivityDiscountZhuanShengBuy{
+    repeated DropInfo dropInfo=1;
+    required int32 typ=2;
+    required int32 groupId=3;
+    required int32 num=4;
+    optional int32 usePoint=5;
+}
+
+
+//转生大礼包全部购买
+message CSOpenActivityDiscountZhuanShengBuyAll{
+    // 活动id
+    required int32 groupId=1;
+    // key 礼包类型 val 购买次数
+    repeated TimesInfo buyInfoList=2;
+}
+message SCOpenActivityDiscountZhuanShengBuyAll{ 
+    repeated DropInfo dropInfo=1;
+    repeated TimesInfo buyInfoList=2;
+    required int32 groupId=3; 
+}
+
+// 转生大礼包-赠品领取
+message CSOpenActivityDiscountZhuanShengReceiveGift{
+    required int32 groupId=1;
+    required int32 typ=2;
+}
+message SCOpenActivityDiscountZhuanShengReceiveGift{
+    required int32 groupId=1;
+    required int32 typ=2;
+    repeated DropInfo dropInfo=3;
+}
+
+//充值抽奖信息获取
+message CSOpenActivityChargeDrewInfo{
+    required int32 groupId=1;
+}
+message SCOpenActivityChargeDrewInfo{
+    // 活动id
+    required int32 groupId=1;
+    // 可抽奖次数
+    required int32 drewTimes=2;
+    // 充值数
+    required int32 chargeNum=3;
+    //活动开始时间
+    required int64 startTime=4;
+    //活动结束时间
+    required int64 endTime=5;
+    //参与次数
+    required int32 attendTimes=6;
+    //倍数
+    required int32 rate=7;
+    //增量日志
+    repeated DrewLog logList=8;
+}
+
+// 抽奖信息推送
+message SCOpenActivityChargeDrewTimesNotice{
+    required int32 groupId=1;
+    // 可抽奖次数
+    required int32 drewTimes=2;
+}
+
+//充值抽奖
+message CSOpenActivityChargeDrewAttend{
+    //活动id
+    required int32 groupId=1;
+    //抽奖方式 0单次1十次
+    optional int32 drewType=2;
+    //最后一个日志的时间
+    optional int64 lastLogTime=3;
+    //自动购买
+    optional bool isAutoBuy=4;
+    //奖池level
+    optional int32 dropLevel=5[default=0];
+}
+message SCOpenActivityChargeDrewAttend{
+    //掉落
+    repeated DropInfo dropList=1;
+    //倍数
+    required int32 rate=2;
+    //活动id
+    required int32 groupId=3;
+    //抽奖方式 0单次1十次
+    optional int32 drewType=4;
+    //增量日志
+    repeated DrewLog logList=5;
+    // 卡牌收集
+    optional DrewPokerInfo pokerInfo=6;
+    //奖励位置
+    repeated int32 rewIndexList=7;
+    //额外掉落
+    repeated DropInfo extraDropList=8;
+} 
+
+message DrewPokerInfo{
+    repeated int32 pokerList=1;
+    repeated int32 rewPokerTypeList=2; 
+}
+
+// 玩家消费领奖（每多少领奖）消费元宝请求
+message CSOpenActivityCostRewardsCostInfo{
+    required int32 groupId=1;
+}
+message SCOpenActivityCostRewardsCostInfo{
+    required int32 groupId=1;
+    required int64 curCostGold=2;
+}
+
+//升阶奖励-信息请求
+message CSOpenActivityAdvancedRewInfo{
+    //活动id  
+    required int32 groupId=1;
+}
+message SCOpenActivityAdvancedRewInfo{
+    //活动id
+    required int32 groupId=1;
+    //领奖记录（档次条件）
+    repeated int32 rewRecordList=2;
+    //活动开始时间
+    required int64 startTime=3;
+    //活动结束时间
+    required int64 endTime=4;   
+    //活动期间充值数
+    required int32 periodChargeNum=5;
+}
+
+//升阶奖励-领取奖励
+message CSOpenActivityAdvancedReceiveRew{
+    // 奖励模板id
+    required int32 rewId=1;
+} 
+message SCOpenActivityAdvancedReceiveRew{
+    required RewProperty rewInfo=1;
+    repeated DropInfo dropInfo=2;
+    required int32 rewId=3;
+    repeated int32 rewRecordList=4;
+}
+
+//升阶战力-信息请求
+message CSOpenActivityAdvancedPowerRewInfo{
+    //活动id  
+    required int32 groupId=1;
+}
+message SCOpenActivityAdvancedPowerRewInfo{
+    //活动id
+    required int32 groupId=1;
+    //领奖记录（档次条件）
+    repeated int64 rewRecordList=2;
+    //活动开始时间
+    required int64 startTime=3;
+    //活动结束时间
+    required int64 endTime=4;     
+    // 免费过期时间
+    required int64 freeExpireTime=5;  
+}
+
+//升阶战力-领取奖励
+message CSOpenActivityAdvancedPowerReceiveRew{
+    // 奖励模板id
+    required int32 rewId=1;
+} 
+message SCOpenActivityAdvancedPowerReceiveRew{
+    required RewProperty rewInfo=1;
+    repeated DropInfo dropInfo=2;
+    required int32 rewId=3;
+    repeated int64 rewRecordList=4;
+}
+
+//升阶奖励（随功能开启）-信息请求
+message CSOpenActivityAdvancedRewExtendedInfo{
+    //活动id  
+    required int32 groupId=1;
+}
+message SCOpenActivityAdvancedRewExtendedInfo{
+    //活动id
+    required int32 groupId=1;
+    //领奖记录（档次条件）
+    repeated int32 rewRecordList=2;
+    //活动开始时间
+    required int64 startTime=3;
+    //活动结束时间
+    required int64 endTime=4;     
+    // 免费过期时间
+    required int64 freeExpireTime=5;  
+}
+
+//升阶奖励（随功能开启）-领取奖励
+message CSOpenActivityAdvancedRewExtendedReceive{
+    // 奖励模板id
+    required int32 rewId=1;
+} 
+message SCOpenActivityAdvancedRewExtendedReceive{
+    required RewProperty rewInfo=1;
+    repeated DropInfo dropInfo=2;
+    required int32 rewId=3;
+    repeated int32 rewRecordList=4;
+}
+
+
+//每充值x奖励（全服次数）-信息请求
+message CSOpenActivityChargeRewardsLimitInfo{
+    //活动id  
+    required int32 groupId=1;
+}
+message SCOpenActivityChargeRewardsLimitInfo{
+    //活动id
+    required int32 groupId=1;
+    //活动开始时间
+    required int64 startTime=2;
+    //活动结束时间
+    required int64 endTime=3;     
+    //全服领取次数
+    repeated RewardsTimesInfo timesInfo=4;
+    //当前充值元宝
+    required int32 ChargeNum=5;
+    //个人领取次数
+    repeated RewardsTimesInfo playerTimesInfo=6;
+}
+
+
+message LaBaLog{
+    required int64 createTime=1;
+    required string playerName=2;
+    required int32 costGold=3;
+    required int32 rewGold=4;
+}
+
+// 返利-元宝拉霸信息
+message CSOpenActivityFeedbackGoldLaBaInfo{
+    required int32 groupId=1;
+}
+message SCOpenActivityFeedbackGoldLaBaInfo{
+    required int32 groupId=1;
+    //当前充值数
+    required int32 curChargeNum=2;
+    //当前投入次数
+    required int32 labaTimes=3;
+    //活动开始时间
+    required int64 startTime=4;
+    //活动结束时间
+    required int64 endTime=5; 
+    //拉霸日志列表
+    repeated LaBaLog logList=6;
+}
+
+// 返利-元宝拉霸
+message CSOpenActivityFeedbackGoldLaBaAttend{
+    required int32 groupId=1;
+    // 最后一个日志的时间
+    required int64 lastLogTime=2;
+}
+message SCOpenActivityFeedbackGoldLaBaAttend{
+    required int32 groupId=1;
+    required int32 rewGold=2;
+    //增量日志
+    repeated LaBaLog logList=3;
+    required int32  labaTimes=4;
+}
+
+//拉霸日志增量
+message CSOpenActivityLaBaLogIncr{
+    required int64 logTime=1;
+    required int32 groupId=2;
+}
+//拉霸日志增量回复
+message SCOpenActivityLaBaLogIncr{
+    repeated LaBaLog logList=1;
+    required int32 groupId=2;
+}
+
+
+//元宝金猪信息
+message CSOpenActivityFeedbackGoldPigInfo{
+    //活动id  
+    required int32 groupId=1;
+}
+message SCOpenActivityFeedbackGoldPigInfo{
+    //活动id
+    required int32 groupId=1;
+    //已消费元宝
+    required int32 costNum=2;
+    //活动开始时间
+    required int64 startTime=4;
+    //活动结束时间
+    required int64 endTime=5; 
+    //当前充值 
+    required int32 chargeNum=6;
+}
+
+message TimesRewRecord{
+    required int32 vip=1;
+    required int32 times=2;
+}
+
+// 累抽信息
+message CSOpenActivityTimesRewInfo{
+    required int32 groupId=1;
+}
+message SCOpenActivityTimesRewInfo{
+    required int32 groupId=1;
+    //活动开始时间
+    required int64 startTime=2;
+    //活动结束时间
+    required int64 endTime=3; 
+    //次数
+    required int32 times=4; 
+    //领取记录
+    repeated TimesRewRecord recordList=5;
+}
+
+//累抽领取奖励
+message CSOpenActivityTimesRewReceive{
+    required int32 rewId=1;
+}
+message SCOpenActivityTimesRewReceive{
+    required int32 rewId=1;
+    repeated DropInfo dropInfo=2;
+    //领取记录
+    repeated TimesRewRecord recordList=3;
+}
+
+
+message DrewLog{
+    required int64 createTime=1;
+    required string playerName=2;
+    required int32 itemId=3;
+    required int32 itemNum=4;
+}
+
+//抽奖日志增量
+message CSOpenActivityDrewLogIncr{
+    required int32 groupId=1;
+    required int64 logTime=2;
+}
+//抽奖日志增量回复
+message SCOpenActivityDrewLogIncr{
+    required int32 groupId=1;
+    repeated DrewLog logList=2;   
+}
+
+
+
+//每日单笔充值-信息请求
+message CSOpenActivityCycleSingleChargeInfo{
+    //活动id  
+    required int32 groupId=1;
+}
+message SCOpenActivityCycleSingleChargeInfo{
+    //活动id
+    required int32 groupId=1;
+    //最大单笔数
+    required int32 maxSingleChargeNum=2;
+    //领奖记录（档次条件）
+    repeated int32 rewRecordList=3;
+    //活动开始时间
+    required int64 startTime=4;
+    //活动结束时间
+    required int64 endTime=5; 
+}
+
+//每日单笔充值-领取奖励
+message CSOpenActivityCycleSingleChargeRewards{
+    // 奖励模板id
+    required int32 rewId=1;
+}
+message SCOpenActivityCycleSingleChargeRewards{
+    required RewProperty rewInfo=1;
+    repeated DropInfo dropInfo=2;
+    required int32 rewId=3;
+    repeated int32 rewRecordList=4; 
+}
+
+//炼制-信息
+message CSOpenActivityMadeResInfo{
+    required int32 groupId=1;
+}
+message SCOpenActivityMadeResInfo{
+    //活动id
+    required int32 groupId=1;
+    //炼制次数
+    required int32 madeTimes=2;
+    //活动开始时间
+    required int64 startTime=3;
+    //活动结束时间
+    required int64 endTime=4; 
+}
+
+//炼制-炼制
+message CSOpenActivityMadeRes{
+    required int32 groupId=1;
+}
+message SCOpenActivityMadeRes{ 
+    required int32 groupId=1; 
+    required int32 madeTimes=2;
+}
+
+message KanJiaInfo {
+    //礼包类型
+    required int32 type=1;
+    //折扣
+    required int32 discountNum=2;
+    //砍价次数
+    required int32 kanjiaTimes=3;
+}
+//折扣-砍价信息
+message CSOpenActivityKanJiaInfo{
+    required int32 groupId=1;
+}
+message SCOpenActivityKanJiaInfo{
+    //活动id
+    required int32 groupId=1;
+    //总已砍价次数
+    required int32 useTimes=2;
+    //活动开始时间
+    required int64 startTime=3;
+    //活动结束时间
+    required int64 endTime=4; 
+    //充值元宝
+    required int64 chargeNum=5;
+    //砍价信息记录
+    repeated KanJiaInfo kanjiaInfoList=6;
+    //购买记录
+    repeated int32 buyRecordList=7;
+}
+
+//折扣-砍价礼包
+message CSOpenActivityKanJia{
+    required int32 groupId=1;
+    required int32 type=2;
+}
+message SCOpenActivityKanJia{ 
+    required int32 groupId=1; 
+    repeated KanJiaInfo kanjiaInfoList=2; 
+    //购买记录
+    repeated int32 buyRecordList=3;
+}
+
+//折扣-购买砍价礼包
+message CSOpenActivityKanJiaBuy{
+    required int32 groupId=1;
+    required int32 type=2;
+}
+message SCOpenActivityKanJiaBuy{ 
+    required int32 groupId=1; 
+    required int32 type=2;
+    repeated int32 buyRecordList=3;
+}
+
+//超值套餐信息
+message SCOpenActivityTaoCanInfo{
+    //活动id
+    required int32 groupId=1;
+    //是否购买至尊会员
+    required bool isBuyHuiYaunPlus=2;
+    //是否购买装备大礼包
+    required bool isBuyEquipGift=3;
+    //是否购买等级投资（初级）
+    required bool isBuyInvestLevel=4;
+} 
+
+//超值套餐购买
+message CSOpenActivityTaoCanBuy{
+    required int32 groupId=1;
+}
+message SCOpenActivityTaoCanBuy{ 
+    required int32 groupId=1; 
+}
+
+//养鸡信息
+message CSOpenActivityFeedbackDevelopInfo{
+    required int32 groupId=1;
+}
+message SCOpenActivityFeedbackDevelopInfo{
+    //活动id
+    required int32 groupId=1;
+    //活动开始时间
+    required int64 startTime=2;
+    //活动结束时间
+    required int64 endTime=3; 
+    //是否喂养
+    required bool isFeed=4;
+    //是否死亡
+    required bool isDead=5;
+    //是否激活 
+    required bool isActivate=6;
+    //激活/复活 充值数（死亡后充值）
+    required int32 chargeNum=7;
+    //喂养天数
+    required int32 feedDay=8;
+    //今日消费数
+    required int32 todayCostNum=9;
+    //是否领取最终奖励
+    required bool isReceiveRew=10;
+} 
+
+//激活/复活金鸡
+message CSOpenActivityFeedbackDevelopRevive{
+    required int32 groupId=1;
+}
+message SCOpenActivityFeedbackDevelopRevive{
+    //活动id
+    required int32 groupId=1;
+    //是否死亡 
+    required bool isDead=2;
+    //喂养天数 
+    required int32 feedDay=3;
+} 
+
+//返利-金鸡领奖
+message CSOpenActivityFeedbackDevelopReceive{
+    // 奖励模板id
+    required int32 rewId=1;
+} 
+message SCOpenActivityFeedbackDevelopReceive{ 
+    required RewProperty rewInfo=1;
+    repeated DropInfo dropInfo=2;
+}
+
+
+//疯狂宝箱日志结构
+message CrazyBoxLog{
+    required int64 createTime=1;
+    required string playerName=2;
+    required int32 itemId=3;
+    required int32 itemNum=4;
+}
+
+//疯狂宝箱信息获取
+message CSOpenActivityCrazyBoxInfo{
+    required int32 groupId=1;
+}
+message SCOpenActivityCrazyBoxInfo{
+    // 活动id
+    required int32 groupId=1;
+    // 可抽奖次数
+    required int32 drewTimes=2;
+    // 消费元宝数
+    required int32 costNum=3;
+    //活动开始时间
+    required int64 startTime=4;
+    //活动结束时间
+    required int64 endTime=5; 
+    //当前宝箱等级
+    required int32 curBoxLev=6;
+    //当前宝箱开启数
+    required int32 curBoxTimes=7;
+    //增量日志
+    repeated CrazyBoxLog logList=8;
+}
+
+// 疯狂宝箱信息推送
+message SCOpenActivityCrazyBoxTimesNotice{
+    // 活动id
+    required int32 groupId=1;
+    // 可抽奖次数
+    required int32 drewTimes=2;
+}
+
+//疯狂宝箱开箱
+message CSOpenActivityCrazyBoxAttend{
+    //活动id
+    required int32 groupId=1;
+    //抽奖方式 0单次1十次
+    optional int32 drewType=2;
+    // 最后一个日志的时间
+    optional int64 lastLogTime=3;
+} 
+message SCOpenActivityCrazyBoxAttend{
+    //掉落
+    repeated DropInfo dropList=1;
+    //活动id
+    required int32 groupId=2;
+    //抽奖方式 0单次1十次
+    optional int32 drewType=3;
+    //增量日志
+    repeated CrazyBoxLog logList=4;
+      //额外奖励
+      repeated DropInfo extraDropList=5;
+}
+
+//疯狂宝箱日志增量
+message CSOpenActivityCrazyBoxLogIncr{
+    required int32 groupId=1;
+    required int64 logTime=2;
+}
+//疯狂宝箱日志增量回复
+message SCOpenActivityCrazyBoxLogIncr{
+    required int32 groupId=1;
+    repeated CrazyBoxLog logList=2;   
+}
+
+message DevelopInfo{
+    //名人谱-好感度
+    required int32 favorableNum=1;
+    //喂养次数
+    repeated TimesInfo timesInfoList=2;
+    //每日喂养好感度
+    required int32 dayFavorableNum=3;
+}
+
+message ChargeReturnInfo{
+    //是否返还过
+    required bool isReturn=1;
+}
+
+message ChargeReturnMultipleInfo{
+    //活动期间充值数
+    required int32 periodChargeNum=1;
+    //领取奖励次数
+    required int32 rewardCnt=2;
+}
+
+message AdvancedExpendReturnInfo{
+    //消耗数量
+    required int32 useItemNum=1;
+}
+
+message AllianceCheerInfo{
+    //奖金池
+    required int32 rewPool=1;
+}
+
+message SystemActivateInfo{
+    //最大充值数
+    required int32 maxSingleChargeNum=1;
+    //是否激活
+    required bool isActivate=2;
+}
+
+message CycleSingleChargeMaxRewInfo {
+    // 可领取奖励
+    repeated int32 canReceiveRecordList=1;
+    // 最高单笔充值
+    required int32 maxSingleChargeNum=2;
+}
+
+message CycleSingleChargeMaxRewMultipleInfo {
+    // 可领取奖励
+    repeated TimesInfo canReceiveRecordInfo=1;
+    // 最高单笔充值
+    required int32 maxSingleChargeNum=2;
+}
+
+message CycleSingleChargeAllMultipleRewInfo {
+    // 可领取奖励
+    repeated TimesInfo canReceiveRecordInfo=1;
+    // 单笔充值
+    repeated int32 singleChargeRecord=2;
+}
+
+message ChargeReturnLevelInfo{
+    //是否返还过
+    required bool isReturn=1;
+}
+
+message AdvancedTimesReturnInfo{
+    //升阶次数
+    required int32 advancedTimes=1;
+}
+
+message CostDrewInfo{
+    // 可抽奖次数
+    required int32 drewTimes=1;
+    // 消费数
+    required int32 costNum=2;
+    //参与次数
+    required int32 attendTimes=3;
+    //倍数
+    required int32 rate=4;
+    //增量日志
+    repeated DrewLog logList=5;
+}
+
+//
+message AdvancedRewMaxInfo{
+   //活动期间充值数
+   required int32 periodChargeNum=1;
+   //活动初始进阶数
+   required int32 initAdvancedNum=2;
+}
+
+message FeedbackSingleChargeMaxRewInfo {
+    // 可领取奖励
+    repeated int32 canReceiveRecordList=1;
+    // 最高单笔充值 
+    required int32 maxSingleChargeNum=2;
+}
+
+message FeedbackHouseExtendedInfo {
+    // 激活充值数
+    required int32 activateChargeNum=1;
+    // 是否领取激活礼包
+    required bool isActivateGift=2;
+    // 装修充值数
+    required int32 uplevelChargeNum=3;
+    // 当前装修礼包等级
+    required int32 curUplevelGiftLevel=4;
+    // 是否领取装修礼包
+    required bool isUplevelGift=5;
+}
+
+message WelfareQiYuInfo {
+    repeated GeneralCollectInfo biologyInfo=1;
+}
+
+message WelfareGoalInfo {
+    required int32 goalCount=1; //目标进度
+    required int32 goalId=2;    //目标关联表di
+}
+
+// 通天塔
+message TongTianTaInfo{
+    required int32 minForce=1;
+    required int32 maxForce=2;
+}
+
+// 云隐商品信息
+message YunYinCommodity{
+    required int32 typ=1;
+    required int32 num=2;
+}
+
+// 云隐仙人商店
+message YunYinShopInfo{
+    // 在云隐商店花费的元宝
+    required int32 goldNum=1;
+    // 购买记录
+    repeated YunYinCommodity yunYinCommodity=2;    
+}
+
+// 购买云隐商品请求
+message CSOpenActivityYunYinBuy{
+    // 活动id
+    required int32 groupId=1;
+    // 商品类型
+    required int32 type=2;
+    // 商品数量
+    required int32 num=3;
+}
+// 购买云隐商品回复
+message SCOpenActivityYunYinBuy{
+    required int32 groupId=1;
+    required int32 type=2;
+    required int32 num=3;
+    repeated DropInfo dropInfo=4;
+    required int32 goldNum=5;
+}
+
+// 新七天投资信息
+message NewInvestDayInfo{
+    // 投资类型
+    required int32 typ=1;
+    //七日投资领取记录
+    required int32 investDayRecord=2;
+    //购买时间
+    required int64 buyTime=4;
+}
+
+// 新七天投资计划
+message NewInvestSevenDayInfo{
+    repeated NewInvestDayInfo newInvestDayInfo=1;
+}
+
+
+//进阶消耗返还、城战助威、名人普、首充翻倍、首充返还、BOSS首杀、领域系统激活、每日单笔（一次一档奖励）、首充返还（按档次）、升阶次数返还、卡牌收集
+//消费抽奖、循环充值奖励、沙滩夺宝、通天塔、云隐仙人、新七天投资计划
+// 1-14、11-6、1-15、9-3、9-4
+//通用-信息请求
+message CSOpenActivityGetInfo{
+    required int32 groupId=1;
+}
+message SCOpenActivityGetInfo{
+    //活动id
+    required int32 groupId=1;
+    //活动开始时间
+    required int64 startTime=2;
+    //活动结束时间
+    required int64 endTime=3;
+    //记录 
+    repeated int32 recordList=4;
+    //名人谱-好感度
+    optional DevelopInfo developInfo=5; 
+    //首充返利-充值返还（固定比例）
+    optional ChargeReturnInfo returnInfo=6;
+    //升阶消耗返还
+    optional AdvancedExpendReturnInfo expendReturnInfo=7;
+    //城战助威
+    optional AllianceCheerInfo cheerInfo=8; 
+    //系统单笔充值激活 
+    optional SystemActivateInfo systemInfo=9;
+    //每日单笔信息（一次一档奖励）
+    optional CycleSingleChargeMaxRewInfo cycleSingleMaxRewInfo=10;
+    //首充返利-充值返还(按档次比例) 1-12
+    optional ChargeReturnLevelInfo returnLevelInfo=11;
+    //升阶次数返还
+    optional AdvancedTimesReturnInfo timesReturnInfo=12;
+    //消费抽奖
+    optional CostDrewInfo costDrewInfo=13;
+    //累计充值奖励
+    optional ChargeReturnMultipleInfo returnMultipleInfo=14;
+    //11-6 
+    optional AdvancedRewMaxInfo advancedRewMaxInfo=15;
+    //1-14
+    optional FeedbackSingleChargeMaxRewInfo singleChargeMax=16;
+    // 1-15 房产活动
+    optional FeedbackHouseExtendedInfo houseExtendedInfo=17;
+    //记录信息
+    repeated TimesInfo recordInfo=18;
+    //每日单笔信息（一档多次次奖励）
+    optional CycleSingleChargeMaxRewMultipleInfo cycleSingleMaxRewMultipleInfo=19;
+    //奇遇
+    optional WelfareQiYuInfo qiYuInfo=20;
+    //目标活动
+    optional WelfareGoalInfo goalInfo=21;
+    // 沙滩夺宝
+    optional int32 isActivite=22;
+    repeated OpenActivityBeachShopInfo beachShopInfo=23;
+    //擂台助力
+    optional FeedbackChargeArenapvpAssistInfo arenapvpAssistInfo=24;
+    //擂台助力-消费助力
+    optional FeedbackChargeArenapvpAssistReturnInfo arenapvpAssistReturnInfo =25;
+    //每日单笔-所有都可领取
+    optional CycleSingleChargeAllMultipleRewInfo cycleAllMultipleRewInfo =26;
+    //擂台助力-新消费助力
+    optional FeedbackChargeNewArenapvpAssistReturnInfo newArenapvpAssistReturnInfo =27;
+    //炼金炉-冶炼
+    optional SmeltInfo smeltInfo=28;
+    //仙人指路-奖池
+    optional RewPoolsInfo rewPoolsInfo=29;
+    //修仙典籍
+    optional XiuxianBookInfo xiuxianBookInfo=30;
+    //通天塔
+    optional TongTianTaInfo tongTianTaInfo=31;
+    //云隐仙人
+    optional YunYinShopInfo yunYinShopInfo=32; 
+    //转生冲刺
+    optional ZhuanShengInfo zhuanShengInfo=33; 
+    //新七天投资计划
+    optional NewInvestSevenDayInfo newInvestSevenDayInfo=34;
+} 
+ 
+message ZhuanShengInfo {
+    required int32 zhuanSheng=1;  //转生等级
+}
+
+message XiuxianBookInfo {
+    required int32 level=1;  //当前可领取最低等级
+    required int32 maxLevel=2; //历史最高等级
+}
+
+message SmeltInfo {
+    required int32 num=1; //消耗数量
+    required int32 canRewRecord=2; //能够领取的次数
+}
+
+message RewPoolsInfo {
+    required int32 position=1;  //奖池位置
+    required int32 backTimes=2;  //回退总次数
+    repeated DrewLog logList=3;  //日志
+}
+
+message FeedbackChargeArenapvpAssistInfo{
+    //充值数目
+    required int32 chargeNum=1;
+}
+
+message FeedbackChargeArenapvpAssistReturnInfo {
+    required int32 costNum=1;
+}
+
+message FeedbackChargeNewArenapvpAssistReturnInfo {
+    required int64 costNum=1;
+}
+
+// 进阶消耗返还、名人普、升阶次数返还、每日单笔（一次一档奖励）、循环充值奖励、通天塔、云隐仙人、新七天投资计划
+// 11-6、1-14、1-15、9-4
+//通用-领取奖励 
+message CSOpenActivityReceiveRew{
+    // 奖励模板id
+    required int32 rewId=1;
+}
+
+message SCOpenActivityReceiveRew{
+    required int32 rewId=1;
+    required int32 groupId=2;
+    required RewProperty rewInfo=3;
+    repeated DropInfo dropInfo=4; 
+    repeated int32 recordList=5;
+    repeated TimesInfo recordInfo=6;
+}
+
+message CSOpenActivityReceiveRewMultiple{
+    // 奖励模板id
+    required int32 rewId=1;
+    // 0表示领取一次，1表示领取10次
+    required int32 receiveType=2;
+}
+
+message SCOpenActivityReceiveRewMultiple{
+    required int32 rewId=1;
+    required int32 groupId=2;
+    required RewProperty rewInfo=3;
+    repeated DropInfo dropInfo=4; 
+    repeated int32 recordList=5;
+    repeated TimesInfo recordInfo=6;
+}
+
+//名人普-培养
+message CSOpenActivityDevelopFeed{
+    required int32 groupId=1;
+    // 喂养物品种类:0：物品1；1：物品2；2：物品3
+    required int32 feedIndex=2;
+    // 喂养数量
+    required int32 feedTimes=3;
+}
+message SCOpenActivityDevelopFeed{
+    required int32 groupId=1;
+    required int32 curFavorableNum=2;       //总好感度
+    repeated TimesInfo timesInfoList=3;
+    repeated DropInfo dropInfo=4;
+    required int32 dayFavorableNum=5;       //当日好感度
+} 
+
+
+//返利-房产投资推送
+message SCOpenActivityFeedbackHouseInvestNotice{
+    // 活动id
+    required int32 groupId=1;
+    //活动期间充值数
+    required int32 chargeNum=2;
+    //当天充值数
+    required int32 curDayChargeNum=3;
+}
+
+//返利-房产投资信息
+message CSOpenActivityFeedbackHouseInvestInfo{
+    //活动id
+    required int32 groupId=1;
+}
+message SCOpenActivityFeedbackHouseInvestInfo{
+    //活动id
+    required int32 groupId=1;
+    //活动期间充值数
+    required int32 chargeNum=2;
+    //当天充值数
+    required int32 curDayChargeNum=3;
+    //装修几天
+    required int32 decorDays=4;
+    //是否激活
+	required bool isActivity=5;   
+    //今天是否装修 
+	required bool isCurDayDecor=6;
+    //是否出售
+	required bool isSell=7;
+    //活动开始时间
+    required int64 startTime=8;
+    //活动结束时间
+    required int64 endTime=9;
+}
+
+//返利-房产投资激活
+message CSOpenActivityFeedbackHouseInvestAdvenced{
+    //活动id
+    required int32 groupId=1;
+}
+message SCOpenActivityFeedbackHouseInvestAdvenced{ 
+    //活动id
+    required int32 groupId=1;
+    required RewProperty rewInfo=2;
+    repeated DropInfo dropInfo=3;
+}
+
+//返利-房产投资装修
+message CSOpenActivityFeedbackHouseInvestDecor{
+    //活动id
+    required int32 groupId=1;
+}
+message SCOpenActivityFeedbackHouseInvestDecor{ 
+    //活动id
+    required int32 groupId=1;
+    required RewProperty rewInfo=2;
+    repeated DropInfo dropInfo=3;
+}
+
+//返利-房产投资出售
+message CSOpenActivityFeedbackHouseInvestSell{
+    //活动id
+    required int32 groupId=1;
+}
+message SCOpenActivityFeedbackHouseInvestSell{ 
+    //活动id
+    required int32 groupId=1;
+    required RewProperty rewInfo=2;
+    repeated DropInfo dropInfo=3;
+}
+
+
+//获取砸金蛋信息
+message CSOpenActivitySmashEggInfo{
+    //活动id
+    required int32 groupId=1;
+}
+message SCOpenActivitySmashEggInfo{
+    //活动id
+    required int32 groupId=1;
+    //已参与次数
+    required int32 attendTimes=2;
+    //砸金蛋砸奖记录
+    repeated int32 records=3;  
+    //活动开始时间
+    required int64 startTime=4;
+    //活动结束时间
+    required int64 endTime=5;
+}
+
+//砸金蛋
+message CSOpenActivitySmashEggAttend{
+    //活动id
+    required int32 groupId=1;
+    //抽奖次数
+    required int32 attendCount=2;
+    //砸金蛋号码
+    required int32 dropNum=3;
+}
+message SCOpenActivitySmashEggAttend{
+    //活动id
+    required int32 groupId=1;
+    //抽奖次数
+    required int32 attendCount=2;
+    //砸金蛋号码
+    required int32 dropNum=3;
+    //砸金蛋掉落
+    repeated DropInfo dropInfo=4;
+    //额外掉落
+    repeated DropInfo extraDropList =5;
+}
+
+
+//系统激活
+message CSOpenActivitySystemActivate{
+    required int32 groupId=1;
+}
+message SCOpenActivitySystemActivate {
+    required int32 groupId=1;
+}
+
+//城战助威奖金池变化
+message SCOpenActivityAllianceCheerPoolChanged {
+    required int32 groupId=1;
+    required int64 poolNum=2;
+}
+
+
+//活动开服时间变化
+message SCOpenActivityOpenServerTimeChanged {
+    required int64 actvityOPenServerTime=1;
+    required int64 actvityMergeTime=2; 
+}
+
+message XunHuanInfo {
+    required int32 groupId=1;
+    //活动开始时间
+    required int64 startTime=4;
+    //活动结束时间
+    required int64 endTime=5;
+}
+
+//循环活动推送
+message SCOpenActivityXunHuanInfo {
+    // 当前随机活动组
+    repeated XunHuanInfo infoList=1;
+}
+
+//消费抽奖
+message CSOpenActivityCostDrewAttend{
+    //活动id
+    required int32 groupId=1;
+    //抽奖方式 0单次1十次
+    optional int32 drewType=2;
+    //最后一个日志的时间
+    optional int64 lastLogTime=3;
+    //自动购买
+    optional bool isAutoBuy=4;
+    //奖池level
+    optional int32 dropLevel=5[default=0];
+}
+message SCOpenActivityCostDrewAttend{
+    //掉落
+    repeated DropInfo dropList=1;
+    //倍数
+    required int32 rate=2;
+    //活动id
+    required int32 groupId=3;
+    //抽奖方式 0单次1十次
+    optional int32 drewType=4;
+    //增量日志
+    repeated DrewLog logList=5;
+    //奖池level
+    required int32 dropLevel=6; 
+    //奖励位置
+    repeated int32 rewIndexList=7;
+    //额外奖励
+    repeated DropInfo extraDropList=8;
+}
+
+// 摸金抽取卡牌推送
+message SCOpenActivityGroupCollectNotice{
+    required int32 poker=1;
+    required RewProperty rewInfo=2;
+    repeated DropInfo dropInfo=3;
+}
+
+// 每日单笔
+message SCOpenActivityCycleSingleChargeMaxRewInfoNotice{
+    required int32 groupId=1;
+    //每日单笔信息（一档一次次奖励）
+    optional CycleSingleChargeMaxRewInfo info=2;
+    //每日单笔信息（一档多次次奖励）
+    optional CycleSingleChargeMaxRewMultipleInfo multipleInfo=3;
+}
+
+// 每日单笔
+message SCOpenActivityCycleSingleChargeAllRewInfoNotice{
+    required int32 groupId=1;
+    // 可领取奖励
+    repeated TimesInfo canReceiveRecordInfo=2;
+    // 单笔充值
+    repeated int32 singleChargeRecord=3;
+}
+
+//排行榜名次下降推送（前三）
+message SCOpenActivityRankingDropDownNotice {
+    //上次名次
+    required int32 beforeRanking=1;
+    //当前名次
+    required int32 curRanking=2;
+    //排行榜名称
+    required string rankName=3;
+    //活动id
+    required int32 groupId=4;
+}
+
+//仙人指路-奖池 抽奖
+message CSOpenActivityRewPoolsDrew {
+    required int32 groupId=1;
+    required bool isAutoBuy=2;   //是否自动购买
+    required int32 attendType=3;   //0为单抽，1为十连
+}
+
+message SCOpenActivityRewPoolsDrew {
+    required int32 groupId=1;
+    required int32 position=2;  //奖池位置
+    repeated DropInfo dropInfo=3; 
+    required int32 backTimes=4;  //回退次数
+    repeated DrewLog logList=5;  //日志
+}
+
+// 新七天投资购买请求
+message CSOpenActivityNewInvestDayBuy{
+    // 投资类型
+    required int32 groupId=1;
+    // 投资档次
+    required int32 typ=2;
+}
+// 新七天投资购买回复
+message SCOpenActivityNewInvestDayBuy{
+    // 投资类型
+    required int32 groupId=1;
+    // 投资档次
+    required int32 typ=2;
+}

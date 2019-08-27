@@ -1,0 +1,143 @@
+syntax = "proto2";
+
+package ui;
+
+//天赋
+message TianFuInfo {
+    //天赋id
+    required int32 tianFuId=1;
+    //天赋等级
+    required int32 level=2;
+}
+
+//技能天赋
+message SkillTianFuInfo {
+    //技能id
+    required int32 skillId=1;
+    //天赋信息
+    repeated TianFuInfo tianFuList=2;
+}
+
+//技能cd 
+message SkillCdInfo {
+    //技能id
+    required int32 skillId=1;
+    //上一次使用时间
+    required int64 lastTime=2;
+}
+
+//技能信息
+message SkillInfo {
+    //技能id
+    required int32 skillId=1;
+    //技能等级
+    required int32 level=2;
+}
+
+//登录下发技能信息
+message SCSkillGet{
+    repeated SkillInfo skillList=1;
+}
+
+
+//添加技能
+message SCSkillAdd {
+    //技能id
+    required int32 skillId=1;
+    //技能等级
+    required int32 level=2;
+}
+
+//升级技能请求
+message CSSkillUpgrade{
+    //技能id
+    required int32 skillId=1;
+}
+//升级技能应答
+message SCSkillUpgrade {
+   //技能id
+   required int32 oldSkillId=1;
+}
+
+//全部升级请求
+message CSSkillUpgradeAll{
+}
+//全部升级应答
+message SCSkillUpgradeAll{
+    repeated int32 oldSkillIdList =1;
+}
+
+//技能移除
+message SCSkillRemove {
+    //技能类型id
+    required int32 skillId=1;
+    //技能等级
+    required int32 level=2;
+}
+
+
+//技能cd列表
+message SCSkillCdTime {
+    //下发有使用过的
+    repeated SkillCdInfo skillCdList=1;
+}
+
+
+//技能学习
+message SCSkillLearn {
+    //技能id
+    required int32 skillId=1;
+    //技能等级
+    required int32 level=2;
+}
+
+
+//觉醒
+message CSSkillTianFuAwaken{
+    //技能id
+    required int32 skillId=1;
+    //天赋id
+    required int32 tianFuId=2;
+}
+
+//觉醒回复
+message SCSkillTianFuAwaken{
+    //技能id
+    required int32 skillId=1;
+    //天赋信息
+    required TianFuInfo tianFuInfo=2;
+    //成功与失败
+    required bool sucess=3;
+}
+
+
+//天赋升级
+message CSSkillTianFuUpgrade {
+    //技能id
+    required int32 skillId=1;
+    //天赋id
+    required int32 tianFuId=2;
+}
+
+//天赋升级回复
+message SCSkillTianFuUpgrade {
+    //技能id
+    required int32 skillId=1;
+    //天赋信息
+    required TianFuInfo tianFuInfo=2;
+    //成功与失败
+    required bool sucess=3;
+}
+
+//技能天赋登录下发
+message SCSkillTianFuGet {
+    repeated SkillTianFuInfo skillTianFuList= 1;
+}
+
+
+
+
+
+
+
+

@@ -1,0 +1,120 @@
+syntax = "proto2";
+
+package ui;
+
+message FashionInfo {
+    //时装id
+    required int32 fashionId=1;
+    //星数
+    required int32 level=2;
+    //进度值
+    required int32 upPro=3;
+    //时装激活时间 
+    required int64 acitveTime=4 [default=0];
+}
+
+message TrialInfo {
+    //时装id
+    required int32 trialFashionId=1;
+    //过期时间
+    required int64 expireTime=2;
+}
+
+//时装信息请求
+message CSFashionGet {
+}
+//时装信息应答
+message SCFashionGet{
+   //时装穿戴id
+   required int32 fashionWear=1;
+   //时装信息
+   repeated FashionInfo fashionList=2;
+   //时装试用信息
+   repeated TrialInfo trialList=3;
+}
+
+//激活时装请求
+message CSFashionActive {
+    //时装id
+   required int32 fashionId=1;
+} 
+//激活时装应答
+message SCFashionActive {
+   //时装id
+   required int32 fashionId=1;
+   //激活时间
+   required int64 activeTime=2;
+}
+
+//穿戴时装请求
+message CSFashionWear {
+   //时装id
+   required int32 fashionId=1;
+}
+//穿戴时装应答
+message SCFashionWear {
+    //时装id
+    required int32 fashionId=1;
+}
+
+//时装卸下请求
+message CSFashionUnLoad {
+}
+
+//时装卸下回复
+message SCFashionUnLoad {
+    //时装穿戴id
+    required int32 fashionWear=1;
+}
+
+
+//时装升星请求
+message CSFashionUpstar {
+    //时装id
+    required int32 fashionId=1;
+ }
+ 
+ //时装升星应答
+ message SCFahionUpstar {
+     //时装id
+     required int32 fashionId=1;
+     //时装星数
+     required int32 level=2;
+     //进度值
+     required int32 upPro=3;
+     //状态 false 失败 true成功
+     required bool result=4;
+  }
+
+  //时装移除
+  message SCFashionRemove{
+    //时装id
+    required int32 fashionId=1;
+  }
+
+
+// 时装试用推送
+message SCFashionTrialNotice{
+    //时装id
+    required int32 trialFashionId=1;
+    //过期时间
+    required int64 expireTime=2;
+}
+
+// 时装试用过期
+message SCFashionTrialOverdueNotice{
+    required int32 trialFashionId=1;
+    //1激活过期 2时效过期 
+    required int32 overdueType=2;
+}
+
+
+
+
+
+
+
+
+
+
+

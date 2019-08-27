@@ -1,0 +1,61 @@
+syntax = "proto2";
+
+package ui;
+
+message ShopLimit {
+    //道具流水id
+    required int32 shopId=1;
+    //已购买数量
+    required int32 dayCount=2;
+}
+
+message ShouAutoBuy {
+    //道具流水id
+    required int32 shopId=1;
+    //购买组数量
+    required int32 num=2;
+    //当日累计购买数量
+    optional int32 dayCount=3;
+}
+
+//过5点请求
+message CSShopLimit {
+    
+}
+
+//下发每日限购道具,已购买次数
+message SCShopLimit {
+    repeated ShopLimit shopLimitList=1;
+}
+
+//商店购买道具
+message CSShopBuy {
+    //道具流水id
+    required int32 shopId=1;
+    //购买组数量
+    required int32 num=2;
+}
+
+//商店购买道具 
+message SCShopBuy {
+    //道具流水id
+    required int32 shopId=1;
+    //购买组数量
+    required int32 num=2;
+    //当日累计购买数量
+    optional int32 dayCount=3;
+}
+
+//自动购买物品
+message SCShopAutoBuyList {
+    repeated ShouAutoBuy autoBuyList=1;
+}
+
+//通知前端停止自动进阶 自动升星 自动强化等
+message SCShopStopAutoBuy {
+
+}
+
+
+
+

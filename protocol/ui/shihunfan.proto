@@ -1,0 +1,71 @@
+syntax = "proto2";
+
+package ui;
+
+//噬魂幡信息
+message ShihunfanInfo {
+    //阶数
+    required int32 advancedId=1;
+    //祝福值
+    optional int32 bless=2;
+    //祝福值开始时间
+    optional int64 blessTime=3;
+}
+
+//噬魂幡培养信息
+message ShihunfanDanInfo {
+    //当前培养等级
+    required int32 level=1;
+    //祝福值
+    optional int32 progress=2;
+}
+
+//噬魂幡信息请求
+message CSShihunfanGet {
+}
+//噬魂幡信息应答
+message SCShihunfanGet{
+   //噬魂幡信息
+   required ShihunfanInfo shihunfanInfo=1;
+   //培养信息
+   required ShihunfanDanInfo shihunfandanInfo=2;
+   //充值数
+   required int32 chargeVal=3;
+}
+
+
+//充值数推送
+message SCShihunfanChargeVary{
+    required int32 chargeVal=1;
+}
+
+
+//噬魂幡升阶请求
+message CSShihunfanAdvanced{
+    //是否自动购买
+    required bool buyFlag=1;
+}
+//噬魂幡升阶应答
+message SCShihunfanAdvanced{
+    //噬魂幡信息
+    required ShihunfanInfo shihunfanInfo=1;
+    //是否暴击
+    optional bool isDouble=2 [default=false]; 
+    //进阶方式
+    required int32 advancedType=3;
+    //当前充值数
+    required int32 chargeVal=4;
+    //是否自动购买
+    optional bool buyFlag=5 [default=false];
+}
+
+
+//噬魂幡培养请求
+message CSShihunfanDanAdvanced{
+    required int32 num=1;
+}
+//噬魂幡培养应答
+message SCShihunfanDanAdvanced{
+    //培养信息
+    required ShihunfanDanInfo shihunfandanInfo=1;
+}

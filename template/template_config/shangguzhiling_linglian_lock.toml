@@ -1,0 +1,27 @@
+file="shangguzhiling_linglian_lock_vo.go"
+pkg="template"
+class="ShangguzhilingLinglianLockTemplateVO"
+comment = "上古之灵灵炼锁定配置"
+[[variables]]
+name="Id"
+type="int"
+tag="id"
+comment="id"
+
+[[variables]]
+name="NextId"
+type="int32"
+tag="next_id"
+comment="下一Id"
+
+[[variables]]
+name="Times"
+type="int32"
+tag="times"
+comment="锁定次数"
+
+[[variables]]
+name="SuodingUseItemCount"
+type="int32"
+tag="suoding_use_item_count"
+comment="锁定消耗的数量"

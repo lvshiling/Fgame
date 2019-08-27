@@ -1,0 +1,138 @@
+syntax = "proto2";
+
+package ui;
+
+import "inventory.proto";
+
+
+message GlobalTradeInfo {
+    required int64 tradeId=1;
+    required int32 serverId=2; //服务器id
+    required int64 playerId=3; //玩家id
+    required string playerName=4; //玩家名字
+    required int32 itemId=5; //物品id
+    required int32 itemNum=6; //物品数量
+    optional ItemPropertyData propertyData=7;  //属性
+    required int32 gold=8; //价格
+    required int64 createTime=9; //创建时间
+    required int32 level=10;//等级
+}
+
+//交易列表
+message CSTradeInfoList {
+
+}
+
+//交易列表回复
+message SCTradeInfoList{
+    repeated GlobalTradeInfo tradeInfoList=1;
+    required int32 totalPage=2; //总分页
+    required int32 currentPage=3; //当前分页
+}
+
+
+//请求上架
+message CSTradeUploadItem {
+    required int32 bagType=1; //背包类型
+    required int32 index=2;  //背包索引
+    required int32 num=3; //数量
+    required int32 gold=4; //定价
+}
+
+//上架
+message SCTradeUploadItem{
+    required TradeInfo tradeInfo=1;
+}
+
+
+//请求下架
+message CSTradeWithDrawItem {
+    required int64 tradeId=1; //商品id
+}
+
+//请求下架
+message SCTradeWithDrawItem{
+    required int64 tradeId=1; //商品id
+}
+
+
+//请求交易
+message CSTradeItem {
+    required int64 tradeId=1; //商品id
+}
+
+//请求交易
+message SCTradeItem{
+    required int64 tradeId=1; //商品id
+}
+
+//商品信息
+message TradeInfo {
+    required int64 tradeId=1;
+    required int32 itemId=2; //物品id
+    required int32 itemNum=3; //物品数量
+    optional ItemPropertyData propertyData=4;  //属性
+    required int32 gold=5; //价格
+    required int64 createTime=6; //创建时间
+    required int32 level=7;//等级
+    required int32 status=8;//状态 0:上架中 1:上架 2:下架中 3:下架 
+}
+
+
+//自己上架的物品
+message CSSelfTradeInfoList {
+
+}
+
+//自己上架的物品
+message SCSelfTradeInfoList{
+    repeated TradeInfo tradeInfoList=1;
+}
+
+//出售日志
+message TradeSellLog{
+    required int32 itemId=1;
+    required int32 itemNum=2;
+    optional ItemPropertyData propertyData=3;  //属性
+    required int64 tradeTime=4;
+    required int32 buyServerId=5;
+    required int64 buyPlayerId=6;
+    required string buyPlayerName=7;
+    required int32 buyGold=8;
+    required int32 getGold=9;
+    required int32 fee=10; //手续费
+    required int32 level=11;//等级
+    required int32 feeRate=12;//手续费比例
+}
+
+//购买日志
+message TradeBuyLog{
+    required int32 itemId=1;
+    required int32 itemNum=2;
+    optional ItemPropertyData propertyData=3;  //属性
+    required int64 tradeTime=4;
+    required int32 sellServerId=5;
+    required int64 sellPlayerId=6;
+    required string sellPlayerName=7;
+    required int32 buyGold=8;
+    required int32 level=9;//等级
+}
+
+
+//交易日志
+message TradeLog{
+    required int32 logType=1;
+    optional TradeSellLog sellLog=2;
+    optional TradeBuyLog buyLog=3;
+}
+
+
+//日志
+message CSTradeLogList {
+
+}
+
+//交易日志
+message SCTradeLogList{
+    repeated TradeLog tradeInfoList=1;
+}

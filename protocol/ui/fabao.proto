@@ -1,0 +1,179 @@
+syntax = "proto2";
+
+package ui;
+
+
+//法宝信基本信息息
+message FaBaoInfo {
+   //阶数
+   required int32 advancedId=1;
+   //当前法宝id 
+   required int32 faBaoId=2;
+   //食幻化丹食丹等级
+   required int32 unrealLevel=3;
+   //食幻化丹培养进度值
+   required int32 unrealPro=4;
+   //幻化
+   repeated int32 unrealList=5;
+   //祝福值
+   optional int32 bless=6;
+   //祝福值开始时间
+   optional int64 blessTime=7;
+   //通灵等级
+   required int32 tonglingLevel=8;
+   //通灵次数
+   required int32 tonglingNum=9;
+   //通灵进度值
+   required int32 tonglingPro=10;
+   //是否隐藏
+   required bool hidden=11;
+}
+
+//法宝缓存信息
+message FaBaoCacheInfo {
+   //阶数
+   required int32 advancedId=1;
+   //当前法宝id 
+   required int32 faBaoId=2;
+   //食幻化丹食丹等级
+   required int32 unrealLevel=3;
+   //食幻化丹培养进度值
+   required int32 unrealPro=4;
+   //通灵等级
+   required int32 tonglingLevel=5;
+   //通灵进度值
+   required int32 tonglingPro=6;
+   //皮肤信息列表
+   repeated FaBaoSkinInfo skinList=7;
+}
+
+
+//法宝皮肤
+message FaBaoSkinInfo {
+    //法宝皮肤id
+    required int32 faBaoId=1;
+    //升星等级
+    required int32 level=2;
+    //升星培养值
+    required int32 pro=3;
+}
+
+//法宝信息请求
+message CSFaBaoGet {
+}
+//法宝信息应答
+message SCFaBaoGet{
+   required FaBaoInfo faBaoInfo=1;
+   //法宝皮肤
+   repeated FaBaoSkinInfo  faBaoSkinList=2;
+}
+
+//食用幻化丹请求
+message CSFaBaoUnrealDan {
+    required int32 num=1;
+}
+//食用幻化丹应答
+message SCFaBaoUnrealDan {
+    //幻化丹食丹等级
+    required int32 level=1;
+    //进度值
+    required int32 progress=2;
+}
+
+
+//幻化请求
+message CSFaBaoUnreal {
+    //幻化法宝id
+    required int32 faBaoId=1;
+}
+//幻化应答
+message SCFaBaoUnreal {
+    //幻化
+    optional int32 faBaoId=1;
+}
+
+//通灵请求
+message CSFaBaoTongLing {
+
+}
+
+//通灵应答
+message SCFaBaoTongLing {
+    required int32 tonglingLevel=1;
+    required int32 tonglingNum=2;
+    required int32 tonglingPro=3;
+}
+
+//卸下请求
+message CSFaBaoUnload {
+}
+
+//卸下应答
+message SCFaBaoUnload {
+    //法宝id
+    required int32 faBaoId=1;
+}
+
+//进阶请求
+message CSFaBaoAdvanced{
+    //是否自动进阶
+    required bool autoFlag=1;
+}
+//进阶应答
+message SCFaBaoAdvanced{
+    //阶数
+    required int32 advancedId=1;
+    //法宝id
+    required int32 faBaoId=2;
+    //祝福值
+    optional int32 bless=3;
+    //祝福值开始时间
+    optional int64 blessTime=4;
+    //进阶方式 1进阶丹 2祝福丹 3直升券 4激活卡
+    required int32 advancedType=5;
+    // 是否暴击
+    optional bool isDouble=6 [default=false]; 
+    //总祝福值
+    optional int32 totalBless=7;
+}
+
+//法宝隐藏
+message CSFaBaoHidden {
+    //是否隐藏 0展示  1隐藏
+    required bool hidden=1;
+}
+
+//法宝隐藏
+message SCFaBaoHidden {
+    required bool hidden=1;
+}
+
+
+//法宝皮肤升星请求
+message CSFaBaoUpstar {
+    //法宝皮肤id
+    required int32 faBaoId=1;
+ }
+ 
+ //法宝皮肤升星应答
+ message SCFaBaoUpstar {
+     //法宝皮肤id
+     required int32 faBaoId=1;
+     //皮肤星数
+     required int32 level=2;
+     //进度值
+     required int32 upPro=3;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

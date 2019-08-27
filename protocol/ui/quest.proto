@@ -1,0 +1,273 @@
+syntax = "proto2";
+
+package ui;
+
+import "item.proto";
+import "rewproperty.proto";
+import "drop.proto";
+
+message QuestKaiFuMuBiao {
+    //开服第几天解锁
+    required int32 kaiFuTime=1;
+    //完成数量
+    required int32 finishNum=2;
+    //组奖励是否领取
+    required bool groupReceived=3;
+}
+
+message QuestPosition {
+    required float posX =1;
+    required float posY =2;
+    required float posZ =3;
+}
+
+//任务数据
+message QuestData{
+    required int32 key=1;
+    required int32 value=2;
+}
+
+//任务信息
+message QuestInfo{
+    required int32 questId=1;
+    //1:激活 2:接取 3:完成 4:提交
+    required int32 state=2;
+    repeated QuestData dataList=3;
+    repeated QuestData collectItemList=4;
+}
+
+//推送当前任务列表
+message SCQuestList {
+    repeated QuestInfo questList=1;
+    //是否完成任务 false 未完成 true已完成
+    required bool finish=2;
+}
+
+//接受任务
+message CSQuestAccept{
+    required int32 questId=1;
+}
+
+//接受任务推送
+message SCQuestAccept{
+    required int32 questId=1;
+}
+
+//交付任务
+message CSQuestCommit{
+    required int32 questId=1;
+    //是否双倍
+    optional bool double=2 [default=false];     
+}
+
+//交付任务成功
+message SCQuestCommit{
+    required int32 questId=1;
+    required bool double=2;
+}
+
+//任务更新
+message SCQuestUpdate{
+    repeated QuestInfo questList=1;
+}
+
+//npc对话
+message CSQuestNPCDialog{
+    required int32 questId=1;
+    required int32 npcId=2;
+}
+
+//npc对话回复
+message SCQuestNPCDialog{
+    required int32 questId=1;
+    required int32 npcId=2;
+}
+
+//采集物品
+message CSQuestGather{
+    required int32 questId=1;
+    required int32 itemId=2;
+    required int32 num=3;
+}
+
+//采集物品
+message SCQuestGather{
+    required int32 questId=1;
+    required int32 itemId=2;
+    required int32 num=3;
+}
+
+//屠魔次数请求
+message CSQuestTuMoNumGet {
+}
+
+//屠魔次数应答
+message SCQuestTuMoNumGet {
+    //今日已使用屠魔次数
+    required int32 num=1;
+    //今日已购买额外次数
+    required int32 buyNum=2;
+    //今日已拥有额外次数
+    required int32 extraNum=3;
+
+}
+
+//使用屠魔令
+message CSQuestTuMoUseToken{
+    //屠魔令 1绿、2蓝、3紫、4橙
+    required int32 token=1;
+}
+
+//使用屠魔令回复
+message SCQuestTuMoUseToken{
+    //屠魔令 0绿、1蓝、2紫、3橙
+    required int32 token=1;
+    //任务id
+    required int32 questId=2;
+}
+
+//放弃屠魔任务
+message CSQuestTuMoDiscard {
+    //任务id
+    required int32 questId=1;
+}
+
+//放弃屠魔回复
+message SCQuestTuMoDiscard {
+    //任务id
+    required int32 questId=1;
+}
+
+//屠魔次数购买请求
+message CSQuestTuMoBuyNum {
+    //本次购买次数
+    required int32 num=1;
+}
+
+//屠魔次数购买回复
+message SCQuestTuMoBuyNum {
+    //今日已购买额外次数
+    required int32 buyNum=1;
+    //今日已拥有额外次数
+    required int32 extraNum=2;
+}
+
+//屠魔任务一键完成
+message CSQuestTuMoFinishAll{
+
+}
+
+//屠魔任务一键完成回复
+message SCQuestTuMoFinishAll{
+    repeated ItemInfo itemList=1; 
+    required int32 num=2;
+}
+
+//屠魔任务单次完成
+message CSQuestTuMoImmediate {
+    required int32 questId=1;
+}
+
+//屠魔任务当次完成回复
+message SCQuestTuMoImmediate {
+    required int32 questId=1;
+    repeated ItemInfo itemList=2;
+}
+
+//小飞鞋
+message CSQuestFeiXie {
+    required int32 questId=1;
+    required int32 mapId=2;
+    required QuestPosition pos=3;
+}
+
+//小飞鞋回复
+message SCQuestFeiXie {
+    required int32 questId=1;
+    required int32 mapId=2;
+    required QuestPosition pos=3;
+}
+
+//一键完成日环任务
+message CSQuestDailyFinishAll{
+    required int32 dailyTag=1;  // 1日环任务 2仙盟日常任务
+    required bool isDoube=2;    //是否双倍
+}
+message SCQuestDailyFinishAll {
+    required int32 dailyTag=1;    // 1日环任务 2仙盟日常任务
+    repeated ItemInfo itemList=2;
+}
+
+
+//单次完成日环任务
+message CSQuestDailyFinishOnce{
+    required int32 dailyTag=1;   // 1日环任务 2仙盟日常任务
+    required bool isDoube=2;    //是否双倍
+} 
+message SCQuestDailyFinishOnce {
+    required int32 dailyTag=1;    // 1日环任务 2仙盟日常任务
+    repeated ItemInfo itemList=2; 
+}
+
+//日环任务变更seq
+message SCQuestDailySeq {
+    // 1 日环任务 2仙盟日常任务
+    required int32 dailyTag=1;
+    required int32 seqId=2;
+    required int32 times=3;
+}
+
+//开服目标任务
+message CSQuestKaiFuMuBiaoGet{
+
+}
+
+//开服目标任务(含完成次数变更推送)
+message SCQuestKaiFuMuBiaoGet {
+   repeated QuestKaiFuMuBiao kaiFuMuBiaoList=1;
+}
+
+//领取组奖励
+message CSQuestkaiFuMuBiaoReceive{
+    required int32 kaiFuTime=1;
+}
+
+//领取组奖励回复
+message SCQuestkaiFuMuBiaoReceive{
+    required int32 kaiFuTime=1;
+}
+
+message QiYuInfo {
+    // 是否领取奖励 0否1是
+    required int32 isReceive=1;
+    // 结束时间
+    required int64 endTime=2;
+    // 任务id
+    required int32 qiyuId=3; 
+    // 是否前置提示过 0否1是
+    optional int32 isHadNotice=4;
+}
+
+//奇遇任务推送
+message SCQuestQiYuNotice {
+    repeated QiYuInfo infoList=1;
+}
+
+//领取奇遇奖励
+message CSQuestQiYuReceive{
+    required int32 qiyuId=1;
+}
+message SCQuestQiYuReceive{
+    required int32 qiyuId=1;
+    required int32 isReceive=2;
+}
+
+//日环任务单次完成奖励推送
+message SCQuestDailyCommitRew {
+    required int32 questId=1;
+    required int32 dailyTag=2;  // 1 日环任务 2仙盟日常任务
+    repeated DropInfo dropList=3;
+    required RewProperty rewInfo=4;
+}
+
+ 

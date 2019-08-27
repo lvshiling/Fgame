@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package pb;
+//获取交易战区数据
+message TradeServerListRequest{
+
+}
+
+message TradeServerInfo{
+    int32 platform=1;
+    int32 serverId=2;
+    int32 regionId=3;
+}
+
+message TradeServerListResponse{
+    repeated TradeServerInfo tradeServerInfoList=1;
+}
+
+service TradeServerManage {
+    //获取服务器列表
+    rpc GetTradeServerList(TradeServerListRequest) returns(TradeServerListResponse){}
+}
+

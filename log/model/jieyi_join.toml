@@ -1,0 +1,27 @@
+file="jieyi_join.go"
+pkg="model"
+class="JieYiJoin"
+base="JieYiLogMsg"
+comment = "加入结义"
+name="jieyi_join"
+
+[[variables]]
+name="PlayerId"
+type="int64"
+tag="playerId"
+comment="加入的玩家"
+show="normal"
+
+[[variables]]
+name="Reason"
+type="int32"
+tag="reason"
+comment="变更原因编号" 
+show="normal"
+
+[[variables]]
+name="ReasonText"
+type="string"
+tag="reasonText"
+comment="变更原因"
+show="normal"

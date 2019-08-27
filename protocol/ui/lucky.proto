@@ -1,0 +1,23 @@
+syntax = "proto2";
+
+package  ui;
+
+import "drop.proto";
+import "rewproperty.proto";
+
+message LuckyInfo{
+    //幸运符物品id
+    required int32 itemId=1;
+    //过期时间
+    required int64 expireTime=2;
+}
+
+// 幸运信息变化
+message SCLuckyInfoChanged {
+    required LuckyInfo info=1;
+}
+
+// 幸运信息推送
+message SCLuckyInfoNotice{
+    repeated LuckyInfo infoList=1;
+}

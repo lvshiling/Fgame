@@ -1,0 +1,154 @@
+syntax = "proto2";
+
+import "player.proto";
+import "common.proto";
+
+package ui;
+
+
+//仇人信息
+message FoeInfo{
+    required int64 foeId=1;
+    required int64 killTime=2;
+    required PlayerBasicInfo playerBasicInfo=3;
+}
+
+
+//仇人列表
+message SCFoesGet{
+    //仇人列表
+    repeated FoeInfo foeList=1;
+}
+
+//移除仇人
+message CSFoeRemove{
+    required int64 foeId = 1;
+}
+
+//移除仇人回复
+message SCFoeRemove{
+    required int64 foeId = 1;
+}
+
+
+//仇人增加
+message SCFoeAdd{
+    required FoeInfo foeInfo=1;
+}
+
+
+//查看位置
+message CSFoeViewPos {
+    required int64 foeId=1;
+    required string foeName=2;
+}
+
+//查看位置回复
+message SCFoeViewPos {
+    // false 玩家不在线 
+    required bool result=1;
+    required int64 foeId=2;
+    optional bool isCross=3;
+    //地图名字
+    optional string name=4;
+    //非跨服显示
+    optional int32 mapId=5;
+    optional Position pos=6; 
+    required string foeName=7;
+}
+
+
+//追踪传送
+message CSFoeTransfer {
+    required int64 foeId=1;
+}
+
+//追踪传送回复
+message SCFoeTransfer {
+    required int64 foeId=1;
+}
+
+
+
+message FoeFeedback{
+    required string playerName=1;
+    required int32 isProtected=2;//0否1是
+}
+// 报复相关信息
+message SCFoeFeedbackInfo{
+    required int64 protectExpireTime=1;
+    repeated FoeFeedback feedbackList=2;
+}
+
+message XianTaoInfo {
+    // 仙桃类型
+    required int32 typ=1;
+    // 仙桃掉落数量
+    required int32 num=2;
+}
+message XianTaoFoeNoticeInfo {
+    repeated XianTaoInfo info=1;
+}
+message ShenYuFoeNoticeInfo {
+    // 死亡掉落钥匙数量
+    required int32 dropKeyNum=1;
+}
+//仇人推送
+message SCFoeNotice{
+    required string foeName=1;
+    required int32 foeRole=2;
+    required int32 foeSex=3;
+    required int64 foeId=4;
+    required int32 sceneType=5;
+    optional ShenYuFoeNoticeInfo shenYuFoeInfo=6; //神域仇人推送信息
+    optional XianTaoFoeNoticeInfo xianTaoFoeInfo=7; //仙桃仇人推送信息
+}
+
+//击杀玩家推送
+message SCFoeKillNotice{
+    required string deadName=1;
+    required int32 deadRole=2;
+    required int32 deadSex=3;
+    required int64 deadId=4;
+    required int32 sceneType=5;
+    optional XianTaoFoeNoticeInfo xianTaoFoeInfo=6; //仙桃仇人推送信息
+}
+
+//报复提醒
+message SCFoeFeedbackNotice{
+    required int64 playerId=1;
+    required string playerName=2;
+    required bool isProtected=3;
+    required int64 lostSilver=4;
+}
+
+//放狗
+message CSFoeFeedback{
+    required int64 foeId=1;
+    optional string args=2;
+}
+message SCFoeFeedback{
+    required bool isProtected=1;
+    required string foeName=2;
+    required int32 lostSilver=3;
+    required int32 sex=4;
+    optional string args=5;
+}
+
+//购买恶狗保护
+message CSFoeFeedbackBuyProtect{
+    
+}
+message SCFoeFeedbackBuyProtect{
+    // 保护过期时间
+    required int64 expireTime=1;
+}
+
+
+//查询报复信息
+message CSFoeFeedbackRead{
+}
+message SCFoeFeedbackRead{
+    repeated FoeFeedback feedbackList=1; 
+}
+ 

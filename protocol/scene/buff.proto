@@ -1,0 +1,14 @@
+syntax = "proto2";
+
+package scene;
+//buff数据
+message ObjectBuffData {
+    //uuid
+    required int64 uid = 1;
+    //对象类型 
+    required int32 objecType = 2;
+    //buff id
+    required int32 buffId = 3;
+    //buff时间
+    required float buffTime=4;
+}

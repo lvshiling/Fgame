@@ -1,0 +1,205 @@
+syntax = "proto2";
+
+package ui;
+
+//物品
+message MingGeItemInfo {
+    //槽位
+    required int32 slot=1;
+    //物品id
+    required int32 itemId=2;
+}
+
+//命格
+message MingGeInfo {
+    //命盘子类型
+    required int32 mingGeType = 1;
+    repeated MingGeItemInfo itemList=2;
+}
+
+//命盘
+message MingGePanInfo {
+    //命盘类型 0 普通命盘  1高级命盘
+    required int32 panType=1;
+    repeated MingGeInfo mingGePanList=2;
+}
+
+
+//命盘祭炼信息
+message MingGeRefinedInfo {
+    //贪狼  2破军  3七杀 4紫薇
+    required int32 type=1;
+    //阶数
+    required int32 number=2;
+    //星数
+    required int32 star=3;
+    //次数
+    required int32 refinedNum=4;
+    //进度值
+    required int32 refinedPro=5;
+}
+
+//命理属性
+message MingLiPropertyInfo {
+    //槽位
+    required int32 slot=1;
+    //命宫属性类型
+    required int32 propertyType=2;
+    //洗炼次数
+    required int32 times=3;
+}
+
+//命理
+message MingLiInfo {
+    //部位
+    required int32 posTag =1;
+    //命理
+    repeated MingLiPropertyInfo propertyList=2;
+}
+
+//命理信息
+message MingGeMingLiInfo {
+    //命宫类型
+    required int32 mingGongType=1;
+    //命理信息
+    repeated MingLiInfo mingLiList=2;
+
+}
+
+//获取命盘信息
+message CSMingGePanGet {
+
+}
+
+//获取命盘信息
+message SCMingGePanGet {
+    repeated MingGePanInfo mingGePanList=1;
+}
+
+//命格合成
+message CSMingGeSynthesis {
+    required int32 synthesisId=1;
+}
+
+//合成回复
+message SCMingGeSynthesis {
+    required bool sucess =1;
+    required int32 itemId=2;
+    required int32 itemNum =3;
+}
+
+//命盘祭炼信息
+message CSMingGeRefinedGet {
+
+}
+
+
+//命盘祭炼信息
+message SCMingGeRefinedGet {
+    repeated MingGeRefinedInfo refinedList=1;
+}
+
+
+//命盘祭炼
+message CSMingGeRefined {
+    required bool autoBuy=1;
+    //祭炼次数
+    required int32 num=2;
+}
+
+//命盘祭炼
+message SCMingGeRefined {
+    repeated MingGeRefinedInfo refinedList =1;
+}
+
+
+//获取命理信息
+message CSMingGeMingLiGet {
+
+}
+
+//获取命理信息回复
+message SCMingGeMingLiGet {
+    repeated MingGeMingLiInfo mingLiList=1;
+}
+
+//命理洗炼
+message CSMingGeMingLiBaptize {
+    //是否自动购买
+    required bool autoBuy=1;
+    //命宫类型
+    required int32 mingGongType=2;
+    //部位
+    required int32 posTag=3;
+    //槽位多选
+    repeated int32 slotList=4;
+}
+
+//命理洗练
+message SCMingGeMingLiBaptize {
+    //命宫类型
+    required int32 mingGongType=1;
+    //部位
+    required int32 posTag=2;
+    //命理信息
+    repeated MingLiPropertyInfo propertyList=3;
+}
+
+
+//命盘镶嵌
+message CSMingGePanMosaic {
+    //命盘类型 0 普通命盘 1超级命盘
+    required int32 panType=1;
+    //命盘子类型
+    required int32 mingGeType=2;
+    //镶嵌槽位
+    required int32 slot=3;
+    //镶嵌命格物品
+    required int32 itemId=4;
+}
+
+//命盘镶嵌回复
+message SCMingGePanMosaic {
+    //命盘类型 0 普通命盘 1超级命盘
+    required int32 panType=1;
+    //命盘子类型
+    required int32 mingGeType=2;
+    //镶嵌槽位
+    required int32 slot=3;
+    //镶嵌命格物品
+    required int32 itemId=4;
+}
+
+
+
+//命盘卸下
+message CSMingGePanUnload {
+    //命盘类型 0 普通命盘 1超级命盘
+    required int32 panType=1;
+    //命盘子类型
+    required int32 mingGeType=2;
+    //卸下槽位
+    required int32 slot=3;
+}
+
+
+//命盘卸下
+message SCMingGePanUnload {
+    //命盘类型 0 普通命盘 1超级命盘
+    required int32 panType=1;
+    //命盘子类型
+    required int32 mingGeType=2;
+    //卸下槽位
+    required int32 slot=3;
+}
+
+//命宫激活推送
+message SCMingGeMingGongActive {
+   repeated MingGeMingLiInfo mingGeMingLiList=1;
+}
+
+
+
+
+
+

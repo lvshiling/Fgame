@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package pb;
+
+//公告请求
+message NoticeRequest{
+    int32 platform=1;                   //平台 
+}
+
+//公告回复
+message NoticeResponse{
+    string notice=1;
+}
+
+//刷新公告
+message RefreshNoticeRequest{
+
+}
+
+//刷新公告回复
+message RefreshNoticeResponse{
+   
+}
+
+
+service NoticeManage {
+    //获取公告
+    rpc GetNotice(NoticeRequest) returns(NoticeResponse){}
+    //刷新公告
+    rpc RefreshNotice(RefreshNoticeRequest)  returns(RefreshNoticeResponse){}
+}

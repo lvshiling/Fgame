@@ -1,0 +1,61 @@
+syntax = "proto2";
+
+package ui;
+
+message CSLogin {
+   required string token = 1;        // token string
+   required int32 serverId=2;        //服务器
+   optional bool guaJi=3;  //是否挂机
+    //配置
+    optional string deviceMac=4; //设备码
+    optional string clientAppVersion=5;//客户端app版本号
+    optional string clientResourceVersion=6; //客户端资源号
+}
+
+message SCLogin {
+    required int64 userId = 1;
+    //0:未认证 1:未成年 2:成年
+    required int32 realNameState=2; 
+    required int64 now =3;
+    // 开服时间
+    required int64 openServerTime=4; 
+    //合服时间
+    required int64 mergeServerTime=5;
+    //是否是gm
+    required int32 gm=6;
+    // 活动开服时间
+    required int64 activityOpenServerTime=7; 
+    //活动合服时间
+    required int64 activityMergeServerTime=8;
+    optional string iosVersion=9;  //ios版本
+    optional string androidVersion=10; //安卓版本
+} 
+
+message CSTestLogin {
+    required string userName = 1;
+    required string password = 2;
+}
+
+
+message SCTestLogin {
+    required int64 userId = 1;
+    //0:未认证 1:未成年 2:成年
+    required int32 realNameState=2; 
+    required int64 now =3;
+    // 开服时间
+    required int64 openServerTime=4; 
+    //合服时间
+    required int64 mergeServerTime=5;
+    // 活动开服时间
+    required int64 activityOpenServerTime=6; 
+    //活动合服时间
+    required int64 activityMergeServerTime=7;
+}
+ 
+
+
+
+
+
+
+

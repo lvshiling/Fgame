@@ -1,0 +1,12 @@
+syntax = "proto2";
+
+package messagetype;
+
+enum ChatMonitorMessageType {
+    //设置监听服务器
+    CGChatMinitorType = 4001;
+    GCChatMinitorType = 4002;
+
+    //监听下发的信息
+    GCChatMinitorMsgType = 4003;
+}

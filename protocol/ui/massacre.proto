@@ -1,0 +1,68 @@
+syntax = "proto2";
+
+package ui;
+
+//戮仙刃信息
+message MassacreInfo{
+    //戮仙刃id
+    required int32 advancedId=1;
+    //当前杀气数量
+    required int64 shaQiNum=2;
+}
+
+//戮仙刃信息请求
+message CSMassacreGet {
+}
+//戮仙刃信息应答
+message SCMassacreGet{
+   //戮仙刃信息
+   required MassacreInfo massacreInfo=1;
+}
+
+
+//戮仙刃进阶请求
+message CSMassacreAdvanced{
+    //是否自动进阶
+    required bool autoFlag=1;
+}
+//戮仙刃进阶应答
+message SCMassacreAdvanced{
+    //戮仙刃id
+    required int32 advancedId=1;
+    //当前杀气数量
+    required int64 shaQiNum=2;
+    //进阶方式 1杀气进阶
+    required int32 advancedType=3;
+    //进阶结果 1进阶成功 2升星成功 3失败
+    required int32 resultType=4;
+}
+
+//戮仙刃信息推送
+message SCMassacreInfo{
+    required MassacreInfo massacreInfo=1;
+}
+
+//玩家被击杀戮仙刃兵魂消失推送
+message SCMassacreWeaponLoseInfo{
+    //旧戮仙刃id
+    required int32 oldAdvancedId=1;
+    //新戮仙刃id
+    required int32 newAdvancedId=2;
+    //击杀者名字
+    required string killerName=3;
+}
+
+//戮仙刃杀气推送
+message SCMassacreShaQiVary{
+    required int64 shaQiNum=1;
+}
+
+//戮仙刃杀气掉落
+message SCMassacreShaQiDrop{
+    //掉落星数
+    required int32 dropStar=1;
+    //掉落杀气数量
+    required int32 dropNum=2;
+    //击杀者名字
+    required string killerName=3;
+}

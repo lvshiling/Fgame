@@ -1,0 +1,125 @@
+
+syntax = "proto2";
+
+package ui;
+
+import "drop.proto";
+import "inventory.proto";
+
+
+//装备槽位
+message TuLongEquipSlot {
+    //位置 0:武器 1:战袍 2:头盔 3:战靴 4:腰带 5:护手 6:玉坠 7:项链
+    required int32 slotId=1;
+    //强化等级
+    required int32 level=2; 
+    optional int32 itemId=4[default=0];
+    optional int32 bindType=5[default=0]; //0不绑定1绑定，默认0
+    //属性
+    optional ItemPropertyData propertyData=6;
+    //宝石
+    repeated GemSlot gems=7;
+}
+
+message TuLongEquipInfo{
+    required int32 suitType=1;
+    repeated TuLongEquipSlot slotList=2; //装备槽位数据
+}
+
+message TuLongEquipSkillInfo{
+    required int32 suitType=1;
+    required int32 skillLevel=2; //技能等级
+}
+
+
+//屠龙装备槽位数据改变
+message SCTuLongEquipSlotChanged {
+    //改变的装备
+    repeated TuLongEquipInfo infoList=1; //屠龙装备列表
+}
+
+//屠龙装备信息推送
+message SCTuLongEquipInfoNotice{
+    repeated TuLongEquipInfo infoList=1; //屠龙装备列表
+}
+
+//屠龙装备技能推送
+message SCTuLongEquipSkillNotice {
+    repeated TuLongEquipSkillInfo infoList=1;//屠龙装备技能列表
+}
+
+//使用装备
+message CSTuLongUseEquip {
+    //索引
+    required int32 index=1;
+    // 0龙牙1龙鳞2龙血3龙胆4龙魄
+    required int32 suitType=2;
+}
+message SCTuLongUseEquip {
+    required int32 index=1;
+    required int32 suitType=2;
+}
+
+//脱下装备
+message CSTuLongTakeOffEquip {
+   // 0龙牙1龙鳞2龙血3龙胆4龙魄
+    required int32 suitType=1;
+    //位置 0:武器 1:战袍 2:头盔 3:战靴 4:腰带 5:护手 6:玉坠 7:项链
+    required int32 slotId=2;
+}
+message SCTuLongTakeOffEquip {
+     required int32 suitType=1;
+    required int32 slotId=2;
+}
+
+//屠龙装备强化
+message CSTuLongEquipStrengthen{
+    // 0龙牙1龙鳞2龙血3龙胆4龙魄
+    required int32 suitType=1;
+    // 装槽备位置
+    required int32 slotId=2; 
+}
+message SCTuLongEquipStrengthen{
+    //强化结果 0:失败 1：成功
+    required int32 result=1;
+    required int32 level=2;
+    required int32 slotId=3; 
+    required int32 suitType=4;
+}
+
+//屠龙融合
+message CSTuLongEquipRongHe{
+    //材料索引
+    repeated int32 itemIndex =1;
+    //客户端使用
+    required int32 args=2;
+}
+message SCTuLongEquipRongHe{
+    repeated int32 itemIdList=1;
+    required int32 args=2;
+}
+
+//屠龙转化
+message CSTuLongEquipZhuanHua{
+    //材料索引
+    repeated int32 itemIndex =1;
+    //位置 0:武器 1:战袍 2:头盔 3:战靴 4:腰带 5:护手 6:玉坠 7:项链
+    required int32 slotId=2;
+}
+message SCTuLongEquipZhuanHua{
+    required int32 itemId=1;
+    required int32 slotId=2;
+}
+
+//屠龙激活技能
+message CSTuLongEquipSkillUpgrade {
+    // 0龙牙1龙鳞2龙血3龙胆4龙魄
+    required int32 suitType=1;
+}
+message SCTuLongEquipSkillUpgrade {
+    required int32 suitType=1; 
+    // 结果 
+    required bool isSuccess=2;
+    // 技能等级
+    required int32 skillLevel=3;
+}

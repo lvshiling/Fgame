@@ -1,0 +1,38 @@
+syntax = "proto2";
+
+package ui;
+import "drop.proto";
+
+//挑战个人boss
+message CSMyBossChallenge{
+    required int32 biologyId=1;
+}
+message SCMyBossChallenge{
+}
+
+
+//个人boss挑战结果
+message SCMyBossChallengeResult{
+    //挑战是否成功：0否1是
+    required bool isSuccess =1;
+    //掉落物品
+    repeated DropInfo dropList=2;
+}
+ 
+//个人Boss下发场景信息
+message SCMyBossSceneInfo{
+    //创建场景时间
+    required int64 createTime = 1;
+    required int32  bossId=2;
+}
+
+
+message MyBossInfo{
+    required int32 biologyId=1;
+    required int32 attendTimes=2;
+}
+
+// 推送boss信息
+message SCMyBossInfoNotice{
+    repeated MyBossInfo infoList=1;
+}

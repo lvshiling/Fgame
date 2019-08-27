@@ -1,0 +1,42 @@
+syntax = "proto2";
+
+package ui;
+
+import "scene.proto";
+
+//挑战引导副本
+message CSWelfareSceneAttend{
+    required int32 groupId=1;
+}
+message SCWelfareSceneAttend{
+    required int32 groupId=1;
+} 
+
+
+// 奇遇岛 
+message QiYuDaoInfo {
+    repeated GeneralCollectInfo biologyInfo=1;
+    required int32 collectNum=2;    //采集物数量
+} 
+
+//引导副本下发场景信息
+message SCWelfareSceneInfo{
+    //创建场景时间
+    required int64 createTime = 1;
+    //模板id
+    required int32 tempId=2;
+    //奇遇岛
+    optional QiYuDaoInfo qiYuDaoInfo=3;  //侧边栏所有的npc
+}
+ 
+//场景信息推变化送 
+message SCWelfareSceneDataChangedNotice{
+    required int32 tempId=1; 
+    optional QiYuDaoInfo qiYuDaoInfo=2;  //侧边栏变化的npc
+}
+
+//刷新通知
+message SCWelfareSceneRefersh{
+    required int32 groupId=1; 
+} 
+ 

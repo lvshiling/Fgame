@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+package pb;
+
+//客户端配置刷新
+message ClientVersionRefreshRequest{
+}
+//客户端配置刷新
+message ClientVersionRefreshResponse{
+}
+
+//服务器配置刷新
+message ServerConfigRefreshRequest{
+
+}
+
+//服务器配置刷新
+message ServerConfigRefreshResponse{
+
+}
+
+
+//刷新平台配置
+message PlatformConfigRefreshRequest{
+    int32 platform=1;
+}
+
+//刷新平台配置
+message PlatformConfigRefreshResponse{
+    int32 platform=1;
+}
+
+
+service ConfigManage {
+    //客户端版本刷新
+    rpc RefreshClientVersion(ClientVersionRefreshRequest) returns(ClientVersionRefreshResponse){}
+    //服务器配置刷新
+    rpc RefreshServerConfig(ServerConfigRefreshRequest) returns(ServerConfigRefreshResponse){}
+    //刷新平台配置
+    rpc RefreshPlatformConfig(PlatformConfigRefreshRequest) returns(PlatformConfigRefreshResponse){}
+}
+

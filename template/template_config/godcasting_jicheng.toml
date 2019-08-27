@@ -1,0 +1,27 @@
+file="godcasting_jicheng_vo.go"
+pkg="template"
+class="GodCastingJichengTemplateVO"
+comment = "神铸继承配置"
+[[variables]]
+name="Id"
+type="int"
+tag="id"
+comment="id"
+
+[[variables]]
+name="Level"
+type="int32"
+tag="level"
+comment="等级"
+
+[[variables]]
+name="NeedItemId"
+type="int32"
+tag="need_item_id"
+comment="需要的物品ID"
+
+[[variables]]
+name="NeedItemCount"
+type="int32"
+tag="need_item_count"
+comment="需要的物品数量"

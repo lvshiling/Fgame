@@ -1,0 +1,101 @@
+syntax = "proto2";
+
+package ui;
+
+import "item.proto";
+
+
+//抢红包玩家信息
+message SnatcherInfo {
+    //名字
+    required string name=1;
+    //角色
+    required int32 role =2;
+    //性别
+    required int32 sex = 3;
+    //等级
+    required int32 level=4;
+    //玩家id
+    required int64 playerId=5;
+}
+
+
+//查红包
+message CSHongbaoGet{
+    //红包id
+    required int64 hongBaoId=1;
+    //频道  0:世界 1:帮派 2:队伍 3:系统 4:个人
+    required int32 channel = 2;
+}
+message SCHongbaoGet{
+    //奖励
+    repeated ItemInfo itemList=1;
+    //抢红包玩家
+    repeated SnatcherInfo snatcherList=2;
+    //红包结束时间
+    required int64 endTime=3;
+    //红包类型
+    required int32 hongBaoType=4;
+    //红包id
+    required int64 hongBaoId=5;
+    //发红包玩家id
+    required int64 sendId=6;
+    //红包领取人数
+    required int32 countMax=7;
+    //频道  0:世界 1:帮派 2:队伍 3:系统 4:个人
+    required int32 channel = 8;
+}
+
+//发红包
+message CSHongbaoSend{
+    //红包类型
+    required int32 hongBaoType=1;
+    //频道  0:世界 1:帮派 2:队伍 3:系统 4:个人
+    required int32 channel = 2;
+    //其他参数(前端自定义规则)
+    optional string args=3;
+    //红包领取人数
+    required int32 countMax=4;
+}
+message SCHongbaoSend{
+    //红包id
+    required int64 hongBaoId=1;
+}
+
+
+//抢红包
+message CSHongbaoSnatch{
+    //红包id
+    required int64 hongBaoId=1;
+    //频道  0:世界 1:帮派 2:队伍 3:系统 4:个人
+    required int32 channel = 2;
+}
+message SCHongbaoSnatch{
+    //奖励
+    repeated ItemInfo itemList=1;
+    //抢红包玩家
+    repeated SnatcherInfo snatcherList=2;
+    //红包结束时间
+    required int64 endTime=3;
+    //红包类型
+    required int32 hongBaoType=4;
+    //结果: 0抢完; 1抢过; 2过期; 3成功;
+    required int32 result=5;
+    //红包id
+    required int64 hongBaoId=6;
+    //发红包玩家id
+    required int64 sendId=7;
+    //抢红包次数
+    required int32 snatchCount=8;
+    //红包领取人数
+    required int32 countMax=9;
+}
+
+
+//玩家红包信息
+message CSHongbaoSnatchGet{
+}
+message SCHongbaoSnatchGet{
+    //抢红包次数
+    required int32 snatchCount=1;
+}

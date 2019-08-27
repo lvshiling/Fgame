@@ -1,0 +1,15 @@
+file="soul_devour_vo.go"
+pkg="template"
+class="SoulDevourTemplateVO"
+comment = "帝魂吞噬配置"
+[[variables]]
+name="Id"
+type="int"
+tag="id"
+comment="id"
+
+[[variables]]
+name="DevourId"
+type="string"
+tag="devour_id"
+comment="吞噬物品"

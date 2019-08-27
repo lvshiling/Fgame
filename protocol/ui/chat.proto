@@ -1,0 +1,72 @@
+syntax = "proto2";
+
+package ui;
+
+
+
+//聊天发送
+message CSChatSend {
+    //频道  0:世界 1:帮派 2:队伍 3:系统 4:个人
+    required int32 channel = 1;
+    //接收id
+    required int64 recvId=2;
+    //消息类型 0:普通文本 1:表情 2:语音 3:红包
+    required int32 msgType=3;
+    //消息内容
+    required bytes content=4;
+    //其他参数(前端自定义规则)
+    optional string args=5;
+}
+
+//聊天发送
+message SCChatSend {
+    //频道  0:世界 1:帮派 2:队伍 3:系统  4:个人
+    required int32 channel = 1;
+    //接收id
+    required int64 recvId=2;
+    //消息类型 0:普通文本 1:表情 2:语音 3:红包
+    required int32 msgType=3;
+    //消息内容
+    required bytes content=4;
+    //其他参数(前端自定义规则)
+    optional string args=5;
+    //发言奖励次数
+    optional int32 chatCount=6;
+}
+
+//聊天接收
+message SCChatRecv {
+    //发送者id
+    required int64 sendId=1; 
+    //频道  0:世界 1:帮派 2:队伍 3:系统 4:个人
+    required int32 channel = 2;
+    //接收id
+    required int64 recvId=3;
+    //消息类型 0:普通文本 1:表情 2:语音 3:红包
+    required int32 msgType=4;
+    //消息内容
+    required bytes content=5;
+    //其他参数(前端自定义规则)
+    optional string args=6;
+    //发送者名称
+    optional string sendName=7;
+}
+
+message ChatData {
+    //发送者id
+    required int64 sendId=1; 
+    //消息类型 0:普通文本 1:表情 2:语音 3:红包
+    required int32 msgType=2;
+    //消息内容
+    required bytes content=3;
+    //发送时间
+    required int64 sendTime=4;
+    //其他参数(前端自定义规则)
+    optional string args=5;
+}
+
+//聊天列表推送 
+message SCChatListNotice{
+    repeated ChatData worldList=1;
+    repeated ChatData systemList=2;
+}

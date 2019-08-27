@@ -1,0 +1,54 @@
+syntax = "proto2";
+
+package cross;
+
+import "property.proto";
+
+//灵童展示数据
+message LingTongShowData{
+    optional int32 fashionId=1;
+    optional int32 weaponId=2;
+    optional int32 weaponState=3;
+    optional int32 titleId=4;
+    optional int32 wingId=5;
+    optional int32 mountId=6;
+    optional int32 shenFaId=7;
+    optional int32 lingYuId=8;
+    optional int32 faBaoId=9;
+    optional int32 xianTiId=10;
+}
+
+//灵童数据
+message LingTongData{
+    //灵童id
+    required int32 lingTongId=1; 
+    //灵童系统属性
+    required PropertyData battlePropertyData=2;
+    //灵童展示数据
+    required LingTongShowData lingTongShowData=3;
+    //名字
+    required string name=4;
+}
+
+//灵童数据变更
+message SILingTongDataInit{
+    required LingTongData lingTongData=1;
+}
+
+//灵童数据变更
+message SILingTongDataChanged{
+    //灵童id
+    optional int32 lingTongId=1; 
+    //灵童系统属性
+    optional PropertyData battlePropertyData=2;
+    //灵童展示数据
+    optional LingTongShowData lingTongShowData=3;
+    //灵童名字
+    optional string name=4;
+}
+
+
+
+//灵童数据移除
+message SILingTongDataRemove{
+}

@@ -1,0 +1,27 @@
+syntax = "proto2";
+
+package ui;
+
+import "item.proto";
+
+
+message TreasureBoxLog {
+    required int32 serverId=1;
+    required string playerName=2;
+    required int64 lastTime=3;
+    repeated ItemInfo itemList=4;
+}
+
+
+//跨服宝箱日志请求
+message CSTreasureBoxLog {
+    //最近一条日志时间
+    required int64 logTime=1;
+}
+
+
+//跨服宝箱日志回复
+message SCTreasureBoxLog {
+    repeated TreasureBoxLog boxLogList=1;
+}
+

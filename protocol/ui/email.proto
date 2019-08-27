@@ -1,0 +1,105 @@
+syntax ="proto2";
+
+package ui;
+
+import "baby.proto";
+
+//附件信息
+message AttachementInfo{
+    //物品Id
+    required int32 itemId = 1;
+    //物品数量
+    required int32 num = 2;
+    //等级
+    optional int32 level=3;
+	optional int32 upstar=4;        //金装强化星级
+	repeated int32 attrList=5;      //金装附件属性列表
+	optional int32 bindType=6;      //绑定类型
+	optional bool isRandomAttr=7;   //是否随机金装属性
+	optional int32 expireType=8;    //过期类型
+	optional int64 expireTime=9;    //过期时间
+	optional int64 itemGetTime=10;  //获取时间
+	optional int32 quality=11;      //宝宝品质
+	optional int32 sex=12;          //宝宝性别
+	repeated TalentInfo TalentList=13;//宝宝天赋
+	optional int32 danbei=14;       //宝宝单倍
+    optional int32 openLightLevel=15;//开光等级
+    optional int32 openTimes=16;//开光次数
+} 
+
+//邮件信息
+message EmailInfo{
+    //邮件Id
+    required int64 emailId = 1;
+    //是否已读：0否 1是(默认0)
+    required int32 isRead = 2;
+    //是否已领取附件:0否 1是(默认0)
+    required int32 isGetAttachment = 3;
+    //发送时间
+    required int64 createTime = 4;
+    //邮件标题
+    required string title = 5;
+    //邮件内容
+    required string content = 6;
+    //附件
+    repeated AttachementInfo AttachementInfo = 7;
+}
+
+//邮件列表请求
+message CSEmailsGet{
+}
+//邮件列表请求应答
+message SCEmailsGet{
+    repeated EmailInfo emailInfo = 1;
+}
+
+//读邮件请求
+message CSReadEmail{
+    required int64 emailId = 1;
+}
+//读邮件请求应答
+message SCReadEmail{
+    required int64 emailId = 1;
+}
+
+//删除已读邮件请求
+message CSDelHadReadEmail{
+}
+//删除已读邮件请求应答
+message SCDelHadReadEmail{
+    repeated int64 emailIdList = 1;
+}
+
+//删除邮件请求
+message CSDelEmail{
+    required int64 emailId = 1;
+}
+//删除邮件请求应答
+message SCDelEmail{
+    required int64 emailId = 1;
+}
+
+//邮件一键领取附件请求
+message CSGetAttachmentBatch{
+}
+//邮件一键领取附件请求应答
+message SCGetAttachmentBatch{
+    repeated int64 emailIdList = 1;
+    repeated AttachementInfo attachementInfo = 2;
+}
+
+//邮件领取请求
+message CSGetAttachment{
+    required int64 emailId = 1;
+}
+//邮件领取请求应答
+message SCGetAttachment{
+    required int64 emailId = 1;
+    repeated AttachementInfo attachementInfo = 2;
+}
+
+
+//邮件添加应答
+message SCAddEmail{
+    required EmailInfo emailInfo = 1;
+}

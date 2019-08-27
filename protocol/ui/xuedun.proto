@@ -1,0 +1,76 @@
+syntax = "proto2";
+
+package ui;
+
+message XueDunCacheInfo {
+    //阶数
+    required int32 number=1;
+    //血炼值
+    required int64 blood=2;
+    //星数
+    required int32 star=3;
+    //星级进度值
+    required int32 starPro=4;
+    //培养等级
+    required int32 culLevel=5;
+    //培养进度值
+    required int32 culPro=6;
+}
+
+message XueDunInfo {
+    //阶数
+    required int32 number=1;
+    //血炼值
+    required int64 blood=2;
+    //星数
+    required int32 star=3;
+    //星数升级次数
+    required int32 starNum=4;
+    //星数进度值
+    required int32 starPro=5;
+    //培养等级
+    required int32 culLevel=6;
+    //培养次数
+    required int32 culNum=7;
+    //培养进度值
+    required int32 culPro=8;
+}
+
+//血盾界面信息
+message CSXueDunGet {
+    
+}
+
+//血盾界面信息
+message SCXueDunGet {
+    required XueDunInfo xunDunInfo=1;
+}
+
+//血盾升级
+message CSXueDunUpgrade {
+  
+}
+
+//血盾升级回复
+message SCXueDunUpgrade {
+    //是否成功
+    required bool sucess=1;
+    required XueDunInfo xunDunInfo=2;
+}
+
+//血盾培养
+message CSXueDunPeiYang {
+    required int32 num=1;
+}
+
+//血盾培养回复
+message SCXueDunPeiYang {
+    required XueDunInfo xunDunInfo=1;
+}
+
+
+//炼狱值改变
+message SCXueDunBloodChanged {
+    required int64 blood=1;
+}
+

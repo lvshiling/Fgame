@@ -1,0 +1,55 @@
+syntax = "proto2";
+
+package ui;
+
+import "drop.proto";
+import "rewproperty.proto";
+
+// 仙尊特权卡信息
+message XianZunCardInfo {
+    // 仙尊特权卡类型
+    required int32 type=1;
+    // 激活时间
+    required int64 activiteTime=2;
+    // 是否已领取
+    required int32 isReceive=3;
+}
+
+// 仙尊特权卡信息请求
+message CSXianZunCardInfo{
+}
+// 仙尊特权卡信息回复
+message SCXianZunCardInfo{
+    repeated XianZunCardInfo xianZunCardInfo=1;
+}
+
+// 仙尊特权卡购买请求
+message CSXianZunCardBuy{
+     // 仙尊特权卡类型
+    required int32 type=1;
+}
+// 仙尊特权卡购买回复
+message SCXianZunCardBuy{
+    required int32 type=1;
+    // 激活后获得物品
+    repeated DropInfo dropInfo=2;
+    // 激活后获得钱
+    optional RewProperty rewInfo=3;
+}
+
+// 领取每日奖励请求
+message CSReceiveXianZunCardReward{
+    // 仙尊特权卡类型
+   required int32 type=1;
+}
+// 领取每日奖励回复
+message SCReceiveXianZunCardReward{
+   required int32 type=1;
+   repeated DropInfo dropInfo=2;
+   optional RewProperty rewInfo=3;
+}
+
+// 仙尊卡过期推送
+message SCXianZunCardNotice{
+    required int32 type=1;
+}

@@ -1,0 +1,21 @@
+file="wushuangweapon_unlock_vo.go"
+pkg="template"
+class="WushuangWeaponUnlockTemplateVO"
+comment = "无双神器强化配置"
+[[variables]]
+name="Id"
+type="int"
+tag="id"
+comment="id"
+
+[[variables]]
+name="Position"
+type="int32"
+tag="position"
+comment="身体部位"
+
+[[variables]]
+name="IsJiesuo"
+type="int32"
+tag="is_jiesuo"
+comment="是否解锁"

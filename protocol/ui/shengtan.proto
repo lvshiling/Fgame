@@ -1,0 +1,37 @@
+syntax = "proto2";
+
+package ui;
+
+import "scene.proto";
+
+
+
+//圣坛场景信息
+message SCShengTanSceneInfo{
+    required int64 bossHp=1; //boss血量
+    required int64 bossMaxHp=2; //boss最大血量
+    required int32 jiuNiangNum=3; //酒酿数量
+    required int32 jiuNiangExpPercent=4; //酒酿经验加成
+    //排名信息
+    repeated SceneRankInfo rankInfoList=5; //排行信息
+}
+
+
+
+
+//圣坛boss血量变化
+message SCShengTanSceneBossHpChanged{
+    required int64 bossHp=1; //boss血量
+}
+
+
+//圣坛酒酿数量辩护
+message SCShengTanSceneJiuNiangChanged{
+    required int32 jiuNiangNum=1; //酒酿数量
+    required int32 jiuNiangExpPercent=2; //酒酿经验加成
+}
+
+
+//圣坛场景结束
+message SCShengTanSceneEnd{
+}

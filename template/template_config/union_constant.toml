@@ -1,0 +1,33 @@
+file="union_constant_vo.go"
+pkg="template"
+class="UnionConstantTemplateVO"
+comment = "仙盟常量配置"
+[[variables]]
+name="Id"
+type="int"
+tag="id"
+comment="id"
+
+[[variables]]
+name="GaimingTime"
+type="int64"
+tag="gaiming_time"
+comment="合盟改名时间"
+
+[[variables]]
+name="GaimingItemCount"
+type="int32"
+tag="gaiming_item_count"
+comment="改名消耗数量"
+ 
+ [[variables]]
+name="HemengCd"
+type="int32"
+tag="hemeng_cd"
+comment="合盟cd"
+
+ [[variables]]
+name="HemengShenqing"
+type="int32"
+tag="hemeng_shenqing"
+comment="合盟申请"

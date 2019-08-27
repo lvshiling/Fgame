@@ -1,0 +1,1 @@
+./main.exe --config ./tb_choujiang_moni.json --position [起始位置] --times [次数] 

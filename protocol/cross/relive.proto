@@ -1,0 +1,29 @@
+syntax = "proto2";
+
+package cross;
+
+//玩家复活数据
+message PlayerReliveData{
+    required int32 culTime =1;
+    required int64 lastReliveTime=2;
+}
+
+//复活同步
+message ISPlayerReliveSync{
+    required PlayerReliveData playerReliveData=1;
+}
+
+//复活同步确认
+message SIPlayerReliveSync{
+
+}
+
+//原地复活
+message ISPlayerRelive{
+    required int32 reliveTime=1;
+}
+
+//原地复活
+message SIPlayerRelive{
+    required bool success = 1;
+}

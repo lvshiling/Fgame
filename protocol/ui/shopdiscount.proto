@@ -1,0 +1,43 @@
+syntax = "proto2";
+
+package ui;
+
+
+message ShopDiscountInfo {
+    //特权类型
+    required int32 typ=1;
+    //开始时间
+    required int64 startTime=2;
+    //结束时间
+    required int64 endTime=3;
+}
+
+//商城促销特权信息
+message CSShopDiscountGet{
+    
+}
+
+//商城促销特权信息应答
+message SCShopDiscountGet{
+    required ShopDiscountInfo info=1;
+}
+
+//推送促销特权信息
+message SCShopDiscountNotice {
+    required ShopDiscountInfo info=1;
+}
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+

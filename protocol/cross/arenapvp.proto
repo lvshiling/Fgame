@@ -1,0 +1,68 @@
+syntax = "proto2";
+
+package cross;
+
+// import "skill.proto";
+// import "property.proto";
+
+// message ArenapvpPlayer {
+//     required int64 playerId=1;
+//     required int64 force=2;
+//     required bool online=3;
+//     required string name=4;
+//     required int32 level=5;
+//     required int32 role=6;
+//     required int32 sex=7;
+//     required int32 fashionId=8;
+//     required int32 serverId=9;
+//     required PropertyData battlePropertyData=10;
+//     repeated SkillData skillList=11;
+// }
+
+//参与
+message SIArenapvpAttend{
+}
+message ISArenapvpAttend{
+    required bool isLineUp=1;
+    required int64 sceneId=2;
+}  
+ 
+//pvp 复活
+message ISArenapvpRelive {
+}
+message SIArenapvpRelive{
+    required bool success=1;
+}
+
+// 玩家数据变化
+message PlayerArenapvpData{
+    optional int32 reliveTimes=1; 
+} 
+message SIPlayerArenapvpDataChanged{
+    required PlayerArenapvpData playerArenapvpData=1;
+} 
+
+//重置复活次数
+message ISArenapvpResetReliveTimes{
+}
+
+//参与成功
+message ISArenapvpAttendSuccess{
+}
+
+//pvp对战结束
+message ISArenapvpResultBattle {
+    required bool win=1;
+    required int32 pvpType=2;
+} 
+
+//pvp海选结束
+message ISArenapvpResultElection {
+    required bool win=1;
+    required int32 ranking=2;
+    required int32 pvpType=3;
+} 
+
+//海选幸运奖
+message ISAreanapvpElectionLuckyRew {
+}

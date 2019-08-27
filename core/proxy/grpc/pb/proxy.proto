@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package pb;
+
+service Proxy {
+   rpc Forward(stream Message) returns(stream Message){}
+}
+
+message Message {
+    bytes body=1;
+}
+

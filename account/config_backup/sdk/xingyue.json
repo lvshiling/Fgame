@@ -1,0 +1,14 @@
+{
+    "iOS":{
+        "cpId":"2f7b9528-0bea-4f04-bb05-9d104fe04a0d",
+        "paramKey":"hf5q3n5uc9dzzbdz6e5snmjk3bdqkxuh4rh3tbjsweyh3ieoqq",
+        "gameId":"ed47b3db-e9de-4c1d-ac04-34e47d4891ab",
+        "payKey":"2w4y75m3ktxb0k0tah23ulfh3qt0hutqaiyxiv73z4kusa9x2l"
+    },
+    "android":{
+        "cpId":"2f7b9528-0bea-4f04-bb05-9d104fe04a0d",
+        "paramKey":"hf5q3n5uc9dzzbdz6e5snmjk3bdqkxuh4rh3tbjsweyh3ieoqq",
+        "gameId":"3f75f83c-d213-4382-9226-32715b179fba",
+        "payKey":"clwpn0u8slalikyrloq1p5mgv10f88lz5dwg5m1pj33wwo5t5u"
+    }
+}

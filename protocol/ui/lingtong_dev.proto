@@ -1,0 +1,231 @@
+syntax = "proto2";
+
+package ui;
+
+
+message LingTongDevCacheInfo {
+    //系统类型  1灵兵 2灵骑 3 灵翼 4灵身 5灵域 6灵宝 7 灵体
+    required int32 classType=1;
+    //阶数
+    required int32 advanceId=2;
+    //幻化
+    required int32 seqId=3;
+    //幻化等级
+    required int32 unrealLevel=4;
+    //幻化进度值
+    required int32 unrealPro=5;
+    //培养等级
+    required int32 culLevel=6;
+    //培养进度值
+    required int32 culPro =7;
+    //通灵等级
+    required int32 tongLingLevel=8;
+    //通灵进度值
+    required int32 tongLingPro=9;
+    //皮肤信息列表
+    repeated LingTongDevSkinInfo skinList=10;
+}
+
+//灵童养成类数据
+message AllLingTongDevInfo {
+   //兵魂信息
+   repeated LingTongDevCacheInfo lingTongDevList=1;
+}
+
+
+//灵童养成信息
+message LingTongDevInfo {
+    //阶数
+    required int32 advancedId=1;
+    //当前灵童养成id
+    required int32 seqId=2;
+    //食幻化丹食丹等级
+    required int32 unrealLevel=3;
+    //幻化丹培养进度值
+    required int32 unrealPro=4;
+    //食培养丹食丹等级 (灵骑)
+    optional int32 culLevel=5;
+    //培养丹培养进度值
+    optional int32 culPro=6;
+    //通灵等级 (灵宝)
+    optional int32 tongLingLevel=7;
+    //通灵进度值
+    optional int32 tongLingPro=8;
+    //幻化
+    repeated int32 unrealList=9;
+    //祝福值
+    optional int32 bless=10;
+    //祝福值开始时间
+    optional int64 blessTime=11;
+    //是否隐藏灵童养成
+    required bool hidden=12;
+}
+
+//灵童养成皮肤
+message LingTongDevSkinInfo {
+    //灵童养成皮肤id
+    required int32 seqId=1;
+    //升星等级
+    required int32 level=2;
+    //升星培养值
+    required int32 upPro=3;
+}
+
+//灵童养成信息请求
+message CSLingTongDevGet {
+    // 1灵兵 2灵骑 3 灵翼 4灵身 5灵域 6灵宝 7 灵体
+    required int32 classType =1;
+}
+
+//灵童养成信息应答
+message SCLingTongDevGet{
+   required int32 classType =1;
+   required LingTongDevInfo lingTongInfo=2;
+   //灵童养成皮肤列表
+   repeated LingTongDevSkinInfo lingTongSkinList=3;
+}
+
+//食用幻化丹请求
+message CSLingTongDevUnrealDan {
+    //养成系统
+    required int32 classType=1;
+    required int32 num=2;
+}
+//食用幻化丹应答
+message SCLingTongDevUnrealDan {
+   //养成系统
+   required int32 classType=1;
+   //幻化丹食丹等级
+   required int32 unrealLevel=2;
+   //进度值
+   required int32 unrealPro=3;
+}
+
+//食用培养丹请求 (灵骑培养)
+message CSLingTongDevCulDan {
+    //养成系统
+    required int32 classType=1;
+    required int32 num=2;
+}
+//食用培养丹应答
+message SCLingTongDevCulDan {
+   //养成系统
+   required int32 classType=1;
+   //培养丹食丹等级
+   required int32 culLevel=2;
+   //进度值
+   required int32 culPro=3;
+}
+
+//食用通灵丹 (灵宝通灵)
+message CSLingTongDevTongLing{
+    //养成系统
+    required int32 classType=1;
+}
+
+//食用通灵丹 (灵宝通灵)
+message SCLingTongDevTongLing{
+   //养成系统
+   required int32 classType=1;
+   //通灵食丹等级
+   required int32 tongLingLevel=2;
+   //进度值
+   required int32 tongLingPro=3;
+}
+
+
+//幻化请求
+message CSLingTongDevUnreal {
+    //养成系统
+    required int32 classType=1;
+    //幻化灵童养成id
+    required int32 seqId=2;
+}
+//幻化应答
+message SCLingTongDevUnreal {
+    required int32 classType=1;
+    optional int32 seqId=2;
+}
+
+//卸下请求
+message CSLingTongDevUnload {
+    required int32 classType=1;
+}
+
+//卸下应答
+message SCLingTongDevUnload {
+    required int32 classType=1;
+    //灵童养成id
+    required int32 seqId=2;
+}
+
+//进阶请求
+message CSLingTongDevAdvanced{
+    required int32 classType=1;
+    //是否自动进阶
+    required bool autoFlag=2;
+}
+//进阶应答
+message SCLingTongDevAdvanced{
+    //灵童养成
+    required int32 classType=1;
+    //阶数
+    required int32 advancedId=2;
+    //灵童养成id
+    required int32 seqId=3;
+    //祝福值
+    optional int32 bless=4;
+    //祝福值开始时间
+    optional int64 blessTime=5;
+    //进阶方式 1进阶丹 2祝福丹 3直升券
+    required int32 advancedType=6;
+    // 是否暴击
+    optional bool isDouble=7 [default=false];
+    //总祝福值
+    optional int32 totalBless=8;
+}
+
+//灵童养成隐藏
+message CSLingTongDevHidden {
+    required int32 classType = 1;
+    //是否隐藏 0展示  1隐藏
+    required bool hidden=2;
+}
+
+//灵童养成隐藏
+message SCLingTongDevHidden {
+    required int32 classType=1;
+    required bool hidden=2;
+}
+
+
+
+//灵童养成皮肤升星请求
+message CSLingTongDevUpstar {
+    required int32 classType=1;
+    //灵童养成皮肤id
+    required int32 seqId=2;
+ }
+ 
+ //灵童养成皮肤升星应答
+ message SCLingTongDevUpstar {
+     //灵童养成
+     required int32 classType=1;
+     //灵童养成皮肤id
+     required int32 seqId=2;
+     //皮肤星数
+     required int32 level=3;
+     //进度值
+     required int32 upPro=4;
+}
+
+
+
+
+
+
+
+
+
+
+

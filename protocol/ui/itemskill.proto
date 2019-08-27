@@ -1,0 +1,46 @@
+syntax = "proto2";
+
+package ui;
+
+
+message ItemSkillInfo {
+    //技能类型
+    required int32 typ=1;
+    //技能等级
+    required int32 level=2;
+}
+
+
+//激活物品技能应答
+message SCItemSkillActive {
+    required ItemSkillInfo itemSkill=1;
+}
+
+
+//物品技能升级应答
+message SCItemSkillUpgrade {
+    required  ItemSkillInfo itemSkill=1;
+}
+
+//所有物品技能信息
+message CSItemSkillAllGet{
+
+}
+
+//所有物品技能信息应答
+message SCItemSkillAllGet{
+    //物品技能信息
+    repeated ItemSkillInfo itemSkillList=1;
+ }
+
+ 
+
+
+
+
+
+
+
+
+
+

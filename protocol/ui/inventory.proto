@@ -1,0 +1,432 @@
+syntax = "proto2";
+
+package ui;
+
+import "drop.proto";
+import "baby.proto";
+
+//宝石槽位
+message GemSlot{
+    required int32 order =1;
+    required int32 itemId =2;
+}
+
+//装备槽位
+message EquipmentSlot {
+    //位置 0:武器 1:战袍 2:头盔 3:战靴 4:腰带 5:护手 6:玉坠 7:项链
+    required int32 slotId=1;
+    required int32 level=2;
+    required int32 star=3;
+    optional int32 bindType=4[default=0]; //0不绑定1绑定，默认0
+    //物品
+    optional int32 itemId= 5;
+    //宝石
+    repeated GemSlot gems=6;
+}
+
+// 基础属性
+message BaseProperty {
+    required int32 expireType=1;    //过期类型0.无过期时间1.当日指定时间过期2.获得物品多少秒后过期3.指定时间日期过期
+    required int64 expireTime=2;    //过期时间
+    required int64 itemGetTime=3;   //物品获取时间
+}
+// 金装属性
+message GoldEquipProperty {
+    required int32 openLightLevel=1; //开关等级
+    required int32 upstarLevel=2;   //升星等级
+    repeated int32 attrList=3;      //附加属性
+    optional int32 godCastingTimes=4; //神铸进阶已尝试升级次数
+}
+// 宝宝属性
+message BabyProperty {
+    required int32 quality=1;       //品质
+    required int32 danbei=2;        //倍数
+    required int32 sex=3;           //性别
+    repeated TalentInfo talentList=4;    //天赋 
+}
+// 特戒属性
+message RingProperty{
+    required int32 advance=1;
+    required int32 strengthenLevel=2;
+    required int32 jingLingLevel=3;
+}
+// 物品属性
+message ItemPropertyData { 
+    required BaseProperty base=1; 
+    optional GoldEquipProperty goldequip=2;
+    optional BabyProperty baby=3;
+    optional RingProperty ring=4;
+}
+ 
+//物品
+message SlotItem {
+    //服务器索引
+    required int32 index=1;
+    //道具id
+    required int32 itemId=2;
+    //数量
+    required int32 num=3;
+    //背包类型 0:主背包 1:宝石
+    required int32 bagType=4;
+    //等级
+    optional int32 level=5 [default=-1]; //-1 没有变化
+    //获取时间
+    optional int64 getTime=6 [default=0]; //0 没有变化 
+    //绑定属性 0否 1是
+    optional int32 bindType=7 [default=0];
+    //物品属性
+    optional ItemPropertyData propertyData=8;
+}
+
+//物品使用记录
+message SlotItemUse {
+    //物品id
+    required int32 itemId=1;
+    //今天使用次数
+    required int32 totalTimes=2;
+    //总使用次数
+    required int32 todayTimes=3;
+    //上次使用时间
+    required int64 lastUseTime=4;
+}
+
+//背包物品使用信息变化推送
+message SCInventoryItemUseChangedNotice{
+    repeated SlotItemUse itemUseList=1;  
+}
+
+//背包数据返回
+message SCInventoryGet {
+    repeated SlotItem itemList=1;       //主背包数据
+    repeated EquipmentSlot slotList=2;  //装备槽位数据
+    repeated SlotItem depotItemList=3;  //仓库数据    
+    repeated SlotItemUse itemUseList=4; //物品使用记录
+    repeated SlotItem miBaoDepotItemList=5;  //秘宝仓库数据  
+    repeated SlotItem materialDepotItemList=6; //装备仓库数据
+}
+
+//背包数据合并
+message CSInventoryMerge {
+    optional int32 bagType =1;//背包类型
+}
+
+//背包数据合并
+message SCInventoryMerge {
+    repeated SlotItem itemList=1; //主背包数据
+    required int32 bagType =2;//背包类型
+}
+
+//背包数据改变
+message SCInventoryChanged {
+    //改变的物品
+    repeated SlotItem itemList=1;
+}
+
+//装备槽位数据改变
+message SCInventoryEquipmentSlotChanged {
+    //改变的装备
+    repeated EquipmentSlot slotList=1;
+}
+
+//仓库物品改变
+message SCDepotChanged {
+    //仓库物品改变
+    repeated SlotItem depotItemList=1;
+}
+
+message ChooseInfo{
+    repeated int32 chooseIndexList=1;
+}
+
+//物品使用
+message CSInventoryItemUse {
+    //索引
+    required int32 index=1;
+    //数量
+    required int32 num=2;
+    //背包类型
+    optional int32 bagType =3;
+    //自由选择索引
+    optional ChooseInfo chooseInfo=4;
+    //参数,逗号隔开
+    optional string args=5;
+
+}
+
+//物品使用
+message SCInventoryItemUse {
+    //索引
+    required int32 index=1;
+    //数量
+    required int32 num=2;
+    //背包类型
+    required int32 bagType=3;
+    //物品id
+    required int32 itemId=4;
+}
+
+//物品出售
+message CSInventoryItemSell {
+    //索引
+   required int32 index=1;
+    //数量
+   required int32 num=2;
+     //背包类型
+     optional int32 bagType =3;
+}
+
+//物品出售
+message SCInventoryItemSell {
+    //索引
+   required int32 index=1;
+    //数量
+   required int32 num=2;
+    //背包类型
+    required int32 bagType =3;
+}
+
+//购买位置
+message CSInventoryBuySlots {
+    required int32 buyNum=1;
+}
+
+//购买位置 
+message SCInventoryBuySlots {
+    //背包格子数
+    required int32 num=1;
+}
+
+//推送格子数
+message SCInventorySlots{
+    //背包格子数
+    required int32 bagNum=1;
+    //仓库格子数
+    required int32 depotNum=2;
+}
+
+
+//使用装备
+message CSInventoryUseEquip {
+  //索引
+   required int32 index=1;
+}
+
+//使用装备成功
+message SCInventoryUseEquip {
+    //索引
+   required int32 index=1;
+}
+
+
+//脱下装备
+message CSInventoryTakeOffEquip {
+    //位置 0:武器 1:战袍 2:头盔 3:战靴 4:腰带 5:护手 6:玉坠 7:项链
+    required int32 slotId=1;
+}
+  
+//脱下装备成功
+message SCInventoryTakeOffEquip {
+    //位置
+    required int32 slotId=1;
+}
+  
+
+//强化
+message CSInventoryEquipStrengthen {
+    //位置
+    required int32 slotId=1;
+    //类型 1.强化 2.升星
+    required int32 typ=2;
+    //自动购买
+    optional bool auto=3;
+}
+
+//强化成功
+message SCInventoryEquipStrengthen {
+    //位置
+    required int32 slotId=1;
+    required int32 typ=2;
+    //强化结果 0:成功 1：失败 2:回退
+    required int32 result=3;
+    //自动购买
+    optional bool auto=4;
+}
+
+//进阶
+message CSInventoryEquipUpgrade{
+    //位置
+    required int32 slotId=1;
+}
+  
+//进阶成功
+message SCInventoryEquipUpgrade{
+    //位置
+    required int32 slotId=1;
+    //进阶结果 0:成功 1：失败 
+    required int32 result=2;
+}
+
+message EquipStrengthenResult{
+    //位置
+    required int32 slotId=1;
+    //强化结果 0:成功 1：失败 2:回退
+    required int32 result=2;
+}
+
+//一键强化
+message CSInventoryEquipStrengthenAll {
+}
+  
+//一键强化成功
+message SCInventoryEquipStrengthenAll {
+   repeated EquipStrengthenResult resultList=1;
+}
+
+
+//使用宝石
+message CSInventoryUseGem {
+    //索引
+    required int32 index=1;
+    //位置
+    required int32 slotId =2;
+    //宝石槽位
+    required int32 order=3;
+}
+  
+//使用宝石成功
+message SCInventoryUseGem {
+    //索引
+    required int32 index=1;
+    //位置
+    required int32 slotId=2;
+    //宝石槽位
+    required int32 order=3;
+}
+  
+
+//脱下宝石 
+message CSInventoryTakeOffGem {
+    //位置 0:武器 1:战袍 2:头盔 3:战靴 4:腰带 5:护手 6:玉坠 7:项链
+    required int32 slotId=1;
+    required int32 order =2;
+}
+
+//脱下宝石成功
+message SCInventoryTakeOffGem {
+    //位置
+    required int32 slotId=1;
+    required int32 order =2;
+}
+
+message UseGem{
+    //位置
+    required int32 slotId=1;
+    //索引
+    repeated int32 indexList=2; 
+    //宝石槽位
+    repeated int32 orderList=3; 
+}
+// 一键镶嵌宝石
+message CSInventoryUseGemAll{
+    repeated UseGem useGemList=1;
+}
+message SCInventoryUseGemAll{
+} 
+
+//宝箱掉落
+message SCInventoryBoxDropInfo { 
+    repeated DropInfo dropInfoList=1;
+}
+
+
+//存入仓库
+message CSSaveInDepot{
+    //背包索引
+    required int32 index=1;
+}
+//存入仓库回复
+message SCSaveInDepot{
+    //改变的物品
+    repeated SlotItem itemList=1;
+}
+
+//仓库取出
+message CSDepotTakeOut{
+    //仓库索引
+    required int32 index=1;
+}
+//仓库取出回复
+message SCDepotTakeOut{
+    //改变的物品
+    repeated SlotItem itemList=1;
+}
+
+//仓库购买位置
+message CSDepotBuySlots {
+    required int32 buyNum=1;
+}
+//仓库购买位置回复 
+message SCDepotBuySlots {
+    required int32 totalNum=1;
+}
+
+//仓库合并
+message CSDepotMerge {
+}
+//仓库合并回复
+message SCDepotMerge {
+    repeated SlotItem itemList=1; //仓库数据
+}
+
+
+//批量出售
+message CSInventoryItemSellBatch{
+    //索引列表
+    repeated int32 indexList=1;
+    //背包类型
+    optional int32 bagType =3;
+}
+//批量出售回复
+message SCInventoryItemSellBatch {
+    //出售总价
+    required int64 gainsNum=1;
+}
+
+
+//秘宝仓库物品改变
+message SCMibaoDepotChanged {
+    required int32 type=1;
+    //秘宝仓库物品改变
+    repeated SlotItem depotItemList=2;
+}
+
+
+//秘宝仓库取出
+message CSMibaoDepotTakeOut{
+    required int32 type=1;
+    // 是否批量取出
+    required bool isBatch=2;
+    // 物品索引
+    optional int32 index=3;
+}
+//秘宝仓库取出回复
+message SCMibaoDepotTakeOut{
+    required int32 type=1;
+    //改变的物品
+    repeated SlotItem itemList=2;
+    required bool isBatch=3;
+    optional int32 index=4;
+}
+ 
+//物品拆解
+message CSInventoryItemDecompose {
+    required int32 index=1;     //物品索引
+    required int32 num=2;       //拆解数量
+    optional int32 bagType=3;   //背包类型
+}
+message SCInventoryItemDecompose {
+    required int32 index=1;     //物品索引
+    required int32 num=2;       //拆解数量
+    required int32 bagType=3;
+    repeated DropInfo dropInfoList=4;   //拆解获得
+}  

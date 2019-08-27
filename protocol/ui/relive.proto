@@ -1,0 +1,11 @@
+
+
+
+syntax = "proto2";
+
+package ui;
+
+message SCReliveInfo{
+    required int32 culTime=1;  //累计使用复活次数
+    required int64 lastReliveTime=2;  //上一次复活时间
+}

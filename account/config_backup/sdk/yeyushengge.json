@@ -1,0 +1,10 @@
+{
+    "iOS":{
+        "key":"2fb409937b5e4e400cbe03e810cf07fb",
+        "chargeKey":"dc3a008152d8600b073230682cd2c191"
+    },
+    "android":{
+        "key":"eb4921643a53c036a27791da4c6edaee",
+        "chargeKey":"464969d57f5602c3b4b55c1ffc1c64b3"
+    }
+}

@@ -1,0 +1,193 @@
+syntax = "proto2";
+
+package pb;
+
+
+message CmdKickoutPlayer {
+    required int64 playerId=1;
+    required string kickoutReason=2;
+}
+
+
+
+
+message CmdForbidPlayer{
+    required int64 playerId=1; //玩家id
+    required string forbidReason =2; //封禁原因
+    required string forbidName=3; //封禁者
+    required int64 forbidTime=4; //封号时间
+}
+
+message CmdUnforbidPlayer{
+    required int64 playerId=1; //玩家id
+}
+
+
+
+message CmdForbidPlayerChat{
+    required int64 playerId=1; //玩家id
+    required string forbidReason =2; //封禁原因
+    required string forbidName=3; //封禁者
+    required int64 forbidTime=4; //禁言时间
+}
+
+message CmdUnforbidPlayerChat{
+    required int64 playerId=1; //玩家id
+}
+
+
+message CmdIgnorePlayerChat{
+    required int64 playerId=1; //玩家id
+    required string forbidReason =2; //禁默原因
+    required string forbidName=3; //禁默者
+    required int64 forbidTime=4; //禁默时间
+}
+
+message CmdUnignorePlayerChat{
+    required int64 playerId=1; //玩家id
+}
+
+
+message CmdForbidUser{
+    required int64 playerId=1; //玩家id
+    required string forbidReason =2; //封禁原因
+    required string forbidName=3; //封禁者
+    required int64 forbidTime=4; //封号时间
+}
+
+message CmdUnforbidUser{
+    required int64 playerId=1; //玩家id
+}
+
+message CmdSendServerCompensate{
+    required string title=1;                //标题
+    required string content=2;              //内容
+    required string attachmentStr=3;        //附件 (物品1id:物品1数量,物品2id:物品2数量) 
+    required int32 needLevel=4;             //补偿条件
+    required int64 needCreateTime=5;        //补偿条件
+    optional bool bind=6; //是否绑定
+}
+
+message CmdSendPlayerCompensate{
+    required string playerIdList=1;          //补偿玩家列表
+    required string title=2;                //标题
+    required string content=3;              //内容 
+    required string attachmentStr=4;        //附件
+    optional bool bind=5; //是否绑定
+}
+
+//聊天设置
+message CmdChatSet{
+    required int32 worldVipLevel =1; //世界频道vip等级
+    required int32 worldLevel=2; //世界频道等级
+    required int32 allianceVipLevel=3; //公会频道等级
+    required int32 allianceLevel =4; //公会等级
+    required int32 privateVipLevel =5; //私聊vip等级
+    required int32 privateLevel =6; //私聊
+    optional int32 teamVipLevel=7;//组队vip等级
+    optional int32 teamLevel=8;//组队等级
+}
+
+//注册设置
+message CmdRegisterSet{
+    required int32 open =1; //0:关闭 1:开放
+}
+
+
+
+//设置权限
+message CmdPrivilegeSet{
+    required int64 playerId =1; //玩家id
+    required int32 privilege=2; //0：无 1：普通扶持 2:研发扶持
+}
+
+//扶持号充值
+message CmdPrivilegeCharge{
+    required int64 playerId =1; //玩家id
+    required int64 gold=2; //扶持金额
+    optional int32 num =3; //数量
+}
+
+//充值
+message CmdCharge{
+    required int64 playerId =1; //玩家id
+    required string orderId =2; //订单
+    required int32 chargeId=3; //充值档次
+    required int32 money=4; //钱
+}
+
+// 系统公告
+message CmdBroadcastNotice{
+    required string content=1;  //内容
+    required int64 beginTime=2; //开始时间
+    required int64 endTime=3;   //结束时间
+    required int64 intervalTime=4;  //间隔时间
+}
+
+
+//出售
+message CmdTradeSell{
+    required int64 playerId =1; //玩家id
+    required int32 platform =2; //平台id
+    required int32 serverId=3; //服务器id
+    required int64 tradeId=4; //商品id
+    required int32 gold=5; //金钱
+    required int64 globalTradeId=6; //全局商品id
+    required int64 buyPlayerId=7; //购买者id
+    required int32 buyPlatform=8; //购买者平台
+    required int32 buyServerId=9; //购买者服务器id
+    required string buyPlayerName=10; //购买者玩家名字
+}
+
+//结婚配置
+message CmdMarrySet{
+    required int32 houTaiType = 1;//切换类型
+}
+
+//创建角色
+message CmdCreateRole{
+    required int64 userId=1;
+    required int32 sdkType=2;
+    required string token =3;
+}
+
+//设置仙盟公告
+message CmdAllainceNotice{
+    required int64 allianceId=1; //仙盟id
+    required string noticeStr=2; //公告内容
+}
+
+//自定义交易回购池
+message CmdCustomRecycleGold{
+    required int64 gold=1;  //回收池元宝
+}
+
+
+
+
+//ping
+message CmdPing{
+    required int32 platformId=1; //平台
+    required int32 serverId=2; //服务器id
+}
+
+
+//兑换
+message CmdExchange{
+    required int64 playerId =1; //玩家id
+    required int64 exchangeId =2; //订单
+    required string code=3; //兑换码
+    required int32 money=4; //金额
+}
+
+
+//兑换
+message CmdFirstChargeReset{
+}
+
+
+
+//解散
+message CmdAllianceDismiss{
+    required int64 allianceId=1;
+}

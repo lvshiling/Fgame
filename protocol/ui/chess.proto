@@ -1,0 +1,99 @@
+syntax = "proto2";
+
+package ui;
+
+import "drop.proto";
+
+message ChessBreifInfo{
+    //棋局掉落id
+    required int32 chessDropId=1;
+    //棋局类型0银两1元宝2绑元
+    required int32 typ=2;
+    //已参与次数
+    required int32 useTimes=3; 
+    //总参与次数
+    required int32 totalUseTimes=4;
+}
+message ChessLog{
+    required int64 createTime=1;
+    required string playerName=2;
+    required int32 itemId=3;
+    required int32 itemNum=4;
+}
+
+//棋局信息
+message  CSChessInfoGet{
+
+}
+//棋局信息回复
+message SCChessInfoGet{
+    //棋局信息
+    repeated ChessBreifInfo chessInfo = 1;
+    //棋局日志棋局日志
+    repeated ChessLog logList=2;
+}
+
+//棋局日志增量
+message CSChessLogIncr{
+    required int64 logTime=1;
+}
+//棋局日志增量回复
+message SCChessLogIncr{
+    repeated ChessLog logList=1;
+}
+
+//棋局破解
+message CSChessAttend{
+    //棋局类型:0银两1元宝2绑元
+    required int32 typ=1;
+    //日志时间
+    required int64 logTime=2;
+    //自动购买破解券
+    required bool autoFlag=3;
+}
+//棋局破解回复
+message SCChessAttend{
+   //棋局类型:0银两1元宝2绑元
+    required int32 typ=1;
+    //棋局掉落
+    repeated DropInfo dropInfo=2;
+    //日志
+    repeated ChessLog logList=3;
+    //自动购买
+    required bool autoFlag=4;
+}
+
+
+//棋局十连破解
+message CSChessAttendBatch{
+    //棋局类型:0银两1元宝2绑元
+    required int32 typ=1;
+    //参与次数
+    required int32 attendNum=2;
+    //日志时间
+    required int64 logTime=3;
+    //自动购买破解券
+    required bool autoFlag=4;
+}
+//棋局十连破解回复
+message SCChessAttendBatch{
+   //棋局类型:0银两1元宝2绑元
+    required int32 typ=1;
+    //棋局掉落
+    repeated DropInfo dropList=2;
+    //日志
+    repeated ChessLog logList=3;
+    //自动购买破解券
+    required bool autoFlag=4;
+}
+
+
+//换一批
+message CSChessChanged{
+    //棋局类型:0银两1元宝2绑元
+    required int32 typ=1;
+}
+message SCChessChanged{
+    //棋局掉落id
+    required int32 chessDropId=1;
+}

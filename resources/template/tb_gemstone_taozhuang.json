@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "next_id": 2,
+    "gemstone_level": 100,
+    "hp": 9,
+    "attack": 3,
+    "defence": 3
+  },
+  {
+    "id": 2,
+    "next_id": 3,
+    "gemstone_level": 150,
+    "hp": 18,
+    "attack": 5,
+    "defence": 5
+  },
+  {
+    "id": 3,
+    "next_id": 4,
+    "gemstone_level": 200,
+    "hp": 27,
+    "attack": 7,
+    "defence": 7
+  },
+  {
+    "id": 4,
+    "next_id": 5,
+    "gemstone_level": 250,
+    "hp": 35,
+    "attack": 9,
+    "defence": 9
+  },
+  {
+    "id": 5,
+    "next_id": 0,
+    "gemstone_level": 300,
+    "hp": 44,
+    "attack": 11,
+    "defence": 11
+  }
+]

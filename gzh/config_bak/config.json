@@ -1,0 +1,28 @@
+{
+    "host":"0.0.0.0",
+    "port":80,
+    "redis":{
+        "host":"127.0.0.1",
+        "port":6379,
+        "maxIdle":50,
+        "maxActive":50,
+        "wait": true,
+        "idleTimeout":240
+    },
+    "gzh":{
+        "appid":"wxf2af6a93032ed813",
+        "appsecret":"c794c04721bf823b89ce83d66aa1b6f5",
+        "token":"Ztjy3cY1ThOEzApImqmwdMwllc",
+        "encodingaeskey":"DEexLaTOZtUySvdgW4qwl8anpKp9OEAGr5wt5GUS07c"
+    },
+    "wxredbagpay":{
+        "key":"RRC9dzMlpwKwHOO37SgVuUFb1t2TjM0e",
+        "mch_appid":"wxf2af6a93032ed813",
+        "mchid":"1540501671",
+        "certpath":"./config/redbagcerts"
+    },
+    "remote":{
+        "host":"192.168.1.123",
+        "port":19090
+    }
+}	

@@ -1,0 +1,446 @@
+syntax = "proto2";
+
+package ui;
+
+message RankForce {
+    optional int32 serverId=1 [default=-1];   //本区使用  本服不使用
+    required int64 playerId=2;
+    required string playerName=3;
+    required string gangName=4;
+    required int64  power=5;
+    required int32  role=6;  //1 开天 2 奕剑 3 破月
+    required int32 sex=7;    //1 男   2 女
+}
+
+message RankOrder {
+    optional int32 serverId=1 [default=-1];   //本区使用  本服不使用
+    required int64 playerId=2;
+    required string playerName=3;
+    required int32  order= 4;
+    required int64  power=5;
+}
+
+message RankWeapon {
+    optional int32 serverId=1 [default=-1];   //本区使用  本服不使用
+    required int64 playerId=2;
+    required string playerName=3;
+    required int32 star=4;
+    required int32 wearId=5;
+    required int64 power=6; 
+    required int32 role=7;
+    required int32 sex=8;
+}
+
+message RankGang {
+    optional int32 serverId=1 [default=-1];   //本区使用  本服不使用
+    required string gangName=2;
+    required int64  leaderId=3;
+    required string leaderName=4;
+    required int64 power=5;
+    required int32 role=6;
+    required int32 sex=7;   
+}
+
+message RankProperty{
+    optional int32 serverId=1 [default=-1];   //本区使用  本服不使用
+    required int64 num=2;
+    required int64 playerId=3;
+    required string playerName=4;
+    required int64 power=5;
+}
+
+
+//战斗力排行榜
+message CSRankForceGet{
+   //page 0第一页
+   required int32 page=1;
+   // false 本服  true 本区
+   required bool isArea=2;
+}
+
+//战斗力排行榜回复
+message SCRankForceGet{
+    //page 
+    required int32 page=1;
+    //玩家战力
+    repeated RankForce forceList=2;
+    //排行榜时间
+    required int64 rankTime=3;
+    // false 本服  true 本区
+    required bool isArea=4;
+ }
+
+ //坐骑排行榜
+message CSRankMountGet{
+    //page  0第一页
+    required int32 page=1;
+    // false 本服  true 本区
+   required bool isArea=2;
+ }
+ 
+ //坐骑排行榜回复
+ message SCRankMountGet{
+     //page 
+     required int32 page=1;
+     //玩家坐骑
+     repeated RankOrder mountList=2;
+     //排行榜时间
+     required int64 rankTime=3;
+     // false 本服  true 本区
+     required bool isArea=4;
+}
+
+
+ //战翼排行榜
+ message CSRankWingGet{
+    //page 0第一页
+    required int32 page=1;
+   // false 本服  true 本区
+   required bool isArea=2;
+ }
+ 
+ //战翼排行榜回复
+ message SCRankWingGet{
+     //page 
+     required int32 page=1;
+     //玩家战翼
+     repeated RankOrder wingList=2;
+     //排行榜时间
+     required int64 rankTime=3;
+     // false 本服  true 本区
+     required bool isArea=4;
+}
+
+
+ //护体盾排行榜
+ message CSRankBodyShieldGet{
+    //page 0第一页
+    required int32 page=1;
+   // false 本服  true 本区
+   required bool isArea=2;
+ }
+ 
+ //护体盾排行榜回复
+ message SCRankBodyShieldGet{
+     //page 
+     required int32 page=1;
+     //玩家护体盾
+     repeated RankOrder bodyShieldList=2;
+     //排行榜时间
+     required int64 rankTime=3;
+     // false 本服  true 本区
+     required bool isArea=4;
+}
+
+
+ //兵魂排行榜
+ message CSRankWeaponGet{
+    //page 0第一页
+    required int32 page=1;
+   // false 本服  true 本区
+   required bool isArea=2;
+ }
+ 
+ //兵魂排行榜回复
+ message SCRankWeaponGet{
+     //page 
+     required int32 page=1;
+     //玩家兵魂
+     repeated RankWeapon weaponList=2;
+     //排行榜时间
+     required int64 rankTime=3;
+    // false 本服  true 本区
+    required bool isArea=4;
+}
+
+ //帮派排行榜
+ message CSRankGangGet{
+    //page 0第一页
+    required int32 page=1;
+   // false 本服  true 本区
+   required bool isArea=2;
+ }
+ 
+ //帮派排行榜回复
+ message SCRankGangGet{
+     //page
+     required int32 page=1;
+     //帮派
+     repeated RankGang gangList=2;
+     //排行榜时间
+     required int64 rankTime=3;
+    // false 本服  true 本区
+     required bool isArea=4;
+}
+
+//我的排名请求
+message CSRankMyGet {
+    //类型 1战力 2 帮派 3 坐骑 4 战翼 5 兵魂 6 护体盾 7身法 8领域 9护体仙羽 10神盾尖刺  
+    //11 暗器  12 法宝 13 仙体 14 噬魂幡 15 天魔体  16灵童等级 17灵兵 18灵骑 19灵翼 20灵身
+    //21 灵域  22灵宝  23 灵体  
+    required int32 rankType=1;
+    // false 本服  true 本区
+    required bool isArea=2;
+}
+
+//我的排名回复
+message SCRankMyGet {
+    //类型 
+    required int32 rankType=1;
+    //我的排名 0 未上榜
+    required int32 pos=2;
+    // false 本服  true 本区
+    required bool isArea=3;
+}
+
+
+ //身法排行榜
+ message CSRankShenFaGet{
+    //page 0第一页
+    required int32 page=1;
+    // false 本服  true 本区
+    required bool isArea=2;
+ }
+ 
+ //身法排行榜回复
+ message SCRankShenFaGet{
+     //page
+     required int32 page=1;
+     //身法
+     repeated RankOrder shenFaList=2;
+     //排行榜时间
+     required int64 rankTime=3;
+    // false 本服  true 本区
+     required bool isArea=4;
+}
+
+
+ //领域排行榜
+ message CSRankLingYuGet{
+    //page 0第一页
+    required int32 page=1;
+    // false 本服  true 本区
+    required bool isArea=2;
+ }
+ 
+ //领域排行榜回复
+ message SCRankLingYuGet{
+     //page
+     required int32 page=1;
+     //领域
+     repeated RankOrder lingYuList=2;
+     //排行榜时间
+     required int64 rankTime=3;
+    // false 本服  true 本区
+    required bool isArea=4;
+}
+
+ //护体仙羽排行榜
+ message CSRankFeatherGet{
+    //page 0第一页
+    required int32 page=1;
+    // false 本服  true 本区
+    required bool isArea=2;
+ }
+ 
+ //护体仙羽排行榜回复
+ message SCRankFeatherGet{
+     //page
+     required int32 page=1;
+     //护体仙羽
+     repeated RankOrder FeahterList=2;
+     //排行榜时间
+     required int64 rankTime=3;
+    // false 本服  true 本区
+    required bool isArea=4;
+}
+
+
+
+ //神盾尖刺排行榜
+ message CSRankShieldGet{
+    //page 0第一页
+    required int32 page=1;
+    // false 本服  true 本区
+    required bool isArea=2;
+ }
+ 
+ //神盾尖刺排行榜回复
+ message SCRankShieldGet{
+     //page
+     required int32 page=1;
+     //神盾尖刺
+     repeated RankOrder ShieldList=2;
+     //排行榜时间
+     required int64 rankTime=3;
+    // false 本服  true 本区
+    required bool isArea=4;
+}
+
+ //暗器排行榜
+ message CSRankAnQiGet{
+    //page 0第一页
+    required int32 page=1;
+    // false 本服  true 本区
+    required bool isArea=2;
+ }
+ 
+ //暗器排行榜回复
+ message SCRankAnQiGet{
+     //page
+     required int32 page=1;
+     //神盾尖刺
+     repeated RankOrder anQiList=2;
+     //排行榜时间
+     required int64 rankTime=3;
+    // false 本服  true 本区
+    required bool isArea=4;
+}
+
+
+
+ //法宝排行榜
+ message CSRankFaBaoGet{
+    //page 0第一页
+    required int32 page=1;
+   // false 本服  true 本区
+   required bool isArea=2;
+ }
+ 
+ //法宝排行榜回复
+ message SCRankFaBaoGet{
+     //page 
+     required int32 page=1;
+     //玩家法宝
+     repeated RankOrder faBaoList=2;
+     //排行榜时间
+     required int64 rankTime=3;
+     // false 本服  true 本区
+     required bool isArea=4;
+}
+
+
+ //仙体排行榜
+ message CSRankXianTiGet{
+    //page 0第一页
+    required int32 page=1;
+   // false 本服  true 本区
+   required bool isArea=2;
+ }
+ 
+ //仙体排行榜回复
+ message SCRankXianTiGet{
+     //page 
+     required int32 page=1;
+     //玩家仙体
+     repeated RankOrder xianTiList=2;
+     //排行榜时间
+     required int64 rankTime=3;
+     // false 本服  true 本区
+     required bool isArea=4;
+}
+
+ //噬魂幡排行榜
+ message CSRankShiHunFanGet{
+    //page 0第一页
+    required int32 page=1;
+   // false 本服  true 本区
+   required bool isArea=2;
+ }
+ 
+ //噬魂幡排行榜回复
+ message SCRankShiHunFanGet{
+     //page 
+     required int32 page=1;
+     //玩家噬魂幡
+     repeated RankOrder shiHunFanList=2;
+     //排行榜时间
+     required int64 rankTime=3;
+     // false 本服  true 本区
+     required bool isArea=4;
+}
+
+ //天魔体排行榜
+ message CSRankTianMoTiGet{
+    //page 0第一页
+    required int32 page=1;
+   // false 本服  true 本区
+   required bool isArea=2;
+ }
+ 
+ //天魔体排行榜回复
+ message SCRankTianMoTiGet{ 
+     //page 
+     required int32 page=1;
+     //玩家天魔体
+     repeated RankOrder tianMoTiList=2;
+     //排行榜时间
+     required int64 rankTime=3;
+     // false 本服  true 本区
+     required bool isArea=4; 
+}
+
+
+ //灵童等级排行榜
+ message CSRankLingTongLevelGet{
+    //page 0第一页
+    required int32 page=1;
+   // false 本服  true 本区
+   required bool isArea=2;
+ }
+ 
+ //灵童等级排行榜回复
+ message SCRankLingTongLevelGet{ 
+     //page 
+     required int32 page=1;
+     //玩家灵童等级
+     repeated RankProperty lingtongLevelList=2;
+     //排行榜时间
+     required int64 rankTime=3;
+     // false 本服  true 本区
+     required bool isArea=4; 
+}
+
+
+ //灵童养成类排行榜
+ message CSRankLingTongDevGet{
+     // 1灵兵 2灵骑 3 灵翼 4灵身 5灵域 6灵宝 7 灵体
+    required int32 classType= 1;
+    //page 0第一页
+    required int32 page=2;
+   // false 本服  true 本区
+   required bool isArea=3;
+ }
+
+ //灵童养成类排行榜回复
+ message SCRankLingTongDevGet{
+     required int32 classType = 1;
+    //page 
+    required int32 page=2;
+    //玩家灵童养成类
+    repeated RankOrder lingTongDevList=3;
+    //排行榜时间
+    required int64 rankTime=4;
+    // false 本服  true 本区
+    required bool isArea=5;
+ }
+
+ 
+ //玩家飞升排行榜
+ message CSRankFeiShengGet{
+    //page 0第一页
+    required int32 page=1;
+   // false 本服  true 本区
+   required bool isArea=2;
+ }
+ 
+ message SCRankFeiShengGet{ 
+     //page 
+     required int32 page=1;
+     //玩家飞升
+     repeated RankProperty feiShengList=2;
+     //排行榜时间
+     required int64 rankTime=3;
+     // false 本服  true 本区
+     required bool isArea=4; 
+}

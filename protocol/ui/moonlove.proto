@@ -1,0 +1,156 @@
+syntax  = "proto2";
+
+package ui;
+
+import "rewproperty.proto";
+import "common.proto";
+
+
+message MoonloveRank {
+	//玩家名字
+	required string playerName = 1;
+	//魅力/豪气值
+	required int32 number = 2;
+}
+
+message PlayerMoonloveInfo {
+	//豪气排名(0未上榜，1~10)
+	required int32 generousRank = 1;
+	//魅力排名(0未上榜，1~10)
+	required int32 charmRank = 2;
+	//豪气值
+	required int32 generousNum = 3;
+	//魅力值
+	required int32 charmNum = 4;
+}
+
+message ScenePlayer{
+	required int64 playerId=1;
+	required string name=2;
+	required int32 sex=3;	 //1男2女
+	required int32 point=4;  //亲密度
+	required int32 status=5; //0单人1双人双月
+}
+
+//推送豪气信息变化
+message SCMoonloveGenerousChanged{
+	//玩家id
+	required int64 playerId = 1;
+	//豪气排名(0未上榜，1~10)
+	required int32 generousRank = 2;
+	//豪气值
+	required int32 generousNum = 3;
+	
+}
+//推送魅力信息变化
+message SCMoonloveCharmChanged{
+	//玩家id
+	required int64 playerId = 1;
+	//魅力排名(0未上榜，1~10)
+	required int32 charmRank = 2;
+	//魅力值
+	required int32 charmNum = 3;
+}
+
+
+
+//月下情缘场景下发信息
+message SCMoonloveSceneInfo{
+	//魅力榜
+	repeated MoonloveRank charmRank = 1;
+	//豪气榜
+	repeated MoonloveRank generousRank = 2;
+	//玩家活动信息
+	required PlayerMoonloveInfo moonloveInfo = 3;
+	//累计经验值
+	required int64 rewExp = 5;
+	//场景开始时间
+	required int64 createTime = 6;
+}
+
+//排行榜广播
+message SCMoonlovePushCharmRank{
+	//魅力榜
+	repeated MoonloveRank charmRank = 1;
+}
+
+//排行榜广播
+message SCMoonlovePushGenerousRank{
+	//豪气榜
+	repeated MoonloveRank generousRank = 2;
+}
+	
+
+//月下情缘结束
+message SCMoonloveSceneResult{
+	required int64 playerId = 1;
+	//经验
+	required int64 rewExp = 2;
+}
+
+//发放排行榜奖励
+message SCMoonloveRankRewards{
+	//排行榜资源奖励
+	required  RewProperty rewProperty = 1;
+}
+
+//双人赏月寻找请求
+message CSMoonloveViewDouble {
+	required int64 playerId=1;
+}
+//双人赏月寻找请求应答
+message SCMoonloveViewDouble{
+	//玩家id
+	required int64 playerId = 1;
+	//目标玩家id
+	required int64 targetPlayerId = 2;
+	//目标位置
+	required Position targetPosition = 3;
+} 
+
+//双人赏月状态请求
+message CSMoonloveViewDoubleState{
+	//目标玩家id
+	required int64 targetPlayerId = 1;
+}
+//双人赏月状态请求应答
+message SCMoonloveViewDoubleState{
+	//目标玩家id
+	required int64 targetPlayerId = 1;
+	required bool isSuccess = 2;
+}
+
+//双人赏月状态解除请求
+message CSMoonloveViewDoubleRelease{
+	//目标玩家id
+	required int64 targetPlayerId = 1;
+}
+//双人赏月状态解除请求应答
+message SCMoonloveViewDoubleRelease{
+	//玩家id
+	required int64 playerId = 1;
+}
+
+//场景玩家列表
+message CSMoonlovePlayerList{
+
+}
+//场景玩家列表应答
+message SCMoonlovePlayerList{
+	repeated ScenePlayer playerList = 1; 
+}
+
+//弹幕推送
+message SCMoonloveGiftNotice{
+	//赠送者名称
+	required string name=1; 
+	//赠送对象名称
+	required string targetName=2; 
+	//礼物数量
+	required int32 num=3;
+}
+
+//经验累计推送
+message SCMoonloveExpCountNotice{
+    required int64 expCount=1;
+}

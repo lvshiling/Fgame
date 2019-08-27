@@ -1,0 +1,126 @@
+syntax = "proto2";
+
+package ui;
+
+message WeaponInfo {
+    //兵魂id
+    required int32 weaponId=1;
+    //兵魂星数
+    required int32 level=2;
+    //培养等级
+    required int32 culLevel=3;
+    //培养进度值
+    required int32 culPro =4;
+    //觉醒状态 0未觉醒 1觉醒
+    required int32 state=5;
+}
+
+//兵魂数据
+message AllWeaponInfo {
+   //兵魂穿戴id
+   required int32 weaponWear=1;
+   //兵魂信息
+   repeated WeaponInfo weaponList=2;
+}
+
+//兵魂信息请求
+message CSWeaponGet {
+}
+
+//兵魂信息应答
+message SCWeaponGet{
+   //兵魂穿戴id
+   required int32 weaponWear=1;
+   //兵魂信息
+   repeated WeaponInfo weaponList=2;
+}
+
+//激活兵魂请求
+message CSWeaponActive {
+    //兵魂id
+   required int32 weaponId=1;
+}
+//激活兵魂应答
+message SCWeaponActive {
+   //兵魂id
+   required int32 weaponId=1;
+}
+
+//兵魂食培养丹请求
+message CSWeaponEatDan {
+   //兵魂id
+   required int32 weaponId=1;
+   //食单数量
+   required int32 num=2;
+}
+//兵魂食培养丹应答
+message SCWeaponEatDan {
+   //兵魂id
+   required int32 weaponId=1;
+   //兵魂培养等级
+   required int32 culLevel=2;
+   //培养进度值
+   required int32 culPro=3;
+}
+
+//兵魂升星请求
+message CSWeaponUpstar {
+   //兵魂id
+   required int32 weaponId=1;
+   //勾选自动购买
+   required bool autoFlag=2;
+}
+
+//兵魂升星应答
+message SCWeaponUpstar {
+    //兵魂id
+    required int32 weaponId=1;
+    //兵魂星数
+    required int32 level=2;
+    //进度值
+    required int32 upPro=3;
+ }
+
+ //兵魂觉醒请求
+message CSWeaponAwaken {
+    //兵魂id
+    required int32 weaponId=1;
+ }
+ 
+ //兵魂觉醒应答
+ message SCWeaponAwaken {
+    //结果 0觉醒失败  1觉醒成功
+    required int32 result=1;
+     //兵魂id
+     required int32 weaponId=2;
+  }
+
+//穿戴兵魂请求
+message CSWeaponWear {
+   //兵魂id
+   required int32 weaponWear=1;
+}
+//穿戴兵魂应答
+message SCWeaponWear {
+    //兵魂id
+    required int32 weaponWear=1;
+}
+
+//卸下兵魂请求
+message CSWeaponUnLoad {
+ }
+ //卸下兵魂应答
+message SCWeaponUnLoad {
+    //兵魂id
+    required int32 weaponWear=1;
+}
+
+
+
+
+
+
+
+
+
+

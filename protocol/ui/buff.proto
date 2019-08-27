@@ -1,0 +1,35 @@
+syntax = "proto2";
+
+package ui;
+
+
+//buff数据
+message BuffData {
+    //buff id
+    required int32 buffId = 3;
+    //buff时间
+    required float buffTime=4;
+}
+
+//buff列表
+message CSBuffList{
+
+}
+
+//前往击杀请求
+message SCBuffList {
+    repeated BuffData buffList=1;
+}
+
+
+
+//buff查询 
+message CSBuffSearch{
+    required int32 buffId=1;
+}
+
+//buff查询
+message SCBuffSearch {
+    required int32 buffId=1;
+    required bool result=2;
+}

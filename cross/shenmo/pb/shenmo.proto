@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+package pb;
+
+
+message ShenMoRankInfo{
+    int32 serverId=1;
+    int64 allianceId=2;
+    string allianceName=3;
+    int32 jiFenNum=4;
+}
+
+message ShenMoRanInfoData {
+    int64 rankTime=1;
+    repeated ShenMoRankInfo rankInfoList=2;
+}
+
+//获取神魔战场排行榜列表
+message ShenMoRankListRequest{
+}
+
+//神魔战场排行榜列表回复
+message ShenMoRankListResponse{
+    //上周排行榜
+     ShenMoRanInfoData lastRankData=1;
+    //本周排行榜
+     ShenMoRanInfoData thisRankData=2;
+}
+
+service ShenMo{
+    //获取
+    rpc GetShenMoRankList(ShenMoRankListRequest) returns(ShenMoRankListResponse){}
+}
+

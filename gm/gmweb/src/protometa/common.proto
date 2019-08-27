@@ -1,0 +1,21 @@
+syntax = "proto2";
+
+import "basic.proto";
+
+//common message optional from 201-300
+package pb;
+
+enum ErrorCode {
+    RoomNoExist = 1001;
+    AuthTimeout= 1002;
+    Unknown=0;
+}
+
+message GCError {
+   required ErrorCode errorCode = 1;
+}
+
+extend pb.Message {
+   optional GCError gcError = 201;
+}
+

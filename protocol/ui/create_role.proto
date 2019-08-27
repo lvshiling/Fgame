@@ -1,0 +1,25 @@
+syntax = "proto2";
+
+package ui;
+
+//进入选择角色界面
+message SCEnterSelectJob {
+}
+
+//选择角色
+message CSSelectJob {
+   required int32 job = 1;
+   required int32 sex = 2;
+   required string name =3;
+}
+
+//选择角色回复
+message SCSelectJob {
+
+}
+ 
+
+
+
+
+

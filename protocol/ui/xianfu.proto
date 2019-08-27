@@ -1,0 +1,165 @@
+syntax = "proto2";
+
+package ui;
+
+import "drop.proto";
+import "rewproperty.proto";
+
+message XianfuInfo {
+    //仙府Id
+    required int32 xianfuId = 1;
+    //仙府类型:0银两 1经验 2材料 3元宝 4双修
+    required int32 xianfuType = 2;
+    //已挑战次数(包含免费)
+    required int32 useTimes = 3;
+    //升级开始时间
+    required int64 startTime = 4;
+    //升级状态:0未升级 1升级进行中(默认0)
+    required int32 state = 5;
+    //波数
+    required int32 group=6;
+}
+
+//秘境仙府界面信息请求
+message CSXianfuGet{
+
+}
+//秘境仙府界面信息请求应答
+message SCXianfuGet{
+    repeated XianfuInfo xianfuInfo = 1;
+}
+
+
+//秘境仙府升级请求
+message CSXianfuUpgrade{
+    required int32 xianfuId  = 1;
+    required int32 xianfuType = 2;
+}
+//秘境仙府升级请求应答
+message SCXianfuUpgrade{
+    required int32 xianfuId  = 1;
+    required int32 xianfuType = 2;
+}
+
+
+//秘境仙府升级加速请求
+message CSXianfuAccelerate{
+    required int32 xianfuId  = 1;
+    required int32 xianfuType = 2;
+}
+//秘境仙府升级加速请求应答
+message SCXianfuAccelerate{
+    required int32 xianfuId  = 1;
+    required int32 xianfuType = 2;
+}
+
+
+//秘境仙府扫荡请求
+message CSXianfuSaoDang{
+    //仙府id
+    required int32 xianfuId  = 1;
+    //仙府类型
+    required int32 xianfuType = 2;
+    //扫荡次数
+    required int32 num=3;
+}
+//秘境仙府扫荡请求应答
+message SCXianfuSaoDang{
+    required int32 xianfuId  = 1;
+    required int32 xianfuType = 2;
+    //扫荡属性奖励
+    required RewProperty rewProperty = 3;
+    //扫荡物品奖励
+    repeated XianfuSweepDrop rewAllItemArr = 4; 
+    //扫荡次数
+    required int32 saodangNum=5;
+}
+
+
+//秘境仙府挑战请求
+message CSXianfuChallenge{
+    required int32 xianfuId  = 1;
+    required int32 xianfuType = 2;
+}
+//秘境仙府挑战请求应答
+message SCXianfuChallenge{
+    required int32 xianfuId  = 1;
+    required int32 xianfuType = 2;
+    //请求是否成功：0否1是
+    required bool isSuccess = 3;
+}
+
+//秘境仙府下发场景信息
+message SCXianfuSceneInfo{
+    required int32 xianfuId  = 1;
+    //仙府类型:0银两 1经验 2材料 3元宝 4双修
+    required int32 xianfuType = 2;
+    //累计资源
+    required int64 resource = 3;
+    //怪物总波数
+    required int32 totalBiologyGroup = 4;
+    //怪物波数
+    required int32 biologyGroup = 5;
+    //击杀数
+    required int32 killNum = 6;
+    //创建场景时间
+    required int64 createTime = 7;
+}
+
+//秘境仙府挑战结果
+message SCXianfuChallengeResult{
+    required int32 xianfuId  = 1;
+    //仙府类型:0银两 1经验 2材料 3元宝 4双修
+    required int32 xianfuType = 2;
+    //挑战是否成功：0否1是
+    required bool isSuccess = 3;
+    //累计资源
+    required int64 resource = 4;
+    //最终波数
+    required int32 group=5;
+}
+
+
+//秘境仙府怪物刷新波数
+message SCXianfuRefreshBiology{
+    //下一波数
+    required int32 nextBiologyGroup = 1;
+}
+
+
+message XianfuSweepDrop {
+    //掉落物品
+    repeated DropInfo dropList=1;
+}
+//秘境仙府一键完成
+message CSXianfuFinishAll{
+    //仙府类型:0银两 1经验 2材料 3元宝 4双修
+    required int32 xianfuType = 1;
+}
+//秘境仙府一键完成应答
+message SCXianfuFinishAll{
+    required int32 xianfuId  = 1;
+    required int32 xianfuType = 2;
+    //一键属性奖励
+    required RewProperty rewAllProperty = 3;
+    //一键物品奖励
+    repeated XianfuSweepDrop rewAllItemArr = 4; 
+}
+
+
+//秘境仙府挑战奖励信息实时推送
+message SCXianfuRewNotice{
+    required int64 num=1;
+}
+
+//经验副本击杀数量推送
+message SCXianfuKillNumNotice{
+    required int32 killNum=1;
+}
+
+//经验副本Boss血量推送
+message SCXianfuBossHpChangedNotice{
+    //boss血量
+    required int64 curHp=1;
+}
+

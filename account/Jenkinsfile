@@ -1,0 +1,138 @@
+pipeline {
+  agent any
+  options {
+      checkoutToSubdirectory('src/fgame/fgame') 
+  }
+  tools {
+    go 'go1.11'
+  }
+  environment {
+      GOPATH = "$WORKSPACE"
+      GOLANGCI_PATH = tool name: 'golangci-lint', type: 'com.cloudbees.jenkins.plugins.customtools.CustomTool'
+      GORELEASER_PATH = tool name: 'goreleaser', type: 'com.cloudbees.jenkins.plugins.customtools.CustomTool'
+      SONAR_QUBE_SCANNER_PATH = tool name: 'SonarQube Scanner 3.3.0', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
+      PATH = "$PATH:$GOLANGCI_PATH/bin:$PATH:$SONAR_QUBE_SCANNER_PATH/bin:$GORELEASER_PATH/bin"
+  }
+  parameters {
+    choice(name: 'ENV', choices: ['master', 'inner_test', 'test','prod'], description: '环境,master:开发,inner_test:内部测试,test:测试,prod:生产')
+    string(name: 'SOURCE', defaultValue: 'all', description: '编译源')
+    string(name: 'TAG', defaultValue: 'dev', description: '标签')
+  }
+  stages {
+    stage('build') {
+      // environment {
+        //构建版本号
+        // BUILD_VERSION  = VersionNumber(versionNumberString: '${BUILD_DATE_FORMATTED, "yyyyMMdd"}_${BUILDS_TODAY}', versionPrefix: "${JOB_NAME}_${params.TAG}.")
+      // }
+      steps {
+        // echo "当前版本号:${BUILD_VERSION}"
+        dir('src/fgame/fgame/account') {
+          sh "goreleaser --snapshot --skip-publish --rm-dist"
+        }
+        //TODO: 发送消息
+        echo "推送企业微信消息"
+      }
+    }
+    // stage('test') {
+    //   steps {
+    //     echo "test"
+    //   }
+    // }
+    // stage('Code Analysis') {
+    //     steps {
+    //       withSonarQubeEnv('SonarQube') {
+    //         sh "cd $GOPATH/src/fgame/fgame/account && sonar-scanner -Dsonar.host.url=http://192.168.1.123:7000 -Dsonar.projectKey=account"
+    //       }
+    //       waitForQualityGate false
+    //     }
+    // }
+    stage('deploy') {
+      environment {
+          //TODO 修改
+        IP = "192.168.1.123"
+        PORT = "22"
+        SUFFIX="master"
+        DEST_PATH="fgame_$SUFFIX/dist/account"
+        ARCH = "_Tux_64"
+        DIST_FILE="account_SNAPSHOT-$env.GIT_COMMIT$ARCH-bit.tar.gz"
+      }
+    
+      input {
+          message '部署?'
+      }
+      steps {
+        sshagent(['ssh']) {
+          dir('src/fgame/fgame/account') {
+            sh 'rsync -azP --delete -e "ssh -p $PORT" "dist/$DIST_FILE" root@$IP:$DEST_PATH'
+            echo "上传成功"
+          }
+        }
+      }
+    }
+  }
+  
+  post {
+        always {
+          //TODO 清理工作空间
+          echo 'always'
+        }
+        success {
+            echo 'I succeeeded!'
+            // dir("src/fgame/fgame/account/build"){
+            //   archiveArtifacts '**'
+            // }
+        }
+        unstable {
+            echo 'I am unstable :/'
+        }
+        failure {
+            echo 'I failed :('
+        }
+        changed {
+            echo 'Things were different before...'
+        }
+  }
+}
+
+// JENKINS_NODE_COOKIE=3e18e4d9-15eb-4e54-84a1-213444939ecd
+// BUILD_URL=http://192.168.1.123:8081/job/fgame_master/26/
+// SHELL=/bin/bash
+// HUDSON_SERVER_COOKIE=83271354dd52a695
+// SOURCE=all
+// STAGE_NAME=build
+// BUILD_TAG=jenkins-fgame_master-26
+// GIT_PREVIOUS_COMMIT=c86c82895c29bfe96615a3b4f3d87f97e525b6dc
+// JOB_URL=http://192.168.1.123:8081/job/fgame_master/
+// WORKSPACE=/var/lib/jenkins/workspace/fgame_master@2
+// RUN_CHANGES_DISPLAY_URL=http://192.168.1.123:8081/job/fgame_master/26/display/redirect?page=changes
+// USER=jenkins
+// ENV=master
+// GIT_COMMIT=09eb9d0706aaffc801be513c7f6f7ee807ecae48
+// JENKINS_HOME=/var/lib/jenkins
+// PATH=/usr/local/go/bin:/usr/local/go/bin:/sbin:/usr/sbin:/bin:/usr/bin
+// RUN_DISPLAY_URL=http://192.168.1.123:8081/job/fgame_master/26/display/redirect
+// _=/bin/printenv
+// PWD=/var/lib/jenkins/workspace/fgame_master@2
+// HUDSON_URL=http://192.168.1.123:8081/
+// LANG=zh_CN.UTF-8
+// JOB_NAME=fgame_master
+// BUILD_DISPLAY_NAME=#26
+// BUILD_ID=26
+// JENKINS_URL=http://192.168.1.123:8081/
+// GIT_PREVIOUS_SUCCESSFUL_COMMIT=c86c82895c29bfe96615a3b4f3d87f97e525b6dc
+// JOB_BASE_NAME=fgame_master
+// HOME=/var/lib/jenkins
+// SHLVL=4
+// GOROOT=/usr/local/go
+// GIT_BRANCH=origin/master
+// EXECUTOR_NUMBER=0
+// JENKINS_SERVER_COOKIE=durable-ebc51e24be4f7f704ab4fd23b3a73189
+// NODE_LABELS=master
+// GIT_URL=http://192.168.1.13:8080/fgame/fgame.git
+// LOGNAME=jenkins
+// HUDSON_HOME=/var/lib/jenkins
+// NODE_NAME=master
+// GOPATH=/var/lib/jenkins/workspace/fgame_master@2
+// BUILD_NUMBER=26
+// JOB_DISPLAY_URL=http://192.168.1.123:8081/job/fgame_master/display/redirect
+// HUDSON_COOKIE=f5b88546-86f5-4a3d-90f2-866bfafcd943

@@ -1,0 +1,427 @@
+syntax = "proto2";
+
+package ui;
+
+//坐标
+message JieYiPosition {
+    required float posX =1;
+    required float posY =2;
+    required float posZ =3;
+}
+
+
+// 结义信息
+message JieYiInfo{
+    // 结义id
+    required int64 jieYiId=1;
+    // 威名
+    required string name=2;
+    // 人数
+    required int32 playerNum=3;
+}
+
+// 结义成员信息
+message JieYiMemberInfo{
+    // 结义成员id
+    required int64 playerId=1;
+    // 结义成员名字
+    required string name=2;
+    required int32 role=3;
+    required int32 sex=4;
+    required int32 level=5;
+    required int64 force=6;
+    required int32 zhuanSheng=7;
+    optional int32 shengWeiZhi=8;
+    // 结义成员加入时间
+    required int64 jieYiTime=9;
+    // 结义信物类型
+    optional int32 tokenType=10;
+    // 结义信物等级
+    optional int32 tokenLev=11;
+    // 结义信物升级进度值
+    optional int32 tokenPro=12;
+    // 结义道具类型
+    required int32 jieYiDaoJu=13;
+    // 玩家是否在线 0不在线
+    required int32 isOnline=14;
+    // 结义成员威名等级
+    optional int32 nameLev=15;
+}
+
+// 结义成员信息请求
+message CSJieYiMemberInfo{
+}
+// 结义成员信息回复
+message SCJieYiMemberInfo{
+    // 结义信息
+    optional JieYiInfo jieYiInfo=1;
+    // 结义成员信息
+    repeated JieYiMemberInfo jieYiMember=2;
+}
+
+// 玩家结义信息回复
+message SCJieYiPlayerInfo{
+    // 0未结义 1已结义
+    required int32 isJieYi=1;
+    optional string name=2;
+}
+
+// 玩家结义邀请请求
+message CSJieYiInvite{
+    // 结义道具类型
+    required int32 jieYiDaoJu=1;
+    // 结义玩家id
+    required int64 playerId=2;
+    // 结义威名
+    required string name=3;
+
+}
+// 玩家结义邀请回复
+message SCJieYiInvite{
+    // 结义道具类型
+    required int32 jieYiDaoJu=1;
+    // 结义威名
+    optional string name=2;
+    
+}
+// 玩家结义邀请回复推送
+message SCJieYiInviteNotice{
+    // 结义威名
+    required string jieYiName=1;
+    // 邀请者id
+    required int64 playerId=2;
+    required string playerName=3;
+    required int32 sex=4;
+    required int32 role=5;
+    required int64 force=6;
+    required int32 memberNum=7;
+    // 结义道具类型
+    required int32 jieYiDaoJu=8;
+}
+
+// 处理邀请请求
+message CSJieYiHandleInvite{
+    // 邀请者id
+    required int64 playerId=1;
+    required bool agree=2;
+    // 结义道具类型
+    required int32 jieYiDaoJu=3;
+    // 结义威名
+    required string jieYiName=4;
+}
+// 处理邀请回复
+message SCJieYiHandleInvite{
+    required int64 playerId=1;
+    required bool agree=2;
+    // 老大性别
+    required int32 sex=3;
+}
+// 处理邀请回复推送
+message SCJieYiHandleInviteNotice{
+    // 被邀请者id
+    required int64 playerId=1;
+    required string playerName=2;
+    required bool agree=3;
+    required int64 laoDaId=4;
+    // 新成员性别
+    required int32 sex=5;
+}
+
+// 结义威名升级请求
+message CSJieYiNameUpLev{
+}
+// 结义威名升级回复
+message SCJieYiNameUpLev{
+    required int32 level=1;
+    // 随机祝福值
+    required int32 randBless=2;
+    // 当前祝福值进度
+    required int32 pro=3;
+    // 是否升级成功
+    required bool success=4;
+}
+
+// 玩家信物激活请求
+message CSJieYiTokenActivite{
+    // 玩家信物类型
+    required int32 token=1;
+}
+// 玩家信物激活回复
+message SCJieYiTokenActivite{
+    required int32 token=1;
+}
+
+// 玩家信物升级请求
+message CSJieYiTokenUpLev{
+    //是否自动购买
+    required bool autoFlag=1;
+}
+// 玩家信物升级回复
+message SCJieYiTokenUpLev{
+    required int32 typ=1;
+    required int32 level=2;
+    // 随机祝福值
+    required int32 randBless=3;
+    // 当前祝福值进度
+    required int32 pro=4;
+    // 是否升级成功
+    required bool success=5;
+}
+
+// 玩家信物替换请求
+message CSJieYiTokenChange{
+    // 玩家信物类型
+    required int32 token=1;
+    // 玩家信物替换类型 0 补差价 1 高级信物
+    required int32 type=2;
+}
+// 玩家信物替换回复
+message SCJieYiTokenChange{
+    required int32 token=1;
+    required int32 level=2;
+}
+
+// 兄弟信物赠送(替换)请求
+message CSJieYiTokenGive{
+    // 玩家信物类型
+    required int32 token=1 [default=-1];
+    // 玩家id
+    required int64 playerId=2;
+    // 留言
+    required string leaveWord=3;
+    // 信物替换类型 0 补差价 1 高级信物
+    required int32 type=4;
+}
+// 兄弟信物赠送(替换)回复
+message SCJieYiTokenGive{
+    required int32 token=1;
+    required int64 playerId=2;
+    required int32 level=3;
+}
+// 兄弟信物赠送(替换)回复推送
+message SCJieYiTokenGiveNotice{
+    // 赠送者id
+    required int64 playerId=1;
+    required string playerName=2;
+    required string leaveWord=3;
+    required int32 token=4;
+    required int32 lastToken=5;
+}
+
+// 玩家解除结义请求
+message CSJieYiJieChu{
+}
+// 玩家解除结义回复
+message SCJieYiJieChu{
+}
+// 玩家解除结义回复推送
+message SCJieYiJieChuNotice{
+    // 解除者id
+    required int64 playerId=1;
+    required string playerName=2;
+}
+
+// 玩家发布结义请求
+message CSJieYiPost{
+    required string leaveWord=1;
+}
+// 玩家发布结义回复
+message SCJieYiPost{
+    required int64 postTime=1;
+    required string leaveWord=2;
+}
+
+// 玩家结义留言墙
+message LeaveWordInfo{
+    required int64 playerId=1;
+    required int64 force=2;
+    required string playerName=3;
+    required string leaveWord=4;
+    required int32 level=5;
+    // 玩家上次发布留言的时间
+    required int64 lastPostTime=6;
+    required int32 sex=7;
+    required int32 role=8;
+    // 玩家是否在线 0不在线
+    required int32 isOnline=9;
+}
+
+// 玩家结义留言墙请求
+message CSJieYiLeaveWordInfo{
+}
+// 玩家结义留言墙回复
+message SCJieYiLeaveWordInfo{
+    repeated LeaveWordInfo leaveWordInfo=1;
+}
+
+// 玩家结义道具替换请求
+message CSJieYiDaoJuChange{
+    // 道具类型
+    required int32 daoJu=1;
+}
+// 玩家结义道具替换回复
+message SCJieYiDaoJuChange{
+    // 道具类型
+    required int32 daoJu=1;
+}
+
+// 兄弟结义道具替换请求
+message CSJieYiDaoJuHelpChange{
+    // 兄弟id
+    required int64 playerId=1;
+    // 结义道具类型
+    required int32 daoJuType=2;
+}
+// 兄弟结义道具替换回复
+message SCJieYiDaoJuHelpChange{
+    // 兄弟id
+    required int64 playerId=1;
+    // 结义道具类型
+    required int32 daoJuType=2;
+}
+// 兄弟结义道具替换推送
+message SCJieYiDaoJuHelpChangeNotice{
+    // 结义道具类型
+    required int32 daoJuType=1;
+}
+
+// 玩家求援请求
+message CSJieYiQiuYuan{
+}
+// 玩家求援回复
+message SCJieYiQiuYuan{
+    required int64 lastQiuYuanTime=1;
+}
+// 玩家求援回复推送
+message SCJieYiQiuYuanNotice{
+    required string playerName=1;
+    required int32 mapId=2;
+    required JieYiPosition pos=3;
+}
+
+// 兄弟救援请求
+message CSJieYiJiuYuan{
+    required int32 mapId=1;
+    required JieYiPosition pos=2;
+}
+// 兄弟救援回复
+message SCJieYiJiuYuan{
+}
+
+// 老大踢人请求
+message CSJieYiLaoDaTiRen{
+    // 被踢玩家id
+    required int64 playerId=1;
+}
+// 老大踢人回复
+message SCJieYiLaoDaTiRen{
+    required int64 playerId=1;
+}
+// 老大踢人回复推送
+message SCJieYiLaoDaTiRenNotice{
+    // 被踢者
+    required int64 playerId=1;
+    required string playerName=2;
+    // 踢人者
+    required int64 laoDaId=3;
+    required string laoDaName=4; 
+}  
+// 推送给被踢的人
+message SCJieYiLaoDaTiRenOtherNotice{
+    // 踢人者
+    required int64 laoDaId=1;
+    required string laoDaName=2; 
+}
+
+// 信物索要请求
+message CSJieYiTokenSuoYao{
+    // 被索要人id
+    required int64 playerId=1;
+    // 信物类型
+    required int32 token=2;
+    // 留言
+    required string leaveWord=3;
+}
+// 信物索要回复
+message SCJieYiTokenSuoYao{
+    required int64 playerId=1;
+    required int32 token=2;
+    required string leaveWord=3;
+}
+// 信物索要回复推送
+message SCJieYiTokenSuoYaoNotice{
+    required int32 token=1;
+    // 索要人id
+    required int64 playerId=2;
+    required string playerName=3;
+    required string leaveWord=4;
+}
+
+// 处理信物索要请求
+message CSJieYiHandleTokenSuoYao{
+    // 索要人id
+    required int64 playerId=1;
+    required int32 token=2;
+}
+// 处理信物索要回复
+message SCJieYiHandleTokenSuoYao{
+    required int64 playerId=1;
+    required int32 token=2;
+}
+
+// 声威值掉落
+message SCJieYiShengWeiZhiDrop{
+    // 掉落等级
+    required int32 dropLev=1;
+    // 掉落声威值数量
+    required int32 dropNum=2;
+    // 击杀者名字
+    required string killerName=3;
+    // 兄弟位置
+    required int32 mapId=4;
+    required JieYiPosition pos=5;
+    // 兄弟id
+    required int64 playerId=6;
+    // 兄弟名字
+    required string name=7;
+}
+
+// 声威值推送
+message SCJieYiShengWeiZhiTuiSong{
+    required int32 shengWeiZhi=1;
+}
+
+//结义信息发生改变的推送
+message SCJieYiInfoOnChange{
+    optional int64 jieYiId=1 [default=-1];  //-1没有变化
+    optional string name=2 [default=""];
+    optional int32 playerNum=3 [default=-1];
+}
+
+//结义兄弟信息发生改变
+message SCJieYiBrotherInfoOnChange{
+    // 结义成员id
+    optional int64 playerId=1 [default=-1];  //-1没有变化
+    // 结义成员名字
+    optional string name=2 [default=""];
+    optional int32 role=3 [default=-1];
+    optional int32 sex=4 [default=-1];
+    optional int32 level=5 [default=-1];
+    optional int64 force=6 [default=-1];
+    optional int32 zhuanSheng=7 [default=-1];
+    optional int32 shengWeiZhi=8 [default=-1];
+    // 结义成员加入时间
+    optional int64 jieYiTime=9 [default=-1];
+    // 结义信物类型
+    optional int32 tokenType=10 [default=-1];
+    // 结义信物等级
+    optional int32 tokenLev=11 [default=-1];
+    // 结义道具类型
+    optional int32 jieYiDaoJu=12 [default=-1];
+    // 玩家是否在线 0不在线
+    optional int32 isOnline=13 [default=-1];
+    // 玩家威名等级
+    optional int32 nameLev=14;
+}
+
+

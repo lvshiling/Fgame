@@ -1,0 +1,24 @@
+
+
+file="dummy_name_vo.go"
+pkg="template"
+class="DummyNameTemplateVO"
+comment = "假人名配置"
+[[variables]]
+name="Id"
+type="int"
+tag="id"
+comment="id"
+
+[[variables]]
+name="Type"
+type="int32"
+tag="type"
+comment="类型1.姓氏2.男名3.女名"
+
+[[variables]]
+name="Name"
+type="string"
+tag="name"
+comment="名称"
+ 

@@ -1,0 +1,14 @@
+{
+    "iOS":{
+        "appId":"10118",
+        "appKey":"d381d2c81743efc7b09800f9ca425bb7",
+        "payKey":"cde7ca411090eacb48e71681e44c4889",
+        "notifyUrl":"http://test.fhgamers.com:18080/api/charge/taifeng/ios"
+    },
+    "android":{
+        "appId":"10118",
+        "appKey":"d381d2c81743efc7b09800f9ca425bb7",
+        "payKey":"cde7ca411090eacb48e71681e44c4889",
+        "notifyUrl":"http://test.fhgamers.com:18080/api/charge/taifeng/android"
+    }
+} 

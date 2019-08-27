@@ -1,0 +1,17 @@
+
+
+file="cd_group_vo.go"
+pkg="template"
+class="CdGroupTemplateVO"
+comment = "cd组配置"
+[[variables]]
+name="Id"
+type="int"
+tag="id"
+comment="id"
+
+[[variables]]
+name="Time"
+type="int"
+tag="time"
+comment="时间"

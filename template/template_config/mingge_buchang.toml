@@ -1,0 +1,27 @@
+file="mingge_buchang_vo.go"
+pkg="template"
+class="MingGeBuchangTemplateVO"
+comment = "命格补偿配置"
+[[variables]]
+name="Id"
+type="int"
+tag="id"
+comment="id"
+
+[[variables]]
+name="MinggongCount"
+type="int32"
+tag="minggong_count"
+comment="3条属性一样的数量"
+
+[[variables]]
+name="ReturnItemId"
+type="string"
+tag="return_item_id"
+comment="返还物品id"
+
+[[variables]]
+name="ReturnItemCount"
+type="string"
+tag="return_item_count"
+comment="返还物品数量"

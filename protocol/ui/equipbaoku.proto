@@ -1,0 +1,156 @@
+syntax = "proto2";
+
+package ui;
+
+import "drop.proto";
+import "inventory.proto";
+import "shop.proto";
+
+message EquipbaokuInfo{
+    //宝库幸运值
+    required int32 luckyPoints=1;
+    //宝库积分
+    required int32 attendPoints=2;
+}
+message EquipbaokuLog{
+    required int64 createTime=1;
+    required string playerName=2;
+    required int32 itemId=3;
+    required int32 itemNum=4;
+}
+
+//宝库信息
+message  CSEquipbaokuInfoGet{
+}
+//宝库信息回复
+message SCEquipbaokuInfoGet{
+    //装备宝库信息
+    required EquipbaokuInfo equipBaokuInfo=1;
+    //装备宝库日志
+    repeated EquipbaokuLog equipLogList=2;
+    //材料宝库信息
+    required EquipbaokuInfo materialBaokuInfo=3;
+    //材料宝库日志
+    repeated EquipbaokuLog materialLogList=4;
+    //每日限购道具
+    repeated ShopLimit shopLimitList=5;
+}
+
+//宝库日志增量
+message CSEquipbaokuLogIncr{
+    // 0装备宝库 1材料宝库
+    required int32 type=1;
+    required int64 logTime=2;
+}
+//宝库日志增量回复
+message SCEquipbaokuLogIncr{
+    required int32 type=1;
+    repeated EquipbaokuLog logList=2;
+}
+
+
+//宝库探索
+message CSEquipbaokuAttend{
+    // 0装备宝库 1材料宝库
+    required int32 type=1;
+    //日志时间
+    required int64 logTime=2;
+    //自动购买
+    optional bool autoFlag=3;
+}
+//宝库探索回复
+message SCEquipbaokuAttend{
+    required int32 type=1;
+    //宝库掉落
+    repeated DropInfo dropInfo=2;
+    //日志
+    repeated EquipbaokuLog logList=3;
+    //自动购买
+    optional bool autoFlag=4;
+    //宝库幸运值
+    required int32 luckyPoints=5;
+    //宝库积分
+    required int32 attendPoints=6;
+}
+
+
+//宝库十连探索
+message CSEquipbaokuAttendBatch{
+    // 0装备宝库 1材料宝库
+    required int32 type=1;
+    //探索次数
+    required int32 attendNum=2;
+    //日志时间
+    required int64 logTime=3;
+    //自动购买
+    optional bool autoFlag=4;
+}
+//宝库十连探索回复
+message SCEquipbaokuAttendBatch{
+    required int32 type=1;
+    //宝库掉落
+    repeated DropInfo dropList=2;
+    //日志
+    repeated EquipbaokuLog logList=3;
+    //自动购买
+    optional bool autoFlag=4;
+    //宝库幸运值
+    required int32 luckyPoints=5;
+    //宝库积分
+    required int32 attendPoints=6;
+}
+
+
+//开启幸运宝箱
+message CSEquipbaokuLuckyBox{
+    // 0装备宝库 1材料宝库
+    required int32 type=1;
+}
+message SCEquipbaokuLuckyBox{
+    required int32 type=1;
+    //幸运宝箱掉落
+    repeated DropInfo dropList=2;
+    //宝库幸运值
+    required int32 luckyPoints=3;
+}
+
+
+//积分兑换
+message CSEquipbaokuPointsExchange{
+    // 0装备宝库 1材料宝库
+    required int32 type=1;
+    //道具流水id
+    required int32 shopId=2;
+    //购买组数量
+    required int32 num=3;
+}
+message SCEquipbaokuPointsExchange{
+    required int32 type=1;
+    //道具流水id
+    required int32 shopId=2;
+    //购买组数量
+    required int32 num=3;
+    //宝库积分
+    required int32 attendPoints=4;
+    //当日累计购买数量
+    optional int32 dayCount=5;
+}
+
+
+//分解装备(仅装备宝库)
+message CSEquipbaokuResolveEquip{
+    repeated int32 indexList=1;
+}
+message SCEquipbaokuResolveEquip{
+    required int32 goldYuanLevel=1;
+    required int64 goldYuanExp=2;
+    repeated DropInfo dropInfoList=3;
+}
+
+
+//下发每日限购道具,已购买次数
+message CSEquipbaokuShopLimit {
+}
+message SCEquipbaokuShopLimit {
+    repeated ShopLimit shopLimitList=2;
+}

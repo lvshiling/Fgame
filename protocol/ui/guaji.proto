@@ -1,0 +1,92 @@
+syntax = "proto2";
+
+package ui;
+
+
+message GuaJiOption{
+    required int32 optionType=1;
+    required int32 optionValue=2;
+}
+
+message GuaJiData {
+    required int32 guaJiType=1; //挂机类型
+    repeated GuaJiOption options=2; //挂机选项
+}
+
+
+//挂机进阶设置数据
+message GuaJiAdvanceSettingData{
+    required int32 advanceType=1;
+    required int32 advanceValue=2;
+}
+
+
+//挂机请求
+message CSGuaJi {
+    repeated GuaJiData guaJiDataList=1; //挂机列表
+    repeated GuaJiAdvanceSettingData guaJiAdvanceSettingDataList=2;//挂机进阶设置
+}
+
+//挂机回复
+message SCGuaJi{
+    repeated GuaJiData guaJiDataList=1; //挂机列表
+    repeated GuaJiAdvanceSettingData guaJiAdvanceSettingDataList=2;//挂机进阶设置
+}
+
+message SCCurrentGuaJi{
+    required int32 guaJiType=1; //挂机类型
+}
+
+//停止挂机请求
+message CSStopGuaJi {
+    
+}
+
+//挂机回复
+message SCStopGuaJi{
+
+}
+
+//定义
+message GuaJiPosition {
+    required float posX =1;
+    required float posY =2;
+    required float posZ =3;
+}
+
+//场景地点
+message SCGuaJiPos {
+    required int32 mapId=1;
+    required GuaJiPosition pos=2;
+}
+
+//当前挂机停止
+message SCCurrentGuaJiStop{
+
+}
+
+//挂机进阶数据
+message GuaJiAdvanceData{
+    //0:坐骑,1:战翼,2:护体盾,3:暗器,4:法宝,5:身法,6:仙体,7:领域,8:噬魂番,9:天魔体,10:仙羽,11:盾刺,12:戮仙刃
+    //100:灵兵,101:灵骑,102:灵翼,103:灵身,104:灵域,105:灵宝,106:灵体
+    required int32 advanceType=1;
+    required int32 advanceValue=2;
+}
+
+//进阶系统列表请求
+message CSGuaJiAdvanceList{
+   
+}
+
+//进阶系统列表请求回复
+message SCGuaJiAdvanceList{
+    repeated GuaJiAdvanceData guaJiAdvanceDataList=1;
+}
+
+//进阶系统变更
+message SCGuaJiAdvanceUpdateList{
+    repeated  GuaJiAdvanceData guaJiAdvanceDataList=1;
+}
+
+
+

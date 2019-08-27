@@ -1,0 +1,22 @@
+file="baby_beishu_vo.go"
+pkg="template"
+class="BabyBeiShuTemplateVO"
+comment = "宝宝属性倍数模板配置"
+[[variables]]
+name="Id"
+type="int"
+tag="id"
+comment="id"
+ 
+[[variables]]
+name="Type"
+type="int32"
+tag="type"
+comment="属性类型"
+ 
+[[variables]]
+name="Attr"
+type="int32"
+tag="attr"
+comment="属性基数"
+  

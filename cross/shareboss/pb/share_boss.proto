@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package pb;
+
+
+
+message Position {
+    float x=1;
+    float y=2;
+    float z=3;
+}
+
+message BossInfo{
+    int32 biologyId =1;
+    bool isDead=2;
+    int64 deadTime=3;
+    Position pos=4;
+}
+
+//获取跨服boss列表
+message ShareBossInfoListRequest{
+     int32 bossType=1;
+}
+
+//跨服boss列表回复
+message ShareBossInfoListResponse{
+    int32 bossType=1;
+    repeated BossInfo bossInfoList=2;
+}
+
+service ShareBoss{
+    //获取
+    rpc GetAllShareBossList(ShareBossInfoListRequest) returns(ShareBossInfoListResponse){}
+}
+

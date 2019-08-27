@@ -1,0 +1,36 @@
+syntax = "proto2";
+
+package  ui;
+
+import "item.proto";
+
+
+//获取界面信息
+message CSDragonGet{
+}
+
+//获取界面信息回复
+message SCDragonGet {
+    //阶段
+    required int32 stageId=1;
+    //道具
+    repeated ItemInfo itemList=2;
+}
+
+//喂养
+message CSDragonFeed {
+    //道具
+    required int32 itemId=1;
+}
+
+//喂养回复
+message SCDragonFeed {
+    //阶段
+    required int32 stageId=1;
+    //道具
+    repeated ItemInfo itemList=2;
+    //是否激活 0未激活 1激活
+    required bool status=3;
+}
+
+

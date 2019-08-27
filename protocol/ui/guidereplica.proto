@@ -1,0 +1,58 @@
+syntax = "proto2";
+
+package ui;
+import "drop.proto";
+
+//挑战引导副本
+message CSGuideReplicaChallenge{
+    required int32 questId=1;
+}
+message SCGuideReplicaChallenge{
+}
+
+
+//引导副本挑战结果
+message SCGuideReplicaChallengeResult{
+    //挑战是否成功：0否1是
+    required bool isSuccess =1;
+    //掉落物品
+    repeated DropInfo dropList=2;
+}
+
+message CatDogKillInfo {
+    required int32 type=1; //1猫2狗
+    required int32 num=2; 
+}
+// 猫狗大战 
+message CatDogInfo {
+    repeated CatDogKillInfo killInfo=1;
+} 
+
+//引导副本下发场景信息
+message SCGuideReplicaSceneInfo{
+    //创建场景时间
+    required int64 createTime = 1;
+    //地图id
+    required int32 mapId=2;
+    //引导类型
+    required int32 guideType=3;  
+    //猫狗
+    optional CatDogInfo catDogInfo=4; 
+    //任务id
+    required int32 questId=5;
+}
+ 
+//场景信息推送 
+message SCGuideReplicaSceneDataChangedNotice{
+    required int32 guideType=1;          //引导类型
+    optional CatDogInfo catDogInfo=2;
+    optional bool herbsFlag=3; //药草标识
+}
+
+//引导副本玩家操作
+message CSGuideReplicaPlayerCommonOperate{
+    required int32 guideType=1;   
+}
+message SCGuideReplicaPlayerCommonOperate{
+    required int32 guideType=1;
+}

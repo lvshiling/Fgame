@@ -1,0 +1,27 @@
+file="shangguzhiling_linglian_taozhuang_vo.go"
+pkg="template"
+class="ShangguzhilingLinglianTaozhuangTemplateVO"
+comment = "上古之灵灵炼套装配置"
+[[variables]]
+name="Id"
+type="int"
+tag="id"
+comment="id"
+
+[[variables]]
+name="NextId"
+type="int32"
+tag="next_id"
+comment="下一Id"
+
+[[variables]]
+name="NeedLevel"
+type="int32"
+tag="need_level"
+comment="目标星级"
+
+[[variables]]
+name="Percent"
+type="int32"
+tag="percent"
+comment="万分比"

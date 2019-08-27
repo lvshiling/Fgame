@@ -1,0 +1,105 @@
+syntax = "proto2";
+
+package ui;
+
+import "drop.proto";
+import "rewproperty.proto";
+
+message HouseInfo {
+    //房子序号
+    required int32 houseIndex=1;
+    //房子类型:0银两 1绑元
+    required int32 houseType=2;
+    //装修次数
+    required int32 uplevelTimes=3;
+    //损坏状态0否1是
+    required int32 isBroken=4;
+    //房子等级
+    required int32 level=5;
+    //是否领取租金
+    required int32 isRent=6;
+    //历史最高等级
+    required int32 maxLevel=7;
+}
+
+//房子日志
+message HouseLog{
+    required int64 createTime=1;
+    required string playerName=2;
+    required int32 houseIndex=3;
+    required int32 houseLevel=4;         //房子等级
+    required int32 houseType=5;         //房子类型 
+    required int32 operateType=6;       //操作类型：0激活1升级2出售
+}
+ 
+
+//房子界面信息请求 
+message CSHouseListGet{
+    
+}
+message SCHouseListGet{
+    repeated HouseInfo houseList=1;
+    repeated HouseLog logList=2;
+}
+
+
+//房子激活请求
+message CSHouseActivate{
+    required int32 houseIndex=1;
+    required int32 houseType=2;
+    required int64 logTime=3;     //日志时间
+}
+message SCHouseActivate{
+    required int32 houseIndex=1;
+    required int32 houseType=2;
+    repeated HouseLog logList=3;
+}
+
+
+//房子升级请求
+message CSHouseUpgrade{
+    required int32 houseIndex=1;
+    required int64 logTime=2;     //日志时间
+}
+message SCHouseUpgrade{
+    required int32 houseIndex=1;
+    repeated HouseLog logList=2;
+    repeated DropInfo dropInfo=3;
+}
+
+// 房子出售
+message CSHouseSell {
+    required int32 houseIndex=1;
+    required int64 logTime=2;     //日志时间
+}
+message SCHouseSell {
+    required int32 houseIndex=1;
+    repeated HouseLog logList=2;
+    required RewProperty rewInfo=3;
+}
+
+// 房子收租金
+message CSHouseReceiveRent {
+    required int32 houseIndex=1;
+}
+message SCHouseReceiveRent {
+    required int32 houseIndex=1;
+    required RewProperty rewInfo=2;
+}
+
+// 房子维修
+message CSHouseRepair {
+    required int32 houseIndex=1;
+}
+message SCHouseRepair {
+    required int32 houseIndex=1;
+}
+  
+
+//房子日志增量
+message CSHouseLogIncr{
+    required int64 logTime=1; 
+}
+message SCHouseLogIncr{
+    repeated HouseLog logList=1;
+}

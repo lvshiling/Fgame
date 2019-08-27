@@ -1,0 +1,155 @@
+syntax = "proto2";
+
+package ui;
+
+
+
+message LingTongCacheInfo {
+    //出战灵童id
+    required int32 lingTongId=1;
+    //出战灵童时装
+    required int32 fashionId=2;
+    //灵童总等级
+    required int32 level=3;
+    //灵童各自
+    repeated LingTongInfo lingTongList=4;
+}
+
+message LingTongInfo {
+    //灵童id
+    required int32 lingTongId=1;
+    //灵童名字
+    required string lingTongName=2;
+    //时装id
+    required int32 fashinId=3;
+    //等级
+    required int32 level=4;
+    //等级进度值
+    required int32 levelPro=5;
+    //培养等级
+    required int32 peiYangLevel=6;
+    //培养进度值
+    required int32 peiYangPro=7;
+    //升星等级
+    required int32 starLevel=8;
+    //升星进度值
+    required int32 starPro=9;
+}
+
+
+//灵童信息请求
+message CSLingTongGet {
+}
+//灵童信息应答
+message SCLingTongGet{
+   //出战灵童
+   required int32 lingTongId=1;
+   //灵童信息列表
+   repeated LingTongInfo lingTongList=2;
+}
+
+//激活灵童请求
+message CSLingTongActive {
+    //灵童id
+   required int32 lingTongId=1;
+} 
+//激活灵童应答
+message SCLingTongActive {
+   //灵童id
+   required int32 lingTongId=1;
+   required  LingTongInfo lingTongInfo=2;
+}
+
+//灵童出战请求
+message CSLingTongChuZhan {
+   //灵童id
+   required int32 lingTongId=1;
+}
+//穿戴灵童应答
+message SCLingTongChuZhan {
+    //灵童id
+    required int32 lingTongId=1;
+}
+
+
+//灵童升级请求
+message CSLingTongUpgrade {
+    //灵童id
+    required int32 lingTongId=1;
+ }
+ 
+ //灵童升级应答
+ message SCLingTongUpgrade {
+     //灵童id
+     required int32 lingTongId=1;
+     //灵童等级
+     required int32 level=2;
+     //进度值
+     required int32 upPro=3;
+     //状态 false 失败 true成功
+     required bool result=4;
+  }
+
+//灵童培养请求
+message CSLingTongPeiYang {
+    //灵童id
+    required int32 lingTongId=1;
+    //数量
+    required int32 num=2;
+}
+
+
+//灵童培养回复
+message SCLingTongPeiYang {
+    //灵童id
+    required int32 lingTongId=1;
+    //灵童培养等级
+    required int32 peiYangLevel=2;
+    //培养进度值
+    required int32 peiYangPro=3;
+}
+
+//灵童改名
+message CSLingTongRename{
+    //灵童id
+    required int32 lingTongId=1;
+    required string lingTongName= 2;
+}
+
+//灵童改名回复
+message SCLingTongRename{
+    required  int32 lingTongId=1;
+    required string lingTongName=2;
+}
+
+
+//灵童升星请求
+message CSLingTongUpstar {
+    //灵童id
+    required int32 lingTongId=1;
+}
+ 
+//灵童升星回复
+message SCLingTongUpstar {
+    //灵童id
+    required int32 lingTongId=1;
+    //灵童升星等级
+    required int32 level=2;
+    //灵童升星进度值
+    required int32 upPro=3;
+    //状态 false 失败 true成功
+    required bool result=4;
+}
+
+message SCLingTongPowerNotice{
+    required int64 power=1;
+}
+
+
+
+
+
+
+
+
+

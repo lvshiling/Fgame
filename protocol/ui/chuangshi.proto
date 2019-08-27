@@ -1,0 +1,552 @@
+syntax = "proto2";
+
+package ui;
+import "drop.proto";
+import "scene.proto";
+import "common.proto";
+
+// 创世之战预告信息请求
+message CSChuangShiYuGao{ 
+}
+message SCChuangShiYuGao{
+    // 玩家是否参加 0未参加 1参加
+    required int32 isJoin=1;
+    // 人数
+    required int64 peopleNum=2;
+}
+
+// 报名创世之战请求
+message CSBaoMingChuangShi{
+}
+message SCBaoMingChuangShi{
+    // 报名成功获取的物品
+    repeated DropInfo dropInfo=1;
+}
+
+//玩家官职信息
+message PlayerGuanZhiInfo {
+    required int32 level=1; //官职等级
+    required int32 weiWang=2;   //威望进度条
+    required int32 receiveRewLevel=3;//官职奖励领取等级
+}
+
+// 玩家创世信息
+message PlayerChuangShiInfo{
+    required int32 pos=1;           //阵营职位
+    required int64 jifen=2;         //创世积分
+    required int64 diamonds=3;      //钻石
+    required int64 weiWang=4;       //威望
+    required int32 campType=5;      //阵营类型
+    required PlayerGuanZhiInfo guanZhiInfo=6;   //玩家官职信息
+    required int32 signStatus=7;            //报名标志0未报名1报名中2已报名3报名失败
+    required int32 voteStatus=8;            //投票标识0未投票1投票中2已投票3投票失败
+    required int64 lastPayTime=9;           //上次个人工资时间
+    required int64 joinCampTime=10;         //加入阵营时间
+    required int64 wanFaActivateTime=11;    //万法自然激活时间
+} 
+   
+//创世成员 
+message ChuangShiMemberInfo{
+    required int32 platform=1;          //平台id
+    required int32 serverId=2;          //服务器id
+    required string name=3;             //名字
+    required int32 pos=4;               //阵营职位
+    required int64 force=5;             //战力
+    required string allianceName=6;     //仙盟名  
+    required int64 memId=7;             //成员id
+    required int32 alPos=8;             //仙盟职位
+    required int64 allianceId=9;        //仙盟id
+    required int32 campType=10;         //阵营类型
+    required int32 role=11;         //职业
+    required int32 sex=12;          //性别
+    required int32 wingId=13;       //战翼id
+    required int32 weaponId=14;     //兵魂id
+    required int32 fashionId=15;    //时装id
+    required int64 scheduleJifen=16;        //分配的积分
+    required int64 scheduleDiamonds=17;     //分配的钻石
+    required int64 playerJifen=18;          //玩家个人创世积分
+    required int32 level=19;        //等级
+    required int32 zhuanSheng=20;   //转生
+    required int32 online=21;       //在线状态0离线1在线
+    required int32 guanZhiLevel=22; // 官职系统等级
+}
+
+// 城池建设技能
+message JianSheSkillInfo {
+    required int32 level=1;             //技能建筑等级
+    required int64 activateTime=2;      //激活时间
+} 
+
+//城池建设
+message ChuangShiJianSheInfo{
+    required int32 type=1;          //建设类型
+    required int32 level=2;         //建设等级 
+    required int32 exp=3;           //建设经验
+    repeated JianSheSkillInfo skillList=4; //建筑技能
+    optional int32 skillLevelSet=5;        //当前使用建筑技能等级
+}
+
+message CityBriefInfo {
+    required int32 camp=1;      //阵营
+    required int32 cityType=2;  //城市类型
+    required int32 index=3;     //城市索引
+    required int32 orignalCamp=5;   //初始阵营
+    optional ChuangShiMemberInfo kingMember=4; //城主
+}   
+ 
+//创世城市  
+message ChuangShiCity { 
+    required int32 camp=1;      //阵营
+    required int32 cityType=2;  //城市类型
+    required int32 index=3;     //城市索引
+    optional ChuangShiMemberInfo kingMember=4; //城主
+    required int32 orignalCamp=5;   //初始阵营
+    required int64 cityId=6;        //城市id
+    repeated ChuangShiJianSheInfo jianSheList=7;        //城防建设列表
+    required int64 jifen=8;         //积分
+    required int64 diamonds=9;      //钻石
+}  
+
+
+// 战报信息
+message ChuangShiLog{
+    required int32 type=1;      //战报类型 0攻城1工资2任命3建设
+    required string content=2;  //战报内容
+    required int64 logTime=3;   //战报时间
+}
+
+// // 阵营信息
+// message CampBriefInfo{
+//     required int32 camp=1;          //阵营
+//     required int64 jifen=2;         //阵营积分 
+//     required int64 diamonds=3;      //阵营钻石
+//     required int64 payJifen=4;         //阵营积分工资
+//     required int64 payDiamonds=5;      //阵营钻石工资 
+// } 
+ 
+//创世阵营
+message ChuangShiCamp{ 
+    required int32 camp=1;  //阵营
+    optional ChuangShiMemberInfo kingMember=2;  //神王
+    required int64 power=3;                     //总战力
+    repeated ChuangShiCity cityList=4;          //城市列表
+    repeated ChuangShiMemberInfo memList=5;     //成员列表
+    required int64 jifen=6;         //阵营积分
+    required int64 diamonds=7;      //阵营钻石
+    repeated ChuangShiCity attackList=8;    // 攻城目标
+    required int64 payJifen=9;         //阵营积分工资
+    required int64 payDiamonds=10;      //阵营钻石工资 
+}
+  
+//创世信息
+message CSChuangShiInfo{ 
+}
+message SCChuangShiInfo{
+    // (登录下发)
+    repeated ChuangShiCamp campList=1; //创世阵营
+} 
+
+//玩家创世信息变化推送信息(登录下发)
+message SCChuangShiPlayerInfoNotice{
+    required PlayerChuangShiInfo playerInfo=1;
+} 
+
+//玩家创世积分变化
+message SCChuangShiPlayerJifenChanged {
+    required int64 jifen=1;
+} 
+  
+//阵营信息推送
+message SCChuangShiCampNotice  {
+    required ChuangShiCamp camp=1; //阵营信息 
+} 
+
+
+// //创世城列表 
+// message CSChuangShiCityList{
+// } 
+// message SCChuangShiCityList{
+//     repeated ChuangShiCamp campList=1; //创世阵营
+//     repeated ChuangShiCity cityList=2; //城市列表
+// }
+
+
+// 创世加入阵营
+message CSChuangShiJoinCamp{
+    required int32 camp=1;
+}
+message SCChuangShiJoinCamp {
+    required int32 camp=1;
+}
+
+
+//神王报名列表
+message CSChuangShiShenWangBaoMingList{
+}
+message SCChuangShiShengWangBaoMingList{ 
+    repeated ChuangShiMemberInfo memberInfoList=1;
+}
+
+
+//神王报名
+message CSChuangShiShenWangBaoMing{
+}
+message SCChuangShiShenWangBaoMing{
+    required int32 status=1; //0 未报名 1报名中 2报名成功
+} 
+
+message ChuangShiTouPiaoMemberInfo{
+    required ChuangShiMemberInfo memberInfo=1;
+    required int32 ticketNum=2;
+} 
+ 
+//获取投票列表
+message CSChuangShiShenWangTouPiaoList{
+}
+message SCChuangShiShengWangTouPiaoList{
+    repeated ChuangShiTouPiaoMemberInfo memberInfoList=1;
+}
+ 
+//获取战报列表
+message CSChuangShiLogList{
+} 
+message SCChuangShiLogList{
+    repeated ChuangShiLog logList=1;//战报列表
+}
+
+//投票
+message CSChuangShiShengWangTouPiao{
+    required int64 supportId=1; //支持的玩家id
+}
+message SCChuangShiShengWangTouPiao{
+    required int64 supportId=1; 
+    required int32 status=2; //0 未投票 1投票中 2投票成功
+}  
+
+//任命
+message CSChuangShiCityRenMing{
+    required int64 cityId=1;        //城池id 
+    required int64 beCommitId=2;    //任命成员id 
+} 
+message SCChuangShiCityRenMing{
+    required ChuangShiCity city=1;
+}
+
+
+message CampPaySchedule {
+    required int64 cityId=1; //城池id
+    required int32 ratio=2; //分配比例 
+}
+//阵营工资分配
+message CSChuangShiCampPaySchedule{
+    repeated CampPaySchedule scheduleList=1;
+} 
+message SCChuangShiCampPaySchedule{
+    required int64 jifen=1;         //剩余分配阵营积分
+    required int64 diamonds=2;      //剩余分配阵营钻石
+    repeated CampPaySchedule scheduleList=3;
+} 
+
+message CityPaySchedule {
+    required int32 alPos=1; //仙盟职位
+    required int32 ratio=2; //分配比例
+}
+//城池工资分配
+message CSChuangShiCityPaySchedule{
+    repeated CityPaySchedule scheduleList=1;
+} 
+message SCChuangShiCityPaySchedule{
+    required int64 jifen=1;         //城池积分
+    required int64 diamonds=2;      //城池钻石
+}
+
+//领取个人工资
+message CSChuangShiMyPayReceive{
+}
+message SCChuangShiMyPayReceive{
+    required int64 totalJifen=1;   
+    required int64 totalDiamonds=2; 
+}
+
+//领取阵营工资
+message CSChuangShiCampPayReceive{
+}
+message SCChuangShiCampPayReceive{
+    required int64 jifen=1;         //阵营积分
+    required int64 diamonds=2;      //阵营钻石
+}
+
+
+//领取我的分配工资
+message CSChuangShiMyPayScheduleReceive{
+}
+message SCChuangShiMyPayScheduleReceive{
+    required int64 totalJifen=1;   
+    required int64 totalDiamonds=2; 
+} 
+
+
+//城防建设
+message CSChuangShiCityJianShe{
+    required int64 cityId=1;            //城市id
+    required int32 buildType=2;         //建筑类型
+    required int32 num=3;               //捐献数量 
+}
+message SCChuangShiCityJianShe{
+    required ChuangShiCity city=1;
+    required int32 num=2;
+} 
+
+//城池天气设置
+message CSChuangShiCityTianQiSet {  
+    required int64 cityId=1;    //城池id
+    required int32 level=2;     //建设等级
+} 
+message SCChuangShiCityTianQiSet {
+    required int64 cityId=1;    //城池id
+    required int32 level=2;     //建设等级
+    required int32 orignalCampType=3;
+    required int32 cityType=4; 
+    required int32 index=5; 
+    required ChuangShiJianSheInfo jianShe=6;        //城防建设列表
+}  
+ 
+// 玩家升职请求
+message CSChuangShiPositionAdvance{
+}
+// 玩家升职回复
+message SCChuangShiPositionAdvance{
+    required bool success=1;
+    // 官职等级
+    required int32 level=2;
+    // 剩余威望
+    required int32 weiWang=3;
+}
+
+// 领取官职奖励
+message CSChuangShiGuanZhiRew{
+    required int32 rewLevel=1;
+}
+message SCChuangShiGuanZhiRew{ 
+    required int32 rewLevel=1;
+}
+
+//进入主城和中立
+message CSChuangShiEnterCity {
+    required int64 cityId=1;  //城市id
+}
+message SCChuangShiEnterCity {
+    required int64 cityId=1;  //城市id
+} 
+
+// 选择攻城目标
+message CSChuangShiGongChengTarget {
+    required int64 cityId=1;
+}
+message SCChuangShiGongChengTarget {
+    required ChuangShiCity city=1;
+}
+ 
+
+// 
+// 成员阵营变更推送
+message SCChuangShiMemberCampChangedNotice {
+    optional string playerName=1;
+    required int32 oldPos=2;
+    optional string cityName=3;
+}
+
+// 仙盟阵营更换通知
+message SCChuangShiAllianceCampChangedNotice {
+    required string mengZhuName=1;
+    required int32 newCampType=2;
+} 
+
+//神王结果推送
+message SCChuangShiShenWangBroadcast{
+    // 成员信息
+    required ChuangShiMemberInfo memInfo=1;
+}  
+
+//新城主任命推送
+message SCChuangShiMemRenMingNotice { 
+    required int64 shenWangId=1;
+    required string shenWangName=2; 
+    required CityBriefInfo cityBriefInfo=3;
+}
+
+//盟主变更推送
+message SCChuangShiChengZhuChangedNotice { 
+    required string oldMengZhuName=1;
+    required CityBriefInfo cityBriefInfo=2; 
+} 
+
+// 仙盟解散通知
+message SCChuangShiChengZhuAllianceDismissNotice{
+    required CityBriefInfo cityBriefInfo=1; 
+    required string allianceName=2; 
+}  
+
+message CampPayScheduleResult {
+    required string cityName=1;
+    required string chengZhuName=2;
+    required int32 guanZhiLevel=3;
+    required int64 force=4;
+    required int64 cityJifen=5;
+    required int64 cityDiamonds=6;
+    required int32 ratio=7; //分配比例 
+} 
+// 阵营工资分配推送
+message SCChuangShiCampPayScheduleNotice {
+    required string shenWangName=1;
+    required int64 campJifen=2;         //阵营剩余积分
+    repeated CampPayScheduleResult scheduleResultList=3;
+} 
+
+message CityPayScheduleResult {
+    required ChuangShiMemberInfo memInfo=1;
+    required int32 ratio=2; //分配比例 
+}
+// 城池工资分配推送
+message SCChuangShiCityPayScheduleNotice {
+    required string chengZhuName=1; 
+    required int64 cityJifen=2;         //城池剩余积分
+    repeated CityPayScheduleResult scheduleResultList=3;
+}
+
+// 神王召唤广播（阵营）
+message SCChuangShiSceneShenWangCallBroadcast {
+    required string shenWangName=1;
+    required Position pos=2;
+    required CityBriefInfo cityBriefInfo=3;
+} 
+
+// 阵营攻城目标推送
+message SCChuangShiCampAttackNotice {
+    required string attackShenWangName=1;
+    required int32 attackCampType=2;
+    required string defenCityName=3; 
+    required int32 defenCampType=4;
+}
+
+// 城门被攻击通知
+message SCChuangShiCityWarDefenNotice {
+    required string cityName=1;
+}
+
+//攻城结束推送 
+message SCChuangShiSceneFinish {
+    required int32 winCamp=1;           //获胜阵营
+    required string winShenWangName=2;  //获胜阵营神王名字
+    required int32 defenCamp=3;     //初始守方阵营
+    required string defenShenWangName=4;  //守方阵营神王名字
+    required CityBriefInfo defenCityBriefInfo=5; //城池信息
+    required int32 downJianSheType=6;   //建筑类型
+    required int32 downLevel=7;         //建筑掉级 
+} 
+ 
+  
+// --------------攻城场景----------------------   
+
+//正在抢占复活点
+message CSChuangShiSceneReliveOccupying{
+}
+message SCChuangShiSceneReliveOccupying{
+    required int32 campType=1;
+    required int64 playerId=2;
+}
+
+//复活点占领取消 
+message SCChuangShiSceneReliveOccupyStop{
+    required int32 campType=1; 
+}
+ 
+//复活点占领成功
+message SCChuangShiSceneReliveOccupy{
+    required int32 campType=1;
+    optional string playerName=2;
+} 
+ 
+
+//场景信息推送
+message SCChuangShiSceneInfoNotice {
+    //守方阵营
+    required int32 defendCampType=1;
+    //当前守方阵营
+    required int32 currentDefendCampType=2; 
+    //结束时间
+    required int64 endTime=3;
+    //当前复活点阵营
+    required int32 cuurentReliveCampType=4;
+    //正在读条占领复活点阵营
+    required int32 currentCollectReliveCampType=5;
+    //正在读条占领复活点开始时间
+    required int64 collectReliveStartTime=6; 
+    //玉玺采集物
+    optional GeneralCollectInfo yuXi=7;
+    // 地图id
+    required int32 mapId=8;
+    // 城池建设
+    required ChuangShiCity cityInfo=9;        //城防建设列表
+}
+ 
+// 玉玺信息广播
+message  SCChuangShiSceneYuXiBroadcast {
+    required GeneralCollectInfo yuXi=1;
+}
+
+
+//城门破了
+message SCChuangShiSceneDoorBroke {
+    //城门
+    required int32 door=1;
+}
+
+//使用万法自然
+message CSChuangShiWanFaZiRan { 
+} 
+message SCChuangShiWanFaZiRan {
+    required int64 activateTime=1;  //激活时间
+}  
+
+//原地复活次数改变
+message SCChuangShiSceneReliveTimeChange {
+    //已使用原地复活次数
+    required int32 reliveTime=1; 
+}
+
+//神王召唤
+message CSChuangShiSceneShenWangCall {
+    required int64 cityId=1;         //城池id
+    required Position pos=2;       //位置
+}
+message SCChuangShiSceneShenWangCall { 
+}
+   
+
+//神王召唤救援
+message CSChuangShiSceneRescure {
+    required int64 cityId=1;         //城池id
+    required Position pos=2;       //位置 
+}
+message SCChuangShiSceneRescure { 
+}
+
+
+//召唤雇佣兵
+message CSChuangShiSceneCallYongBing {
+    required int32 index=1;
+}
+message SCChuangShiSceneCallYongBing {
+}
+
+// 天气变化通知
+message SCChuangShiSceneTianQiChanged {
+    required int32 skillLevelSet=1;
+    optional string operatPlayerName=2;
+}
+
+// 建设等级变化通知
+message SCChuangShiSceneJianSheChanged {
+    required ChuangShiJianSheInfo jianShe=1;         
+} 

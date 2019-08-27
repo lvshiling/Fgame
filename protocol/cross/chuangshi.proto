@@ -1,0 +1,31 @@
+syntax = "proto2";
+
+package cross;
+ 
+message ChuangShiData {
+    required int32 pos=1;
+    required int32 campType=2;
+}  
+
+//进入创世世界场景
+message SIChuangShiEnterCity{
+    required int64 cityId=1;
+}
+message ISChuangShiEnterCity{
+    required bool isLineUp=1;
+    required int64 sceneId=2;
+}
+ 
+
+//创世击杀玩家
+message ISChuangShiKillPlayer {
+}
+
+
+
+//创世攻城结束
+message SIChuangShiSceneFinish{
+}
+message ISChuangShiSceneFinish{
+    required bool win=1;
+}

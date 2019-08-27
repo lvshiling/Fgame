@@ -1,0 +1,77 @@
+syntax = "proto2";
+
+package ui;
+import "item.proto";
+
+message TuLongRank{
+    //排名
+    required int32 pos=1;
+    //服务器id
+    required int32 serverId=2;
+    //仙盟
+    required string name=3;
+    //击杀数量
+    required int32 num=4;
+}
+
+
+
+//获取排行榜
+message CSTuLongRank{
+}
+
+//获取排行榜回复
+message SCTuLongRank {
+    repeated TuLongRank rankList=1;
+    //我的排名 pos=0 未上榜
+    required int32 pos=2;
+}
+
+
+//屠龙采集
+message CSTuLongCollect {
+    //小boss标识
+    required int64 npcId=1;
+}
+
+//屠龙采集回复
+message SCTuLongCollect {
+    required int64 npcId=1;
+}
+
+//屠龙采集打断
+message SCTuLongCollectStop {
+    required int64 npcId=1;
+}
+
+//屠龙采集完成
+message SCTuLongCollectFinish{
+    required int64 npcId=1;
+}
+
+//大boss状态
+message SCTuLongBossStatus{
+    //0 待刷新 1已刷新 2已击杀
+    required int32 status=1;
+    //boss标识
+    required int32 biaoShi=2;
+}
+
+//跨服屠龙活动开始
+message SCTuLongStart {
+
+}
+
+message SCTuLongAllianceBiaoShi {
+    //仙盟标识标识
+    required int32 biaoShi=1;
+}
+
+message SCTuLongResult {
+    //仙盟击杀boss数
+    required int32 num=1;
+    repeated ItemInfo itemList=2; 
+}
+
+
+

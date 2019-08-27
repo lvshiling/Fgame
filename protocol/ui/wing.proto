@@ -1,0 +1,209 @@
+syntax = "proto2";
+
+package ui;
+
+
+//战翼信基本信息息
+message WingInfo {
+    //阶数
+    required int32 advancedId=1;
+    //当前战翼id
+    required int32 wingId=2;
+    //食幻化丹食丹等级
+    required int32 unrealLevel=3;
+    //幻化丹培养进度值
+    required int32 unrealPro=4;
+    //皮肤信息列表
+    repeated WingSkinInfo skinList=5;
+}
+
+//护体仙羽
+message FeatherInfo {
+    //阶数
+    required int32 featherId=1;
+    //进度值
+    required int32 progress=2;
+}
+
+//战翼皮肤
+message WingSkinInfo {
+    //战翼皮肤id
+    required int32 wingId=1;
+    //升星等级
+    required int32 level=2;
+    //升星培养值
+    required int32 pro=3;
+}
+
+//战翼信息请求
+message CSWingGet {
+}
+//战翼信息应答
+message SCWingGet{
+   //阶数
+   required int32 advancedId=1;
+   //当前战翼id 
+   required int32 wingId=2;
+   //食幻化丹食丹等级
+   required int32 unrealLevel=3;
+   //食幻化丹培养进度值
+   required int32 unrealPro=4;
+   //幻化
+   repeated int32 unrealList=5;
+   //祝福值
+   optional int32 bless=6;
+   //祝福值开始时间
+   optional int64 blessTime=7;
+   //是否隐藏
+   required bool hidden=8;
+   //战翼试用阶数
+   optional int32 trialOrderId=9 [default=0];
+   //战翼试用激活时间
+   optional int64 activeTime=10 [default=0];
+   //战翼皮肤
+   repeated WingSkinInfo  wingSkinList=11;
+   //护体仙羽信息
+   required FeatherInfo featherInfo=12;
+}
+
+//食用幻化丹请求
+message CSWingUnrealDan {
+    required int32 num=1;
+}
+//食用幻化丹应答
+message SCWingUnrealDan {
+    //幻化丹食丹等级
+    required int32 level=1;
+    //进度值
+    required int32 progress=2;
+}
+
+
+//幻化请求
+message CSWingUnreal {
+    //幻化战翼id
+    required int32 wingId=1;
+}
+//幻化应答
+message SCWingUnreal {
+    //幻化
+    optional int32 wingId=1;
+}
+
+//卸下请求
+message CSWingUnload {
+}
+
+//卸下应答
+message SCWingUnload {
+    //战翼id
+    required int32 wingId=1;
+}
+
+//进阶请求
+message CSWingAdvanced{
+    //是否自动进阶
+    required bool autoFlag=1;
+}
+//进阶应答
+message SCWingAdvanced{
+    //阶数
+    required int32 advancedId=1;
+    //战翼id
+    required int32 wingId=2;
+    //祝福值
+    optional int32 bless=3;
+    //祝福值开始时间
+    optional int64 blessTime=4;
+    //进阶方式 1进阶丹 2祝福丹 3直升券 4激活卡
+    required int32 advancedType=5;
+    // 是否暴击
+    optional bool isDouble=6 [default=false]; 
+    //总祝福值
+    optional int32 totalBless=7;
+}
+
+//护盾仙羽信息
+message CSFeatherGet {
+
+}
+
+//护盾仙羽信息应答
+message SCFeatherGet{
+    //阶数
+    required int32 featherId=1;
+    //培养值
+    required int32 progress=2;
+ }
+
+
+ //进阶请求
+message CSFeatherAdvanced{
+    //是否自动进阶
+    required bool autoFlag=1;
+}
+
+//进阶应答
+message SCFeatherAdvanced{
+    //阶数
+    required int32 featherId=1;
+    //培养值
+    required int32 progress=2;
+    //进阶方式 1进阶丹 2祝福丹 3直升券 
+    required int32 advancedType=3;
+}
+
+//战翼隐藏
+message CSWingHidden {
+    //是否隐藏 0展示  1隐藏
+    required bool hidden=1;
+}
+
+//战翼隐藏
+message SCWingHidden {
+    required bool hidden=1;
+}
+
+
+//使用试用卡获得试用阶数
+message SCWingTrialCard {
+    required int32 trialWingId=1;
+    required int64 activeTime=2;
+}
+
+//试用阶数过期
+message SCWingTrialOverdue {
+    required int32 trialWingId=1;
+    //激活过期 bResult = false  时效过期 bResult = true
+    required bool bResult=2;
+}
+
+
+//战翼皮肤升星请求
+message CSWingUpstar {
+    //战翼皮肤id
+    required int32 wingId=1;
+ }
+ 
+ //战翼皮肤升星应答
+ message SCWingUpstar {
+     //战翼皮肤id
+     required int32 wingId=1;
+     //皮肤星数
+     required int32 level=2;
+     //进度值
+     required int32 upPro=3;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

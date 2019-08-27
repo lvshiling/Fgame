@@ -1,0 +1,120 @@
+syntax = "proto2";
+
+package ui;
+import "material.proto";
+
+
+//双修邀请
+message CSMajorInvite {
+    //副本类型 0双修1夫妻
+    optional int32 majorType=1;
+    required int32 fubenId=2;
+}
+message SCMajorInvite {
+    required int64 inviteTime=1;
+    required int32 majorType=2;
+    required int32 fubenId=3;
+}
+
+//取消邀请
+message CSMajorInviteCancle {
+}
+message SCMajorInviteCancle{
+    // 1 已发送 2配偶已决策
+    required int32 result=1;
+}
+
+//邀请推送给配偶
+message SCMajorInvitePushSpouse {
+    required int64 playerId=1;
+    //副本类型 0双修1夫妻
+    required int32 majorType=2;
+    required int32 fubenId=3;
+}
+
+//取消推送给配偶
+message SCMajorInvitePushCancle{
+    required string name =1;
+    required int32 majorType=2;
+    required int32 fubenId=3; 
+}
+
+//配偶决策
+message CSMajorInviteDeal {
+    //false 拒绝 true同意
+    required bool result=1;
+}
+message SCMajorInviteDeal {
+    // 1已发送  2对方取消邀请
+    required int32 result=1;
+}
+
+//配偶拒绝推送给邀请者
+message SCMajorSpouseRefused {
+    required string name=1;
+    required int32 majorType=2;
+    required int32 fubenId=3;
+}
+
+//双修结果
+message SCMajorResult  {
+    //状态  0失败  1成功
+    required bool sucess=1;
+    required int32 majorType=2;
+    required int32 fubenId=3;
+}
+
+
+//双修下发场景信息
+message SCMajorSceneInfo {
+    //创建场景事件
+    required int64 createTime=1;
+    //玩家id
+    required int64 ownerId=2;
+    //配偶id
+    required int64 spouseId=3;
+    //副本类型
+    required int32 majorType=4;
+    required int32 fubenId=5;
+}
+
+//请求玩家双修已使用次数
+message CSMajorNum {
+    //副本类型 0双修1夫妻
+    optional int32 majorType=1;
+}
+message SCMajorNum {
+    //副本类型 0双修1夫妻
+    required int32 majorType=1;
+    required int32 num=2;
+}
+
+
+message MajorNumInfo {
+    //副本类型 0双修1夫妻
+    required int32 majorType=1;
+    required int32 num=2;
+}
+//副本次数推送
+message SCMajorNumNotice {
+    repeated MajorNumInfo infoList=1;
+}
+
+
+//副本扫荡请求
+message CSMajorSaoDang{
+    //副本类型 0双修1夫妻
+    required int32 majorType=1;
+    required int32 fubenId=2;
+    //扫荡次数
+    required int32 num=3;
+}
+message SCMajorSaoDang{
+    //副本类型 0双修1夫妻
+    required int32 majorType=1;
+    required int32 fubenId=2;
+    //扫荡物品奖励
+    repeated MaterialSweepDrop sweepDropList=3;
+    //扫荡次数
+    required int32 saodangNum=4;
+}

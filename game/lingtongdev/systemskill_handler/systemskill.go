@@ -1,0 +1,89 @@
+package sysskill_handler
+
+import (
+	"fgame/fgame/game/additionsys/additionsys"
+	additionsystypes "fgame/fgame/game/additionsys/types"
+	playerlingtongdev "fgame/fgame/game/lingtongdev/player"
+	"fgame/fgame/game/lingtongdev/types"
+	"fgame/fgame/game/player"
+	playertypes "fgame/fgame/game/player/types"
+	"fgame/fgame/game/systemcompensate/systemcompensate"
+	systemcompensatetypes "fgame/fgame/game/systemcompensate/types"
+	"fgame/fgame/game/systemskill/systemskill"
+	sysskilltypes "fgame/fgame/game/systemskill/types"
+	welfaretypes "fgame/fgame/game/welfare/types"
+	"fgame/fgame/game/welfare/welfare"
+)
+
+func init() {
+	systemskill.RegisterSystemSkillHandler(sysskilltypes.SystemSkillTypeLingTongWeapon, systemskill.SystemSkillHandlerFunc(getLingTongWeaponSystemNumber))
+	systemskill.RegisterSystemSkillHandler(sysskilltypes.SystemSkillTypeLingTongMount, systemskill.SystemSkillHandlerFunc(getLingTongMountSystemNumber))
+	systemskill.RegisterSystemSkillHandler(sysskilltypes.SystemSkillTypeLingTongWing, systemskill.SystemSkillHandlerFunc(getLingTongWingSystemNumber))
+	systemskill.RegisterSystemSkillHandler(sysskilltypes.SystemSkillTypeLingTongShenFa, systemskill.SystemSkillHandlerFunc(getLingTongShenFaSystemNumber))
+	systemskill.RegisterSystemSkillHandler(sysskilltypes.SystemSkillTypeLingTongLingYu, systemskill.SystemSkillHandlerFunc(getLingTongLingYuSystemNumber))
+	systemskill.RegisterSystemSkillHandler(sysskilltypes.SystemSkillTypeLingTongFaBao, systemskill.SystemSkillHandlerFunc(getLingTongFaBaoSystemNumber))
+	systemskill.RegisterSystemSkillHandler(sysskilltypes.SystemSkillTypeLingTongXianTi, systemskill.SystemSkillHandlerFunc(getLingTongXianTiSystemNumber))
+	additionsys.RegisterSystemAdvancedHandler(additionsystypes.AdditionSysTypeLingTongWeapon, additionsys.SystemAdvancedHandlerFunc(getLingTongWeaponSystemNumber))
+	additionsys.RegisterSystemAdvancedHandler(additionsystypes.AdditionSysTypeLingTongMount, additionsys.SystemAdvancedHandlerFunc(getLingTongMountSystemNumber))
+	additionsys.RegisterSystemAdvancedHandler(additionsystypes.AdditionSysTypeLingTongWing, additionsys.SystemAdvancedHandlerFunc(getLingTongWingSystemNumber))
+	additionsys.RegisterSystemAdvancedHandler(additionsystypes.AdditionSysTypeLingTongShenFa, additionsys.SystemAdvancedHandlerFunc(getLingTongShenFaSystemNumber))
+	additionsys.RegisterSystemAdvancedHandler(additionsystypes.AdditionSysTypeLingTongLingYu, additionsys.SystemAdvancedHandlerFunc(getLingTongLingYuSystemNumber))
+	additionsys.RegisterSystemAdvancedHandler(additionsystypes.AdditionSysTypeLingTongFaBao, additionsys.SystemAdvancedHandlerFunc(getLingTongFaBaoSystemNumber))
+	additionsys.RegisterSystemAdvancedHandler(additionsystypes.AdditionSysTypeLingTongXianTi, additionsys.SystemAdvancedHandlerFunc(getLingTongXianTiSystemNumber))
+	welfare.RegisterSystemAdvancedHandler(welfaretypes.AdvancedTypeLingBing, welfare.SystemAdvancedHandlerFunc(getLingTongWeaponSystemNumber))
+	welfare.RegisterSystemAdvancedHandler(welfaretypes.AdvancedTypeLingQi, welfare.SystemAdvancedHandlerFunc(getLingTongMountSystemNumber))
+	welfare.RegisterSystemAdvancedHandler(welfaretypes.AdvancedTypeLingYi, welfare.SystemAdvancedHandlerFunc(getLingTongWingSystemNumber))
+	welfare.RegisterSystemAdvancedHandler(welfaretypes.AdvancedTypeLingShen, welfare.SystemAdvancedHandlerFunc(getLingTongShenFaSystemNumber))
+	welfare.RegisterSystemAdvancedHandler(welfaretypes.AdvancedTypeLingYu, welfare.SystemAdvancedHandlerFunc(getLingTongLingYuSystemNumber))
+	welfare.RegisterSystemAdvancedHandler(welfaretypes.AdvancedTypeLingBao, welfare.SystemAdvancedHandlerFunc(getLingTongFaBaoSystemNumber))
+	welfare.RegisterSystemAdvancedHandler(welfaretypes.AdvancedTypeLingTi, welfare.SystemAdvancedHandlerFunc(getLingTongXianTiSystemNumber))
+	systemcompensate.RegisterSystemCompensateHandler(systemcompensatetypes.SystemCompensateTypeLingTongWeapon, systemcompensate.SystemCompensateHandlerFunc(getLingTongWeaponSystemNumber))
+	systemcompensate.RegisterSystemCompensateHandler(systemcompensatetypes.SystemCompensateTypeLingTongMount, systemcompensate.SystemCompensateHandlerFunc(getLingTongMountSystemNumber))
+	systemcompensate.RegisterSystemCompensateHandler(systemcompensatetypes.SystemCompensateTypeLingTongWing, systemcompensate.SystemCompensateHandlerFunc(getLingTongWingSystemNumber))
+	systemcompensate.RegisterSystemCompensateHandler(systemcompensatetypes.SystemCompensateTypeLingTongShenFa, systemcompensate.SystemCompensateHandlerFunc(getLingTongShenFaSystemNumber))
+	systemcompensate.RegisterSystemCompensateHandler(systemcompensatetypes.SystemCompensateTypeLingTongLingYu, systemcompensate.SystemCompensateHandlerFunc(getLingTongLingYuSystemNumber))
+	systemcompensate.RegisterSystemCompensateHandler(systemcompensatetypes.SystemCompensateTypeLingTongFaBao, systemcompensate.SystemCompensateHandlerFunc(getLingTongFaBaoSystemNumber))
+	systemcompensate.RegisterSystemCompensateHandler(systemcompensatetypes.SystemCompensateTypeLingTongXianTi, systemcompensate.SystemCompensateHandlerFunc(getLingTongXianTiSystemNumber))
+}
+
+//获取灵兵系统阶数
+func getLingTongWeaponSystemNumber(pl player.Player) (number int32) {
+	manager := pl.GetPlayerDataManager(playertypes.PlayerLingTongDevDataManagerType).(*playerlingtongdev.PlayerLingTongDevDataManager)
+	return manager.GetLingTongDevAdvancedId(types.LingTongDevSysTypeLingBing)
+}
+
+//获取灵骑系统阶数
+func getLingTongMountSystemNumber(pl player.Player) (number int32) {
+	manager := pl.GetPlayerDataManager(playertypes.PlayerLingTongDevDataManagerType).(*playerlingtongdev.PlayerLingTongDevDataManager)
+	return manager.GetLingTongDevAdvancedId(types.LingTongDevSysTypeLingQi)
+}
+
+//获取灵翼系统阶数
+func getLingTongWingSystemNumber(pl player.Player) (number int32) {
+	manager := pl.GetPlayerDataManager(playertypes.PlayerLingTongDevDataManagerType).(*playerlingtongdev.PlayerLingTongDevDataManager)
+	return manager.GetLingTongDevAdvancedId(types.LingTongDevSysTypeLingYi)
+}
+
+//获取灵身系统阶数
+func getLingTongShenFaSystemNumber(pl player.Player) (number int32) {
+	manager := pl.GetPlayerDataManager(playertypes.PlayerLingTongDevDataManagerType).(*playerlingtongdev.PlayerLingTongDevDataManager)
+	return manager.GetLingTongDevAdvancedId(types.LingTongDevSysTypeLingShen)
+}
+
+//获取灵域系统阶数
+func getLingTongLingYuSystemNumber(pl player.Player) (number int32) {
+	manager := pl.GetPlayerDataManager(playertypes.PlayerLingTongDevDataManagerType).(*playerlingtongdev.PlayerLingTongDevDataManager)
+	return manager.GetLingTongDevAdvancedId(types.LingTongDevSysTypeLingYu)
+}
+
+//获取灵宝系统阶数
+func getLingTongFaBaoSystemNumber(pl player.Player) (number int32) {
+	manager := pl.GetPlayerDataManager(playertypes.PlayerLingTongDevDataManagerType).(*playerlingtongdev.PlayerLingTongDevDataManager)
+	return manager.GetLingTongDevAdvancedId(types.LingTongDevSysTypeLingBao)
+}
+
+//获取灵骑系统阶数
+func getLingTongXianTiSystemNumber(pl player.Player) (number int32) {
+	manager := pl.GetPlayerDataManager(playertypes.PlayerLingTongDevDataManagerType).(*playerlingtongdev.PlayerLingTongDevDataManager)
+	return manager.GetLingTongDevAdvancedId(types.LingTongDevSysTypeLingTi)
+}

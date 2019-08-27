@@ -1,0 +1,27 @@
+file="pk_reward_cd_vo.go"
+pkg="template"
+class="PkRewardCdTemplateVO"
+comment = "pk奖励时间模板配置"
+[[variables]]
+name="Id"
+type="int"
+tag="id"
+comment="id"
+
+[[variables]]
+name="ActivityType"
+type="int32"
+tag="activity_type"
+comment="活动类型"
+
+[[variables]]
+name="KillCount"
+type="int32"
+tag="kill_count"
+comment="杀人数"
+
+[[variables]]
+name="KillCd"
+type="int32"
+tag="kill_cd"
+comment="杀人cd"

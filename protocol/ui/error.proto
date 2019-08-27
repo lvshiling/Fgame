@@ -1,0 +1,30 @@
+syntax = "proto2";
+
+package ui;
+
+enum ErrorCode{
+    //不知道的错误
+    Unknown=1; //不知道的错误
+
+    //gm错误10001-11000
+    GMFormatWrong=10001;//gm命令格式不对
+
+    //场景错误11001-12000
+
+    //登陆错误12001-13000
+    RepeatCreateJob = 12001; //重复创建角色
+    NameAlreadyExist = 12002; //名字已经存在
+    NameInvalid = 12003; //名字无效
+    JobInvalid = 12004; //角色无效
+    SexInvalid = 12005; //性别无效
+    //仓库错误13001-14000
+    InventorySlotNoEnough=13001; //位置不足
+    InventoryArgumentInvalid =13002; //参数不对
+    InventoryCanNotSell = 13003; //不能出售
+    InventoryCanNotAddSlot =13004; //不能添加槽位
+    //misc 14001-15000
+    MiscRealNameAuthAlready = 14001; //已经实名认证过了
+    MiscRealNameAuthCodeWrong = 14002; //手机验证码错误
+    MiscRealNamePhoneInvalid = 14003; //手机号码无效
+    MiscRealNameAuthInfoWrong=14004; //身份证和名字匹配不上
+}

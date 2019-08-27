@@ -1,0 +1,137 @@
+syntax = "proto2";
+
+package ui;
+
+
+
+//八卦秘境等级
+message SCBaGuaLevel{
+   //八卦秘境等级
+   required int32 level=1;
+}
+
+//前往击杀请求
+message CSBaGuaToKill {
+}
+
+//前往击杀回复
+message SCBaGuaToKill {
+    //前往八卦秘境等级
+    required int32 level=1;
+}
+
+//前往击杀结果
+message SCBaGuaToKillResult {
+    //状态  0失败  1成功
+    required bool state=1;
+    //当前八卦秘境等级
+    required int32 level=2;
+}
+
+//八卦秘境下发场景信息
+message SCBaGuaSceneInfo {
+    //创建场景事件
+    required int64 createTime=1;
+    //八卦秘境等级
+    required int32 level=2;
+    //玩家id
+    required int64 ownerId=3;
+    //配偶id
+    required int64 spouseId=4;
+}
+
+
+
+//夫妻助战
+message CSBaGuaPair {
+
+}
+
+//夫妻助战回复
+message SCBaGuaPair {
+    //邀请时间
+    required int64 inviteTime=1;
+}
+
+//取消邀请
+message CSBaGuaPairCancle {
+
+}
+
+//取消邀请回复
+message SCBaGuaPairCancle{
+    // 1 已发送 2配偶已决策
+    required int32 result=1;
+}
+
+//邀请推送给配偶
+message SCBaGuaPairPushSpouse {
+    required int64 playerId=1;
+    required int32 level=2;   //八卦秘境等级
+}
+
+//取消推送给配偶
+message SCBaGuaPairPushCancle{
+    required string name =1;
+}
+
+//玩家决策
+message CSBaGuaPairDeal {
+    //true 同意 false取消
+    required bool result=1;
+}
+
+//玩家决策回复
+message SCBaGuaPairDeal {
+    // 1已发送  2对方取消邀请
+    required int32 result=1;
+}
+
+//配偶拒绝
+message SCBaGuaSpouseRefused {
+    required string name=1;
+}
+
+//夫妻助战结果
+message SCBaGuaPairResult  {
+    //身份 false 配偶  true 本人  
+    required bool identity=1;
+    //状态  0失败  1成功
+    required bool state=2;
+    //当前八卦秘境等级
+    required int32 level=3;
+}
+
+//下一关
+message CSBaGuaNext {
+}
+
+message SCBaGuaNext {
+    //前往八卦秘境等级
+    required int32 level=1;
+}
+
+//夫妻助战闯关者中途掉线
+message SCBaGuaInviteOffonline {
+    required string inviteName=1;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

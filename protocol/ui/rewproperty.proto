@@ -1,0 +1,19 @@
+syntax = "proto2";
+
+package ui;
+
+
+
+//奖励属性
+message RewProperty {
+    //经验
+    required int32 exp=1;
+    //经验点 
+    required int32 expPoint=2;
+    //银两
+    required int32 silver=3;
+    //元宝
+    required int32 gold=4;
+    //绑元
+    required int32 bindGold=5;
+}

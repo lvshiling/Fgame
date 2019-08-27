@@ -1,0 +1,75 @@
+syntax = "proto3";
+
+package pb;
+
+//获取封禁ip列表
+message ForbidIpListRequest{
+}
+
+
+message ForbidIpListResponse{
+    repeated string ipList=1;
+}
+
+//查找封禁ip
+message ForbidIpSearchRequest{
+    string ip=1;
+}
+
+
+message ForbidIpSearchResponse{
+    string ip=1;
+    bool forbid=2;
+}
+
+
+//封禁ip 
+message ForbidIpRequest{
+    string ip=1;
+    bool forbid=2; //0:解封 1:封禁
+}
+
+
+message ForbidIpResponse{
+    string ip=1;
+    bool forbid=2; //0:解封 1:封禁
+}
+
+
+
+//封禁用户
+message ForbidUserRequest{
+    int64 userId=1;
+    bool forbid=2; //0:解封 1:封禁
+}
+
+
+message ForbidUserResponse{
+    int64 userId=1;
+    bool forbid=2; //0:解封 1:封禁
+}
+
+//封禁用户
+message ForbidUserSearchRequest{
+    int64 userId=1;
+}
+
+
+message ForbidUserSearchResponse{
+    int64 userId=1;
+    bool forbid=2; //0:解封 1:封禁
+}
+
+service ForbidManage {
+    //获取封禁用ip列表
+    rpc GetForbidIpList(ForbidIpListRequest) returns(ForbidIpListResponse){}
+    //封禁ip
+    rpc ForbidIp(ForbidIpRequest)returns(ForbidIpResponse){}
+    //封禁ip
+    rpc ForbidSearch(ForbidIpSearchRequest)returns(ForbidIpSearchResponse){}
+     //封禁用户
+     rpc ForbidUser(ForbidUserRequest)returns(ForbidUserResponse){}
+     //封禁用户查找
+     rpc ForbidUserSearch(ForbidUserSearchRequest)returns(ForbidUserSearchResponse){}
+}
+

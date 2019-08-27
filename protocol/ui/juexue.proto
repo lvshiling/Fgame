@@ -1,0 +1,86 @@
+syntax = "proto2";
+
+package ui;
+
+message JueXueInfo {
+    //绝学类型
+    required int32 typ=1;
+    //绝学等级
+    required int32 level=2;
+    //顿悟 1无顿悟 2顿悟
+    required int32 insight=3;
+}
+
+
+//绝学信息应答
+message SCJueXueGet{
+   //使用的绝学(模板id)
+   required int32 id=1;
+   //绝学信息
+   repeated JueXueInfo jueXueList=2;
+}
+
+//激活绝学请求
+message CSJueXueActive {
+    //绝学类型
+   required int32 typ=1;
+}
+//激活绝学应答
+message SCJueXueActive {
+    //模板id
+    required int32 id=1;
+}
+
+
+//绝学升级请求
+message CSJueXueUpgrade {
+   //绝学类型
+   required int32 typ=1;
+}
+
+//绝学升级应答
+message SCJueXueUpgrade {
+    //模板id
+    required int32 id=1;
+ }
+
+ //绝学顿悟请求
+message CSJueXueInsight {
+    //绝学类型
+    required int32 typ=1;
+ }
+ 
+ //绝学顿悟应答
+ message SCJueXueInsight  {
+    //模板id
+    required int32 id=1;
+  }
+
+//绝学使用请求
+message CSJueXueUse {
+   //绝学类型
+   required int32 typ=1;
+}
+//绝学使用应答
+message SCJueXueUse {
+    //模板id
+    required int32 id=1;
+}
+
+//卸下绝学请求
+message CSJueXueUnLoad {
+ }
+ //卸下绝学应答
+message SCJueXueUnLoad {
+    //模板id
+    required int32 id=1;
+}
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,75 @@
+syntax = "proto2";
+
+package ui;
+
+//充值请求
+message CSCharge{
+    required int32 chargeId=1;
+}
+
+//充值成功回复
+message SCCharge{
+    required int32 chargeId=1;
+}
+
+
+// 充值下订单
+message SCChargeOrder{
+    //充值id
+    required int32 chargeId=1;
+    //平台类型
+    required int32 chargeType=2;
+    //订单id
+    required string orderId=3;
+    //回调地址
+    required string notifyUrl=4;
+    //sdk订单id
+    required string sdkOrderId=5;
+    //平台用户id
+    required string platformUserId=6;
+    //钱
+    required int32 money=7;
+    //角色id
+    required int64 playerId=8;
+    //角色名字
+    required string playerName=9;
+    //服务器id
+    required int32 serverId=10;
+    //服务器名字
+    required string serverName=11;
+    //extension
+    required string extension =12;
+}
+ 
+//档次首充记录
+message SCFirstChargeRecordNotice{
+    repeated int32 chargeIdList=1;
+}
+
+// 充值元宝推送
+message SCChargeGoldNotice{
+    required int64 chargeGold=1;
+}
+
+// 今日充值元宝
+message SCTodayChargeGold{
+    required int64 chargeGold=1;
+}
+
+// 新首充信息请求
+message CSNewFirstChargeRecord{
+}
+// 新首充信息回复
+message SCNewFirstChargeRecord{
+    // 开始时间
+    required int64 startTime=1;
+    // 持续多久（毫秒）
+    required int64 duration=2;
+    // 已领取记录
+    repeated int32 chargeIdList=3;
+}
+
+//新档次首充记录
+message SCNewFirstChargeRecordNotice{
+    repeated int32 chargeIdList=1;
+}

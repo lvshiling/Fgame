@@ -1,0 +1,11 @@
+syntax = "proto2";
+
+package ui;
+
+
+
+//珍惜Boss推送
+message SCPlayerZhenXiBossInfo{
+    required int32 enterTimes=1;
+    //required int32 reliveTime=2;
+}

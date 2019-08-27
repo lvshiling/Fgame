@@ -1,0 +1,659 @@
+syntax = "proto2";
+
+package ui;
+
+
+message MarryRecommend {
+    //玩家id
+    required int64 playerId=1;
+    //玩家姓名
+    required string name=2;
+    //玩家等级
+    required int32 level=3;
+    //玩家战力
+    required int64 force=4;
+    //玩家角色
+    required int32 role=5;
+    //玩家性别
+    required int32 sex=6;
+    //玩家时装
+    required int32 fashionId=7;
+    //玩家武器
+    required int32 weaponId=8;
+    //是否是好友
+    required bool isFriend=9;
+}
+
+
+message MarryWedInfo {
+    required int64 playerId=1;
+    required string name=2;
+}
+
+message MarryGrade {
+    //婚宴档次
+    required int32 grade=1;
+    //婚车档次
+    required int32 hunCheGrade=2;
+    //喜糖档次
+    required int32 sugarGrade=3;
+}
+
+//玩家信息
+message MarryMember {
+    //玩家id
+    required int64 playerId=1;
+    //玩家姓名
+    required string name=2;
+    //玩家等级
+    required int32 level=3;
+    //玩家战力
+    required int64 force=4;
+    //玩家角色
+    required int32 role=5;
+    //玩家性别
+    required int32 sex=6;
+    //玩家时装
+    required int32 fashionId=7;
+    //婚戒物品
+    required int32 ring=8;
+    //婚戒等级
+    required  int32 rLevel=9;
+    //婚戒培养进度
+    required int32  rProgress=10; 
+    //爱情树
+    required int32 tLevel=11;
+    //爱情树培养进度
+    required int32 tProgress=12;
+    //是否是求婚发起者
+    required bool isProposal=13;
+    //玩家表白等级
+    required int32 dLevel=14;
+    //玩家表白经验
+    required int32 dExp=15;
+    //定情信物列表
+    repeated MarryDingQingSuitInfo dingQingList=16;
+    //玩家武器
+    required int32 weaponId=17;
+    //玩家翅膀
+    required int32 wingId=18;
+    //玩家结婚次数
+    required int32 marryCount=19;
+} 
+
+
+
+message MarryHeroism {
+    //名字
+    required string name=1;
+    //豪气值
+    required int64 heroism=2;
+}
+
+//婚礼时间信息
+message MarryWed {
+    //举办场次 1 第一场 依次类推
+    required int32 period=1;
+    //举办者名字
+    repeated string nameList=2;
+}
+
+//喜帖信息
+message MarryWedCard {
+    //喜帖id 
+    required int64 cardId=1;
+    //新郎名字 
+    required int64 playerId=2;
+    required string mName=3;
+    required int32 role=4;
+    required int32 sex=5;
+    //新娘名字
+    required int64 spouseId=6;
+    required string wName=7;
+    required int32 wRole=8;
+    required int32 wSex=9;
+    //举办时间
+    required string hTime=10;
+}
+
+//结婚界面信息
+message CSMarryGet {
+}
+
+//婚姻信息
+message SCMarryInfo{
+    //婚姻状态 1未婚 2求婚成功 3订婚 4举办过婚礼 5离婚
+    required int32 status=1;
+    //成员
+    repeated  MarryMember memList=2;
+    //婚礼举办场次 (1-12对应婚礼场次)
+    required int32 period=3;
+    //前端做特效使用
+    required bool isProposal=4;
+}
+
+
+//求婚
+message CSMarryProposal {
+    //婚戒
+    required int32 ringType=1;
+    //向谁求婚
+    required int64 playerId=2;
+    //名字
+    required string playerName=3;
+}
+
+//求婚回复
+message SCMarryProposal {
+    // 1 成功 
+    required int32 result=1;
+}
+
+//推送求婚消息
+message SCMarryPushProposal {
+    //求婚者
+    required int64 playerId=1;
+    required string name=2;
+    required int32 role=3;
+    required int32 sex=4;
+    required int32 fashionId=5;
+    //婚戒物品
+    required int32 ring=6;
+}
+
+//被求婚者决策
+message CSMarryProposalDeal {
+    // 1 同意 2 拒绝
+    required int32 result=1;
+    //向谁决策
+    required int64 playerId=2;
+}
+
+//求婚者收到消息
+message SCMarryProposalResult {
+    //结果 1 同意 2拒绝
+    required int32 result=1;
+    required string name=2;
+}
+
+//离婚
+message CSMarryDivorce {
+    //离婚类型 1 强制离婚 2 协议离婚
+    required int32 typ=1;
+}
+
+//离婚回复
+message SCMarryDivorce {
+    //离婚类型
+    required int32 typ=1;
+    //结果 1 已发送  2对方不在线
+    required int32 result=2;
+}
+
+//推送离婚对方
+message SCMarryPushDivorce {
+    required string name=1;
+}
+
+//离婚对方决策
+message CSMarryDivorceDeal {
+    // 1同意  2稍后再说
+    required int32 result=1;
+}
+
+//离婚决策
+message SCMarryDivorceDealPushPeer {
+    //拒绝离婚
+    required string name=1;
+}
+
+//婚戒替换
+message CSMarryRingReplace {
+    //婚戒类型
+    required int32 ringType=1;
+}
+
+//婚戒替换回复
+message SCMarryRingReplace {
+    //婚戒物品
+    required int32 ring=1;
+}
+
+//婚戒培养
+message CSMarryRingFeed {
+}
+
+//婚戒回复
+message SCMarryRingFeed {
+    //婚戒等级
+    required int32 rLevel=1;
+    //婚戒培养值
+    required int32 progress=2;
+}
+
+//爱情树培养
+message CSMarryTreeFeed {
+}
+
+//爱情树培养回复
+message SCMarryTreeFeed {
+    //爱情树等级
+    required int32 tLevel=1;
+    //爱情树培养值
+    required int32 progress=2;
+}
+
+//配偶信息变化推送
+message SCMarrySpouseInfoChange {
+    //配偶
+    required int64 playerId=1;
+    //婚戒物品
+    optional int32 ring=2 [default=-1];     //-1没有变化
+    //婚戒等级
+    optional int32 rLevel=3 [default=-1];
+    //爱情树等级
+    optional int32 tLevel=4 [default=-1];
+    //等级
+    optional int32 level=5 [default=-1];
+    //战力
+    optional int64 force=6 [default=-1];
+    //时装
+    optional int32 fashionId=7 [default=-1];
+    //名字改变
+    optional string spouseName= 8 [default=""];
+    //表白等级改变
+    optional int32 dLevel=9[default=-1]; 
+    //定情信物列表
+    repeated MarryDingQingSuitInfo dingQingList=10;
+    //玩家武器
+    optional int32 weaponId=11[default=-1];
+    //玩家翅膀
+    optional int32 wingId=12[default=-1];
+    //结婚次数
+    optional int32 marryCount=13[default=-1];
+}   
+
+//婚烟信息变化
+message SCMarryInfoChange {
+    //婚烟状态
+    optional int32 status=1 [default=-1];     //-1没有变化
+    //婚礼场次
+    optional int32 period=2 [default=-1];  
+}
+
+
+//举办时间列表
+message CSMarryWedList {
+
+}
+
+//举办时间列表回复
+message SCMarryWedList {
+    repeated MarryWed wedList=1;
+}
+
+
+//婚礼预定
+message CSMarryWedGrade {
+    //婚礼档次
+    required MarryGrade grade=1;
+    //举办场次 1 第一场 依次类推
+    required int32 period=2;
+}
+
+//婚礼预定回复
+message SCMarryWedGrade {
+    //结果 1成功 2已被预定 3 距离开始时间小于1分钟
+    required int32 result=1;
+    //婚礼档次
+    required MarryGrade grade=2;
+    //举办场次 
+    required int32 period=3;
+}
+
+//婚宴场景信息
+message SCMarryBanquet {
+    //婚宴场次
+    required int32 period=1;
+    //举办者
+    repeated MarryWedInfo playerList=2;
+    //豪气值前三
+    repeated MarryHeroism heroismList=3;
+}
+
+//推送豪气值前三变化
+message SCMarryHeroismTopThree {
+    repeated MarryHeroism heroismList=1;
+}
+
+//赠送贺礼
+message CSMarryWedGift{
+    //婚宴场次
+    required int32 period=1;
+    //贺礼档次
+    required int32 grade=2;
+    //自动购买
+    required bool autoFlag=3;
+}
+
+//赠送贺礼回复
+message SCMarryWedGift {
+    required int32 buffId=1;
+    required int32 period=2;
+    required int32 grade=3;
+    required bool autoFlag=4;
+}
+
+//贺礼榜单
+message CSMarryWedGiftList {
+}
+
+//贺礼榜单回复
+message SCMarryWedGiftList {
+    repeated MarryHeroism heroismList=1;
+}
+
+//查看喜帖
+message CSMarryViewWedCard {
+    //喜帖id
+    required int64 cardId=1;
+}
+
+//查看喜帖回复
+message SCMarryViewWedCard {
+    //喜帖id
+    required int64 cardId=1;
+}
+
+//推送喜帖
+message SCMarryPushWedCard {
+    required MarryWedCard wedCard=1;
+}
+
+
+//登录下发
+message SCMarryAfterLogin {
+    //喜帖信息
+    repeated MarryWedCard wedCardList=1;
+} 
+
+//配偶不在线取消婚礼通知
+message SCMarryCancel {
+    required int32 period=1;
+}
+
+//婚礼状态推送
+message  SCMarryWedPushStatus  {
+    //是否显示(仙盟和好友显示 其它隐藏 下发是婚宴开始其它玩家无法知道 举办者是谁) 
+    required bool isShow=1;
+    // 1 巡游  2婚宴开始  3 婚礼结束
+    required int32 status=2;
+    //婚期
+    required int32 period=3;
+    //玩家名字
+    required int64 playerId =4;
+    required string name=5;
+    required int32 role=6;
+    required int32 sex=7;
+    //配偶名字
+    required int64 spouseId=8;
+    required string spouseName=9;
+    required int32 sRole=10;
+    required int32 sSex=11;
+}
+
+//婚宴传送
+message CSMarryWedTransfer {
+}
+
+//点击婚车掉落喜糖
+message CSMarryClickCar {
+    
+}
+
+//点击婚车回复
+message SCMarryClickCar {
+    //点击时间
+    required int64 clickTime=1;
+    //婚车档次
+    required int32 grade=2;
+}
+
+//开始拜堂通知
+message SCMarryWorship {
+    
+}
+
+//婚宴结束提示场景内
+message SCMarryWedEnd {
+    required int64 playerId=1;
+    required string playerName=2;
+    required int32 playerRole=3;
+    required int32 playerSex =4;
+    required int64 spouseId=5;
+    required string spouseName=6;
+    required int32 spouseRole=7;
+    required int32 spouseSex=8;
+}
+
+//寻找意中人
+message CSMarryRecommended {
+
+}
+
+//寻找意中人
+message SCMarryRecommended {
+    repeated MarryRecommend recommendList=1;
+}
+
+
+//婚礼取消推送其它人
+message SCMarryCancelToOther {
+    required bool isShow=1;
+     required int32 period=2;
+     //玩家名字
+     required int64 playerId =3;
+     required string name=4;
+     required int32 role=5;
+     required int32 sex=6;
+     required bool isOnline=7;
+     //配偶名字
+     required int64 spouseId=8;
+     required string spouseName=9;
+     required int32 sRole=10;
+     required int32 sSex=11;
+     required bool sIsOnline=12;
+}
+
+//婚礼预定推送给配偶
+message SCMarryWedGradeToSpouse {
+    //玩家名字
+    required string name=1;
+    //婚期
+    required int32 period=2;
+    //婚礼档次
+    required MarryGrade grade=3;
+}
+
+
+//婚礼预定配偶决策
+message CSMarryWedGradeSpouseDeal{
+    required bool result=1;
+}
+
+
+//婚礼预定配偶决策回复
+message SCMarryWedGradeSpouseDeal {
+    required bool result=1;
+}
+
+//配偶拒绝婚礼预定推送给对方
+message SCMarryWedGradeRefuseToPeer{
+
+}
+
+
+//婚礼预定成功回复
+message SCMarryWedSucess{
+    //举办场次 
+    required int32 period=1;
+}
+
+
+// //赠送表白礼物
+// message CSMarryDevelopSendGift {
+//     //好友id
+//     required int64 friendId=1;
+//     //物品id
+//     required int32 itemId=2;
+//     //数量
+//     required int32 num=3;
+//     //自动购买
+//     required bool auto=4;
+// }
+// message SCMarryDevelopSendGift{
+//     required int64 friendId=1;
+//     required int32 itemId=2; 
+//     required int32 num=3;
+//     required bool auto=4;
+// }
+
+//表白升级
+message CSMarryDevelopUplevel {
+}
+message SCMarryDevelopUplevel {
+    required int32 developLevel=1;
+    required int32 developExp=2;
+}
+
+
+//婚礼游车开始 第三方玩家赠送
+message CSMarryPreGift{
+    //婚宴场次
+    required int32 period=1;
+    //赠送类型,1鲜花，2贺礼(元宝)
+    required int32 giftType=2;
+}
+
+//婚礼游车开始 赠送回馈
+message SCMarryPreGift{
+    repeated int32 itemId=1;
+    repeated int32 itemNum=2;
+}
+
+//赠送通知结婚方信息
+message SCMarryPreGiftMsg{
+    required int64 playerId=1;
+    required string playerName=2;
+    required int64 exp=3;
+    //赠送类型,1鲜花，2贺礼(元宝)
+    required int32 giftType=4;
+}
+
+//结婚纪念请求查询发起
+message CSMarryJiNianMsg{
+    
+}
+
+//结婚纪念查询
+message SCMarryJiNianMsg{
+    repeated SCMarryJiNianInfo jiNianList = 1;
+}
+//结婚纪念查询
+message SCMarryJiNianInfo{
+    required int32 jiNianType = 1;
+    required int32 jiNianCount = 2;
+}
+
+//定情信物激活
+message CSMarryDingQingJiHuoMsg{
+    required int32 suitId=1;    //套装id
+    required int32 posId = 2;   //位置id
+    required bool autoBuyFlag=3;    //是否自动购买
+}
+//定情信物激活回馈
+message SCMarryDingQingJiHuoMsg{
+    required int32 result=1;
+    required int64 spouseId=2; //配偶Id
+    required bool spouseHasFlag=3; //配偶是否拥有
+    required int32 suitId=4;//套装Id
+    required int32 posId=5;//位置Id
+}
+
+//定情信物索要
+message CSMarryDingQingSuoYaoMsg{
+    required int32 suitId=1;    //套装id
+    required int32 posId = 2;   //位置id
+    optional string content=3; //索要备注
+}
+message SCMarryDingQingSuoYaoMsg{
+    required int32 result=1; //0失败，1成功
+}
+//索要的时候发给另外一个人
+message SCMarryDingQingSuoYaoRspMsg{
+    required int32 suitId=1;    //套装id
+    required int32 posId = 2;   //位置id
+    optional string content=3; //索要备注
+    required int64 spouseId=4; //索要者
+    required string spouseName=5; //索要者
+}
+//索要发给另外一个人的处理
+message CSMarryDingQingSuoYaoDealMsg{
+    required int32 suitId=1;    //套装id
+    required int32 posId = 2;   //位置id
+    required bool dealFlag=3; //是否同意
+}
+message SCMarryDingQingSuoYaoDealMsg{
+    required int32 result=1;//0失败，1成功
+}
+
+//赠送定情信物
+message CSMarryDingQingZengSongMsg{
+    required int32 suitId=1;    //套装id
+    required int32 posId = 2;   //位置id
+    optional string content=3; //索要备注
+}
+message SCMarryDingQingZengSongMsg{
+    required int32 result=1;//0失败，1成功
+}
+
+message MarryDingQingSuitInfo {
+    required int32 suitId=1;
+    required int32 posId=2;
+}
+
+message SCMarryBanquetSetChangeMsg{
+    required int32 houtaiId=1;
+}
+
+//定情信物约对方激活
+message CSMarryDingQingYueMsg{
+    required int32 suitId=1;    //套装id
+    required int32 posId = 2;   //位置id
+}
+
+//定情信物约对方激活回复
+message SCMarryDingQingYueMsg{
+
+}
+
+//定情信物约对方激活对方收到
+message SCMarryDingQingYueSpouseMsg{
+    required int32 suitId=1;    //套装id
+    required int32 posId = 2;   //位置id
+    required int64 playerId = 3; //伴侣id
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

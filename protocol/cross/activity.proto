@@ -1,0 +1,52 @@
+syntax = "proto2";
+
+package cross;
+
+import "property.proto";
+
+
+//活动pk数据
+message ActivityPkData{
+    required int32 activityType =1; //活动类型
+    required int32 killedNum=2;
+    required int64 lastKillTime=3;
+}
+
+//活动pk数据变化
+message ISPlayerActivityPkDataChanged{
+    required ActivityPkData activityPkData=1;
+}
+
+//活动pk数据变化
+message SIPlayerActivityPkDataChanged{
+    required ActivityPkData activityPkData=1;
+}
+
+
+message PlayerActivityRankData{
+    required int32 activityType=1; //活动类型
+    required int32 rankType=2;
+    required int64 val=3;
+}  
+ 
+//活动排行榜数据
+message ActivityRankData{
+    required int32 activityType=1;
+    repeated PlayerActivityRankData playerRankDataList=2;
+    required int64 endTime=3;
+}
+ 
+//活动排行榜数据变化
+message ISPlayerActivityRankDataChanged{
+    required int32 activityType=1; //活动类型
+    required int32 rankType=2;
+    required int64 val=3;
+}
+ 
+  
+//活动排行榜数据变化
+message ISPlayerActivityTickRewDataChanged{
+    repeated Property propertyList=1;  //资源属性
+    repeated Property specialPropertyList=2;  //其他资源属性
+}  
+  

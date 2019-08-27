@@ -1,0 +1,25 @@
+syntax = "proto2";
+
+package cross;
+
+
+//参与屠龙 
+message SITuLongAttend {
+}
+message ISTuLongAttend {
+    //是否需要排队
+    required bool isLineUp=1;
+    //场景id
+    required int64 sceneId=2;
+}
+
+//屠龙击杀boss
+message ISTuLongKillBoss{
+    //bossid
+    required int32 bossId=1;
+}
+
+//屠龙击杀boss回复
+message SITuLongKillBoss{
+
+}

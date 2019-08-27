@@ -1,0 +1,83 @@
+syntax = "proto2";
+
+package ui;
+
+
+message AllianceBossRank {
+    required int64 playerId=1;
+    required string playerName=2;
+    required int64 damage=3; 
+ }
+
+message AllianceBossInfo {
+    required int32 level=1;
+    optional int32 status = 2 [default=-1]; //-1未变化 0:存在 1死亡
+    optional int64 maxHp=3 [default=-1]; //-1未变化 最大血量
+    optional int64 hp=4 [default=-1]; //-1未变化 当前血量
+}
+
+message AllianceBossSceneInfo {
+    required int64 summonTime = 1;
+    required AllianceBossInfo bossInfo =2;
+    repeated AllianceBossRank rankList=3;
+}
+
+//仙盟boss召唤
+message CSAllianceBossSummon {
+
+}
+
+//仙盟boss召唤回复
+message SCAllianceBossSummon {
+  
+}
+
+//进入仙盟boss
+message CSAllianceBossEnter {
+
+}
+
+//进入仙盟boss回复
+message SCAllianceBossEnter {
+    required AllianceBossSceneInfo sceneInfo = 1; 
+}
+
+//boss状态变更推送
+message SCAllianceBossChanged {
+    required AllianceBossInfo bossInfo=1;
+}
+
+//排名变更推送
+message SCAllianceBossRank {
+    repeated AllianceBossRank rankList=1;
+}
+
+
+//场景结束
+message SCAllianceBossEnd {
+    required bool sucess=1;
+}
+
+
+//仙盟boss信息
+message CSAllianceBoss{
+
+}
+
+//仙盟boss信息回复
+message SCAllianceBoss{
+    //0 待召唤  1 已召唤  2 已击杀
+    required int32 bossStatus=1;
+    required int32 level=2;
+    required int32 exp=3;
+    //场景开始时间 0 未开始  -1今日已结束
+    required int64 summonTime=4;
+}
+
+//盟主召唤boss成功广播消息
+message SCAllianceBossSummonSucess{
+    
+}
+
+
+

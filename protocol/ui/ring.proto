@@ -1,0 +1,155 @@
+syntax = "proto2";
+
+package ui;
+
+import "drop.proto";
+
+// 特戒信息
+message RingInfo{
+    required int32 type=1;
+    // 特戒id
+    required int32 itemId=2;
+    // 阶别
+    required int32 advance=3;
+    // 升级进度值
+    required int32 advancePro=4;
+    // 强化等级
+    required int32 strengthenLevel=5;
+    // 净灵等级
+    required int32 jingLingLevel=6;
+}
+
+// 特戒信息请求
+message CSRingInfoGet {
+} 
+message SCRingInfoGet {
+    repeated RingInfo ringInfo=1;
+}
+
+// 特戒进阶请求
+message CSRingAdvance{
+    required int32 type=1;
+    // 是否自动购买
+    required bool autoFlag=2;
+}
+message SCRingAdvance{
+    required int32 type=1;
+    required int32 advance=2;
+    required int32 advancePro=3;
+    required int32 bless=4;
+    required bool success=5;
+}
+
+// 特戒强化请求
+message CSRingStrengthen{
+    required int32 type=1;
+}
+message SCRingStrengthen{
+    required int32 type=1;
+    required int32 strengthenLevel=2;
+    required bool success=3;
+}
+
+// 特戒净灵请求
+message CSRingJingLing{
+    required int32 type=1;
+}
+message SCRingJingLing{
+    required int32 type=1;
+    required int32 jingLingLevel=2;
+    required bool success=3;
+}
+
+// 特戒融合请求
+message CSRingFuse{
+    // true:第一槽位放背包里特戒 false:身上
+    required bool isBag=1;
+    // false时,身上特戒类型
+    optional int32 type=2;
+    // true时,背包里的物品索引
+    optional int32 index=3;
+    // 第二槽位背包内物品索引
+    required int32 needIndex=4;
+}
+message SCRingFuse{
+    required bool isBag=1;
+    optional int32 type=2;
+    optional int32 index=3;
+    required int32 needIndex=4;
+    // 合成的物品id
+    required int32 createItemId=5;
+     // 合成的物品数量
+    required int32 createItemIdNum=6;
+    required bool success=7;
+}
+
+// 装备特戒请求
+message CSRingEquip{
+    required int32 index=1;
+}
+message SCRingEquip{
+    required int32 index=1;
+}
+
+// 卸下特戒请求
+message CSRingUnload{
+    required int32 type=1;
+}
+message SCRingUnload{
+    required int32 type=1;
+}
+
+// 特戒槽位数据改变
+message SCRingSlotChanged {
+    //改变的装备
+    required RingInfo ringInfo=1;
+}
+
+
+
+
+// 特戒宝库信息
+message RingBaoKuInfo{
+    //宝库幸运值
+    required int32 luckyPoints=1;
+    //宝库积分
+    required int32 attendPoints=2;
+}
+
+// 特戒宝库信息请求
+message CSRingBaoKuInfo{
+}
+message SCRingBaoKuInfo{
+    required RingBaoKuInfo ringBaoKuInfo=1;
+}
+
+// 特戒宝库探索请求
+message CSRingBaoKuAttend{
+    // 0特戒宝库
+    required int32 type=1;
+    //自动购买
+    required bool autoFlag=2;
+    //探索类型 0单次 1十连
+    required int32 attendType=3;
+}
+message SCRingBaoKuAttend{
+    required int32 type=1;
+    //宝库掉落
+    repeated DropInfo dropInfo=2;
+    //自动购买
+    required bool autoFlag=3;
+    //宝库幸运值
+    required int32 luckyPoints=4;
+    //宝库积分
+    required int32 attendPoints=5;
+    required int32 attendType=6;
+    //额外奖励掉落
+    repeated DropInfo rewDropInfo=7;
+}
+
+// 幸运值变化推送
+message SCRingLuckyPointsChange{
+    required int32 type=1;
+    //宝库幸运值
+    required int32 luckyPoints=2;
+}

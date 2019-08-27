@@ -1,0 +1,2383 @@
+syntax = "proto2";
+
+package ui;
+
+enum MessageType{
+    //gm命令 1-100
+    CS_GM_TYPE=1;
+    //场景模块 101-200
+    //服务器列表200-300
+    CS_SERVER_LIST_TYPE= 201;
+    SC_SERVER_LIST_TYPE= 202;
+    CS_ACCOUNT_LOGIN_TYPE=203;
+    SC_ACCOUNT_LOGIN_TYPE=204;
+
+
+    //通用模块 301-400
+    CS_HEARTBEAT_TYPE= 301; 
+    SC_HEARTBEAT_TYPE=302;
+    CS_GET_TIME_TYPE = 303; //获取时间请求
+    SC_GET_TIME_TYPE = 304; //获取时间返回
+    SC_ERROR_TYPE=305;      //错误提示推送
+    SC_EXCEPTION_TYPE=306;  //异常提示推送
+    SC_SYSTEM_MESSAGE_TYPE=307;  //系统消息
+    CS_OPEN_SERVER_TIME_TYPE=308;  //获取开服时间
+    SC_OPEN_SERVER_TIME_TYPE=309;  //获取开服时间回复
+    CS_MERGE_SERVER_TIME_TYPE=310;  //获取合服时间
+    SC_MERGE_SERVER_TIME_TYPE=311;  //获取合服时间回复
+
+    //登陆模块 401-500
+    CS_TEST_LOGIN_TYPE = 401;                   //测试登陆请求
+    SC_TEST_LOGIN_TYPE = 402;                   //测试登陆返回
+    CS_LOGIN_TYPE = 403;                        //登陆请求
+    SC_LOGIN_TYPE = 404;                        //登陆返回 
+    SC_ENETER_SELECT_JOB_TYPE = 405;            //推送进入选择角色
+    CS_SELECT_JOB_TYPE=406;                     //选择角色
+    SC_SELECT_JOB_TYPE=407;                     //选择角色成功
+    SC_PLAYER_PROPERTY_TYPE= 408;               //玩家属性同步
+    CS_PLAYER_BASIC_INFO_GET_TYPE=409;          //获取玩家基本信息
+    SC_PLAYER_BASIC_INFO_GET_TYPE=410;          //获取玩家基本信息回复
+    CS_PLAYER_BASIC_INFO_BATCH_GET_TYPE=411;    //批量获取玩家基本信息
+    SC_PLAYER_BASIC_INFO_BATCH_GET_TYPE=412;    //批量获取玩家基本信息回复
+    SC_PLAYER_INFO_TYPE = 413;                  //推送玩家个人信息
+    CS_PLAYER_INFO_GET_TYPE = 414;              //获取玩家个人信息
+    SC_PLAYER_INFO_GET_TYPE = 415;              //获取玩家个人信息回复
+    CS_PLAYER_OPEN_VIDEO_TYPE=416;              //开场动画确认
+    SC_PLAYER_OPEN_VIDEO_TYPE=417;              //开场动画确认回复
+    SC_PLAYER_SEX_CHANGED_TYPE=418;             //玩家性别变更回复
+    SC_PLAYER_NAME_CHANGED_TYPE=419;             //玩家姓名变更回复
+    CS_PLAYER_COUNT_DATA_TYPE=420;             //统计数据
+    SC_PLAYER_COUNT_DATA_TYPE=421;             //统计数据回复
+
+    //背包模块 501-600
+    // CS_INVENTORY_GET_TYPE=501;                 //背包获取
+    SC_INVENTORY_GET_TYPE=502;                    //背包获取回复
+    CS_INVENTORY_MERGE_TYPE=503;                  //背包合并
+    SC_INVENTORY_MERGE_TYPE=504;                  //背包合并回复
+    SC_INVENTORY_CHANGED_TYPE=506;                //背包变更推送 
+    CS_INVENTORY_ITEM_USE_TYPE=507;               //背包物品使用 
+    CS_INVENTORY_ITEM_SELL_TYPE=508;              //背包物品出售
+    SC_INVENTORY_ITEM_SELL_TYPE=509;              //背包出售回复
+    CS_INVENTORY_BUY_SLOTS_TYPE=510;              //背包购买槽位
+    SC_INVENTORY_BUY_SLOTS_TYPE=511;              //背包购买槽位回复
+    SC_INVENTORY_SLOTS_TYPE =512;                 //背包槽位推送
+    SC_INVENTORY_EQUIPMENT_CHANGED_TYPE=513;      //装备背包数据改变
+    CS_INVENTORY_USE_EQUIP_TYPE=514;              //使用装备
+    SC_INVENTORY_USE_EQUIP_TYPE=515;              //使用装备回复
+    CS_INVENTORY_TAKE_OFF_EQUIP_TYPE=516;         //脱下装备
+    SC_INVENTORY_TAKE_OFF_EQUIP_TYPE=517;         //脱下装备回复
+    CS_INVENTORY_EQUIP_STRENGTHEN_TYPE=518;       //强化
+    SC_INVENTORY_EQUIP_STRENGTHEN_TYPE=519;       //强化回复
+    CS_INVENTORY_EQUIP_UPGRADE_TYPE=520;          //进阶
+    SC_INVENTORY_EQUIP_UPGRADE_TYPE=521;          //进阶回复
+    CS_INVENTORY_EQUIP_STRENGTHEN_ALL_TYPE=522;   //一键强化
+    SC_INVENTORY_EQUIP_STRENGTHEN_ALL_TYPE=523;   //一键强化成功
+    SC_INVENTORY_ITEM_USE_TYPE=524;               //背包物品使用 
+    CS_INVENTORY_USE_GEM_TYPE=525;                //装备宝石
+    SC_INVENTORY_USE_GEM_TYPE =526;               //装备宝石回复
+    CS_INVENTORY_TAKE_OFF_GEM_TYPE=527;           //卸下宝石
+    SC_INVENTORY_TAKE_OFF_GEM_TYPE =528;          //卸下宝石回复
+    SC_INVENTORY_BOX_DROP_INFO_TYPE =529;         //宝箱使用回复
+    CS_SAVE_IN_DEPOT_TYPE=530;                    //存入仓库
+    SC_SAVE_IN_DEPOT_TYPE=531;                    //存入仓库回复
+    CS_DEPOT_TAKE_OUT_TYPE=532;                   //仓库取出
+    SC_DEPOT_TAKE_OUT_TYPE=533;                   //仓库取出回复
+    CS_DEPOT_BUY_SLOTS_TYPE=534;                  //仓库购买位置 
+    SC_DEPOT_BUY_SLOTS_TYPE=535;                  //仓库购买位置回复 
+    CS_DEPOT_MERGE_TYPE=536;                      //仓库合并
+    SC_DEPOT_MERGE_TYPE=537;                      //仓库合并回复
+    SC_DEPOT_CHANGED_TYPE=538;                    //仓库数据改变
+    CS_INVENTORY_ITEM_SELL_BATCH_TYPE=539;        //背包批量物品出售
+    SC_INVENTORY_ITEM_SELL_BATCH_TYPE=540;        //背包批量物品出售回复
+    SC_INVENTORY_ITEM_USE_CHANGED_NOTICE_TYPE=541;//背包物品使用信息变化推送         
+    CS_INVENTORY_USE_GEM_ALL_TYPE=542;            //一键镶嵌宝石
+    SC_INVENTORY_USE_GEM_ALL_TYPE=543;            //一键镶嵌宝石回复
+    SC_MIBAO_DEPOT_CHANGED_TYPE=544;              //秘宝仓库数据改变
+    CS_MIBAO_DEPOT_TAKE_OUT_TYPE=545;             //秘宝仓库取出
+    SC_MIBAO_DEPOT_TAKE_OUT_TYPE=546;             //秘宝仓库取出回复
+    CS_INVENTORY_ITEM_DECOMPOSE_TYPE=547;         //物品拆解
+    SC_INVENTORY_ITEM_DECOMPOSE_TYPE=548;         //物品拆解回复
+
+
+
+    //misc模块 601-700
+    CS_GET_IDENTIFY_CODE_TYPE = 601;
+    SC_GET_IDENTIFY_CODE_TYPE= 602;
+    CS_REAL_NAME_AUTH_TYPE=603;
+    SC_REAL_NAME_AUTH_TYPE=604;
+    CS_EXIT_KASI_TYPE=605;
+    SC_EXIT_KASI_TYPE=606;
+
+    //食丹模块 701-800
+    CS_DAN_GET_TYPE=701;                            //食丹系统信息
+    SC_DAN_GET_TYPE=702;                            //食丹系统信息回复
+    CS_DAN_USE_TYPE=703;                            //全部食用
+    SC_DAN_USE_TYPE=704;                            //全部食用回复
+    CS_DAN_UPGRADE_TYPE=705;                        //升级
+    SC_DAN_UPGRADE_TYPE=706;                        //全部升级
+
+    CS_DAN_ALCHEMYGET_TYPE=721;                     //炼丹信息
+    SC_DAN_ALCHEMYGET_TYPE=722;                     //炼丹信息回复
+    CS_DAN_ALCHEMYSTART_TYPE=723;                   //开始炼丹
+    SC_DAN_ALCHEMYSTART_TYPE=724;                   //开始炼丹回复
+    CS_DAN_ALCHEMYACCELERATE_TYPE=725;              //加速炼丹
+    SC_DAN_ALCHEMYACCELERATE_TYPE=726;              //加速炼丹回复
+    CS_DAN_ALCHEMYRECEIVE_TYPE=727;                 //领取丹药
+    SC_DAN_ALCHEMYRECEIVE_TYPE=728;                 //领取丹药回复
+
+    //坐骑模块 801-900
+    CS_MOUNT_GET_TYPE=801;                          //坐骑信息   
+    SC_MOUNT_GET_TYPE=802;                          //坐骑信息回复
+    CS_MOUNT_UNREALDAN_TYPE=803;                    //食幻化丹
+    SC_MOUNT_UNREALDAN_TYPE=804;                    //食幻化丹回复
+    SC_MOUNT_CULDAN_TYPE=805;                       //食培养丹
+    CS_MOUNT_CULDAN_TYPE=806;                       //食培养丹回复
+    CS_MOUNT_UNREAL_TYPE=807;                       //幻化
+    SC_MOUNT_UNREAL_TYPE=808;                       //幻化回复
+    CS_MOUNT_UNLOAD_TYPE=809;                       //卸下
+    SC_MOUNT_UNLOAD_TYPE=810;                       //卸下回复
+    CS_MOUNT_ADVANCED_TYPE=811;                     //进阶
+    SC_MOUNT_ADVANCED_TYPE=812;                     //进阶回复 
+    CS_MOUNT_HIDDEN_TYPE=813;                       //坐骑展示/隐藏
+    SC_MOUNT_HIDDEN_TYPE=814;                       //坐骑展示/隐藏回复
+    CS_MOUNT_UPSTAR_TYPE=815;                       //坐骑皮肤升星
+    SC_MOUNT_UPSTAR_TYPE=816;                       //坐骑皮肤升星回复
+
+    //战翼模块 901-1000
+    CS_WING_GET_TYPE=901;                           //战翼信息
+    SC_WING_GET_TYPE=902;                           //战翼信息回复
+    CS_WING_UNREALDAN_TYPE=903;                     //食幻化丹
+    SC_WING_UNREALDAN_TYPE=904;                     //食幻化丹回复
+    CS_WING_UNREAL_TYPE=905;                        //幻化
+    SC_WING_UNREAL_TYPE=906;                        //幻化回复
+    CS_WING_UNLOAD_TYPE=907;                        //卸下
+    SC_WING_UNLOAD_TYPE=908;                        //卸下回复
+    CS_WING_ADVANCED_TYPE=909;                      //进阶
+    SC_WING_ADVANCED_TYPE=910;                      //进阶回复
+    CS_FEATHER_GET_TYPE=911;                        //护体仙羽信息
+    SC_FEATHER_GET_TYPE=912;                        //护体仙羽信息回复
+    CS_FEATHER_ADVANCED_TYPE=913;                   //护体仙羽进阶
+    SC_FEATHER_ADVANCED_TYPE=914;                   //护体仙羽进阶回复
+    CS_WING_HIDDEN_TYPE=915;                        //战翼隐藏
+    SC_WING_HIDDEN_TYPE=916;                        //战翼隐藏回复
+    SC_WING_USE_TRIAL_CARD_TYPE=917;                //使用试用卡回复
+    SC_WING_TRIAL_OVERDUE_TYPE=918;                 //使用阶数过期
+    CS_WING_UPSTAR_TYPE=919;                        //战翼皮肤升星
+    SC_WING_UPSTAR_TYPE=920;                        //战翼皮肤升星回复
+
+
+    //护体盾模块 1001-1100
+    CS_BODYSHIELD_GET_TYPE=1001;                    //护体盾信息
+    SC_BODYSHIELD_GET_TYPE=1002;                    //护体盾信息回复
+    CS_BODYSHIELD_JJDAN_TYPE=1003;                  //食金甲丹
+    SC_BODYSHIELD_JJDAN_TYPE=1004;                  //食金甲丹回复
+    CS_BODYSHIELD_ADVANCED_TYPE=1005;               //进阶
+    SC_BODYSHIELD_ADVANCED_TYPE=1006;               //进阶回复
+    CS_SHIELD_GET_TYPE=1007;                        //神盾尖刺信息
+    SC_SHIELD_GET_TYPE=1008;                        //神盾尖刺信息回复
+    CS_SHIELD_ADVANCED_TYPE=1009;                   //神盾尖刺进阶
+    SC_SHIELD_ADVANCED_TYPE=1010;                   //神盾尖刺进阶回复
+
+    //技能模块 1101-1200
+    SC_SKILL_GET_TYPE=1101;                         //技能信息回复
+    SC_SKILL_ADD_TYPE=1102;                         //添加技能回复
+    CS_SKILL_UPGRADE_TYPE=1103;                     //升级
+    SC_SKILL_UPGRADE_TYPE=1104;                     //升级回复
+    CS_SKILL_UPGRADE_ALL_TYPE=1105;                 //全部升级
+    SC_SKILL_UPGRADE_ALL_TYPE=1106;                 //全部升级回复
+    SC_SKILL_REMOVE_TYPE=1107;                      //移除技能
+    SC_SKILL_CD_TIME_TYPE=1108;                     //技能cd时间
+    SC_SKILL_LEARN_TYPE=1109;                       //技能学习
+    CS_SKILL_TIANFU_AWAKEN_TYPE=1110;               //技能天赋觉醒
+    SC_SKILL_TIANFU_AWAKEN_TYPE=1111;               //技能天赋觉醒回复
+    CS_SKILL_TIANFU_UPGRADE_TYPE=1112;              //技能天赋升级
+    SC_SKILL_TIANFU_UPGRADE_TYPE=1113;              //技能天赋升级回复
+    SC_SKILL_TIANFU_GET_TYPE=1114;                  //技能天赋登录下发
+
+    //称号模块 1201-1300
+    CS_TITLE_GET_TYPE=1201;                         //称号信息
+    SC_TITLE_GET_TYPE=1202;                         //称号信息回复
+    CS_TITLE_ACTIVE_TYPE=1203;                      //激活
+    SC_TITLE_ACTIVE_TYPE=1204;                      //激活回复
+    CS_TITLE_WEAR_TYPE=1205;                        //穿戴
+    SC_TITLE_WEAR_TYPE=1206;                        //穿戴回复
+    CS_TITLE_UNLOAD_TYPE=1207;                      //卸下
+    SC_TITLE_UNLOAD_TYPE=1208;                      //卸下回复
+    SC_TITLE_ADD_TYPE=1209;                         //称号增加
+    SC_TITLE_REMOVE_TYPE=1210;                      //称号移除
+    CS_TITLE_ADD_VALID_TIME_TYPE=1211;              //称号增加时效性
+    SC_TITLE_ADD_VALID_TIME_TYPE=1212;              //称号增加时效性
+    CS_TITLE_UP_STAR_TYPE=1213;                     //称号升星请求 
+    SC_TITLE_UP_STAR_TYPE=1214;                     //称号升星回复
+
+    //商店模块 1301-1400
+    SC_SHOP_LIMIT_TYPE=1301;                        //购买商铺限购信息回复
+    CS_SHOP_BUY_TYPE=1302;                          //购买
+    SC_SHOP_BUY_TYPE=1303;                          //购买回复
+    SC_SHOP_AUTO_BUY_LIST_TYPE=1304;                //自动购买回复
+    SC_SHOP_STOP_AUTO_BUY_TYPE=1305;                //通知前端停止自动活动
+    CS_SHOP_LIMIT_TYPE=1306;                        //过五点请求
+
+
+    //任务模块 1401-1500
+    SC_QUEST_LIST_TYPE=1401;  //当前任务列表
+    CS_QUEST_ACCEPT_TYPE=1402; //接受任务请求
+    SC_QUEST_ACCEPT_TYPE=1403; //接受任务返回
+    CS_QUEST_COMMIT_TYPE=1404; //交付任务请求
+    SC_QUEST_COMMIT_TYPE=1405; //交付任务返回
+    SC_QUEST_UPDATE_TYPE=1406; //任务列表更新
+    CS_QUEST_NPC_DIALOG_TYPE=1407; //npc对话
+    SC_QUEST_NPC_DIALOG_TYPE=1408; //npc对话回复
+    CS_QUEST_GATHER_TYPE=1409; //采集
+    SC_QUEST_GATHER_TYPE=1410; //采集回复
+    CS_QUEST_TUMONUM_GET_TYPE=1411;//屠魔次数请求
+    SC_QUEST_TUMONUM_GET_TYPE=1412;//屠魔次数回复
+    CS_QUEST_TUMO_USETOKEN_TYPE=1413;//使用屠魔令请求
+    SC_QUEST_TUMO_USETOKEN_TYPE=1414;//使用屠魔令回复
+    CS_QUEST_TUMO_DISCARD_TYPE=1415; //放弃屠魔任务请求
+    SC_QUEST_TUMO_DISCARD_TYPE=1416; //放弃屠魔任务回复
+    CS_QUEST_TUMO_BUYNUM_TYPE=1417;  //购买屠魔次数请求
+    SC_QUEST_TUMO_BUYNUM_TYPE=1418;  //购买屠魔次数回复
+    CS_QUEST_TUMO_FINISH_ALL_TYPE=1419; //屠魔任务一键完成
+    SC_QUEST_TUMO_FINISH_ALL_TYPE=1420; //屠魔任务一键完成回复
+    CS_QUEST_TUMO_IMMEDIATE_FINISH_TYPE=1421; //屠魔任务单次完成
+    SC_QUEST_TUMO_IMMEDIATE_FINISH_TYPE=1422; //屠魔任务单次完成回复
+    CS_QUEST_FEIXIE_TYPE=1423;                //任务小飞鞋
+    SC_QUEST_FEIXIE_TYPE=1424;                //任务小飞鞋回复
+    CS_QUEST_DAILY_FINISH_ALL_TYPE=1425;      //一键完成日环任务
+    SC_QUEST_DAILY_FINISH_ALL_TYPE=1426;      //一键完成日环任务回复
+    SC_QUEST_DAILY_SEQ_TYPE=1427;             //日环任务变更seq id
+    CS_QUEST_KAIFUMUBIAO_GET_TYPE=1428;       //开服目标
+    SC_QUEST_KAIFUMUBIAO_GET_TYPE=1429;       //开服目标回复
+    CS_QUEST_KAIFUMUBIAO_RECEIVE_TYPE=1430;   //开服目标领取组奖励
+    SC_QUEST_KAIFUMUBIAO_RECEIVE_TYPE=1431;   //开服目标领取组奖励回复
+    SC_QUEST_QIYU_NOTICE_TYPE=1432;   //奇遇任务推送
+    CS_QUEST_QIYU_RECEIVE_TYPE=1433;   //领取奇遇任务奖励
+    SC_QUEST_QIYU_RECEIVE_TYPE=1434;   //领取奇遇任务奖励回复
+    SC_QUEST_DAILY_COMMIT_REW_TYPE=1435;   //日环任务单次完成奖励推送 
+    CS_QUEST_DAILY_FINISH_ONECE_TYPE=1436;      //单次一键完成日环任务
+    SC_QUEST_DAILY_FINISH_ONECE_TYPE=1437;      //单次一键完成日环任务回复
+    SC_QUEST_YUNYING_GOAL_NOTICE_TYPE=1438;   //运营活动目标任务推送
+
+
+    //时装模块 1501-1600
+    CS_FASHION_GET_TYPE=1501;                         //时装信息
+    SC_FASHION_GET_TYPE=1502;                         //时装信息回复
+    CS_FASHION_ACTIVE_TYPE=1503;                      //激活
+    SC_FASHION_ACTIVE_TYPE=1504;                      //激活回复
+    CS_FASHION_WEAR_TYPE=1505;                        //穿戴
+    SC_FASHION_WEAR_TYPE=1506;                        //穿戴回复
+    CS_FASHION_UNLOAD_TYPE=1507;                      //卸下
+    SC_FASHION_UNLOAD_TYPE=1508;                      //卸下回复
+    CS_FASHION_UPGRADE_STAR_TYPE=1509;                //时装升星
+    SC_FASHION_UPGRADE_STAR_TYPE=1510;                //时装升星回复
+    SC_FASHION_REMOVE_TYPE=1511;                      //时装失效
+    SC_FASHION_TRIAL_NOTICE_TYPE=1512;                //时装试用推送
+    SC_FASHION_TRIAL_OVERDUE_NOTICE_TYPE=1513;        //时装试用过期推送
+    
+
+    //兵魂模块 1601-1700
+    CS_WEAPON_GET_TYPE=1601;                          //兵魂信息
+    SC_WEAPON_GET_TYPE=1602;                          //兵魂信息回复
+    CS_WEAPON_ACTIVE_TYPE=1603;                       //激活
+    SC_WEAPON_ACTIVE_TYPE=1604;                       //激活回复
+    CS_WEAPON_EATDAN_TYPE=1605;                       //食培养丹
+    SC_WEAPON_EATDAN_TYPE=1606;                       //食培养丹回复
+    CS_WEAPON_UPSTAR_TYPE=1607;                       //升星
+    SC_WEAPON_UPSTAR_TYPE=1608;                       //升星回复
+    CS_WEAPON_AWAKEN_TYPE=1609;                       //觉醒
+    SC_WEAPON_AWAKEN_TYPE=1610;                       //觉醒回复
+    CS_WEAPON_WEAR_TYPE=1611;                         //穿戴
+    SC_WEAPON_WEAR_TYPE=1612;                         //穿戴回复
+    CS_WEAPON_UNLOAD_TYPE=1613;                       //卸下
+    SC_WEAPON_UNLOAD_TYPE=1614;                       //卸下回复
+
+    //pk模块 1701-1800
+    CS_PK_STATE_SWITCH_TYPE=1702;                 //pk状态切换
+    SC_PK_STATE_SWITCH_TYPE=1703;                 //pk状态切换
+    SC_PK_VALUE_CHANGED_TYPE=1704;                //pk值变化
+
+    //帝魂模块 1801-1900
+    CS_SOUL_GET_TYPE=1801;                             //帝魂信息
+    SC_SOUL_GET_TYPE=1802;                             //帝魂信息回复
+    CS_SOUL_ACTIVE_TYPE=1803;                          //激活
+    SC_SOUL_ACTIVE_TYPE=1804;                          //激活回复
+    CS_SOUL_EMBED_TYPE=1805;                           //镶嵌
+    SC_SOUL_EMBED_TYPE=1806;                           //镶嵌回复
+    CS_SOUL_FEED_TYPE=1807;                            //喂养
+    SC_SOUL_FEED_TYPE=1808;                            //喂养回复
+    CS_SOUL_AWAKEN_TYPE=1809;                          //觉醒
+    SC_SOUL_AWAKEN_TYPE=1810;                          //觉醒回复     
+    CS_SOUL_STRENGTHEN_TYPE=1811;                      //强化
+    SC_SOUL_STRENGTHEN_TYPE=1812;                      //强化回复
+    CS_SOUL_UPGRADE_TYPE=1813;                         //升级
+    SC_SOUL_UPGRADE_TYPE=1814;                         //审计回复
+    
+    //功能开启模块 1901-2000
+    SC_FUNC_OPEN_LIST_TYPE=1901;                     //功能列表
+    SC_FUNC_OPEN_UPDATE_LIST_TYPE=1902;              //功能更新列表
+    CS_FUNC_OPEN_MANUAL_ACTIVE_TYPE=1903;            //手动功能开启
+    SC_FUNC_OPEN_MANUAL_ACTIVE_TYPE=1904;            //手动功能开启回复
+
+    //境界模块 2001-2100
+    SC_REALM_LEVEL_TYPE=2001;                            //天劫塔等级  
+    CS_REALM_TOKILL_TYPE=2002;                           //前往击杀请求
+    SC_REALM_TOKILL_TYPE=2003;                           //前往击杀回复
+    SC_REALM_TOKILL_RESULT_TYPE=2004;                    //击杀结果 
+    SC_REALM_SCENEINFO_TYPE=2005;                        //下发天劫塔场景信息
+    CS_REALM_RANK_GET_TYPE=2006;                         //天劫塔排行榜
+    SC_REALM_RANK_GET_TYPE=2007;                         //天劫塔排行榜回复
+    CS_REALM_PAIR_TYPE=2008;                              //夫妻助战
+    SC_REALM_PAIR_TYPE=2009;                              //夫妻助战回复
+    CS_REALM_PAIR_CANCLE_TYPE=2010;                       //取消夫妻助战
+    SC_REALM_PAIR_CANCLE_TYPE=2011;                       //回复取消夫妻助战
+    SC_REALM_PAIR_PUSH_SPOUSE_TYPE=2012;                 //助战邀请推送给配偶
+    SC_REALM_PAIR_PUSH_CANCLE_TYPE=2013;                 //取消夫妻助战推送给配偶
+    CS_REALM_PAIR_DEAL_TYPE=2014;                        //配偶决策
+    SC_REALM_PAIR_DEAL_TYPE=2015;                        //配偶决策回复
+    SC_REALM_SPOUSE_REFUSED_TYPE=2016;                   //拒绝推送给邀请者
+    SC_REALM_PAIR_RESULT_TYPE=2017;                      //夫妻助战结果
+    CS_REALM_NEXT_TYPE=2018;                             //下一关
+    SC_REALM_NEXT_TYPE=2019;                             //下一关回复
+    SC_REALM_INVITE_OFFONLINE_TYPE=2020;                 //夫妻助战闯关者中途掉线
+   
+
+    
+
+
+    //绝学模块 2101-2200
+    SC_JUEXUE_GET_TYPE=2101;                             //绝学信息回复
+    CS_JUEXUE_ACTIVE_TYPE=2102;                          //激活
+    SC_JUEXUE_ACTIVE_TYPE=2103;                          //激活回复
+    CS_JUEXUE_UPGRADE_TYPE=2104;                         //升级
+    SC_JUEXUE_UPGRADE_TYPE=2105;                         //升级回复
+    CS_JUEXUE_INSIGHT_TYPE=2106;                         //顿悟
+    SC_JUEXUE_INSIGHT_TYPE=2107;                         //顿悟回复
+    CS_JUEXUE_USE_TYPE=2108;                             //使用
+    SC_JUEXUE_USE_TYPE=2109;                             //使用回复
+    CS_JUEXUE_UNLOAD_TYPE=2110;                          //卸下
+    SC_JUEXUE_UNLOAD_TYPE=2111;                          //卸下回复
+
+    //心法模块 2201-2300
+    SC_XINFA_GET_TYPE=2201;                              //心法信息回复
+    CS_XINFA_ACTIVE_TYPE=2202;                           //激活
+    SC_XINFA_ACTIVE_TYPE=2203;                           //激活回复
+    CS_XINFA_UPGRADE_TYPE=2204;                          //升级
+    SC_XINFA_UPGRADE_TYPE=2205;                          //升级回复
+
+       
+    //好友模块 2301-2400
+    SC_FRIENDS_GET_TYPE=2301;                             //好友推送
+    CS_RECOMMENT_FRIENDS_GET_TYPE=2302;                         //推荐好友获得
+    SC_RECOMMENT_FRIENDS_GET_TYPE=2303;                         //推荐好友回复
+    CS_FRIEND_ADD_TYPE=2304;                                    //添加好友
+    SC_FRIEND_ADD_TYPE=2305;                                    //添加好友回复
+    CS_FRIEND_BLACK_TYPE=2306;                                  //添加到黑名单
+    SC_FRIEND_BLACK_TYPE=2307;                                  //添加到黑名单回复
+    CS_FRIEND_DELETE_TYPE=2308;                                 //好友删除
+    SC_FRIEND_DELETE_TYPE=2309;                                 //好友删除回复
+    CS_FRIEND_SEARCH_TYPE=2310;                                 //好友查找
+    SC_FRIEND_SEARCH_TYPE=2311;                                 //好友查找回复
+    CS_FRIEND_GIFT_TYPE=2312;                                   //赠送鲜花
+    SC_FRIEND_GIFT_TYPE=2313;                                   //赠送鲜花回复
+    SC_FRIEND_GIFT_RECV_TYPE=2314;                              //赠送鲜花接受
+    CS_FRIEND_GIFT_FEEDBACK_TYPE=2315;                          //表达谢意
+    SC_FRIEND_GIFT_FEEDBACK_TYPE=2316;                          //表达谢意回复
+    SC_FRIEND_GIFT_FEEDBACK_RECV_TYPE=2317;                     //表达谢意推送 
+    SC_FRIEND_POINT_CHANGE_TYPE=2318;                           //好友亲密度改变
+    CS_FRIEND_REMOVE_BLACK_TYPE=2319;                           //移除黑名单
+    SC_FRIEND_REMOVE_BLACK_TYPE=2320;                           //移除黑名单回复
+    CS_FRIEND_INVITE_TYPE=2321;                                 //添加好友邀请
+    SC_FRIEND_INVITE_TYPE=2322;                                 //添加好友邀请回复
+    SC_FRIEND_INVITE_PUSH_PEER_TYPE=2323;                       //邀请推送给对方
+    SC_FRIEND_INVITE_REFUSE_PUSH_PEER_TYPE=2324;                //拒绝成为好友
+    CS_FRIEND_INVITE_LIST_TYPE=2325;                            //请求好友申请列表
+    SC_FRIEND_INVITE_LIST_TYPE=2326;                            //请求好友申请列表回复
+    CS_FRIEND_BATCH_TYPE=2327;                                  //好友批量决策
+    SC_FRIEND_BATCH_TYPE=2328;                                  //好友批量决策回复
+    SC_FRIEND_GIVE_FLOWER_LIGHT_TYPE=2329;                      //送花光效广播
+    SC_FRIEND_NOTICE_BROADCASE_TYPE=2330;                       //好友推送广播
+    SC_FRIEND_NOTICE_FEEDBACK_NOTICE_TYPE=2331;                 //好友反馈提醒    
+    CS_FRIEND_NOTICE_FEEDBACK_TYPE=2332;                        //好友赞赏             
+    SC_FRIEND_NOTICE_FEEDBACK_TYPE=2333;                        //好友赞赏回复                   
+    CS_FRIEND_NOTICE_FEEDBACK_READ_TYPE=2334;                   //好友查询赞赏信息                
+    SC_FRIEND_NOTICE_FEEDBACK_READ_TYPE=2335;                   //好友查询赞赏信息回复                   
+    CS_FRIEND_ADD_REW_TYPE=2336;                                //好友添加奖励                
+    SC_FRIEND_ADD_REW_TYPE=2337;                                //好友添加奖励回复                   
+    SC_FRIEND_DUMMY_NUM_CHANGED_TYPE=2338;                      //虚拟好友数量推送  
+    CS_FRIEND_ADD_ALL_TYPE=2339;                                //一键添加
+    SC_FRIEND_ADD_ALL_TYPE=2340;                                //一键添加回复                 
+    CS_FRIEND_FEEDBACK_ASK_FOR_TYPE=2341;                       //好友索取
+    SC_FRIEND_FEEDBACK_ASK_FOR_TYPE=2342;                       //好友索取回复                 
+    CS_FRIEND_FEEDBACK_ASK_FOR_REPLY_TYPE=2343;                 //好友索取应答
+    SC_FRIEND_FEEDBACK_ASK_FOR_REPLY_TYPE=2344;                 //好友索取应答回复                 
+    SC_FRIEND_FEEDBACK_ASK_FOR_NOTICE_TYPE=2345;                 //索取推送                 
+    SC_FRIEND_FEEDBACK_ASK_FOR_REPLY_NOTICE_TYPE=2346;           //索取应答推送      
+    CS_FRIEND_MARRY_DEVELOP_LOG_INCR_TYPE=2347;                 //好友表白日志增量
+    SC_FRIEND_MARRY_DEVELOP_LOG_INCR_TYPE=2348;                 //好友表白日志增量回复               
+        
+    //宝石模块 2401-2500
+    SC_GEM_MINE_GET_TYPE=2401;                           //挖矿信息回复
+    CS_GEM_MINE_ACTIVE_TYPE=2402;                        //矿工激活
+    SC_GEM_MINE_ACTIVE_TYPE=2403;                        //矿工激活回复
+    CS_GEM_MINE_RECEIVE_TYPE=2404;                       //领取收益
+    SC_GEM_MINE_RECEIVE_TYPE=2405;                       //领取收益回复 
+    CS_GEM_GAMBLE_TYPE=2406;                             //赌石请求
+    SC_GEM_GAMBLE_TYPE=2407;                             //赌石回复
+    CS_GEM_MINE_GET_TYPE=2408;                           //挖矿信息请求
+
+     //合成模块2501-2600
+     CS_SYNRHESIS_START_TYPE=2501;                            //合成请求
+     SC_SYNRHESIS_START_TYPE=2502;                            //合成请求应答
+
+    //聊天模块 2601-2700
+    CS_CHAT_SEND_TYPE=2601;                                      //聊天发送
+    SC_CHAT_SEND_TYPE=2602;                                      //聊天发送成功
+    SC_CHAT_RECV_TYPE=2603;                                      //聊天消息接收 
+    SC_CHAT_LIST_NOTICE_TYPE=2604;                               //聊天列表推送
+
+    //邮件模块 2701-2800
+    CS_EMAILS_GET_TYPE = 2701;                                  //邮件列表
+    SC_EMAILS_GET_TYPE = 2702;                                  //邮件列表回复
+    CS_READ_EMAIL_TYPE = 2703;                                  //读邮件请求
+    SC_READ_EMAIL_TYPE = 2704;                                  //读邮件请求回复
+    CS_DEL_EMAIL_BATCH_TYPE = 2705;                             //邮件删除已读请求
+    SC_DEL_EMAIL_BATCH_TYPE = 2706;                             //邮件删除已读请求回复
+    CS_DEL_EMAIL_TYPE = 2707;                                   //邮件删除请求
+    SC_DEL_EMAIL_TYPE = 2708;                                   //邮件删除请求回复
+    CS_GET_ATTACHMENT_BATCH_TYPE = 2709;                        //邮件一键领取请求
+    SC_GET_ATTACHMENT_BATCH_TYPE = 2710;                        //邮件一键领取请求回复
+    CS_GET_ATTACHMENT_TYPE = 2711;                              //邮件领取请求
+    SC_GET_ATTACHMENT_TYPE = 2712;                              //邮件领取请求回复
+    SC_ADD_EMAIL_TYPE = 2713;                                   //邮件添加回复
+
+    //秘境仙府 2801-2900
+    CS_XIANFU_GET_TYPE = 2801;                          //秘境仙府界面信息
+    SC_XIANFU_GET_TYPE = 2802;                          //秘境仙府界面信息回复
+    CS_XIANFU_UPGRADE_TYPE = 2803;                      //秘境仙府升级
+    SC_XIANFU_UPGRADE_TYPE = 2804;                      //秘境仙府升级回复
+    CS_XIANFU_ACCELERATE_TYPE = 2805;                   //秘境仙府升级加速
+    SC_XIANFU_ACCELERATE_TYPE = 2806;                   //秘境仙府升级加速回复
+    CS_XIANFU_SAODANG_TYPE = 2807;                      //秘境仙府扫荡请求
+    SC_XIANFU_SAODANG_TYPE = 2808;                      //秘境仙府扫荡请求回复
+    CS_XIANFU_CHALLENGE_TYPE = 2809;                    //秘境仙府挑战请求
+    SC_XIANFU_CHALLENGE_TYPE = 2810;                    //秘境仙府挑战请求回复
+    SC_XIANFU_SCENEINFO_TYPE = 2811;                    //秘境仙府下发场景信息
+    SC_XIANFU_CHALLENGE_RESULT_TYPE = 2812;             //秘境仙府挑战结果回复
+    SC_XIANFU_REFRESH_BIOLOGY_TYPE = 2813;              //秘境仙府怪物刷新波数
+    CS_XIANFU_FINISH_ALL_TYPE=2814;                     //秘境仙府一键完成
+    SC_XIANFU_FINISH_ALL_TYPE=2815;                     //秘境仙府一键完成应答
+    SC_XIANFU_REW_NOTICE_TYPE=2816;                     //秘境仙府挑战奖励信息实时推送回复
+    SC_XIANFU_KILL_NUM_NOTICE_TYPE=2817;                //秘境仙府击杀数量推送回复
+    SC_XIANFU_BOSS_HP_CHANGED_NOTICE_TYPE=2818;         //秘境仙府Boss血量推送
+
+    //帝魂遗迹模块 2901-3000
+    CS_SOULRUINS_GET_TYPE=2901;                                 //帝魂遗迹信息
+    SC_SOULRUINS_GET_TYPE=2902;                                 //帝魂遗迹信息回复
+    CS_SOULRUINS_CHALLENGE_TYPE=2903;                           //挑战
+    SC_SOULRUINS_CHALLENGE_TYPE=2904;                           //挑战回复
+    SC_SOULRUINS_EVENT_TYPE=2905;                               //触发事件
+    CS_SOULRUINS_DEALEVENT_TYPE=2906;                           //事件处理请求
+    SC_SOULRUINS_DEALEVENT_TYPE=2907;                           //事件处理回复
+    CS_SOULRUINS_FORCEGET_TYPE=2908;                            //帝魂降临传功获得
+    SC_SOULRUINS_SCENEINFO_TYPE=2909;                           //下发场景信息
+    SC_SOULRUINS_FIRSTPASS_TYPE=2910;                           //首次挑战成功
+    SC_SOULRUINS_RESULT_TYPE=2911;                              //挑战结果
+    CS_SOULRUINS_SWEEP_TYPE=2912;                               //扫荡
+    SC_SOULRUINS_SWEEP_TYPE=2913;                               //扫荡回复
+    CS_SOULRUINS_REWRECEIVE_TYPE=2914;                          //星级奖励领取
+    SC_SOULRUINS_REWRECEIVE_TYPE=2915;                          //星级奖励领取回复
+    CS_SOULRUINS_BUYNUM_TYPE=2916;                              //购买挑战次数
+    SC_SOULRUINS_BUYNUM_TYPE=2917;                              //购买挑战次数回复
+    CS_SOULRUINS_FINISH_ALL=2918;                               //一键完成
+    CS_SOULRUINS_NEXT_LEVEL_TYPE=2919;                          //下一关 (消息回复走挑战回复)
+
+
+    //副本模块 3001-3100
+    CS_FUBEN_EXIT_TYPE=3001;  //副本退出
+    SC_FUBEN_EXIT_TYPE=3002;  //副本退出
+    CS_GO_TO_NPC_TYPE=3003;//跳转到npc
+    SC_GO_TO_NPC_TYPE=3004;//跳转到npc回复
+    SC_PLAYER_KILLED_TYPE=3005; //被击杀
+    SC_PLAYER_ATTACKED_TYPE=3006; //和平模式被打
+    SC_SCENE_PLAYER_DATA_CHANGED_TYPE=3007; //场景玩家数据变化
+    SC_SCENE_PLAYER_SKILL_USE_TYPE=3008; //场景玩家技能使用
+    SC_PLAYER_KILL_TYPE=3009; //玩家击杀
+    CS_PLAYER_FEIXIE_TRANSFER_TYPE=3010; //玩家飞鞋传送
+    SC_PLAYER_FEIXIE_TRANSFER_TYPE=3011; //玩家飞鞋传送
+    CS_BUFF_LIST_TYPE=3012;//buff列表请求
+    SC_BUFF_LIST_TYPE=3013;//buff列表回复
+    SC_PLAYER_RELIVE_TYPE=3014;//复活
+    SC_PLAYER_ENTER_PVP_TYPE=3015; //进入pvp
+    SC_PLAYER_EXIT_PVP_TYPE=3016;//退出pvp
+    SC_SCENE_RANK_CHANGED_TYPE=3017;//排行榜变化
+    CS_BUFF_SEARCH_TYPE=3018; //buff查询
+    SC_BUFF_SEARCH_TYPE=3019; //buff查询结果
+
+  
+    //排行榜 3101-3200
+    CS_RANK_FORCE_GET_TYPE=3101;                               //战力排行榜
+    SC_RANK_FORCE_GET_TYPE=3102;                               //战力排行榜回复
+    CS_RANK_MOUNT_GET_TYPE=3103;                               //坐骑排行榜
+    SC_RANK_MOUNT_GET_TYPE=3104;                               //坐骑排行榜回复
+    CS_RANK_WING_GET_TYPE=3105;                                //战翼排行榜
+    SC_RANK_WING_GET_TYPE=3106;                                //战翼排行榜回复
+    CS_RANK_BODYSHIELD_GET_TYPE=3107;                          //护体盾排行榜
+    SC_RANK_BODYSHIELD_GET_TYPE=3108;                          //护体盾排行榜回复
+    CS_RANK_WEAPON_GET_TYPE=3109;                              //兵魂排行榜
+    SC_RANK_WEAPON_GET_TYPE=3110;                              //兵魂排行榜回复
+    CS_RANK_GANG_GET_TYPE=3111;                                //帮派排行榜
+    SC_RANK_GANG_GET_TYPE=3112;                                //帮派排行榜回复
+    CS_RANK_MY_GET_TYPE=3113;                                  //我的排名
+    SC_RANK_MY_GET_TYPE=3114;                                  //我的排名回复
+    CS_RANK_SHENFA_GET_TYPE=3115;                              //身法排行榜
+    SC_RANK_SHENFA_GET_TYPE=3116;                              //身法排行榜回复
+    CS_RANK_LINGYU_GET_TYPE=3117;                              //领域排行榜
+    SC_RANK_LINGYU_GET_TYPE=3118;                              //领域排行榜回复
+    CS_RANK_FEATHER_GET_TYPE=3119;                             //护体仙羽排行榜
+    SC_RANK_FEATHER_GET_TYPE=3120;                             //护体仙羽排行榜回复
+    CS_RANK_SHIELD_GET_TYPE=3121;                              //神盾尖刺排行榜
+    SC_RANK_SHIELD_GET_TYPE=3122;                              //神盾尖刺排行榜回复
+    CS_RANK_ANQI_GET_TYPE=3123;                                //暗器排行榜
+    SC_RANK_ANQI_GET_TYPE=3124;                                //暗器排行榜回复
+    CS_RANK_FABAO_GET_TYPE=3125;                               //法宝排行榜
+    SC_RANK_FABAO_GET_TYPE=3126;                               //法宝排行榜回复
+    CS_RANK_XIANTI_GET_TYPE=3127;                              //仙体排行榜
+    SC_RANK_XIANTI_GET_TYPE=3128;                              //仙体排行榜回复
+    CS_RANK_SHIHUNFAN_GET_TYPE=3129;                              //噬魂幡排行榜
+    SC_RANK_SHIHUNFAN_GET_TYPE=3130;                              //噬魂幡排行榜回复
+    CS_RANK_TIANMOTI_GET_TYPE=3131;                              //天魔体排行榜
+    SC_RANK_TIANMOTI_GET_TYPE=3132;                              //天魔体排行榜回复
+    CS_RANK_LINGTONG_LEVEL_GET_TYPE=3233;                       //灵童等级排行榜
+    SC_RANK_LINGTONG_LEVEL_GET_TYPE=3234;                       //灵童等级排行榜回复
+    CS_RANK_LINGTONGDEV_GET_TYPE =3235;                         //灵童养成类排行榜
+    SC_RANK_LINGTONGDEV_GET_TYPE=3236;                          //灵童养成类回复
+    CS_RANK_FEI_SHENG_GET_TYPE=3237;                         //玩家飞升排行榜
+    SC_RANK_FEI_SHENG_GET_TYPE=3238;                          //玩家飞升排行榜回复 
+
+    //活动模块3201-3300
+    CS_ACTIVITY_ATTEND_TYPE = 3201;              //进入活动请求
+    SC_ACTIVITY_ATTEND_TYPE = 3202;              //进入活动请求应答
+    SC_ACTIVITY_COLLECT_INFO_NOTICE_TYPE=3203;        //活动采集次数信息推送
+    
+    //月下情缘 3301-3400
+    SC_MOONLOVE_GENEROUS_CHANGED_TYPE = 3301;               //月下情缘豪气变化
+    SC_MOONLOVE_CHARM_CHANGED_TYPE = 3302;                  //月下情缘魅力变化
+    CS_MOONLOVE_VIEW_DOUBLE_TYPE = 3303;                    //双人赏月
+    SC_MOONLOVE_VIEW_DOUBLE_TYPE = 3304;                    //双人赏月应答
+    CS_MOONLOVE_VIEW_DOUBLE_STATE_TYPE = 3305;              //双人赏月状态变更请求
+    SC_MOONLOVE_VIEW_DOUBLE_STATE_TYPE = 3306;              //双人赏月状态变更请求应答
+    CS_MOONLOVE_VIEW_DOUBLE_RELEASE_TYPE = 3307;            //双人赏月状态解除请求
+    SC_MOONLOVE_VIEW_DOUBLE_RELEASE_TYPE = 3308;            //双人赏月状态解除请求应答
+    SC_MOONLOVE_SCENE_INFO_TYPE = 3309;                     //进入场景下发信息
+    SC_MOONLOVE_SCENE_RESULT_TYPE = 3310;                   //月下情缘结束
+    SC_MOONLOVE_RANK_REWARDS_TYPE = 3311;                   //发放排行榜奖励
+    SC_MOONLOVE_PUSH_CHARM_RANK_TYPE = 3312;                //广播魅力榜
+    SC_MOONLOVE_PUSH_GENEROUS_RANK_TYPE = 3313;             //广播豪气榜
+    CS_MOONLOVE_PLAYER_LIST_TYPE = 3314;                    //场景玩家列表
+    SC_MOONLOVE_PLAYER_LIST_TYPE = 3315;                    //场景玩家列表应答
+    SC_MOONLOVE_GIFT_NOTICE_TYPE=3316;                      //弹幕推送
+    SC_MOONLOVE_EXP_COUNT_NOTICE_TYPE=3317;                 //经验累计推送
+    
+    
+    //仙盟 3401-3500
+    CS_ALLIANCE_CREATE_TYPE=3401;                           //仙盟创建
+    SC_ALLIANCE_CREATE_TYPE=3402;                           //仙盟创建回复
+    CS_ALLIANCE_JOIN_APPLY_TYPE=3403;                       //仙盟加入申请
+    SC_ALLIANCE_JOIN_APPLY_TYPE=3404;                       //仙盟加入申请回复
+    SC_ALLIANCE_JOIN_APPLY_BROADCAST_TYPE=3405;             //仙盟加入申请推送
+    CS_ALLIANCE_LIST_TYPE=3406;                             //仙盟列表
+    SC_ALLIANCE_LIST_TYPE=3407;                             //仙盟列表回复
+    CS_ALLIANCE_DISMISS_TYPE=3408;                          //仙盟解散
+    SC_ALLIANCE_DISMISS_TYPE=3409;                          //仙盟解散回复
+    CS_ALLIANCE_AGREE_JOIN_APPLY_TYPE=3410;                 //仙盟处理申请
+    SC_ALLIANCE_AGREE_JOIN_APPLY_TYPE=3411;                 //仙盟处理申请回复
+    SC_ALLIANCE_AGREE_JOIN_APPLY_TO_APPLY_TYPE=3412;        //仙盟处理申请通知申请者
+    SC_ALLIANCE_AGREE_JOIN_APPLY_TO_MANAGER_TYPE=3413;      //仙盟处理申请通知管理层
+    SC_ALLIANCE_INFO_TYPE=3414;                             //仙盟信息推送
+    CS_ALLIANCE_JOIN_APPLY_LIST_TYPE=3415;                  //仙盟申请列表
+    SC_ALLIANCE_JOIN_APPLY_LIST_TYPE=3416;                  //仙盟申请列表回复
+    CS_ALLIANCE_EXIT_TYPE=3417;                             //仙盟退出
+    SC_ALLIANCE_EXIT_TYPE=3418;                             //仙盟退出回复
+    CS_ALLIANCE_CHARM_TYPE=3419;                            //仙盟一键招人
+    SC_ALLIANCE_CHARM_TYPE=3420;                            //仙盟一键招人回复
+    CS_ALLIANCE_KICK_TYPE=3421;                             //仙盟踢人
+    SC_ALLIANCE_KICK_TYPE=3422;                             //仙盟踢人回复
+    CS_ALLIANCE_COMMIT_TYPE=3423;                           //仙盟任命
+    SC_ALLIANCE_COMMIT_TYPE=3424;                           //仙盟任命回复
+    CS_ALLIANCE_TRANSFER_TYPE=3425;                         //仙盟转让
+    SC_ALLIANCE_TRANSFER_TYPE=3426;                         //仙盟转让回复
+    CS_ALLIANCE_IMPEACH_TYPE=3427;                          //仙盟弹劾
+    SC_ALLIANCE_IMPEACH_TYPE=3428;                          //仙盟弹劾回复
+    CS_ALLIANCE_MEMBER_LIST_TYPE=3429;                      //仙盟成员列表
+    SC_ALLIANCE_MEMBER_LIST_TYPE=3430;                      //仙盟成员列表回复
+    SC_ALLIANCE_COMMIT_NOTICE_TYPE=3431;                    //仙盟任命通知
+    SC_ALLIANCE_TRANSFER_BROADCAST_TYPE=3432;               //仙盟转让推送
+    CS_ALLIANCE_INVITATION_TYPE=3433;                       //仙盟邀请
+    SC_ALLIANCE_INVITATION_TYPE=3434;                       //仙盟邀请应答
+    SC_ALLIANCE_INVITATION_NOTICE_TYPE=3435;                //仙盟邀请信息推送
+    CS_ALLIANCE_AGREE_INVITATION_TYPE=3436;                 //处理邀请
+    SC_ALLIANCE_AGREE_INVITATION_TYPE=3437;                 //处理邀请应答
+    SC_ALLIANCE_AGREE_INVITATION_NOTICE_TYPE=3438;          //处理邀请应答推送
+    CS_ALLIANCE_SKILL_UPGRADE_TYPE=3439;                    //仙术升级
+    SC_ALLIANCE_SKILL_UPGRADE_TYPE=3440;                    //仙术升级应答
+    SC_ALLIANCE_IMPEACH_BROADCAST_TYPE=3441;                //仙盟弹劾推送
+    CS_ALLIANCE_DONATE_TYPE=3442;                           //仙盟捐献
+    SC_ALLIANCE_DONATE_TYPE=3443;                           //仙盟捐献回复
+    CS_ALLIANCE_DONATE_HUFU_TYPE=3444;                      //仙盟捐献虎符
+    SC_ALLIANCE_DONATE_HUFU_TYPE=3445;                      //仙盟捐献虎符回复
+    SC_ALLIANCE_DONATE_HUFU_BROADCAST_TYPE=3446;            //仙盟捐献虎符广播
+    SC_ALLIANCE_PLAYER_INFO_TYPE=3447;                      //个人仙盟信息
+    CS_ALLIANCE_BRIEF_INFO_TYPE=3448;                       //仙盟信息
+    SC_SCALLIANCE_BRIEF_INFO_TYPE=3449;                     //仙盟信息应答
+    CS_ALLIANCE_NOTICE_CHANGE_TYPE=3450;                    //仙盟公告修改
+    SC_ALLIANCE_NOTICE_CHANGE_TYPE=3451;                    //仙盟公告修改回复
+    SC_SCALLIANCE_NOTICE_BROADCAST_TYPE=3452;                //仙盟公告推送  
+    CS_ALLIANCE_LOG_TYPE=3453;                              //仙盟日志
+    SC_ALLIANCE_LOG_TYPE=3454;                              //仙盟日志回复
+    SC_ALLIANCE_PLAYER_YAO_PAI_CHANGED =3455;               //推送获取腰牌变化
+    CS_ALLIANCE_PLAYER_INFO_TYPE=3456;                      //获取个人仙盟信息
+    SC_ALLIANCE_KICK_NOTICE_TYPE=3457;                      //弹劾推送
+    SC_ALLIANCE_DISMISS_BROADCAST_TYPE=3458;                //仙盟解散推送
+    CS_YAO_PAI_CONVERT_TYPE=3459;                           //腰牌兑换
+    SC_YAO_PAI_CONVERT_TYPE=3460;                           //腰牌兑换回复
+    CS_ALLIANCE_AGREE_JOIN_APPLY_BATCH_TYPE=3461;           //仙盟批量处理申请   
+    SC_ALLIANCE_AGREE_JOIN_APPLY_BATCH_TYPE=3462;           //仙盟批量处理申请回复
+    CS_ALLIANCE_DOU_SHEN_LIST_TYPE=3463;                    //斗神殿列表
+    SC_ALLIANCE_DOU_SHEN_LIST_TYPE=3464;                    //斗神殿列表应答 
+    SC_ALLIANCE_DOU_SHEN_LINGYU_CHANGED_BROADCAST_TYPE=3465;//斗神领域变更广播
+    SC_ALLIANCE_SCENE_RELIVE_TIME_CHANGE_TYPE=3466;         //原地复活次数
+    SC_ALLIANCE_MEMBER_CHANGED_TYPE=3467;                   //仙盟成员变化推送
+    CS_SAVE_IN_ALLIANCE_DEPOT_TYPE=3468;                    //仙盟仓库存入
+    SC_SAVE_IN_ALLIANCE_DEPOT_TYPE=3469;                    //仙盟仓库存入回复
+    CS_TAKE_OUT_ALLIANCE_DEPOT_TYPE=3470;                   //仙盟仓库取出
+    SC_TAKE_OUT_ALLIANCE_DEPOT_TYPE=3471;                   //仙盟仓库取出回复
+    CS_MERGE_ALLIANCE_DEPOT_TYPE=3472;                      //仙盟仓库整理
+    SC_MERGE_ALLIANCE_DEPOT_TYPE=3473;                      //仙盟仓库整理回复
+    SC_ALLIANCE_DEPOT_CHANGED_NOTICE_TYPE=3474;             //仙盟仓库变化推送
+    SC_ALLIANCE_DEPOT_MERGE_NOTICE_TYPE=3475;               //仙盟仓库整理推送
+    CS_ALLIANCE_MEMBER_CALL_TYPE=3476;                      //仙盟成员召集
+    SC_ALLIANCE_MEMBER_CALL_TYPE=3477;                      //仙盟成员召集回复
+    SC_ALLIANCE_MEMBER_CALL_BROADCAST_TYPE=3478;            //仙盟成员召集推送
+    CS_ALLIANCE_MEMBER_RESCUE_TYPE=3479;                    //仙盟救援 
+    SC_ALLIANCE_MEMBER_RESCUE_TYPE=3480;                    //仙盟救援回复
+    CS_ALLIANCE_MEMBER_POS_TYPE=3481;                       //仙盟位置
+    SC_ALLIANCE_MEMBER_POS_TYPE=3482;                       //仙盟位置回复
+    CS_ALLIANCE_AUTO_AGREE_JOIN_TYPE=3483;                  //仙盟设置自动审核
+    SC_ALLIANCE_AUTO_AGREE_JOIN_TYPE=3484;                  //仙盟设置自动审核回复
+    CS_ALLIANCE_JOIN_APPLAY_BATCH_TYPE=3485;                //一键申请加入
+    SC_ALLIANCE_JOIN_APPLAY_BATCH_TYPE=3486;                //一键申请加入回复
+    CS_ALLIANCE_DEPOT_AUTO_REMOVE_TYPE=3487;                //仙盟仓库自动销毁
+    SC_ALLIANCE_DEPOT_AUTO_REMOVE_TYPE=3488;                //仙盟仓库自动销毁回复
+    SC_ALLIANCE_DEPOT_SETTING_NOTICE_TYPE=3489;             //仙盟仓库设置推送
+    SC_ALLIANCE_MENGZHU_INFO_NOTICE_TYPE=3490;             //仙盟盟主缓存信息推送
+    CS_ALLIANCE_INVITE_MERGE_TYPE=3491;              //仙盟邀请合并
+    SC_ALLIANCE_INVITE_MERGE_TYPE=3492;              //仙盟邀请合并回复
+    SC_ALLIANCE_INVITE_MERGE_NOTICE_TYPE=3493;       //仙盟邀请合并推送
+    CS_ALLIANCE_INVITE_MERGE_FEEDBACK_TYPE=3494;     //仙盟邀请合并反馈
+    SC_ALLIANCE_INVITE_MERGE_FEEDBACK_TYPE=3495;     //仙盟邀请合并反馈回复
+
+
+
+    //抢龙椅 3501-3600
+    CS_EMPEROR_GET_TYPE=3501;                     //界面信息
+    SC_EMPEROR_GET_TYPE=3502;                     //界面信息回复
+    CS_EMPEROR_WORSHIP_TYPE=3503;                 //膜拜
+    SC_EMPEROR_WORSHIP_TYPE=3504;                 //膜拜回复
+    CS_EMPEROR_STORAGE_TYPE=3505;                 //领取库存
+    SC_EMPEROR_STORAGE_TYPE=3506;                 //领取库存回复
+    CS_EMPEROR_ROB_TYPE=3507;                     //抢龙椅
+    SC_EMPEROR_ROB_TYPE=3508;                     //抢龙椅回复
+    CS_EMPEROR_RECORD_TYPE=3509;                  //抢夺记录
+    SC_EMPEROR_RECORD_TYPE=3510;                  //抢夺记录回复
+    SC_EMPEROR_ROBBED_TYPE=3511;                  //推给前任皇帝,龙椅被抢
+    CS_EMPEROR_OPEN_BOX_TYPE=3512;                //开帝王宝箱
+    SC_EMPEROR_OPEN_BOX_TYPE=3513;                //开帝王宝箱回复
+
+    //城战 3601-3700
+    SC_ALLIANCE_SCENE_INFO_TYPE = 3601;                         //九霄城战信息
+    CS_ALLIANCE_SCENE_CALL_TYPE = 3602;                         //召唤守卫
+    SC_ALLIANCE_SCENE_CALL_TYPE = 3603;                         //召唤守卫回复
+    CS_ALLIANCE_SCENE_CALLED_GUARD_LIST_TYPE = 3604;            //获取已经召唤的守卫
+    SC_ALLIANCE_SCENE_CALLED_GUARD_LIST_TYPE = 3605;            //获取已经召唤的守卫回复
+    SC_ALLIANCE_SCENE_DOOR_BROKE_TYPE=3606;                     //城门破了
+    SC_ALLIANCE_SCENE_ALL_DOOR_BROKE_TYPE=3607;                 //城门都破了(废弃)
+    SC_ALLIANCE_SCENE_OCCUPYING_TYPE=3608;                      //正在占领(废弃)
+    SC_ALLIANCE_SCENE_OCCUPY_STOP_TYPE=3609;                    //占领取消(废弃)
+    SC_ALLAINCE_SCENE_OCCUPY_TYPE=3610;                         //占领成功
+    SC_ALLAINCE_SCENE_FINISH_TYPE=3611;                         //城战结束
+    SC_ALLIANCE_SCENE_DEFEND_HU_FU_CHANGED_TYPE = 3612;         //守方虎符改变
+    CS_ALLIANCE_SCENE_GET_REWARD_TYPE=3613;                     //领取奖励
+    SC_ALLIANCE_SCENE_GET_REWARD_TYPE=3614;                     //领取奖励回复
+    CS_ALLIANCE_HEGEMON_INFO_TYPE=3615;                         //霸主信息
+    SC_ALLIANCE_HEGEMON_INFO_TYPE=3616;                         //霸主信息回复
+    CS_ALLIANCE_SCENE_RELIVE_OCCUPYING_TYPE=3617;               //抢占复活点
+    SC_ALLIANCE_SCENE_RELIVE_OCCUPYING_TYPE=3618;               //正在抢占复活点
+    SC_ALLIANCE_SCENE_RELIVE_OCCUPY_STOP_TYPE=3619;             //占领取消
+    SC_ALLIANCE_SCENE_RELIVE_OCCUPY_TYPE=3620;                  //占领成功
+    SC_ALLIANCE_SCENE_WAR_POINT_CHANGED_TYPE=3621;              //城战积分变化
+    SC_ALLIANCE_SCENE_YUXI_BROADCAST_TYPE=3622;              // 玉玺信息广播
+
+    
+    //组队 3701-3800
+    CS_TEAM_GET_TYPE=3701;                           //玩家组队界面信息
+    SC_TEAM_GET_TYPE=3702;                           //组队信息
+    CS_TEAM_CREATE_BY_PLAYER_TYPE=3703;              //玩家点击创建队伍
+    CS_TEAM_INVITE_TYPE=3704;                        //邀请玩家
+    SC_TEAM_INVITE_TYPE=3705;                        //邀请玩家回复
+    SC_TEAM_INVITE_TO_INVITED_TYPE=3706;             //推送给被邀请者
+    CS_TEAM_INVITE_RESULT_TYPE=3707;                 //被邀请玩家决策
+    SC_TEAM_INVITE_BROADCAST_TYPE=3708;              //邀请结果组内广播
+    SC_TEAM_BROADCAST_TYPE=3709;                     //队员信息变化广播
+    CS_TEAM_TRANSFER_CAPTAIN_TYPE=3710;              //转让队长
+    CS_TEAM_LEAVE_TYPE=3711;                         //离队
+    SC_TEAM_LEAVE_TYPE=3712;                         //离队回复
+    CS_TEAM_BY_LEAVED_TYPE=3713;                     //请离队伍
+    SC_TEAM_BY_LEAVED_TO_LEAVE_TYPE=3714;            //推送给被请离者
+    CS_TEAM_NEAR_GET_TYPE=3715;                      //附近队伍
+    SC_TEAM_NEAR_GET_TYPE=3716;                      //附近队伍回复
+    CS_TEAM_NEAR_JOIN_TYPE=3717;                     //申请加入
+    SC_TEAM_NEAR_JOIN_TYPE=3718;                     //申请加入回复
+    CS_TEAM_NEAR_JOIN_RESULT_TYPE=3719;              //队长对申请加入决策
+    SC_TEAM_NEAR_JOIN_RESULT_TYPE=3720;              //队长对申请加入决策回复
+    SC_TEAM_NEAR_JOIN_RESULT_TO_APPLY_TYPE=3721;     //推送给申请者结果
+    CS_TEAM_NEAR_PLAYER_GET_TYPE=3722;               //附近玩家
+    SC_TEAM_NEAR_PLAYER_GET_TYPE=3723;               //附近玩家回复
+    CS_TEAM_APPLY_GET_TYPE=3724;                     //申请列表
+    SC_TEAM_APPLY_GET_TYPE=3725;                     //申请列表回复
+    CS_TEAM_CLEAR_APPLY_TYPE=3726;                   //清空列表
+    SC_TEAM_DATA_CHANGE_TYPE=3727;                   //队员血量等级战斗力变化
+    SC_TEAM_NEAR_JOIN_TO_CAPTAIN_TYPE=3728;          //有人申请加入推送给队长
+    CS_TEAM_APPLY_ALL_TYPE=3729;                      //一键申请
+    SC_TEAM_APPLY_ALL_TYPE=3730;                     //一键邀请回复
+    CS_TEAM_INVITE_ALL_TYPE=3731;                    //一键邀请
+    SC_TEAM_INVITE_ALL_TYPE=3732;                    //一键邀请回复
+    CS_TEAM_MEMBER_POS_TYPE=3733;                    //请求队友位置
+    SC_TEAM_MEMBER_POS_TYPE=3734;                    //请求队友位置位置
+    CS_TEAM_AUTO_REVIEW_TYPE=3735;                   //队长修改审核标识
+    SC_TEAM_AUTO_REVIEW_TYPE=3736;                   //队长修改审核标识
+    CS_TEAM_HOUSES_GET_TYPE=3737;                    //组队副本房间信息
+    SC_TEAM_HOUSES_GET_TYPE=3738;                    //组队副本房间回复
+    CS_TEAM_CREATE_HOUSE_TYPE=3739;                  //组队副本创建房间
+    SC_TEAM_CREATE_HOUSE_TYPE=3740;                  //组队副本创建房间回复
+    SC_TEAM_MATCH_CONDTION_FAILED_TYPE=3741;         //队伍匹配队员条件不足
+    CS_TEAM_MATCH_CONDTION_FAILED_DEAL_TYPE=3742;    //队伍匹配队员条件不足咨询框决策
+    SC_TEAM_MATCH_CONDTION_FAILED_DEAL_TYPE=3743;    //队伍匹配队员条件不足咨询框决策
+    SC_TEAM_MATCH_CONDTION_FAILED_BROADCAST_TYPE=3744; //广播未准备好的标识
+    SC_TEAM_MATCH_CONDTION_FAILED_TO_PREPARE_TYPE=3745; //队伍匹配队员条件不满足推送队员
+    CS_TEAM_MATCH_CONDTION_PREPARE_DEAL_TYPE= 3746; //队员准备决策
+    SC_TEAM_MATCH_CONDTION_PREPARE_DEAL_TYPE=3747; //队员准备决策回复
+    SC_TEAM_MATCH_CONDTION_PREPARE_BROADCAST_TYPE=3748; //广播队员准备好状态
+    CS_TEAM_MATCH_RUSH_START_TYPE=3749; //催处开始
+    SC_TEAM_MATCH_RUSH_START_TYPE=3750; //催处开始回复
+    SC_TEAM_MATCH_RUSH_TO_CAPTAIN_TYPE=3751;//催处开始推送给队长
+
+    //资源找回 3801-3900
+    CS_FOUND_RESOUCE_LIST_TYPE=3801;             //资源找回列表
+    SC_FOUND_RESOUCE_LIST_TYPE=3802;             //资源找回列表应答
+    SC_FOUND_TYPE=3804;                          //找回应答
+    CS_FOUND_TYPE=3803;                          //找回
+    CS_FOUND_BATCH_TYPE=3805;                    //一键找回
+    SC_FOUND_BATCH_TYPE=3806;                    //一键找回应答
+
+    //天机牌 3901-4000
+    CS_QUEST_SECRET_CARD_GET_TYPE=3901;             //天机牌界面信息
+    SC_QUEST_SECRET_CARD_GET_TYPE=3902;             //天机牌界面信息回复
+    CS_QUEST_SECRET_SPY_TYPE=3903;                  //窥探天机
+    SC_QUEST_SECRET_SPY_TYPE=3904;                  //窥探天机回复
+    CS_QUEST_SECRET_PICKUP_TYPE=3905;               //接取任务
+    SC_QUEST_SECRET_PICKUP_TYPE=3906;               //接取任务回复
+    CS_QUEST_SECRET_DISCARD_TYPE=3907;              //放弃任务
+    CS_QUEST_SECRET_STAR_REW_TYPE=3908;             //星数奖励
+    SC_QUEST_SECRET_STAR_REW_TYPE=3909;             //星数奖励回复
+    CS_QUEST_SECRET_FINISH_TYPE=3910;               //一键完成
+    SC_QUEST_SECRET_FINISH_TYPE=3911;               //一键完成回复
+    CS_QUEST_SECRET_IMMEDIATE_FINISH_TYPE=3912;     //天机牌单次完成
+    SC_QUEST_SECRET_IMMEDIATE_FINISH_TYPE=3913;     //天机牌单次完成回复
+
+    //神龙现世 4001-4100
+    CS_DRAGON_GET_TYPE=4001;                       //神龙现世界面信息
+    SC_DRAGON_GET_TYPE=4002;                       //神龙现世界面信息回复
+    CS_DRAGON_FEED_TYPE=4003;                      //喂养
+    SC_DRAGON_FEED_TYPE=4004;                      //喂养回复
+
+   
+    //镖车4101-4200
+    CS_PERSONAL_TRANSPORTATION_TYPE=4101;               //个人押镖
+    SC_PERSONAL_TRANSPORTATION_TYPE=4102;               //个人押镖应答
+    CS_ALLIANCE_TRANSPORTATION_TYPE=4103;               //仙盟押镖
+    SC_ALLIANCE_TRANSPORTATION_TYPE=4104;               //仙盟押镖应答
+    CS_DISTRESS_SIGNAL_TYPE=4105;                       //穿云箭
+    SC_DISTRESS_SIGNAL_TYPE=4106;                       //穿云箭应答
+    SC_DISTRESS_SIGNAL_BROADCAST_TYPE=4107;             //穿云箭推送  
+    CS_AGREE_DISTRESS_SIGNAL_TYPE=4108;                 //穿云箭推送处理
+    SC_AGREE_DISTRESS_SIGNAL_TYPE=4109;                 //穿云箭推送处理应答
+    CS_PLAYER_TRANSPORT_INFO_TYPE=4110;                 //个人镖车信息
+    SC_PLAYER_TRANSPORT_INFO_TYPE=4111;                 //个人镖车信息应答
+    SC_TRANSPORT_BRIEF_INFO_NOTICE_TYPE=4112;           //推送镖车信息
+    CS_TRANSPORTATION_PROTECT_TYPE=4113;                //护镖
+    SC_TRANSPORTATION_PROTECT_TYPE=4114;                //护镖应答
+    SC_TRANSPORTATION_PROTECT_NOTICE_TYPE=4115;         //护镖推送
+    CS_RECEIVE_TRANSPORT_REW_TYPE=4116;                 //领取
+    SC_RECEIVE_TRANSPORT_REW_TYPE=4117;                 //领取应答
+    SC_ROB_SUCCESS_NOTICE_TYPE=4118;                    //劫镖成功消息推送
+
+    //四神遗迹 4201-4300
+    SC_FOURGOD_GET_TYPE=4201;                     //四神遗迹信息
+    CS_FOURGOD_OPEN_BOX_TYPE=4202;                //采集宝箱
+    SC_FOURGOD_KEYNUM_CHANGE_TYPE=4203;           //钥匙改变
+    SC_FOURGOD_BIO_BROADCAST_TYPE=4204;           //生物状态更新
+    SC_FOURGOD_TOTAL_TYPE=4205;                   //活动累计获得
+    CS_FOURGOD_USE_MASKED_TYPE=4206;              //使用蒙面衣
+    SC_FOURGOD_USE_MASKED_TYPE=4207;              //使用蒙面衣回复
+    SC_FOURGOD_OPEN_BOX_TYPE=4208;                //采集宝箱回复
+    SC_FOURGOD_OPEN_BOX_STOP_TYPE=4209;           //采集宝箱被打断
+    SC_FOURGOD_OPEN_BOX_FINISH_TYPE=4210;         //采集宝箱完成
+
+    //结婚 4301-4400 
+    CS_MARRY_GET_TYPE=4301;                      //结婚界面信息
+    SC_MARRY_INFO_TYPE=4302;                     //婚姻信息
+    CS_MARRY_PROPOSAL_TYPE=4303;                 //求婚
+    SC_MARRY_PROPOSAL_TYPE=4304;                 //求婚回复
+    SC_MARRY_PUSH_PROPOSAL_TYPE=4305;            //推送求婚消息
+    CS_MARRY_PROPOSAL_DEAL_TYPE=4306;            //被求婚者决策
+    SC_MARRY_PROPOSAL_RESULT_TYPE=4307;          //求婚者收到消息
+    CS_MARRY_DIVORCE_TYPE=4308;                  //离婚
+    SC_MARRY_DIVORCE_TYPE=4309;                  //离婚回复
+    SC_MARRY_PUSH_DIVORCE_TYPE=4310;             //推送离婚对方
+    CS_MARRY_DIVORCE_DEAL_TYPE=4311;             //离婚对方决策
+    CS_MARRY_RING_REPLACE_TYPE=4312;             //婚戒替换
+    SC_MARRY_RING_REPLACE_TYPE=4313;             //婚戒替换回复
+    CS_MARRY_RING_FEED_TYPE=4314;                //婚戒培养
+    SC_MARRY_RING_FEED_TYPE=4315;                //婚戒培养回复
+    SC_MARRY_SPOUSE_INFO_CHANGE_TYPE=4316;       //配偶信息变化推送
+    SC_MARRY_INFO_CHANGE_TYPE=4317;              //婚姻信息变化
+    CS_MARRY_WED_LIST_TYPE=4318;                 //举办时间列表
+    SC_MARRY_WED_LIST_TYPE=4319;                 //举办时间列表回复
+    CS_MARRY_WED_GRADE_TYPE=4320;                //婚礼预定
+    SC_MARRY_WED_GRADE_TYPE=4321;                //婚礼预定回复
+    SC_MARRY_BANQUET_TYPE=4322;                  //婚姻场景信息
+    SC_MARRY_HEROISM_TOP_THREE_TYPE=4323;        //推送豪气值前三变化
+    CS_MARRY_WED_GIFT_TYPE=4324;                 //赠送贺礼
+    SC_MARRY_WED_GIFT_TYPE=4325;                 //赠送贺礼回复
+    CS_MARRY_WED_GIFT_LIST_TYPE=4326;            //贺礼榜单
+    SC_MARRY_WED_GIFT_LIST_TYPE=4327;            //贺礼榜单回复
+    CS_MARRY_VIEW_WED_CARD_TYPE=4328;            //查看喜帖
+    SC_MARRY_VIEW_WED_CARD_TYPE=4329;            //查看喜帖回复
+    SC_MARRY_PUSH_WED_CARD_TYPE=4330;            //结婚推送喜帖
+    SC_MARRY_AFTER_LOGIN_TYPE=4331;              //登录下发
+    SC_MARRY_DIVORCE_DEAL_PUSH_PEER_TYPE=4332;   //离婚决策
+    CS_MARRY_TREE_FEED_TYPE=4333;                //爱情树培养
+    SC_MARRY_TREE_FEED_TYPE=4334;                //爱情树培养回复
+    SC_MARRY_WED_PUSH_STATUS_TYPE=4335;          //婚礼状态推送(全服传送按钮)
+    CS_MARRY_WED_TRANSFER_TYPE=4336;             //婚礼传送
+    CS_MARRY_CLICK_CAR_TYPE=4337;                //点击婚车掉落喜糖
+    SC_MARRY_WORSHIP_TYPE=4338;                 //开始拜堂通知
+    SC_MARRY_CANCEL_TYPE=4339;                  //取消婚礼推送
+    SC_MARRY_WED_END_TYPE=4340;                 //婚礼结束推送(场景内)
+    CS_MARRY_RECOMMENT_SPOUSES_TYPE=4341;       //寻找意中人
+    SC_MARRY_RECOMMENT_SPOUSES_TYPE=4342;       //寻找意中人回复
+    SC_MARRY_CLICK_CAR_TYPE=4343;               //点击婚车回复
+    SC_MARRY_CANCLE_TO_OTHER_TYPE=4344;         //婚宴取消推送给其它人
+    SC_MARRY_WED_GRADE_TO_SPOUSE_TYPE=4345;     //婚礼预定推送给配偶
+    CS_MARRY_WED_GRADE_SPOUSE_DEAL_TYPE=4346;   //婚礼预定配偶决策
+    SC_MARRY_WED_GRADE_SPOUSE_DEAL_TYPE=4347;   //婚礼预定配偶决策回复
+    SC_MARRY_WED_GRADE_REFUSE_TO_PEER_TYPE=4348;//配偶拒绝婚礼预定推送给对方
+    SC_MARRY_WED_SUCESS_TYPE=4349;              //婚礼预定成功回复
+    CS_MARRY_DEVELOP_SEND_GIFT_TYPE=4350;   //赠送表白礼物
+    SC_MARRY_DEVELOP_SEND_GIFT_TYPE=4351;   //赠送表白礼物回复
+    CS_MARRY_DEVELOP_UPLEVEL_TYPE=4352;     //表白升级
+    SC_MARRY_DEVELOP_UPLEVEL_TYPE=4353;     //表白升级回复
+    CS_MARRY_PRE_GIFT=4354;                     //婚礼游车时赠送礼物
+    SC_MARRY_PRE_GIFT=4355;                     //婚礼游车时赠送礼物回馈
+    SC_MARRY_PRE_GIFT_NOTICE=4356;              //婚礼游车时赠送物品通知结婚者
+    CS_MARRY_JINIAN_GET=4357;              //结婚纪念获取
+    SC_MARRY_JINIAN_GET=4358;              //结婚纪念获取
+    CS_MarryDingQingJiHuo=4359; //定情信物激活
+    SC_MarryDingQingJiHuo=4360;
+    CS_MarryDingQingSuoYao=4361;//定情信物索要
+    SC_MarryDingQingSuoYao=4362;
+    SC_MarryDingQingSuoYaoRsp=4363;
+    CS_MarryDingQingSuoYaoDeal=4364;
+    SC_MarryDingQingSuoYaoDeal=4365;
+    CS_MarryDingQingZengSong=4366; //定情信物赠送
+    SC_MarryDingQingZengSong=4367;
+    SC_MARRY_BANQUET_SET_CHANGE_TYPE=4368; //结婚类型修改
+    CS_MARRY_DINGQING_YUE_TYPE=4369; //定情信物约伴侣激活
+    SC_MARRY_DINGQING_YUE_TYPE=4370; //定情信物约伴侣激活回复
+    SC_MARRY_DINGQING_YUE_SPOUSE_TYPE=4371; //定情信物约伴侣激活另一方收到
+
+
+    //身法4401-4500
+    CS_SHENFA_GET_TYPE=4401;                           //身法信息
+    SC_SHENFA_GET_TYPE=4402;                           //身法信息回复
+    CS_SHENFA_UNREALDAN_TYPE=4403;                     //食幻化丹
+    SC_SHENFA_UNREALDAN_TYPE=4404;                     //食幻化丹回复
+    CS_SHENFA_UNREAL_TYPE=4405;                        //幻化
+    SC_SHENFA_UNREAL_TYPE=4406;                        //幻化回复
+    CS_SHENFA_UNLOAD_TYPE=4407;                        //卸下
+    SC_SHENFA_UNLOAD_TYPE=4408;                        //卸下回复
+    CS_SHENFA_ADVANCED_TYPE=4409;                      //进阶
+    SC_SHENFA_ADVANCED_TYPE=4410;                      //进阶回复
+    CS_SHENFA_HIDDEN_TYPE=4411;                         //隐藏
+    SC_SHENFA_HIDDEN_TYPE=4412;                         //隐藏回复
+    CS_SHENFA_UPSTAR_TYPE=4413;                        //身法皮肤升星
+    SC_SHENFA_UPSTAR_TYPE=4414;                        //身法皮肤升星回复
+
+    //领域4501-4600
+    CS_LINGYU_GET_TYPE=4501;                           //领域信息
+    SC_LINGYU_GET_TYPE=4502;                           //领域信息回复
+    CS_LINGYU_UNREALDAN_TYPE=4503;                     //食幻化丹
+    SC_LINGYU_UNREALDAN_TYPE=4504;                     //食幻化丹回复
+    CS_LINGYU_UNREAL_TYPE=4505;                        //幻化
+    SC_LINGYU_UNREAL_TYPE=4506;                        //幻化回复
+    CS_LINGYU_UNLOAD_TYPE=4507;                        //卸下
+    SC_LINGYU_UNLOAD_TYPE=4508;                        //卸下回复
+    CS_LINGYU_ADVANCED_TYPE=4509;                      //进阶
+    SC_LINGYU_ADVANCED_TYPE=4510;                      //进阶回复
+    CS_LINGYU_HIDDEN_TYPE=4511;                         //隐藏
+    SC_LINGYU_HIDDEN_TYPE=4512;                         //隐藏回复
+    CS_LINGYU_UPSTAR_TYPE=4513;                        //领域皮肤升星
+    SC_LINGYU_UPSTAR_TYPE=4514;                        //领域皮肤升星
+
+    //3v3竞技场 4601-4700
+    CS_ARENA_MATCH_TYPE=4601;                                //3v3匹配
+    SC_ARENA_MATCH_TYPE=4602;                                //3v3匹配回复
+    SC_ARENA_MATCH_BROADCAST_TYPE=4603;                      //3v3进入匹配页面
+    SC_ARENA_MATCH_RESULT_TYPE=4604;                         //3v3匹配结果
+    CS_ARENA_STOP_MATCH_TYPE=4605;                           //3v3停止匹配
+    SC_ARENA_STOP_MATCH_TYPE=4606;                           //3v3停止匹配回复
+    SC_ARENA_STOP_MATCH_BROADCAST_TYPE=4607;                 //3v3停止匹配广播
+    CS_ARENA_SELECT_FOUR_GOD_TYPE=4608;                      //玩家选择四圣兽场景
+    SC_ARENA_SELECT_FOUR_GOD_TYPE=4609;                      //玩家选择四圣兽场景回复
+    SC_ARENA_SELECT_FOUR_GOD_BROADCAST_TYPE=4610;            //玩家选择四圣兽场景广播
+    SC_ARENA_FOUR_GOD_QUEUE_TYPE=4611;                       //玩家四圣兽排队中
+    CS_ARENA_FOUR_GOD_CANCEL_QUEUE_TYPE=4612;                //玩家取消排队
+    SC_ARENA_FOUR_GOD_CANCEL_QUEUE_TYPE=4613;                //玩家取消排队回复
+    SC_ARENA_FOUR_GOD_CANCEL_QUEUE_BROADCAST_TYPE=4614;      //玩家取消排队广播
+    SC_ARENA_SCENE_INFO_TYPE=4615;                           //竞技场场景信息
+    SC_ARENA_SCENE_START_TYPE=4616;                          //竞技场开始
+    SC_ARENA_SCENE_END_TYPE=4617;                            //竞技场结束
+    CS_ARENA_INVITE_TYPE=4618;                               //竞技场吆喝
+    SC_ARENA_INVITE_TYPE=4619;                               //竞技场吆喝回复
+    SC_ARENA_FOUR_GOD_SCENE_INFO_TYPE=4620;                  //四神场景信息
+    CS_ARENA_NEXT_MATCH_TYPE=4621;                           //玩家下一轮匹配 
+    SC_ARENA_NEXT_MATCH_TYPE=4622;                           //玩家下一轮匹配回复
+    SC_ARENA_NEXT_MATCH_BROADCAST_TYPE=4623;                 //玩家下一轮匹配广播
+    CS_ARENA_FOUR_GOD_LIST_TYPE=4624;                        //四圣兽信息 
+    SC_ARENA_FOUR_GOD_LIST_TYPE=4625;                        //四圣兽信息回复
+    SC_ARENA_FOUR_GOD_QUEUE_CHANGED_TYPE=4626;               //四圣兽队伍变化
+    CS_ARENA_FOUR_GOD_SCENE_COLLECTING_TYPE=4627;            //采集经验树
+    SC_ARENA_FOUR_GOD_SCENE_COLLECTING_TYPE=4628;            //采集经验树广播
+    SC_ARENA_FOUR_GOD_SCENE_COLLECT_STOP_TYPE=4629;          //采集经验树停止
+    SC_ARENA_FOUR_GOD_SCENE_COLLECT_TYPE=4630;               //采集经验树成功
+    CS_ARENA_FOUR_GOD_TEAM_INFO_LIST_TYPE=4631;              //四圣兽队伍信息
+    SC_ARENA_FOUR_GOD_TEAM_INFO_LIST_TYPE=4632;              //四神兽队伍信息回复
+    SC_ARENA_FINISH_TYPE=4633;                               //3v3结束
+    SC_ARENA_FOUR_GOD_TEAM_CHANGED_TYPE=4634;                //四圣兽队伍改变
+    SC_ARENA_PLAYER_DATA_CHANGED_TYPE=4635;                  //玩家数据变更
+    SC_ARENA_PLAYER_EXIT_TYPE=4636;                          //玩家退出队伍
+    SC_FOUR_GOD_SCENE_BOSS_DEAD_TYPE=4637;                   //四圣兽boss死亡
+    SC_FOUR_GOD_SCENE_BOSS_REBORN_TYPE=4638;                 //四圣兽boss重生
+    SC_FOUR_GOD_SCENE_EXP_TREE_REBORN_TYPE=4639;             //四圣兽经验树刷新
+    SC_FOUR_GOD_SCENE_EXP_TREE_DEAD_TYPE=4640;               //四圣兽经验树采集完
+    SC_FOUR_GOD_SCENE_BOSS_HP_CHANGED_TYPE=4641;             //圣兽hp变化 
+    SC_PLAYER_ARENA_DATA_TYPE=4642;                          //竞技场数据
+    SC_PLAYER_ARENA_DATA_CHANGED_TYPE=4643;                  //竞技场数据变化
+    CS_PLAYER_ARENA_INFO_TYPE=4644;                   //玩家3v3信息
+    SC_PLAYER_ARENA_INFO_TYPE=4645;                   //玩家3v3信息回复
+    CS_ARENA_GET_REWARD_TYPE=4646;                //领取周榜奖励
+    SC_ARENA_GET_REWARD_TYPE=4647;                //领取周榜奖励回复
+    CS_ARENA_MY_RANK_TYPE = 4648;                 //我的周排名
+    SC_ARENA_MY_RANK_TYPE = 4649;                 //我的周排名回复
+    CS_ARENA_RANK_GET_TYPE=4650;                  //获取周排行榜
+    SC_ARENA_RANK_GET_TYPE=4651;                  //获取排行榜回复
+
+
+    //世界boss 4701-4800
+    CS_WORLD_BOSS_LIST_TYPE=4701;                   //世界boss列表
+    SC_WORLD_BOSS_LIST_TYPE=4702;                   //世界boss列表应答
+    CS_CHALLENGE_WORLD_BOSS_TYPE=4703;              //挑战世界boss
+    SC_CHALLENGE_WORLD_BOSS_TYPE=4704;              //挑战世界boss应答
+    SC_WORLD_BOSS_INFO_BROADCAST_TYPE=4705;         //boss信息推送
+    SC_WORLD_BOSS_LIST_INFO_NOTICE_TYPE=4706;       //地图boss列表信息推送
+    SC_WORLD_BOSS_RELIVE_TIME_NOTICE_TYPE=4707;//个人复活次数
+
+
+    //元神金装 4801-4900
+    CS_USE_GOLD_EQUIP_TYPE=4801;                    //穿戴
+    SC_USE_GOLD_EQUIP_TYPE=4802;                    //穿戴回复
+    CS_TAKE_OFF_GOLD_EQUIP_TYPE=4803;               //卸下
+    SC_TAKE_OFF_GOLD_EQUIP_TYPE=4804;               //卸下回复
+    CS_GOLD_EQUIP_STRENGTHEN_BAG_TYPE=4805;         //强化背包
+    SC_GOLD_EQUIP_STRENGTHEN_BAG_TYPE=4806;         //强化背包回复
+    CS_GOLD_EQUIP_STRENGTHEN_BODY_TYPE=4807;        //强化身上
+    SC_GOLD_EQUIP_STRENGTHEN_BODY_TYPE=4808;        //强化身上回复
+    SC_GOLD_EQUIP_SLOT_CHANGED_TYPE=4809;           //金装变更背包推送
+    CS_GOLD_EQUIP_CHONGZHU_TYPE=4810;               //重铸        
+    SC_GOLD_EQUIP_CHONGZHU_TYPE=4811;               //重铸回复
+    SC_GOLD_EQUIP_SLOT_INFO_TYPE=4812;              //金装槽位数据回复    
+    CS_ZHUANSHENG_TYPE=4813;                        //转生请求
+    SC_ZHUANSHENG_TYPE=4814;                        //转生回复
+    CS_EAT_GOLD_EQUIP_TYP=4815;                     //吞噬元神金装
+    SC_EAT_GOLD_EQUIP_TYPE=4816;                    //吞噬元神金装回复
+    CS_GOLD_EQUIP_OPENLIGHT_BODY_TYPE=4817;         //金装开光身上
+    SC_GOLD_EQUIP_OPENLIGHT_BODY_TYPE=4818;         //金装开光身上回复
+    CS_GOLD_EQUIP_OPENLIGHT_BAG_TYPE=4819;          //金装开光背包
+    SC_GOLD_EQUIP_OPENLIGHT_BAG_TYPE=4820;          //金装开光背包回复
+    CS_GOLD_EQUIP_UPSTAR_BODY_TYPE=4821;         //金装强化升星身上
+    SC_GOLD_EQUIP_UPSTAR_BODY_TYPE=4822;         //金装强化升星身上回复
+    CS_GOLD_EQUIP_UPSTAR_BAG_TYPE=4823;          //金装强化升星背包
+    SC_GOLD_EQUIP_UPSTAR_BAG_TYPE=4824;          //金装强化升星背包回复
+    CS_GOLD_EQUIP_USE_GEM_TYPE=4825;                //金装宝石
+    SC_GOLD_EQUIP_USE_GEM_TYPE =4826;               //金装宝石回复
+    CS_GOLD_EQUIP_TAKE_OFF_GEM_TYPE=4827;           //金装卸下宝石
+    SC_GOLD_EQUIP_TAKE_OFF_GEM_TYPE =4828;          //金装卸下宝石回复
+    CS_GOLD_EQUIP_USE_GEM_ALL_TYPE=4829;            //金装一键镶嵌宝石
+    SC_GOLD_EQUIP_USE_GEM_ALL_TYPE=4830;            //金装一键镶嵌宝石回复
+    CS_GOLD_EQUIP_EXTEND_BODY_TYPE=4831;         //金装继承身上
+    SC_GOLD_EQUIP_EXTEND_BODY_TYPE=4832;         //金装继承身上回复
+    CS_GOLD_EQUIP_EXTEND_BAG_TYPE=4833;          //金装继承背包 
+    SC_GOLD_EQUIP_EXTEND_BAG_TYPE=4834;          //金装继承背包回复 
+    CS_GOLD_EQUIP_UNLOCK_GEM_TYPE=4835;          //金装解锁宝石
+    SC_GOLD_EQUIP_UNLOCK_GEM_TYPE =4836;         //金装解锁宝石回复
+    CS_GOLD_EQUIP_LOG_TYPE=4837;          //金装日志 
+    SC_GOLD_EQUIP_LOG_TYPE=4838;          //金装日志回复 
+    CS_GOLD_EQUIP_AUTO_FENJIE_TYPE=4839;          //金装设置自动分解 
+    SC_GOLD_EQUIP_AUTO_FENJIE_TYPE=4840;          //金装设置自动分解回复 
+    CS_GOLD_EQUIP_STRENGTHEN_BUWEI=4841;          //金装新强化身上 
+    SC_GOLD_EQUIP_STRENGTHEN_BUWEI=4842;          //金装新强化身上回复 
+    SC_GOLD_EQUIP_USE_ITEM_WITH_GROW_UP_TYPE=4843;  //金装使用物品直升等级回复 
+    CS_GODCASTING_EQUIP_UPLEVEL_TYPE=4844;  //神铸装备进阶
+    SC_GODCASTING_EQUIP_UPLEVEL_TYPE=4845;  //神铸装备进阶回复
+    CS_GODCASTING_CASTINGSPIRIT_UPLEVEL_TYPE=4846; //神铸铸灵升级
+    SC_GODCASTING_CASTINGSPIRIT_UPLEVEL_TYPE=4847; //神铸铸灵升级回复
+    CS_GODCASTING_FORGESOUL_UPLEVEL_TYPE=4848; //神铸锻魂升级
+    SC_GODCASTING_FORGESOUL_UPLEVEL_TYPE=4849; //神铸锻魂升级回复
+    CS_GODCASTING_EQUIP_INHERIT_TYPE=4850; //神铸装备继承请求
+    SC_GODCASTING_EQUIP_INHERIT_TYPE=4851; //神铸装备继承请求回复
+
+     
+    //苍龙棋局
+    CS_CHESS_INFO_GET_TYPE=4901;                    //棋局信息
+    SC_CHESS_INFO_GET_TYPE=4902;                    //棋局信息回复
+    CS_CHESS_ATTEND_TYPE=4903;                      //棋局破解
+    SC_CHESS_ATTEND_TYPE=4904;                      //棋局破解回复
+    CS_CHESS_CHANGED_TYPE=4905;                     //棋局换一批
+    SC_CHESS_CHANGED_TYPE=4906;                     //棋局换一批回复
+    CS_CHESS_LOG_INCR_TYPE=4907;                    //棋局日志增量
+    SC_CHESS_LOG_INCR_TYPE=4908;                    //棋局日志增量回复
+    CS_CHESS_ATTEND_BATCH_TYPE=4909;                //棋局批量破解
+    SC_CHESS_ATTEND_BATCH_TYPE=4910;                //棋局批量破解回复
+
+    
+    //灵池争夺 5001-5100
+    CS_ONE_ARENA_GET_TYPE=5001;                    //灵池信息
+    SC_ONE_ARENA_GET_TYPE=5002;                    //灵池信息回复
+    CS_ONE_ARENA_ROB_TYPE=5003;                    //灵池抢夺
+    SC_ONE_ARENA_ROB_TYPE=5004;                    //灵池抢夺回复
+    SC_ONE_ARENA_ROBBED_PUSH_TYPE=5005;            //灵池被抢推送
+    CS_ONE_ARENA_RECORED_TYPE=5006;                //抢夺信息
+    SC_ONE_ARENA_RECORED_TYPE=5007;                //抢夺信息回复
+    CS_ONE_ARENA_SELL_TYPE=5008;                   //一键卖出
+    SC_ONE_ARENA_SELL_TYPE=5009;                   //一键卖出回复
+    SC_ONE_ARENA_ROB_RESULT=5010;                  //推送抢夺结果
+    SC_ONE_ARENA_ROBOT_TYPE=5011;                  //灵池争夺下发假人信息
+
+    //复活 5101-5200
+    SC_RELIVE_INFO_TYPE=5101;                     //复活信息
+
+    //跑马灯 5201-5300
+    SC_NOTICE_TYPE=5201;                         //跑马灯信息
+
+    //点击事件 5401-5500
+    CS_CLICK_TYPE=5401;                          //点击事件
+    SC_CLICK_TYPE=5402;                          //点击回复
+
+    //双修 5501-5600
+    CS_MAJOR_INVITE_TYPE=5501;                  //双修邀请
+    SC_MAJOR_INVITE_TYPE=5502;                  //双修邀请回复
+    CS_MAJOR_INVITE_CANCLE_TYPE=5503;           //取消邀请
+    SC_MAJOR_INVITE_CANCLE_TYPE=5504;           //取消邀请回复
+    SC_MAJOR_INVITE_PUSH_SPOUSE_TYPE=5505;      //邀请推送给配偶
+    SC_MAJOR_INVITE_PUSH_CANCLE_TYPE=5506;      //取消推送给配偶
+    CS_MAJOR_INVITE_DEAL_TYPE=5507;             //配偶决策
+    SC_MAJOR_INVITE_DEAL_TYPE=5508;             //配偶决策回复
+    SC_MAJOR_SPOUSE_REFUSED_TYPE=5509;          //配偶拒绝推送给邀请者
+    SC_MAJOR_RESULT_TYPE=5510;                  //双修结果
+    SC_MAJOR_SCENE_INFO_TYPE=5511;              //双修下发场景信息
+    SC_MAJOR_NUM_TYPE=5512;                     //双修已使用次数
+    CS_MAJOR_NUM_TYPE=5513;                     //双修次数请求
+    SC_MAJOR_NUM_NOTICE_TYPE=5514;              //双修次数请求
+    CS_MAJOR_SAODANG_TYPE=5515;                 //双修扫荡
+    SC_MAJOR_SAODANG_TYPE=5516;                 //双修扫荡回复
+
+    //暗器  5601-5700
+    CS_ANQI_GET_TYPE=5601;                    //暗器信息
+    SC_ANQI_GET_TYPE=5602;                    //暗器信息回复
+    CS_ANQI_EAT_DAN_TYPE=5603;                //食暗器丹
+    SC_ANQI_EAT_DAN_TYPE=5604;                //食暗器丹回复
+    CS_ANQI_ADVANCED_TYPE=5605;               //进阶
+    SC_ANQI_ADVANCED_TYPE=5606;               //进阶回复
+    SC_ANQI_INFO_TYPE=5607;                   //暗器信息推送
+
+    //世界boss 5701-5800
+    CS_SHARE_BOSS_LIST_TYPE=5701;                   //跨服世界boss列表
+    SC_SHARE_BOSS_LIST_TYPE=5702;                   //跨服世界boss列表应答
+    CS_SHARE_BOSS_CHALLENGE_TYPE=5703;              //挑战跨服世界boss
+    SC_SHARE_BOSS_CHALLENGE_TYPE=5704;              //挑战跨服世界boss应答
+    SC_SHARE_BOSS_INFO_BROADCAST_TYPE=5705;         //跨服boss信息推送
+    SC_SHARE_BOSS_LIST_INFO_NOTICE_TYPE=5706;       //地图跨服boss列表信息推送 
+
+    //充值 5801-5900
+    CS_CHARGE_TYPE=5801;                            //充值请求
+    SC_CHARGE_TYPE=5802;                            //充值请求回复
+    SC_CHARGE_ORDER_TYPE=5803;                      //充值订单回复
+    SC_FIRST_CHARGE_RECORD_NOTICE_TYPE=5804;        //档次首充记录推送
+    SC_CHARGE_GOLD_NOTICE_TYPE=5805;                //充值元宝推送
+    SC_TODAY_CHARGE_GOLD_TYPE=5806;                 //今日重置元宝推送
+    CS_NEW_FIRST_CHARGE_RECORD=5807;                //新档次首充记录请求
+    SC_NEW_FIRST_CHARGE_RECORD=5808;                //新档次首充记录回复
+    SC_NEW_FIRST_CHARGE_RECORD_NOTICE_TYPE=5809;    //新档次首充记录推送
+
+    //血池 5901-6000
+    CS_XUECHI_BLOODLINE_TYPE=5901;               //设置补血线
+    SC_XUECHI_BLOODLINE_TYPE=5902;               //设置补血线回复
+    CS_XUECHI_AUTO_BUY_TYPE=5903;                //生命瓶自动购买
+    SC_XUECHI_BLOOD_TYPE=5904;                   //血池血量
+    CS_XUECHI_GET_TYPE=5905;                     //界面信息
+    SC_XUECHI_GET_TYPE=5906;                     //界面信息回复
+    SC_XUECHI_AUTO_BUY_TYPE=5907;                //生命瓶自动购买回复
+
+    //跨服屠龙 6001-6100
+    CS_TULONG_RANK_TYPE=6001;                    //屠龙排行榜
+    SC_TULONG_RANK_TYPE=6002;                    //屠龙排行榜回复
+    CS_TULONG_COLLECT_TYPE=6003;                 //屠龙采集
+    SC_TULONG_COLLECT_TYPE=6004;                 //屠龙采集回复
+    SC_TULONG_COLLECT_STOP_TYPE=6005;            //屠龙采集打断
+    SC_TULONG_COLLECT_FINISH_TYPE=6006;          //屠龙成功回复
+    SC_TULONG_BOSS_STATUS_TYPE=6007;             //屠龙大boss状态
+    SC_TULONG_START_TYPE=6008;                   //屠龙活动开始
+    SC_TULONG_ALLIANCE_BIAOSHI_TYPE=6009;        //仙盟标识
+    SC_TULONG_RESULT_TYPE=6010;                  //跨服屠龙结果
+    CS_TULONG_ALLIANCES_TYPE=6011;               //能进入跨服屠龙的仙盟
+    SC_TULONG_ALLIANCES_TYPE=6012;               //能进入跨服屠龙的仙盟回复
+    
+    //会员 6101-6200
+    CS_BUY_HUIYUAN_TYPE=6101;                  //会员购买
+    SC_BUY_HUIYUAN_TYPE=6102;                  //会员购买回复
+    CS_HUIYUAN_RECEIVE_RWE_TYPE=6103;          //会员领奖
+    SC_HUIYUAN_RECEIVE_REW_TYPE=6104;          //会员领奖回复
+    CS_HUIYUAN_INFO_TYPE=6105;                 //会员信息
+    SC_HUIYUAN_INFO_TYPE=6106;                 //会员信息回复
+
+
+    //跨服宝箱日志 6201-6300
+    CS_TREASUREBOX_LOG_TYPE=6201;             //跨服宝箱日志请求
+    SC_TREASUREBOX_LOG_TYPE=6202;             //跨服宝箱日志请求回复
+
+    //采集 6301-6400
+    CS_SCENE_COLLECT_TYPE=6301;               //采集请求
+    SC_SCENE_COLLECT_TYPE=6302;               //采集回复
+    SC_SCENE_COLLECT_STOP_TYPE=6303;          //采集打断推送
+    SC_SCENE_COLLECT_FINISH_TYPE=6304;        //采集完成
+    CS_SCENE_COLLECT_CHOOSE_RESULT_TYPE=6305;       //选择采集结果请求
+    SC_SCENE_COLLECT_CHOOSE_RESULT_TYPE=6306;       //选择采集结果回复
+    CS_SCENE_COLLECT_MIZANG_OPEN_TYPE=6307;        //密藏打开请求
+    SC_SCENE_COLLECT_MIZANG_OPEN_TYPE=6308;        //密藏打开请求回复
+    CS_SCENE_COLLECT_MIZANG_GIVEUP_TYPE=6309;        //密藏采集放弃请求
+    SC_SCENE_COLLECT_MIZANG_GIVEUP_TYPE=6310;        //密藏采集放弃请求回复
+
+    // vip 6401-6500 
+    SC_VIP_INFO_NOTICE_TYPE=6401;           //vip等级推送
+    CS_VIP_GIFT_BUY_TYPE=6402;              //vip礼包购买
+    SC_VIP_GIFT_BUY_TYPE=6403;              //vip礼包购买回复
+    CS_RECEIVE_FREE_GIFT_TYPE=6404;         //领取免费礼包
+    SC_RECEIVE_FREE_GIFT_TYPE=6405;         //领取免费礼包回复
+
+
+    //烟花 6501-6600
+    CS_FIREWORKS_TYPE=6501;                 //放烟花请求
+    SC_FIREWORKS_BROADCAST_TYPE=6502;       //放烟花场景广播
+
+      
+   //福利厅 6601-7600
+   CS_OPEN_ACTIVITY_FIRST_CHARGE_TYPE=6601;                             // 首冲领取
+   SC_OPEN_ACTIVITY_FIRST_CHARGE_TYPE=6602;                             // 首冲领取回复
+   CS_OPEN_ACTIVITY_WELFARE_LOGIN_RECEIVE_REW_TYPE=6603;                // 领取登录奖励
+   SC_OPEN_ACTIVITY_WELFARE_LOGIN_RECEIVE_REW_TYPE=6604;                // 领取登录奖励回复
+   CS_OPEN_ACTIVITY_WELFARE_UPLEVEL_RECEIVE_REW_TYPE=6605;              // 领取升级奖励
+   SC_OPEN_ACTIVITY_WELFARE_UPLEVEL_RECEIVE_REW_TYPE=6606;              // 领取升级奖励回复
+   CS_OPEN_ACTIVITY_WELFARE_ONLINE_RECEIVE_REW_TYPE=6607;               // 领取在线奖励
+   SC_OPEN_ACTIVITY_WELFARE_ONLINE_RECEIVE_REW_TYPE=6608;               // 领取在线奖励回复
+   CS_OPEN_ACTIVITY_INVEST_LEVEL_BUY_TYPE=6609;                        // 购买投资计划
+   SC_OPEN_ACTIVITY_INVEST_LEVEL_BUY_TYPE=6610;                        // 购买投资计划回复
+   CS_OPEN_ACTIVITY_INVEST_DAY_BUY_TYPE=6611;                           // 购买七日投资
+   SC_OPEN_ACTIVITY_INVEST_DAY_BUY_TYPE=6612;                           // 购买七日投资回复
+   CS_OPEN_ACTIVITY_INVEST_LEVEL_RECEIVE_REW_TYPE=6613;             // 领取投资计划奖励
+   SC_OPEN_ACTIVITY_INVEST_LEVEL_RECEIVE_REW_TYPE=6614;             // 领取投资计划奖励回复
+   CS_OPEN_ACTIVITY_INVEST_DAY_RECEIVE_REW_TYPE=6615;               // 领取七日投资奖励
+   SC_OPEN_ACTIVITY_INVEST_DAY_RECEIVE_REW_TYPE=6616;               // 领取七日投   
+   CS_OPEN_ACTIVITY_FEEDBACK_CHARGE_RECEIVE_REW_TYPE=6617;          // 领取充值返利奖励
+   SC_OPEN_ACTIVITY_FEEDBACK_CHARGE_RECEIVE_REW_TYPE=6618;          // 领取充值返利奖励回复
+   CS_OPEN_ACTIVITY_FEEDBACK_COST_RECEIVE_REW_TYPE=6619;            // 领取消费返利奖励
+   SC_OPEN_ACTIVITY_FEEDBACK_COST_RECEIVE_REW_TYPE=6620;            // 领取消费返利奖励回复
+   SC_OPEN_ACTIVITY_FEEDBACK_COST_NOTICE_TYPE=6621;                 // 消费返利元宝推送
+   SC_OPEN_ACTIVITY_FEEDBACK_CHARGE_NOTICE_TYPE=6622;               // 充值返利元宝推送
+
+   CS_OPEN_ACTIVITY_LOGIN_INFO_TYPE=6623;           //登录信息请求
+   SC_OPEN_ACTIVITY_LOGIN_INFO_TYPE=6624;           //登录信息回复
+   CS_OPEN_ACTIVITY_UPLEVEL_INFO_TYPE=6625;          //升级信息请求
+   SC_OPEN_ACTIVITY_UPLEVEL_INFO_TYPE=6626;         //升级信息请求回复
+   CS_OPEN_ACTIVITY_ONLINE_INFO_TYPE=6627;          //在线信息请求
+   SC_OPEN_ACTIVITY_ONLINE_INFO_TYPE=6628;          //在线信息请求回复 
+   CS_OPEN_ACTIVITY_INVEST_LEVEL_INFO_TYPE=6629;        //投资计划信息请求
+   SC_OPEN_ACTIVITY_INVEST_LEVEL_INFO_TYPE=6630;        //投资计划信息请求回复
+   CS_OPEN_ACTIVITY_INVEST_DAY_INFO_TYPE=6631;          //七日投资信息请求
+   SC_OPEN_ACTIVITY_INVEST_DAY_INFO_TYPE=6632;          //七日投资信息请求回复
+   CS_OPEN_ACTIVITY_FEEDBACK_CHARGE_INFO_TYPE=6633;      //充值返利信息请求
+   SC_OPEN_ACTIVITY_FEEDBACK_CHARGE_INFO_TYPE=6634;     //充值返利信息请求回复
+   CS_OPEN_ACTIVITY_FEEDBACK_COST_INFO_TYPE=6635;       //消费返利信息请求
+   SC_OPEN_ACTIVITY_FEEDBACK_COST_INFO_TYPE=6636;       //消费返利信息请求回复
+
+   CS_OPEN_ACTIVITY_RANK_MOUNT_TYPE=6637;                               //活动坐骑排行榜
+   SC_OPEN_ACTIVITY_RANK_MOUNT_TYPE=6638;                               //活动坐骑排行榜回复
+   CS_OPEN_ACTIVITY_RANK_WING_TYPE=6639;                                //活动战翼排行榜
+   SC_OPEN_ACTIVITY_RANK_WING_TYPE=6640;                                //活动战翼排行榜回复
+   CS_OPEN_ACTIVITY_RANK_BODYSHIELD_TYPE=6641;                          //活动护体盾排行榜
+   SC_OPEN_ACTIVITY_RANK_BODYSHIELD_TYPE=6642;                          //活动护体盾排行榜回复
+   CS_OPEN_ACTIVITY_RANK_CHARGE_TYPE=6643;                              //活动充值排行榜
+   SC_OPEN_ACTIVITY_RANK_CHARGE_TYPE=6644;                              //活动充值排行榜回复
+   CS_OPEN_ACTIVITY_RANK_COST_TYPE=6645;                                //活动消费排行榜
+   SC_OPEN_ACTIVITY_RANK_COST_TYPE=6646;                                //活动消费排行榜回复
+   CS_OPEN_ACTIVITY_RANK_SHENFA_TYPE=6647;                              //活动身法排行榜
+   SC_OPEN_ACTIVITY_RANK_SHENFA_TYPE=6648;                              //活动身法排行榜回复
+   CS_OPEN_ACTIVITY_RANK_LINGYU_TYPE=6649;                              //活动领域排行榜
+   SC_OPEN_ACTIVITY_RANK_LINGYU_TYPE=6650;                              //活动领域排行榜回复
+   CS_OPEN_ACTIVITY_RANK_FEATHER_TYPE=6651;                             //活动护体仙羽排行榜
+   SC_OPEN_ACTIVITY_RANK_FEATHER_TYPE=6652;                             //活动护体仙羽排行榜回复
+   CS_OPEN_ACTIVITY_RANK_SHIELD_TYPE=6653;                              //活动神盾尖刺排行榜
+   SC_OPEN_ACTIVITY_RANK_SHIELD_TYPE=6654;                              //活动神盾尖刺排行榜回复
+   CS_OPEN_ACTIVITY_RANK_MY_GET_TYPE=6655;                              //活动我的排名请求
+   SC_OPEN_ACTIVITY_RANK_MY_GET_TYPE=6656;                              //活动我的排名回复
+   CS_OPEN_ACTIVITY_WELFARE_ONLINE_DREW_TYPE=6657;                   //在线抽奖
+   SC_OPEN_ACTIVITY_WELFARE_ONLINE_DREW_TYPE=6658;                   //在线抽奖回复
+   CS_OPEN_ACTIVITY_GIFT_CODE_TYPE=6659;                             //激活码兑换
+   SC_OPEN_ACTIVITY_GIFT_CODE_TYPE=6660;                             //激活码兑换回复
+   SC_OPEN_ACTIVITY_FIRST_CHARGE_NOTICE_TYPE=6661;                   //首充信息推送
+   SC_OPEN_ACTIVITY_CYCLE_CHARGE_NOTICE_TYPE=6662;                   //每日充值元宝推送
+   CS_OPEN_ACTIVITY_CYCLE_CHARGE_INFO_TYPE=6663;                //每日首充信息请求
+   SC_OPEN_ACTIVITY_CYCLE_CHARGE_INFO_TYPE=6664;                //每日首充信息请求回复
+   CS_OPEN_ACTIVITY_CYCLE_CHARGE_REWARDS_TYPE=6665;             //每日首充领取奖励
+   SC_OPEN_ACTIVITY_CYCLE_CHARGE_REWARDS_TYPE=6666;             //每日首充领取奖励回复
+   CS_OPEN_ACTIVITY_REALM_INFO_TYPE=6667;                       //天劫塔冲刺信息
+   SC_OPEN_ACTIVITY_REALM_INFO_TYPE=6668;                       //天劫塔冲刺信息请求回复
+   CS_OPEN_ACTIVITY_REALM_REWARDS_TYPE=6669;                    //天劫塔冲刺领取奖励 
+   SC_OPEN_ACTIVITY_REALM_REWARDS_TYPE=6670;                    //天劫塔冲刺领取奖励回复
+   CS_MERGE_ACTIVITY_SINGLE_CHARGE_INFO_TYPE=6671;              //合服单笔充值信息
+   SC_MERGE_ACTIVITY_SINGLE_CHARGE_INFO_TYPE=6672;              //合服单笔充值信息请求回复
+   CS_MERGE_ACTIVITY_SINGLE_CHARGE_REWARDS_TYPE=6673;           //合服单笔信息领奖
+   SC_MERGE_ACTIVITY_SINGLE_CHARGE_REWARDS_TYPE=6674;           //合服单笔信息领奖回复
+   SC_MERGE_ACTIVITY_SINGLE_CHARGE_NOTICE_TYPE=6675;            //合服单笔充值推送
+   CS_MERGE_ACTIVITY_LUCKY_DREW_ATTEND_TYPE=6676;               //幸运转盘抽奖
+   SC_MERGE_ACTIVITY_LUCKY_DREW_ATTEND_TYPE=6677;               //幸运转盘抽奖回复
+   CS_MERGE_ACTIVITY_BOMB_ORE_ATTEND_TYPE=6678;                 //炸矿
+   SC_MERGE_ACTIVITY_BOMB_ORE_ATTEND_TYPE=6679;                 //炸矿回复
+   CS_MERGE_ACTIVITY_ADVANCED_INFO_TYPE=6680;                   //升阶返还信息请求
+   SC_MERGE_ACTIVITY_ADVANCED_INFO_TYPE=6681;                   //升阶返还信息请求回复
+   CS_MERGE_ACTIVITY_ADVANCED_REWARDS_TYPE=6682;                //升阶返还领取奖励
+   SC_MERGE_ACTIVITY_ADVANCED_REWARDS_TYPE=6683;                //升阶返还领取奖励回复
+   CS_MERGE_ACTIVITY_DISCOUNT_INFO_TYPE=6684;                   //限时礼包信息请求
+   SC_MERGE_ACTIVITY_DISCOUNT_INFO_TYPE=6685;                   //限时礼包信息请求回复
+   CS_MERGE_ACTIVITY_DISCOUNT_BUY_TYPE=6686;                    //限时礼包购买
+   SC_MERGE_ACTIVITY_DISCOUNT_BUY_TYPE=6687;                    //限时礼包购买回复
+
+   CS_MERGE_ACTIVITY_GOLD_BOWL_INFO_TYPE=6688;                  //聚宝盆信息
+   SC_MERGE_ACTIVITY_GOLD_BOWL_INFO_TYPE=6689;                  //聚宝盆信息回复
+   CS_OPEN_ACTIVITY_RANK_CHARM_TYPE=6690;                       //魅力排行榜
+   SC_OPEN_ACTIVITY_RANK_CHARM_TYPE=6691;                       //魅力排行榜回复
+   CS_OPEN_ACTIVITY_RANK_ANQI_TYPE=6692;                        //暗器排行榜
+   SC_OPEN_ACTIVITY_RANK_ANQI_TYPE=6693;                        //暗器排行榜回复
+   SC_OPEN_ACTIVITY_RANK_CHARGE_NOTICE_TYPE=6694;               //充值排行榜元宝推送
+   SC_OPEN_ACTIVITY_RANK_COST_NOTICE_TYPE=6695;                 //消费排行榜元宝推送
+   SC_OPEN_ACTIVITY_RANK_TIME_NOTICE_TYPE=6696;                 //七日冲刺时间信息
+   SC_MERGE_ACTIVITY_TIME_NOTICE_TYPE=6697;                     //合服庆典时间信息
+   SC_OPEN_ACTIVITY_RANK_END_BROADCAST_TYPE=6698;               //活动结束推送
+
+   SC_OPEN_ACTIVITY_FEEDBACK_CYCLE_CHARGE_NOTICE_TYPE=6699;               //连续充值推送
+   CS_OPEN_ACTIVITY_FEEDBACK_CYCLE_CHARGE_INFO_TYPE=6700;                 //连续充值信息请求
+   SC_OPEN_ACTIVITY_FEEDBACK_CYCLE_CHARGE_INFO_TYPE=6701;                 //连续充值信息请求回复
+   CS_OPEN_ACTIVITY_FEEDBACK_CYCLE_CHARGE_REWARDS_TYPE=6702;              //连续充值领取
+   SC_OPEN_ACTIVITY_FEEDBACK_CYCLE_CHARGE_REWARDS_TYPE=6703;              //连续充值领取回复
+   CS_MERGE_ACTIVITY_ADVANCED_BLESS_INFO_TYPE=6704;                 //升阶祝福丹放送信息请求
+   SC_MERGE_ACTIVITY_ADVANCED_BLESS_INFO_TYPE=6705;                 //升阶祝福丹放送信息请求回复
+   CS_MERGE_ACTIVITY_ADVANCED_BLESS_REWARDS_TYPE=6706;              //升阶祝福丹放送领取
+   SC_MERGE_ACTIVITY_ADVANCED_BLESS_REWARDS_TYPE=6707;              //升阶祝福丹放送领取回复
+   CS_OPEN_ACTIVITY_DISCOUNT_ZHUANSHENG_INFO_TYPE=6708;                 //转生大礼包信息请求
+   SC_OPEN_ACTIVITY_DISCOUNT_ZHUANSHENG_INFO_TYPE=6709;                 //转生大礼包信息请求回复
+   CS_OPEN_ACTIVITY_DISCOUNT_ZHUANSHENG_BUY_TYPE=6710;                  //转生大礼包购买
+   SC_OPEN_ACTIVITY_DISCOUNT_ZHUANSHENG_BUY_TYPE=6711;                  //转生大礼包购买回复
+   SC_OPEN_ACTIVITY_CHARGE_DREW_TIMES_NOTICE_TYPE=6712;                 //充值抽奖次数推送
+   CS_OPEN_ACTIVITY_CHARGE_DREW_INFO_TYPE=6713;                         //充值抽奖信息
+   SC_OPEN_ACTIVITY_CHARGE_DREW_INFO_TYPE=6714;                         //充值抽奖信息回复
+   CS_OPEN_ACTIVITY_CHARGE_DREW_ATTEND_TYPE=6715;                       //充值抽奖
+   SC_OPEN_ACTIVITY_CHARGE_DREW_ATTEND_TYPE=6716;                       //充值抽奖回复
+   CS_OPEN_ACTIVITY_RANK_COUNT_TYPE=6717;                               //次数排行榜
+   SC_OPEN_ACTIVITY_RANK_COUNT_TYPE=6718;                               //次数排行榜回复
+   CS_OPEN_ACTIVITY_COST_REWARDS_COST_INFO_TYPE=6719;                   //每消费x领奖消费元宝请求
+   SC_OPEN_ACTIVITY_COST_REWARDS_COST_INFO_TYPE=6720;                   //每消费x领奖消费元宝请求回复
+   CS_OPEN_ACTIVITY_ADVANCED_REW_INFO_TYPE=6721;                        //升阶奖励信息请求
+   SC_OPEN_ACTIVITY_ADVANCED_REW_INFO_TYPE=6722;                        //升阶奖励信息请求回复
+   CS_OPEN_ACTIVITY_ADVANCED_RECEIVE_REW_TYPE=6723;                     //升阶奖励领取
+   SC_OPEN_ACTIVITY_ADVANCED_RECEIVE_REW_TYPE=6724;                     //升阶奖励领取回复
+   CS_OPEN_ACTIVITY_ADVANCED_POWER_REW_INFO_TYPE=6725;                  //升阶战力奖励信息请求
+   SC_OPEN_ACTIVITY_ADVANCED_POWER_REW_INFO_TYPE=6726;                  //升阶战力奖励信息请求回复
+   CS_OPEN_ACTIVITY_ADVANCED_POWER_RECEIVE_REW_TYPE=6727;               //升阶战力奖励领取
+   SC_OPEN_ACTIVITY_ADVANCED_POWER_RECEIVE_REW_TYPE=6728;               //升阶战力奖励领取回复
+   CS_OPEN_ACTIVITY_CHARGE_REWARDS_LIMIT_INFO_TYPE=6729;                //每充值x返利(全服次数限制)信息请求
+   SC_OPEN_ACTIVITY_CHARGE_REWARDS_LIMIT_INFO_TYPE=6730;                //每充值x(全服次数限制)信息请求回复
+   CS_OPEN_ACTIVITY_FEEDBACK_GOLD_LABA_INFO_TYPE=6731;                  //元宝拉霸信息
+   SC_OPEN_ACTIVITY_FEEDBACK_GOLD_LABA_INFO_TYPE=6732;                  //元宝拉霸信息回复
+   CS_OPEN_ACTIVITY_FEEDBACK_GOLD_LABA_ATTEND_TYPE=6733;                //元宝拉霸参与
+   SC_OPEN_ACTIVITY_FEEDBACK_GOLD_LABA_ATTEND_TYPE=6734;                //元宝拉霸参与回复
+   CS_OPEN_ACTIVITY_LABA_LOG_INCR_TYPE=6735;                            //元宝拉霸日志增量
+   SC_OPEN_ACTIVITY_LABA_LOG_INCR_TYPE=6736;                            //元宝拉霸日志增量回复
+   CS_OPEN_ACTIVITY_RANK_FABAO_TYPE=6737;                               //法宝排行榜
+   SC_OPEN_ACTIVITY_RANK_FABAO_TYPE=6738;                               //法宝排行榜回复
+   CS_OPEN_ACTIVITY_RANK_ADVANCED_TYPE=6739;                            //进阶排行榜
+   SC_OPEN_ACTIVITY_RANK_ADVANCED_TYPE=6740;                            //进阶排行榜回复
+   SC_OPEN_ACTIVITY_WELFARE_ONLINE_DATE_NOTICE_TYPE=6741;               //在线抽奖数据推送
+   CS_OPEN_ACTIVITY_ADVANCED_REW_EXTENDED_INFO_TYPE=6742;               //升阶奖励信息请求(随功能开启)
+   SC_OPEN_ACTIVITY_ADVANCED_REW_EXTENDED_INFO_TYPE=6743;               //升阶奖励信息请求回复
+   CS_OPEN_ACTIVITY_ADVANCED_REW_EXTENDED_RECEIVE_TYPE=6744;            //升阶奖励领取(随功能开启)
+   SC_OPEN_ACTIVITY_ADVANCED_REW_EXTENDED_RECEIVE_TYPE=6745;            //升阶奖励领取回复
+   CS_OPEN_ACTIVITY_FEEDBACK_GOLD_PIG_INFO_TYPE=6746;                   //元宝金猪信息
+   SC_OPEN_ACTIVITY_FEEDBACK_GOLD_PIG_INFO_TYPE=6747;                   //元宝金猪信息回复
+   CS_OPEN_ACTIVITY_TIMES_REW_INFO_TYPE=6748;                           //累抽信息 
+   SC_OPEN_ACTIVITY_TIMES_REW_INFO_TYPE=6749;                           //累抽信息回复
+   CS_OPEN_ACTIVITY_TIMES_REW_RECEIVE_TYPE=6750;                        //累抽领取奖励
+   SC_OPEN_ACTIVITY_TIMES_REW_RECEIVE_TYPE=6751;                        //累抽领取奖励回复
+   CS_OPEN_ACTIVITY_DREW_LOG_INCR_TYPE=6752;                            //抽奖日志增量
+   SC_OPEN_ACTIVITY_DREW_LOG_INCR_TYPE=6753;                            //抽奖日志增量回复
+   CS_OPEN_ACTIVITY_CYCLE_SINGLE_CHARGE_INFO_TYPE=6754;                 //每日单笔充值信息
+   SC_OPEN_ACTIVITY_CYCLE_SINGLE_CHARGE_INFO_TYPE=6755;                 //每日单笔充值信息请求回复
+   CS_OPEN_ACTIVITY_CYCLE_SINGLE_CHARGE_REWARDS_TYPE=6756;              //每日单笔充值信息领奖
+   SC_OPEN_ACTIVITY_CYCLE_SINGLE_CHARGE_REWARDS_TYPE=6757;              //每日单笔充值信息领奖回复 
+   CS_OPEN_ACTIVITY_RANK_PROPERTY_TYPE=6758;                            //属性排行榜
+   SC_OPEN_ACTIVITY_RANK_PROPERTY_TYPE=6759;                            //属性排行榜回复
+   CS_OPEN_ACTIVITY_MADE_RES_INFO_TYPE=6760;                            //炼制信息
+   SC_OPEN_ACTIVITY_MADE_RES_INFO_TYPE=6761;                            //炼制信息回复
+   CS_OPEN_ACTIVITY_MADE_RES_TYPE=6762;                                 //炼制
+   SC_OPEN_ACTIVITY_MADE_RES_TYPE=6763;                                 //炼制回复
+   CS_OPEN_ACTIVITY_KANJIA_INFO_TYPE=6764;                              //砍价礼包信息
+   SC_OPEN_ACTIVITY_KANJIA_INFO_TYPE=6765;                              //砍价礼包信息回复
+   CS_OPEN_ACTIVITY_KANJIA_TYPE=6766;                                   //砍价
+   SC_OPEN_ACTIVITY_KANJIA_TYPE=6767;                                   //砍价回复
+   CS_OPEN_ACTIVITY_KANJIA_BUY_TYPE=6768;                               //购买砍价礼包
+   SC_OPEN_ACTIVITY_KANJIA_BUY_TYPE=6769;                               //购买砍价礼包回复
+   CS_OPEN_ACTIVITY_TAOCAN_INFO_TYPE=6770;                              //超值套餐信息(废弃)
+   SC_OPEN_ACTIVITY_TAOCAN_INFO_TYPE=6771;                              //超值套餐信息推送
+   CS_OPEN_ACTIVITY_TAOCAN_BUY_TYPE=6772;                               //超值套餐购买
+   SC_OPEN_ACTIVITY_TAOCAN_BUY_TYPE=6773;                               //超值套餐购买回复
+   CS_OPEN_ACTIVITY_FEEDBACK_DEVELOP_INFO_TYPE=6774;                              //金鸡信息
+   SC_OPEN_ACTIVITY_FEEDBACK_DEVELOP_INFO_TYPE=6775;                              //金鸡信息回复
+   CS_OPEN_ACTIVITY_FEEDBACK_DEVELOP_REVIVE_TYPE=6776;                            //金鸡复活
+   SC_OPEN_ACTIVITY_FEEDBACK_DEVELOP_REVIVE_TYPE=6777;                            //金鸡复活回复
+   CS_OPEN_ACTIVITY_FEEDBACK_DEVELOP_RECEIVE_TYPE=6778;                            //金鸡领奖
+   SC_OPEN_ACTIVITY_FEEDBACK_DEVELOP_RECEIVE_TYPE=6779;                            //金鸡领奖回复
+   SC_OPEN_ACTIVITY_CRAZY_BOX_TIMES_NOTICE_TYPE=6780;                   //疯狂宝箱次数推送
+   CS_OPEN_ACTIVITY_CRAZY_BOX_INFO_TYPE=6781;                           //疯狂宝箱信息
+   SC_OPEN_ACTIVITY_CRAZY_BOX_INFO_TYPE=6782;                           //疯狂宝箱信息回复
+   CS_OPEN_ACTIVITY_CRAZY_BOX_ATTEND_TYPE=6783;                         //疯狂宝箱抽奖
+   SC_OPEN_ACTIVITY_CRAZY_BOX_ATTEND_TYPE=6784;                         //疯狂宝箱抽奖回复
+   CS_OPEN_ACTIVITY_CRAZY_BOX_LOG_INCR_TYPE=6785;                       //疯狂宝箱日志增量
+   SC_OPEN_ACTIVITY_CRAZY_BOX_LOG_INCR_TYPE=6786;                       //疯狂宝箱日志增量回复
+   CS_OPEN_ACTIVITY_COMMON_INFO_TYPE=6787;                              //通用信息请求
+   SC_OPEN_ACTIVITY_COMMON_INFO_TYPE=6788;                              //通用信息请求回复
+   CS_OPEN_ACTIVITY_COMMON_RECEIVE_REW_TYPE=6789;                       //通用领取请求
+   SC_OPEN_ACTIVITY_COMMON_RECEIVE_REW_TYPE=6790;                       //通用领取请求回复
+   CS_OPEN_ACTIVITY_DEVELOP_FEED_TYPE=6791;                             //名人培养请求
+   SC_OPEN_ACTIVITY_DEVELOP_FEED_TYPE=6792;                             //名人培养请求回复
+   CS_OPEN_ACTIVITY_DISCOUNT_ZHUANSHENG_BUY_ALL_TYPE=6793;              //转生礼包全部购买请求
+   SC_OPEN_ACTIVITY_DISCOUNT_ZHUANSHENG_BUY_ALL_TYPE=6794;              //转生礼包全部购买请求回复
+   SC_OPEN_ACTIVITY_FEEDBACK_HOUSE_INVEST_NOTICE_TYPE=6795;             //房产投资推送
+   CS_OPEN_ACTIVITY_FEEDBACK_HOUSE_INVEST_INFO_TYPE=6796;               //房产投资信息请求
+   SC_OPEN_ACTIVITY_FEEDBACK_HOUSE_INVEST_INFO_TYPE=6797;               //房产投资信息请求回复
+   CS_OPEN_ACTIVITY_FEEDBACK_HOUSE_INVEST_ADVENCED_TYPE=6798;           //房产投资激活
+   SC_OPEN_ACTIVITY_FEEDBACK_HOUSE_INVEST_ADVENCED_TYPE=6799;           //房产投资激活回复
+   CS_OPEN_ACTIVITY_FEEDBACK_HOUSE_INVEST_DECOR_TYPE=6800;              //房产投资装修
+   SC_OPEN_ACTIVITY_FEEDBACK_HOUSE_INVEST_DECOR_TYPE=6801;              //房产投资装修回复
+   CS_OPEN_ACTIVITY_FEEDBACK_HOUSE_INVEST_SELL_TYPE=6802;               //房产投资出售
+   SC_OPEN_ACTIVITY_FEEDBACK_HOUSE_INVEST_SELL_TYPE=6803;               //房产投资出售回复
+   CS_OPEN_ACTIVITY_SMASH_EGG_INFO_TYPE=6804;                           //砸金蛋信息
+   SC_OPEN_ACTIVITY_SMASH_EGG_INFO_TYPE=6805;                           //砸金蛋信息回复
+   CS_OPEN_ACTIVITY_SMASH_EGG_ATTEND_TYPE=6806;                         //砸金蛋抽奖
+   SC_OPEN_ACTIVITY_SMASH_EGG_ATTEND_TYPE=6807;                         //砸金蛋抽奖回复
+   CS_OPEN_ACTIVITY_SYSTEM_ACTIVATE_TYPE=6808;                         //系统激活
+   SC_OPEN_ACTIVITY_SYSTEM_ACTIVATE_TYPE=6809;                         //系统激活回复
+   SC_OPEN_ACTIVITY_ALLIANCE_CHEER_POOL_CHANGED_TYPE=6810;             //城战助威奖金池
+   SC_OPEN_ACTIVITY_OPEN_SERVER_TIME_CHANGED_TYPE=6811;                 //活动开服时间变化
+   CS_OPEN_ACTIVITY_DISCOUNT_ZHUANSHENG_RECEIVE_GIFT_TYPE=6812;              //转生礼包赠品领取请求
+   SC_OPEN_ACTIVITY_DISCOUNT_ZHUANSHENG_RECEIVE_GIFT_TYPE=6813;              //转生礼包赠品领取请求回复
+   SC_OPEN_ACTIVITY_XUN_HUAN_INFO_TYPE=6814;                            //循环活动推送
+   CS_OPEN_ACTIVITY_COST_DREW_ATTEND_TYPE=6815;                         //消费抽奖
+   SC_OPEN_ACTIVITY_COST_DREW_ATTEND_TYPE=6816;                         //消费抽奖回复
+   SC_OPEN_ACTIVITY_CYCLE_SINGLE_CHARGE_MAX_REW_INFO_NOTICE_TYPE=6817;  //每日单笔（一次一档奖励）推送
+   SC_OPEN_ACTIVITY_FEEDBACK_CHARGE_RETURN_MULTIPLE_NOTICE_TYPE=6818;   //期间累充推送
+   SC_OPEN_ACTIVITY_PERIOD_CHARGE_NOTICE_TYPE=6819;                     //期间充值推送
+   CS_OPEN_ACTIVITY_RANK_MARRY_DEVELOP_TYPE=6820;                       //表白排行榜
+   SC_OPEN_ACTIVITY_RANK_MARRY_DEVELOP_TYPE=6821;                       //表白排行榜回复
+   CS_OPEN_ACTIVITY_INVEST_NEW_LEVEL_INFO_TYPE=6822;                    //新等级投资计划信息请求
+   SC_OPEN_ACTIVITY_INVEST_NEW_LEVEL_INFO_TYPE=6823;                    //新等级投资计划信息请求回复
+   CS_OPEN_ACTIVITY_INVEST_NEW_LEVEL_BUY_TYPE=6824;                     // 购买新等级投资计划
+   SC_OPEN_ACTIVITY_INVEST_NEW_LEVEL_BUY_TYPE=6825;                     // 购买新等级投资计划回复
+   CS_OPEN_ACTIVITY_INVEST_NEW_LEVEL_RECEIVE_REW_TYPE=6826;             // 领取新等级投资计划奖励
+   SC_OPEN_ACTIVITY_INVEST_NEW_LEVEL_RECEIVE_REW_TYPE=6827;             // 领取新等级投资计划奖励回复
+   SC_OPEN_ACTIVITY_RANKING_DROP_DOWN_NOTICE_TYPE=6828;             // 排行榜前三下降推送
+   CS_OPEN_ACTIVITY_INVEST_UP_LEVEL_TYPE=6829;                       //升级新等级投资计划请求
+   SC_OPEN_ACTIVITY_INVEST_UP_LEVEL_TYPE=6830;                       //升级新等级投资计划回复
+   CS_OPEN_ACTIVITY_BEACH_SHOP_ACTIVITE_TYPE=6831;                  // 沙滩挖宝激活商店请求
+   SC_OPEN_ACTIVITY_BEACH_SHOP_ACTIVITE_TYPE=6832;                  // 沙滩挖宝激活商店回复
+   CS_OPEN_ACTIVITY_BEACH_SHOP_BUY_TYPE=6833;                       // 沙滩挖宝商店购买请求
+   SC_OPEN_ACTIVITY_BEACH_SHOP_BUY_TYPE=6834;                       // 沙滩挖宝商店购买回复
+   SC_OPEN_ACTIVITY_SINGLE_CHARGE_ALL_MULTIPLE_NOTICE=6835;         //每日单笔充值提示
+   CS_OPEN_ACTIVITY_REW_POOLS_DREW_TYPE=6836;                       //仙人指路奖池抽奖请求
+   SC_OPEN_ACTIVITY_REW_POOLS_DREW_TYPE=6837;                       //仙人指路奖池抽奖请求回复
+   CS_OPEN_ACTIVITY_YUN_YIN_BUY_TYPE=6838;                          // 购买云隐商品请求
+   SC_OPEN_ACTIVITY_YUN_YIN_BUY_TYPE=6839;                          // 购买云隐商品回复
+   CS_OPEN_ACTIVITY_RECEIVE_REW_MULTIPLE_TYPE=6840;                 //领取奖励多次
+   SC_OPEN_ACTIVITY_RECEIVE_REW_MULTIPLE_TYPE=6841;                 //领取奖励多次回复
+   CS_OPEN_ACTIVITY_CS_NEW_INVEST_DAY_BUY_TYPE=6842;                 //新七天投资购买请求
+   SC_OPEN_ACTIVITY_CS_NEW_INVEST_DAY_BUY_TYPE=6843;                 //新七天投资购买回复
+ 
+
+    // 红点 7601-7700
+    SC_ACTIVITY_NOTICE_TYPE=7601;                       //运营活动红点推送
+    SC_ACTIVITY_DATA_NOTICE_TYPE=7602;                       //运营活动数据推送
+
+    // 幸运符 7701-7800
+    SC_LUCKY_INFO_CHANGED_TYPE=7701;            //幸运信息变化
+    SC_LUCKY_INFO_NOTICE_TYPE=7702;             //幸运信息推送
+
+    // 无间炼狱 7801-7900
+    SC_LIANYU_GET_TYPE=7801;                   //进场景下发
+    CS_LIANYU_CANCLE_LINEUP_TYPE=7802;         //取消排队
+    SC_LIANYU_CANCLE_LINEUP_TYPE=7803;         //取消排队回复
+    SC_LIANYU_LINEUP_TYPE=7804;                //排队变更回复
+    SC_LIANYU_LINEUP_SUCCESS_TYPE=7805;        //排队成功回复
+    SC_LIANYU_BOSS_STATUS_TYPE=7806;           //boss 状态变更推送
+    SC_LIANYU_RANK_CHANGED_TYPE=7807;          //排行榜杀气变更推送
+    SC_LIANYU_RESULT_TYPE=7808;                //结束后获得物品推送
+    SC_LIANYU_FINISH_TO_LINEUP_TYPE=7809;      //场景结束推送给排队
+    SC_LIANYU_SHAQI_CHANGED_TYPE=7810;          //玩家杀气变化
+
+    // 戮仙刃 7901-8000
+    CS_MASSACRE_GET_TYPE=7901;                    //戮仙刃信息
+    SC_MASSACRE_GET_TYPE=7902;                    //戮仙刃信息回复
+    CS_MASSACRE_ADVANCED_TYPE=7903;               //进阶
+    SC_MASSACRE_ADVANCED_TYPE=7904;               //进阶回复
+    SC_MASSACRE_INFO_TYPE=7905;                   //戮仙刃信息推送
+    SC_MASSACRE_WEAPON_LOSE_INFO_TYPE=7906;       //玩家被击杀戮仙刃兵魂消失推送
+    SC_MASSACRE_SHA_QI_VARY_TYPE=7907;            //戮仙刃杀气推送
+    SC_MASSACRE_SHA_QI_DROP_TYPE=7908;            //戮仙刃杀气掉落
+
+    //打宝塔 8001-8100
+    CS_TOWER_ENTER_TYPE=8001;                   //进入打宝塔
+    SC_TOWER_ENTER_TYPE=8002;                   //进入打宝塔回复
+    SC_TOWER_TIME_NOTICE_TYPE=8003;             //打宝时间推送
+    SC_TOWER_BOSS_INFO_NOTICE_TYPE=8004;        //boss信息推送
+    SC_TOWER_RESULT_NOTICE_TYPE=8005;           //打宝塔结算推送
+    CS_TOWER_FLOOR_LIST_TYPE=8006;              //打宝塔结BOSS列表请求
+    SC_TOWER_FLOOR_LIST_TYPE=8007;              //打宝塔结BOSS列表请求回复
+    CS_TOWER_LOG_INCR_TYPE=8008;                //打宝塔日志增量请求
+    SC_TOWER_LOG_INCR_TYPE=8009;                //打宝塔日志增量请求回复
+    CS_TOWER_DA_BAO_TYPE=8010;                  //打宝请求
+    SC_TOWER_DA_BAO_TYPE=8011;                  //打宝请求回复
+
+    // 天书  8101-8200
+    CS_TIANSHU_ACTIVATE_TYPE=8101;          //天书激活
+    SC_TIANSHU_ACTIVATE_TYPE=8102;          //天书激活回复
+    CS_TIANSHU_GIFT_RECEIVE_TYPE=8103;      //天书领取免费礼物
+    SC_TIANSHU_GIFT_RECEIVE_TYPE=8104;      //天书领取免费礼物回复
+    SC_TIANSHU_INFO_LIST_TYPE=8105;         //天书信息推送
+    CS_TIANSHU_UPLEVEL_TYPE=8106;           //天书升级
+    SC_TIANSHU_UPLEVEL_TYPE=8107;           //天书升级回复
+
+    // 个人BOSS 8201-8300
+    CS_MY_BOSS_CHALLENGE_TYPE=8201;             //挑战个人BOSS
+    SC_MY_BOSS_CHALLENGE_TYPE=8202;             //挑战个人BOSS回复
+    SC_MY_BOSS_INFO_NOTICE_TYPE=8203;             //个人BOSS信息推送
+    SC_MY_BOSS_CHALLENGE_RESULT_TYPE=8204;       //个人BOSS挑战结果
+    SC_MY_BOSS_SCENE_INFO_TYPE=8205;             //个人BOSS场景信息
+
+    //附加系统 8301-8400
+    CS_USE_ADDITION_SYS_EQUIP_TYPE=8301;              //穿戴
+    SC_USE_ADDITION_SYS_EQUIP_TYPE=8302;              //穿戴回复
+    CS_TAKE_OFF_ADDITION_SYS_EQUIP_TYPE=8303;         //卸下
+    SC_TAKE_OFF_ADDITION_SYS_EQUIP_TYPE=8304;         //卸下回复
+    CS_ADDITION_SYS_STRENGTHEN_BODY_TYPE=8305;        //强化槽位
+    SC_ADDITION_SYS_STRENGTHEN_BODY_TYPE=8306;        //强化槽位回复
+    SC_ADDITION_SYS_SLOT_CHANGED_TYPE=8307;           //变更背包推送
+    SC_ADDITION_SYS_SLOT_INFO_TYPE=8308;              //槽位数据回复    
+    CS_ADDITION_SYS_SHENG_JI_TYPE=8309;               //系统升级
+    SC_ADDITION_SYS_SHENG_JI_TYPE=8310;               //系统升级回复    
+    CS_ADDITION_SYS_UPGRADE_TYPE=8311;               //系统进阶
+    SC_ADDITION_SYS_UPGRADE_TYPE=8312;              //系统进阶回复
+    CS_ADDITION_SYS_HUALING_EAT_TYPE=8313;            //系统食用化灵丹
+    SC_ADDITION_SYS_HUALING_EAT_TYPE=8314;            //系统食用化灵丹回复   
+    CS_ADDITION_SYS_SHENZHU_BODY_TYPE=8315;           //系统神铸升级
+    SC_ADDITION_SYS_SHENZHU_BODY_TYPE=8316;           //系统神铸升级回复   
+    CS_ADDITION_SYS_AWAKE_EAT_TYPE=8317;             //系统食用觉醒丹
+    SC_ADDITION_SYS_AWAKE_EAT_TYPE=8318;             //系统食用觉醒丹回复
+    CS_ADDITION_SYS_TONGLING_UPGRADE_TYPE=8319;       //系统通灵升级
+    SC_ADDITION_SYS_TONGLING_UPGRADE_TYPE=8320;       //系统通灵升级回复   
+    CS_ADDITION_SYS_LINGTONG_LINGZHU_INFO_TYPE=8321;       //灵童灵珠信息
+    SC_ADDITION_SYS_LINGTONG_LINGZHU_INFO_TYPE=8322;       //灵童灵珠信息回复   
+    CS_ADDITION_SYS_LINGTONG_LINGZHU_UPLEVEL_TYPE=8323;       //灵童灵珠升级
+    SC_ADDITION_SYS_LINGTONG_LINGZHU_UPLEVEL_TYPE=8324;       //灵童灵珠升级回复 
+
+
+    //神兽攻城 8401-8500
+    SC_GODSIEGE_GET_TYPE=8401;                   //进场景下发
+    CS_GODSIEGE_CANCLE_LINEUP_TYPE=8402;         //取消排队
+    SC_GODSIEGE_CANCLE_LINEUP_TYPE=8403;         //取消排队回复
+    SC_GODSIEGE_LINEUP_TYPE=8404;                //排队变更回复
+    SC_GODSIEGE_LINEUP_SUCCESS_TYPE=8405;        //排队成功回复
+    SC_GODSIEGE_BOSS_STATUS_TYPE=8406;           //boss 状态变更推送
+    SC_GODSIEGE_RESULT_TYPE=8407;                //结束后获得物品推送
+    SC_GODSIEGE_FINISH_TO_LINEUP_TYPE=8408;      //场景结束推送给排队
+    SC_GODSIEGE_COLLECT_CHANGED_TYPE=8409;       //采集数量变化
+    SC_GODSIEGE_COLLECT_NPC_CHANGED_TYPE=8410;   //采集生物信息变化
+
+    //系统技能 8501-8600 
+    CS_SYSTEM_SKILL_GET_TYPE=8501;               //获取系统技能
+    SC_SYSTEM_SKILL_GET_TYPE=8502;               //系统技能信息应答
+    CS_SYSTEM_SKILL_ACTIVE_TYPE=8503;            //激活系统技能
+    SC_SYSTEM_SKILL_ACTIVE_TYPE=8504;            //激活系统技能应答
+    CS_SYSTEM_SKILL_UPGRADE_TYPE=8505;           //系统技能升级
+    SC_SYSTEM_SKILL_UPGRADE_TYPE=8506;           //系统技能升级应答
+    CS_SYSTEM_SKILL_ALL_GET_TYPE=8507;           //所有系统技能
+    SC_SYSTEM_SKILL_ALL_GET_TYPE=8508;           //所有系统技能回复
+
+    //仇人相关 8601-8700
+    SC_FOE_GET_TYPE=8601;                        //仇人列表
+    CS_FOE_REMOVE_TYPE=8602;                     //移除仇人
+    SC_FOE_REMOVE_TYPE=8603;                     //移除仇人回复
+    SC_FOE_ADD_TYPE=8604;                        //增加仇人
+    CS_FOE_VIEW_POS_TYPE=8605;                   //查看位置
+    SC_FOE_VIEW_POS_TYPE=8606;                   //查看位置回复
+    CS_FOE_TRANSFER_TYPE=8607;                   //追踪传送
+    SC_FOE_TRANSFER_TYPE=8608;                   //追踪传送回复
+    SC_FOE_NOTICE_TYPE=8609;                     //仇人推送
+    SC_FOE_FEEDBACK_NOTICE_TYPE=8610;            //仇人反馈提醒    
+    CS_FOE_FEEDBACK_TYPE=8611;                   //报复仇人                
+    SC_FOE_FEEDBACK_TYPE=8612;                   //报复仇人回复    
+    CS_FOE_FEEDBACK_BUY_PROTECT_TYPE=8613;       //报复保护购买                
+    SC_FOE_FEEDBACK_BUY_PROTECT_TYPE=8614;       //报复保护购买回复    
+    SC_FOE_FEEDBACK_INFO_TYPE=8615;              //被报复信息下发   
+    CS_FOE_FEEDBACK_READ_TYPE=8616;         //被报复信息查询             
+    SC_FOE_FEEDBACK_READ_TYPE=8617;         //被报复信息查询回复   
+    SC_FOE_KILL_NOTICE_TYPE=8618;           //击杀玩家推送  
+
+    //幻境boss8701-8800
+    CS_UNREAL_BOSS_LIST_TYPE=8701;              //幻境boss列表
+    SC_UNREAL_BOSS_LIST_TYPE=8702;              //幻境boss列表回复
+    CS_UNREAL_BOSS_CHALLENGE_TYPE=8703;           //挑战幻境boss
+    SC_UNREAL_BOSS_CHALLENGE_TYPE=8704;           //挑战幻境boss回复
+    CS_UNREAL_BOSS_BUY_PILAO_TYPE=8705;           //购买疲劳值
+    SC_UNREAL_BOSS_BUY_PILAO_TYPE=8706;           //购买疲劳值回复
+    SC_UNREAL_BOSS_INFO_BROADCAST_TYPE=8707;      //幻境boss信息广播
+    SC_UNREAL_BOSS_LIST_INFO_NOTICE_TYPE=8708;    //幻境boss下发
+    SC_UNREAL_BOSS_ENEMIES_NOTICE_TYPE=8709;    //幻境boss死亡推送(对boss造成伤害)
+    SC_UNREAL_BOSS_PILAO_INFO_TYPE=8710;        //疲劳值信息推送
+
+    //法宝 8801-8900
+    CS_FABAO_GET_TYPE=8801;                      //法宝信息请求
+    SC_FABAO_GET_TYPE=8802;                      //信息应答
+    CS_FABAO_UNREALDAN_TYPE=8803;                //幻化丹 
+    SC_FABAO_UNREALDAN_TYPE=8804;                //幻化丹回复
+    CS_FABAO_UNREAL_TYPE=8805;                   //幻化
+    SC_FABAO_UNREAL_TYPE=8806;                   //幻化回复
+    CS_FABAO_TONGLING_TYPE=8807;                 //通灵
+    SC_FABAO_TONGLING_TYPE=8808;                 //通灵回复
+    CS_FABAO_UNLOAD_TYPE= 8809;                  //卸下
+    SC_FABAO_UNLOAD_TYPE =8810;                  //卸下回复
+    CS_FABAO_ADVANCED_TYPE=8811;                 //进阶
+    SC_FABAO_ADVANCED_TYPE=8812;                 //进阶回复
+    CS_FABAO_HIDDEN_TYPE=8813;                   //隐藏
+    SC_FABAO_HIDDEN_TYPE=8814;                   //隐藏回复
+    CS_FABAO_UPSTAR_TYPE=8815;                   //升星
+    SC_FABAO_UPSTAR_TYPE =8816;                  //升星回复
+
+
+    // 材料副本 8901-9000
+    CS_MATERIAL_INFO_GET_TYPE=8901;                   //材料副本信息
+    SC_MATERIAL_INFO_GET_TYPE=8902;                   //材料副本信息回复
+    CS_MATERIAL_SAO_DANG_TYPE=8903;                   //材料副本扫荡
+    SC_MATERIAL_SAO_DANG_TYPE=8904;                   //材料副本扫荡回复
+    CS_MATERIAL_CHALLENGE_TYPE=8905;                  //材料副本挑战
+    SC_MATERIAL_CHALLENGE_TYPE=8906;                  //材料副本挑战回复
+    SC_MATERIAL_SCENE_INFO_TYPE=8907;                 //重登下发场景信息
+    SC_MATERIAL_REFRESH_BIOLOGY_TYPE=8908;            //推送波数信息
+    SC_MATERIAL_CHALLENGE_RESULT_TYPE=8909;            //材料副本挑战结果
+
+    
+    //仙体模块 9001-9100
+    CS_XIANTI_GET_TYPE=9001;                          //仙体信息   
+    SC_XIANTI_GET_TYPE=9002;                          //仙体信息回复
+    CS_XIANTI_UNREALDAN_TYPE=9003;                    //食幻化丹
+    SC_XIANTI_UNREALDAN_TYPE=9004;                    //食幻化丹回复
+    CS_XIANTI_UNREAL_TYPE=9005;                       //幻化
+    SC_XIANTI_UNREAL_TYPE=9006;                       //幻化回复
+    CS_XIANTI_UNLOAD_TYPE=9007;                       //卸下
+    SC_XIANTI_UNLOAD_TYPE=9008;                       //卸下回复
+    CS_XIANTI_ADVANCED_TYPE=9009;                     //进阶
+    SC_XIANTI_ADVANCED_TYPE=9010;                     //进阶回复 
+    CS_XIANTI_HIDDEN_TYPE=9011;                       //仙体展示/隐藏
+    SC_XIANTI_HIDDEN_TYPE=9012;                       //仙体展示/隐藏回复
+    CS_XIANTI_UPSTAR_TYPE=9013;                       //仙体皮肤升星
+    SC_XIANTI_UPSTAR_TYPE=9014;                       //仙体皮肤升星回复
+
+
+    //血盾 9101-9200
+    CS_XUEDUN_GET_TYPE=9101;                          //血盾信息
+    SC_XUEDUN_GET_TYPE=9102;                          //血盾信息回复
+    CS_XUEDUN_UPGRADE_TYPE=9103;                      //血盾升级
+    SC_XUEDUN_UPGRADE_TYPE=9104;                      //血盾升级回复
+    CS_XUEDUN_PEIYANGE_TYPE=9105;                     //血盾培养
+    SC_XUEDUN_PEIYANGE_TYPE=9106;                     //血盾培养回复
+    SC_XUEDUN_BLOOD_CHANGED_TYPE=9107;                //血炼值改变推送
+
+    //活跃度 9201-9300
+    CS_LIVENESS_GET_TYPE=9201;                       //过点界面请求
+    SC_LIVENESS_GET_TYPE=9202;                       //登录下发
+    SC_LIVENESS_NUM_CHANGED_TYPE=9203;               //次数改变推送(含活跃度)
+    CS_LIVENESS_OPEN_TYPE=9204;                      //开活跃度宝箱
+    SC_LIVENESS_OPEN_TYPE=9205;                      //开活跃度宝箱回复
+
+    //外域boss 9301-9400
+    CS_OUTLAND_BOSS_LIST_TYPE=9301;                 //外域boss列表
+    SC_OUTLAND_BOSS_LIST_TYPE=9302;                 //外域boss列表回复
+    CS_OUTLAND_BOSS_CHALLENGE_TYPE=9303;            //挑战外域boss
+    SC_OUTLAND_BOSS_CHALLENGE_TYPE=9304;            //挑战外域boss回复
+    SC_OUTLAND_BOSS_INFO_BROADCAST_TYPE=9305;       //外域boss信息广播
+    SC_OUTLAND_BOSS_LIST_INFO_NOTICE_TYPE=9306;     //外域boss下发
+    SC_OUTLAND_BOSS_ENEMIES_NOTICE_TYPE=9307;       //外域boss死亡推送(对boss造成伤害)
+    SC_OUTLAND_BOSS_ZHUOQI_INFO_TYPE=9308;          //浊气信息推送
+    CS_OUTLAND_BOSS_DROP_RECORDS_INCR_TYPE=9309;    //掉落记录增量
+    SC_OUTLAND_BOSS_DROP_RECORDS_INCR_TYPE=9310;    //掉落记录增量回复
+    CS_OUTLAND_BOSS_DROP_RECORDS_GET_TYPE=9311;     //掉落记录
+    SC_OUTLAND_BOSS_DROP_RECORDS_GET_TYPE=9312;     //掉落记录回复
+
+
+    //八卦秘境模块 9401-9500
+    SC_BAGUA_LEVEL_TYPE=9401;                            //八卦秘境等级  
+    CS_BAGUA_TOKILL_TYPE=9402;                           //前往击杀请求
+    SC_BAGUA_TOKILL_TYPE=9403;                           //前往击杀回复
+    SC_BAGUA_TOKILL_RESULT_TYPE=9404;                    //击杀结果 
+    SC_BAGUA_SCENEINFO_TYPE=9405;                        //下发天劫塔场景信息
+    CS_BAGUA_PAIR_TYPE=9406;                              //夫妻助战
+    SC_BAGUA_PAIR_TYPE=9407;                              //夫妻助战回复
+    CS_BAGUA_PAIR_CANCLE_TYPE=9408;                       //取消夫妻助战
+    SC_BAGUA_PAIR_CANCLE_TYPE=9409;                       //回复取消夫妻助战
+    SC_BAGUA_PAIR_PUSH_SPOUSE_TYPE=9410;                 //助战邀请推送给配偶
+    SC_BAGUA_PAIR_PUSH_CANCLE_TYPE=9411;                 //取消夫妻助战推送给配偶
+    CS_BAGUA_PAIR_DEAL_TYPE=9412;                        //配偶决策
+    SC_BAGUA_PAIR_DEAL_TYPE=9413;                        //配偶决策回复
+    SC_BAGUA_SPOUSE_REFUSED_TYPE=9414;                   //拒绝推送给邀请者
+    SC_BAGUA_PAIR_RESULT_TYPE=9415;                      //夫妻助战结果
+    CS_BAGUA_NEXT_TYPE=9416;                             //下一关
+    SC_BAGUA_NEXT_TYPE=9417;                             //下一关回复
+    SC_BAGUA_INVITE_OFFONLINE_TYPE=9418;                 //夫妻助战闯关者中途掉线
+
+    //元宝送不停 9501-9600
+    CS_SONGBUTING_GET_TYPE=9501;                         //元宝送不停
+    CS_SONGBUTING_RECEIVE_TYPE=9502;                     //玩家领取奖励
+    SC_SONGBUTING_CHANGED_TYPE=9503;                     //元宝送不停数据推送
+
+    //引导副本BOSS 9601-9700
+    CS_GUIDE_REPLICA_CHALLENGE_TYPE=9601;                 //挑战引导副本
+    SC_GUIDE_REPLICA_CHALLENGE_TYPE=9602;                 //挑战引导副本回复
+    SC_GUIDE_REPLICA_CHALLENGE_RESULT_TYPE=9603;          //引导副本挑战结果
+    SC_GUIDE_REPLICA_SCENE_INFO_TYPE=9604;                //引导副本场景信息
+    SC_GUIDE_REPLICA_SCENE_DATA_CHANGED_NOTICE_TYPE=9605;                //引导副本信息变化推送
+    CS_GUIDE_REPLICA_PLAYER_COMMON_OPERATE_TYPE=9606;                //引导副本玩家操作
+    SC_GUIDE_REPLICA_PLAYER_COMMON_OPERATE_TYPE=9607;                //引导副本玩家操作回复
+
+    //组队副本 9701-9800
+    CS_TEAMCOPY_ALL_GET_TYPE=9701;                       //组队副本信息
+    SC_TEAMCOPY_ALL_GET_TYPE=9702;                       //信息回复
+    CS_TEAMCOPY_START_BATTLE_TYPE=9703;                  //开始战斗
+    SC_TEAMCOPY_START_BATTLE_TYPE=9704;                  //开始战斗回复
+    SC_TEAMCOPY_START_BATTLE_BROADCAST_TYPE=9705;        //开始战斗请求广播
+    SC_TEAMCOPY_START_BATTLE_RESULT_BROADCAST_TYPE=9706; //开始战斗请求结果广播
+    SC_TEAMCOPY_SCENE_INFO_TYPE=9707;                    //玩家进场景下发
+    SC_TEAMCOPY_PLAYER_DATA_CHANGED_TYPE=9708;           //玩家数据改变推送
+    SC_TEAMCOPY_RESULT_TYPE=9709;                        //结果
+
+    //挂机
+    CS_GUA_JI_TYPE=9801;//挂机请求
+    SC_GUA_JI_TYPE=9802;//挂机回复
+    SC_CURRENT_GUA_JI_TYPE=9803;//当前挂机
+    CS_STOP_GUA_JI_TYPE=9804; //停止挂机
+    SC_STOP_GUA_JI_TYPE=9805; //停止挂机回复
+    SC_GUA_JI_POS_TYPE=9806; //挂机位置
+    SC_CURRENT_GUAJI_TYPE=9807; //当前挂机停止
+    CS_GUA_JI_ADVANCE_LIST_TYPE=9808; //挂机进阶列表
+    SC_GUA_JI_ADVANCE_LIST_TYPE=9809; //挂机进阶列表回复
+    SC_GUA_JI_ADVANCE_UPDATE_LIST_TYPE=9810; //进阶系统变更
+
+
+    //仙尊问答 9901-10000
+    CS_QUIZ_ANSWER_TYPE=9901;                           //仙尊问答答题
+    SC_QUIZ_ANSWER_TYPE=9902;                           //仙尊问答答题回复
+    SC_QUIZ_ASSIGN_INFO_TYPE=9903;                      //仙尊问答出题推送
+
+    //圣诞采集物推送 10001-10100
+    SC_CHRISTMAS_COLLECT_REFRESH_BROADCAST_TYPE=10001;           //圣诞采集物刷新推送 
+    SC_CHRISTMAS_COLLECT_COLLECT_NUM_NOTICE=10002;           //圣诞采集物刷新数量推送
+
+    //点星系统 10101-10200
+    CS_DIANXING_GET_TYPE=10101;                           //点星系统信息请求
+    SC_DIANXING_GET_TYPE=10102;                           //点星系统信息应答
+    SC_DIANXING_XINGCHEN_VARY_TYPE=10103;                 //星尘值推送
+    CS_DIANXING_ADVANCED_TYPE=10104;                      //点星升级请求
+    SC_DIANXING_ADVANCED_TYPE=10105;                      //点星升级应答
+    CS_DIANXING_JIEFENG_ADVANCED_TYPE=10106;              //点星解封请求
+    SC_DIANXING_JIEFENG_ADVANCED_TYPE=10107;              //点星解封应答
+
+    //衣橱 10201-10300
+    CS_WARDROBE_GET_TYPE=10201;                           //衣橱获取
+    SC_WARDROBE_GET_TYPE=10202;                           //衣橱信息
+    SC_WARDROBE_ACTIVE_TYPE=10203;                        //衣橱激活
+    SC_WARDROBE_ROMOVE_TYPE=10204;                        //衣橱失效
+    CS_WARDROBE_PEIYANG_TYPE=10205;                       //衣橱培养
+    SC_WARDROBE_PEIYANG_TYPE=10206;                       //衣橱培养回复
+
+
+    // 天魔体 10301-10400
+    CS_TIANMOTI_GET_TYPE=10301;                    //天魔体信息
+    SC_TIANMOTI_GET_TYPE=10302;                    //天魔体信息回复
+    CS_TIANMOTI_EAT_DAN_TYPE=10303;                //食天魔体丹
+    SC_TIANMOTI_EAT_DAN_TYPE=10304;                //食天魔体丹回复
+    CS_TIANMOTI_ADVANCED_TYPE=10305;               //进阶
+    SC_TIANMOTI_ADVANCED_TYPE=10306;               //进阶回复 
+    SC_TIANMOTI_INFO_TYPE=10307;                   //天魔体信息推送
+    SC_TIANMOTI_CHARGE_VARY_TYPE=10308;            //充值数推送
+
+
+    //噬魂幡 10401-10500
+    CS_SHIHUNFAN_GET_TYPE=10401;                           //噬魂幡系统信息请求
+    SC_SHIHUNFAN_GET_TYPE=10402;                           //噬魂幡系统信息应答
+    SC_SHIHUNFAN_CHARGE_VARY_TYPE=10403;                   //充值数推送
+    CS_SHIHUNFAN_ADVANCED_TYPE=10404;                      //噬魂幡升阶请求
+    SC_SHIHUNFAN_ADVANCED_TYPE=10405;                      //噬魂幡升阶应答
+    CS_SHIHUNFAN_DAN_ADVANCED_TYPE=10406;                  //噬魂幡培养请求
+    SC_SHIHUNFAN_DAN_ADVANCED_TYPE=10407;                  //噬魂幡培养应答
+
+    //灵童 10501-10600
+    CS_LINGTONG_GET_TYPE = 10501; //灵童信息
+    SC_LINGTONG_GET_TYPE = 10502; //信息回复
+    CS_LINGTONG_ACTIVE_TYPE= 10503; //激活灵童
+    SC_LINGTONG_ACTIVE_TYPE = 10504; //激活回复
+    CS_LINGTONG_CHUZHAN_TYPE= 10505; //灵童出战
+    SC_LINGTONG_CHUZHAN_TYPE = 10506;//出战回复
+    CS_LINGTONG_UPGRADE_TYPE = 10507;//灵童升级
+    SC_LINGTONG_UPGRADE_TYPE = 10508;//升级回复
+    CS_LINGTONG_PEIYANG_TYPE = 10509;//灵童培养
+    SC_LINGTONG_PEIYANG_TYPE = 10510;//培养回复
+    CS_LINGTONG_RENAME_TYPE = 10511; //灵童改名
+    SC_LINGTONG_RENAME_TYPE = 10512; //改名回复
+    CS_LINGTONG_UPSTAR_TYPE = 10513;//灵童升星
+    SC_LINGTONG_UPSTAR_TYPE = 10514;//升星回复
+    SC_LINGTONG_POWER_NOTICE_TYPE=10515;//灵童战力推送
+
+    //灵童时装 10601-10700 
+    CS_LINGTONG_FASHION_GET_TYPE= 10601; //灵童时装信息
+    SC_LINGTONG_FASHION_GET_TYPE = 10602;//时装信息回复
+    CS_LINGTONG_FASHION_ACTIVE_TYPE = 10603;//时装激活
+    SC_LINGTONG_FASHION_ACTIVE_TYPE = 10604;//激活回复
+    CS_LINGTONG_FASHION_WEAR_TYPE= 10605;//时装穿戴(仅当前出战)
+    SC_LINGTONG_FASHION_WEAR_TYPE=10606;//穿戴回复
+    CS_LINGTONG_FASHION_UNLOAD_TYPE=10607; //时装卸下
+    SC_LINGTONG_FASHION_UNLOAD_TYPE=10608; //卸下回复
+    CS_LINGTONG_FASHION_UPSTAR_TYPE= 10609;//时装升星
+    SC_LINGTONG_FASHION_UPSTAR_TYPE = 10610;//升星回复
+    SC_LINGTONG_FASHION_REMOVE_TYPE=10611;  //时装移除
+    SC_LINGTONG_FASHION_TRIAL_NOTICE_TYPE=10612; //灵童时装试用推送
+    SC_LINGTONG_FASHION_TRIAL_OVERDUE_NOTICE_TYPE=10613; //灵童时装试用过期
+
+    //灵童类养成 10700-10800
+    CS_LINGTONGDEV_GET_TYPE = 10700; //获取养成信息
+    SC_LINGTONGDEV_GET_TYPE = 10701; //信息回复
+    CS_LINGTONGDEV_UNREALDAN_TYPE= 10702; //食幻化丹
+    SC_LINGTONGDEV_UNREALDAN_TYPE = 10703; //食幻化丹回复
+    CS_LINGTONGDEV_CULDAN_TYPE=10704; //食培养丹
+    SC_LINGTONGDEV_CULDAN_TYPE=10705; //食培养丹回复
+    CS_LINGTONGDEV_TONGLING_TYPE=10706; //通灵
+    SC_LINGTONGDEV_TONGLING_TYPE=10707; //通灵回复
+    CS_LINGTONGDEV_UNREAL_TYPE = 10708; //幻化
+    SC_LINGTONGDEV_UNREAL_TYPE = 10709; //幻化回复
+    CS_LINGTONGDEV_UNLOAD_TYPE = 10710; //卸下
+    SC_LINGTONGDEV_UNLOAD_TYPE = 10711; //卸下回复
+    CS_LINGTONGDEV_ADVANCED_TYPE = 10712; //进阶
+    SC_LINGTONGDEV_ADVANCED_TYPE = 10713; //进阶回复
+    CS_LINGTONGDEV_HIDDEN_TYPE = 10714; //隐藏
+    SC_LINGTONGDEV_HIDDEN_TYPE = 10715; //隐藏回复
+    CS_LINGTONGDEV_UPSTAR_TYPE= 10716; //升星
+    SC_LINGTONGDEV_UPSTAR_TYPE = 10717; //升星回复
+
+    // 飞升 10801-10900
+    CS_FEI_SHENG_SAN_GONG_TYPE=10801;                   //飞升散功 
+    SC_FEI_SHENG_SAN_GONG_TYPE=10802;                   //飞升散功回复
+    CS_FEI_SHENG_DU_JIE_TYPE=10803;                     //飞升渡劫
+    SC_FEI_SHENG_DU_JIE_TYPE=10804;                     //飞升渡劫回复
+    CS_FEI_SHENG_INFO_TYPE=10805;                       //飞升信息
+    SC_FEI_SHENG_INFO_TYPE=10806;                       //飞升信息回复
+    CS_FEI_SHENG_EAT_DAN_TYPE=10807;                    //飞升食丹
+    SC_FEI_SHENG_EAT_DAN_TYPE=10808;                    //飞升食丹回复
+    CS_FEI_SHENG_SAVE_QN_TYPE=10809;                    //飞升保存潜能
+    SC_FEI_SHENG_SAVE_QN_TYPE=10810;                    //飞升保存潜能回复
+    CS_FEI_SHENG_RESET_QN_TYPE=10811;                   //飞升重置潜能
+    SC_FEI_SHENG_RESET_QN_TYPE=10812;                   //飞升重置潜能回复
+    SC_FEI_SHENG_SAN_GONG_BROADCAST_TYPE=10813;         //飞升散功广播
+    SC_FEI_SHENG_DU_JIE_NOTICE_TYPE=10814;         //飞升渡劫结果推送
+
+    //神魔战场 10901-11000
+    SC_SHENMO_SCENE_IFNO_TYPE = 10901;              //进场景下发
+    SC_SHENMO_SCENE_DATA_CHANGED_TYPE=10902;        //场景数据变化
+    SC_SHENMO_SCENE_END_TYPE=10903;                 //场景结束
+    CS_SHENMO_CANCLE_LINEUP_TYPE=10904;              //取消排队
+    SC_SHENMO_CANCLE_LINEUP_TYPE=10905;              //取消排队回复
+    SC_SHENMO_LINEUP_TYPE=10906;                     //排队变更回复
+    SC_SHENMO_LINEUP_SUCCESS_TYPE=10907;             //排队成功回复
+    SC_SHENMO_FINISH_TO_LINEUP_TYPE=10908;           //场景结束推送给排队
+    CS_SHENMO_GET_REWARD_TYPE=10909;                //领取周榜奖励
+    SC_SHENMO_GET_REWARD_TYPE=10910;                //领取周榜奖励回复
+    CS_SHENMO_MY_RANK_TYPE = 10911;                 //我的周排名
+    SC_SHENMO_MY_RANK_TYPE = 10912;                 //我的周排名回复
+    CS_SHENMO_RANK_GET_TYPE=10913;                  //获取周排行榜
+    SC_SHENMO_RANK_GET_TYPE=10914;                  //获取排行榜回复
+    SC_PLAYER_GONGXUN_CHANGED_TYPE=10915;           //玩家功勋值改变
+    SC_SHENMO_BIO_BROADCAST_TYPE=10916;             //副本生物变化场景内广播(场景内)
+
+    //红包系统 11001-11100
+    CS_HONGBAO_GET_TYPE=11001;                      //查红包
+    SC_HONGBAO_GET_TYPE=11002;                      //查红包回复
+    CS_HONGBAO_SEND_TYPE=11003;                     //发红包
+    SC_HONGBAO_SEND_TYPE=11004;                     //发红包回复
+    CS_HONGBAO_SNATCH_TYPE=11005;                   //抢红包
+    SC_HONGBAO_SNATCH_TYPE=11006;                   //抢红包回复
+    CS_HONGBAO_SNATCH_GET_TYPE=11007;               //获取玩家抢红包信息
+    SC_HONGBAO_SNATCH_GET_TYPE=11008;               //获取玩家抢红包信息回复
+
+    //藏经阁 11101-11200
+    CS_CANGJINGGE_BOSS_LIST_TYPE=11101;                 //藏经阁boss列表
+    SC_CANGJINGGE_BOSS_LIST_TYPE=11102;                 //藏经阁boss列表回复
+    CS_CANGJINGGE_BOSS_CHALLENGE_TYPE=11103;            //挑战藏经阁boss
+    SC_CANGJINGGE_BOSS_CHALLENGE_TYPE=11104;            //挑战藏经阁boss回复
+    SC_CANGJINGGE_BOSS_INFO_BROADCAST_TYPE=11105;       //藏经阁boss信息广播
+    SC_CANGJINGGE_BOSS_LIST_INFO_NOTICE_TYPE=11106;     //藏经阁boss下发
+
+    //至尊称号 11201-11300
+    CS_SUPREME_TITLE_GET_TYPE=11201;                   //获取至尊称号
+    SC_SUPREME_TITLE_GET_TYPE=11202;                   //获取至尊称号回复
+    CS_SUPREME_TITLE_ACTIVE_TYPE=11203;                //至尊称号激活
+    SC_SUPREME_TITLE_ACTIVE_TYPE=11204;                //至尊称号激活回复
+    CS_SUPREME_TITLE_WEAR_TYPE=11205;                  //至尊称号穿戴
+    SC_SUPREME_TITLE_WEAR_TYPE=11206;                  //至尊称号穿戴回复
+    CS_SUPREME_TITLE_UNLOAD_TYPE=11207;                //至尊称号卸下
+    SC_SUPREME_TITLE_UNLOAD_TYPE=11208;                //至尊称号卸下回复
+
+    //装备宝库 11301-11400
+    CS_EQUIPBAOKU_INFO_GET_TYPE=11301;                  //装备宝库信息
+    SC_EQUIPBAOKU_INFO_GET_TYPE=11302;                  //装备宝库信息回复
+    CS_EQUIPBAOKU_LOG_INCR_TYPE=11303;                  //装备宝库日志增量
+    SC_EQUIPBAOKU_LOG_INCR_TYPE=11304;                  //装备宝库日志增量回复
+    CS_EQUIPBAOKU_ATTEND_TYPE=11305;                    //装备宝库探索
+    SC_EQUIPBAOKU_ATTEND_TYPE=11306;                    //装备宝库探索回复
+    CS_EQUIPBAOKU_ATTEND_BATCH_TYPE=11307;              //装备宝库十连探索
+    SC_EQUIPBAOKU_ATTEND_BATCH_TYPE=11308;              //装备宝库十连探索回复
+    CS_EQUIPBAOKU_LUCKY_BOX_TYPE=11309;                 //开启幸运宝箱
+    SC_EQUIPBAOKU_LUCKY_BOX_TYPE=11310;                 //开启幸运宝箱回复
+    CS_EQUIPBAOKU_POINTS_EXCHANGE_TYPE=11311;           //积分兑换
+    SC_EQUIPBAOKU_POINTS_EXCHANGE_TYPE=11312;           //积分兑换回复
+    CS_EQUIPBAOKU_RESOLVE_EQUIP_TYPE=11313;             //分解装备
+    SC_EQUIPBAOKU_RESOLVE_EQUIP_TYPE=11314;             //分解装备回复
+    CS_EQUIPBAOKU_SHOP_LIMIT_TYPE=11315;                //下发每日限购道具
+    SC_EQUIPBAOKU_SHOP_LIMIT_TYPE=11316;                //下发每日限购道具回复
+    
+    //仙盟boss 11401-11500
+    CS_ALLIANCE_BOSS_SUMMON_TYPE=11401;                  //召唤仙盟boss
+    SC_ALLIANCE_BOSS_SUMMON_TYPE=11402;                  //召唤仙盟boss回复
+    CS_ALLIANCE_BOSS_ENTER_TYPE=11403;                   //进入仙盟boss
+    SC_ALLIANCE_BOSS_ENTER_TYPE=11404;                   //进入仙盟boss
+    SC_ALLIANCE_BOSS_CHANGED_TYPE=11405;                 //boss状态变更推送
+    SC_ALLIANCE_BOSS_RANK_CHANGED_TYPE=11406;            //排名变更推送
+    SC_ALLIANCE_BOSS_END_TYPE=11407;                     //场景结束
+    CS_ALLIANCE_BOSS_TYPE=11408;                         //仙盟boss信息
+    SC_ALLIANCE_BOSS_TYPE=11409;                         //仙盟boss信息回复
+    SC_ALLIANCE_BOSS_SUMMON_SUCESS_TYPE=11410;          //仙盟boss召唤成功广播
+
+
+    //仙盟圣坛 11501-11600
+    SC_SHENG_TAN_SCENE_INFO_TYPE=11501;                   //圣坛场景信息
+    SC_SHENG_TAN_SCENE_BOSS_HP_CHANGED_TYPE=11502;        //圣坛boss血量变化
+    SC_SHENG_TAN_SCENE_JIU_NIANG_CHANGED_TYPE =11503;     //圣坛酒酿数量变化
+    SC_SHENG_TAN_SCENE_END_TYPE=11504;                    //圣坛结束
+
+    //命格 11701-11800
+    CS_MINGGE_PAN_GET_TYPE=11701;      //获取命盘信息 
+    SC_MINGGE_PAN_GET_TYPE=11702;      //获取命盘信息回复  
+    CS_MINGGE_SYNTHESIS_TYPE=11703;    //命格合成 
+    SC_MINGGE_SYNTHESIS_TYPE=11704;    //命格合成回复
+    CS_MINGGE_REFINED_GET_TYPE=11705;  //获取命盘祭炼 
+    SC_MINGGE_REFINED_GET_TYPE=11706;  //获取命盘祭炼回复
+    CS_MINGGE_REFINED_TYPE=11707;      //命盘祭炼 
+    SC_MINGGE_REFINED_TYPE=11708;      //命盘祭炼回复 
+    CS_MINGGE_MINGLI_GET_TYPE=11709;   //获取命理信息 
+    SC_MINGGE_MINGLI_GET_TYPE=11710;   //获取命理信息回复 
+    CS_MINGGE_MINGLI_BAPTIZE_TYPE=11711; //命理洗炼 
+    SC_MINGGE_MINGLI_BAPTIZE_TYPE=11712; //命理洗练回复 
+    CS_MINGGE_PAN_MOSAIC_TYPE=11713;     //命盘镶嵌
+    SC_MINGGE_PAN_MOSAIC_TYPE=11714;     //命盘镶嵌回复  
+    CS_MINGGE_PAN_UNLOAD_TYPE=11715;     //命盘格卸下
+    SC_MINGGE_PAN_UNLOAD_TYPE=11716;     //命盘格卸下
+    SC_MINGGE_MINGGONG_TYPE=11717;        //命宫激活推送
+
+
+    //屠龙装备 11801-11900
+    CS_TULONG_USE_EQUIP_TYPE=11801;             //屠龙装备穿戴请求
+    SC_TULONG_USE_EQUIP_TYPE=11802;             //屠龙装备穿戴回复
+    CS_TULONG_TAKE_OFF_EQUIP_TYPE=11803;        //屠龙装备卸下
+    SC_TULONG_TAKE_OFF_EQUIP_TYPE=11804;        //屠龙装备卸下回复
+    CS_TULONG_EQUIP_STRENGTHEN_TYPE=11805;        //屠龙装备强化
+    SC_TULONG_EQUIP_STRENGTHEN_TYPE=11806;        //屠龙装备强化回复
+    CS_TULONG_EQUIP_RONGHE_TYPE=11807;              //屠龙装备融合
+    SC_TULONG_EQUIP_RONGHE_TYPE=11808;              //屠龙装备融合回复
+    CS_TULONG_EQUIP_ZHUANHUA_TYPE=11809;            //屠龙装备转化
+    SC_TULONG_EQUIP_ZHUANHUA_TYPE=11810;            //屠龙装备转化回复
+    CS_TULONG_EQUIP_SKILL_UPGRADE_TYPE=11811;       //屠龙装备技能激活
+    SC_TULONG_EQUIP_SKILL_UPGRADE_TYPE=11812;       //屠龙装备技能激活回复
+    SC_TULONG_EQUIP_SKILL_NOTICE_TYPE=11813;       //屠龙装备技能推送
+    SC_TULONG_EQUIP_SLOT_CHANGED_TYPE=11814;       //屠龙装备槽变化推送
+    SC_TULONG_EQUIP_INFO_NOTICE_TYPE=11815;        //屠龙装备槽信息推送
+    
+    //神器 11901 --12000
+    CS_SHENQI_INFO_GET_TYPE=11901;              //获取全部神器信息 
+    SC_SHENQI_INFO_GET_TYPE=11902;              //获取全部神器信息回复 
+    CS_SHENQI_USE_QILING_TYPE=11903;            //使用器灵装备 
+    SC_SHENQI_USE_QILING_TYPE=11904;            //使用器灵装备回复
+    CS_SHENQI_ZHULING_TYPE=11905;               //器灵注灵 
+    SC_SHENQI_ZHULING_TYPE=11906;               //器灵注灵回复
+    CS_SHENQI_QILING_RESOLVE_TYPE=11907;        //分解器灵 
+    SC_SHENQI_QILING_RESOLVE_TYPE=11908;        //分解器灵回复 
+    CS_SHENQI_DEBRIS_UP_TYPE=11909;             //碎片升级 
+    SC_SHENQI_DEBRIS_UP_TYPE=11910;             //碎片升级回复 
+    CS_SHENQI_SMELT_UP_TYPE=11911;              //淬炼升级 
+    SC_SHENQI_SMELT_UP_TYPE=11912;              //淬炼升级回复 
+    CS_SHENQI_KIND_INFO_GET_TYPE=11913;         //获取一种神器信息 
+    SC_SHENQI_KIND_INFO_GET_TYPE=11914;         //获取一种神器信息回复 
+    SC_SHENQI_LINGQI_NUM_CHANGED_TYPE=11915;         //灵气值变化推送 
+
+    //寻宝 12001 --12100
+    CS_HUNT_XUNBAO_TYPE=12001;              //寻宝请求 
+    SC_HUNT_XUNBAO_TYPE=12002;              //寻宝请求回复 
+    SC_HUNT_INFO_NOTICE_TYPE=12003;              //寻宝信息推送
+
+    //阵法 12101-12200
+    CS_ZHENFA_GET_TYPE=12101;               //阵法
+    SC_ZHENFA_GET_TYPE=12102;               //阵法回复
+    CS_ZHENFA_ACTIVATE_TYPE = 12103;        //阵法激活
+    SC_ZHENFA_ACTIVATE_TYPE = 12104;        //阵法激活回复
+    CS_ZHENQI_GET_TYPE=12105;               //阵旗
+    SC_ZHENQI_GET_TYPE=12106;               //阵旗回复
+    CS_ZHENQIXIANHUO_GET_TYPE=12107;        //阵旗仙火
+    SC_ZHENQIXIANHUO_GET_TYPE=12108;        //阵旗仙火回复
+    CS_ZHENFA_SHENGJI_TYPE=12109;           //阵法升级
+    SC_ZHENFA_SHENGJI_TYPE=12110;           //阵法升级回复
+    CS_ZHENQI_ADVANCED_TYPE=12111;           //阵旗部位升阶
+    SC_ZHENQI_ADVANCED_TYPE=12112;          //阵旗部位升阶回复
+    CS_ZHENQI_XIANHUO_SHENGJI_TYPE=12113;   //阵旗仙火升级
+    SC_ZHENQI_XIANHUO_SHENGJI_TYPE=12114;   //阵旗仙火升级回复
+
+    //英灵普 12201 --12300
+    CS_YLPU_QUERY_TYPE=12201;   //查询英灵普信息
+    SC_YLPU_QUERY_TYPE=12202;   //查询英灵普信息
+    CS_YLPU_SP_XIANGQIAN_TYPE=12203;    //英灵普碎片镶嵌请求
+    SC_YLPU_SP_XIANGQIAN_TYPE=12204;    //英灵普碎片镶嵌回复
+    CS_YLPU_SP_YLP_UP_TYPE=12205;   //英灵普升级请求
+    SC_YLPU_SP_YLP_UP_TYPE=12206;   //英灵普升级回复
+
+    //宝宝baby 12301-12400
+    CS_BABY_DONGFANG_TYPE=12301;            //洞房
+    SC_BABY_DONGFANG_TYPE=12302;            //洞房回复
+    CS_BABY_BORN_ACCELERATE_TYPE=12303;     //加速出生
+    SC_BABY_BORN_ACCELERATE_TYPE=12304;     //加速出生回复
+    CS_BABY_EAT_TONIC_TYPE=12305;           //吃补品
+    SC_BABY_EAT_TONIC_TYPE=12306;           //吃补品回复
+    CS_BABY_BORN_CHAOSHENG_TYPE=12307;      //超生
+    SC_BABY_BORN_CHAOSHENG_TYPE=12308;      //超生回复
+    CS_BABY_DONGFANG_INFO_TYPE=12309;      //洞房信息
+    SC_BABY_DONGFANG_INFO_TYPE=12310;      //洞房信息回复
+    CS_BABY_CHANGE_NAME_TYPE=12311;         //宝宝改名
+    SC_BABY_CHANGE_NAME_TYPE=12312;         //宝宝改名回复
+    CS_BABY_ACTIVATE_SKILL_TYPE=12313;      //宝宝激活天赋技能
+    SC_BABY_ACTIVATE_SKILL_TYPE=12314;      //宝宝激活天赋技能回复
+    CS_BABY_LOCK_SKILL_TYPE=12315;          //宝宝锁定天赋技能
+    SC_BABY_LOCK_SKILL_TYPE=12316;          //宝宝锁定天赋技能回复
+    CS_BABY_REFRESH_SKILL_TYPE=12317;      //宝宝刷新天赋技能
+    SC_BABY_REFRESH_SKILL_TYPE=12318;      //宝宝刷新天赋技能回复
+    CS_BABY_LEARN_UPLEVEL_TYPE=12319;      //宝宝读书
+    SC_BABY_LEARN_UPLEVEL_TYPE=12320;      //宝宝读书回复
+    CS_BABY_INFO_TYPE=12321;               //宝宝信息 
+    SC_BABY_INFO_TYPE=12322;               //宝宝信息回复
+    CS_BABY_ZHUAN_SHI_TYPE=12323;               //宝宝转世 
+    SC_BABY_ZHUAN_SHI_TYPE=12324;               //宝宝转世回复
+    CS_BABY_EQUIP_TOY_TYPE=12325;               //宝宝激活玩具 
+    SC_BABY_EQUIP_TOY_TYPE=12326;               //宝宝激活玩具回复 
+    CS_BABY_TOY_UPLEVEL_TYPE=12327;             //宝宝玩具升级
+    SC_BABY_TOY_UPLEVEL_TYPE=12328;             //宝宝玩具升级回复
+    SC_BABY_TOY_SLOT_CHANGED_TYPE=12329;        //宝宝玩具槽位数据改变推送
+    SC_BABY_BORN_NOTICE_TYPE=12330;             //宝宝出生推送
+    SC_BABY_BORN_SPOUSE_NOTICE_TYPE=12331;      //配偶宝宝出生推送 
+    SC_BABY_BORN_MESSAGE_NOTICE_TYPE=12332;     //宝宝出生前提醒推送
+    SC_BABY_POWER_NOTICE_TYPE=12333;            //宝宝战力推送 
+    
+   //交易 12401 --12500
+   CS_TRADE_INFO_LIST_TYPE=12401;   //交易列表
+   SC_TRADE_INFO_LIST_TYPE=12402;   //交易列表回复
+   CS_TRADE_UPLOAD_ITEM_TYPE=12403;    //请求上架
+   SC_TRADE_UPLOAD_ITEM_TYPE=12404;    //请求上架回复
+   CS_TRADE_WITHDRAW_ITEM_TYPE=12405;    //请求下架
+   SC_TRADE_WITHDRAW_ITEM_TYPE=12406;    //请求下架回复
+   CS_TRADE_ITEM_TYPE=12407;   //请求交易
+   SC_TRADE_ITEM_TYPE=12408;  //请求交易回复
+   CS_SELF_TRADE_INFO_LIST_TYPE=12409; //自己上架的物品
+   SC_SELF_TRADE_INFO_LIST_TYPE=12410; //自己上架的物品回复
+   CS_TRADE_LOG_LIST_TYPE=12411; //自己上架的物品回复
+   SC_TRADE_LOG_LIST_TYPE=12412; //自己上架的物品回复
+
+   //神域之战shenyu 12501 --12600
+   SC_SHENYU_SCENE_INFO_NOTICE_TYPE=12501;          //神域场景信息推送
+   SC_SHENYU_KEY_NUM_CHANGED_NOTICE_TYPE=12502;     //神域钥匙变化推送
+   SC_SHENYU_BIO_BROADCAST_TYPE=12503;          //怪物刷新广播推送(场景内) (废弃)
+   SC_SHENYU_KEY_REWARDS_TYPE=12504;            //累计获得推送 (废弃)
+   SC_SHENYU_FINISH_REW_TYPE=12505;            //神域奖励推送
+
+   //仙桃大会 12601 --12700
+   SC_XIANTAO_GET_TYPE=12601;                        //仙桃大会信息
+   CS_XIANTAO_PEACH_COMMIT_TYPE=12602;               //提交桃子
+   SC_XIANTAO_PEACH_COMMIT_TYPE=12603;               //提交桃子回复
+   SC_XIANTAO_PLAYER_ATTEND_CHANGE_TYPE=12604;       //推送仙桃大会玩家信息
+   SC_XIANTAO_PEACH_POINT_CHANGE_TYPE=12605;         //推送采集点信息
+   SC_XIANTAO_RESULT_TYPE=12606;                     //仙桃大会结束后推送
+
+   //龙宫探宝 12701 --12800
+   SC_LONGGONG_GET_TYPE=12701;                        //龙宫探宝信息
+   SC_LONGGONG_PLAYER_VAL_CHANGE_TYPE=12702;          //推送龙宫探宝玩家信息
+   SC_LONGGONG_SCENE_VAL_BROADCAST_TYPE=12703;        //推送龙宫探宝场景数值广播
+   SC_LONGGONG_RESULT_TYPE=12704;                     //龙宫探宝结束后推送
+
+   //房子 12801 --12900
+   CS_HOUSE_LIST_GET_TYPE=12801;            //房子界面信息请求
+   SC_HOUSE_LIST_GET_TYPE=12802;            //房子界面信息请求回复
+   CS_HOUSE_ACTIVATE_TYPE=12803;             //房子激活请求
+   SC_HOUSE_ACTIVATE_TYPE=12804;             //房子激活请求回复
+   CS_HOUSE_UPGRADE_TYPE=12805;             //房子升级请求
+   SC_HOUSE_UPGRADE_TYPE=12806;             //房子升级请求回复
+   CS_HOUSE_SELL_TYPE=12807;             //房子出售请求
+   SC_HOUSE_SELL_TYPE=12808;             //房子出售请求回复
+   CS_HOUSE_RECEIVE_RENT_TYPE=12809;             //房子收取租金请求
+   SC_HOUSE_RECEIVE_RENT_TYPE=12810;             //房子收取租金请求回复
+   CS_HOUSE_REPAIR_TYPE=12811;             //房子维修请求
+   SC_HOUSE_REPAIR_TYPE=12812;             //房子维修请求回复
+   CS_HOUSE_LOG_INCR_TYPE=12813;             //房子日志增量请求
+   SC_HOUSE_LOG_INCR_TYPE=12814;             //房子日志增量请求回复
+
+    //玉玺之战 12901-13000
+    SC_YUXI_POS_BROADCAST_TYPE=12901;           //玉玺位置广播
+    SC_YUXI_COLLECT_INFO_BROADCAST_TYPE=12902;  //玉玺采集物信息广播
+    CS_YUXI_RECEIVE_DAY_REW_TYPE=12903;         //每日奖励领取请求
+    SC_YUXI_RECEIVE_DAY_REW_TYPE=12904;         //每日奖励领取请求回复
+    CS_YUXI_GET_IFNO_TYPE=12905;                //玩家玉玺信息请求
+    SC_YUXI_GET_IFNO_TYPE=12906;                //玩家玉玺信息请求回复
+    SC_YUXI_WINNER_BROADCAST_TYPE=12907;             //玉玺获胜仙盟广播
+
+    //运营活动副本 13001-13100
+    CS_WELFARE_SCENE_ATTEND_TYPE=13001;         //运营活动副本挑战
+    SC_WELFARE_SCENE_ATTEND_TYPE=13002;         //运营活动副本挑战回复
+    SC_WELFARE_SCENE_INFO_TYPE=13003;           //运营活动副本场景信息
+    SC_WELFARE_SCENE_DATA_CHANGED_NOTICE_TYPE=13004;      //运营活动副本场景信息变化推送
+    SC_WELFARE_SCENE_REFRESH_TYPE=13005;      //运营活动副本
+
+    //周卡13101-13200
+    CS_WEEK_INFO_TYPE=13101;            //周卡信息请求
+    SC_WEEK_INFO_TYPE=13102;            //周卡信息请求回复
+    CS_WEEK_BUY_TYPE=13103;             //购买周卡
+    SC_WEEK_BUY_TYPE=13104;             //购买周卡回复
+    CS_WEEK_RECEIVE_REW_TYPE=13105;     //领取周卡奖励
+    SC_WEEK_RECEIVE_REW_TYPE=13106;     //领取周卡奖励回复
+
+    //符石13201-13300
+    CS_FUSHI_INFO_TYPE=13201;   //八卦符石信息请求
+    SC_FUSHI_INFO_TYPE=13202;   //八卦符石信息回复
+    CS_FUSHI_ACTIVITE_TYPE=13203;   //激活八卦符石信息请求
+    SC_FUSHI_ACTIVITE_TYPE=13204;   //激活八卦符石信息回复
+    CS_FUSHI_UP_LEVEL_TYPE=13205;   //升级八卦符石信息请求
+    SC_FUSHI_UP_LEVEL_TYPE=13206;   //升级八卦符石信息回复
+
+    //物品技能13301-13400
+    CS_ITEM_SKILL_ALL_GET_TYPE=13301;           //所有物品技能
+    SC_ITEM_SKILL_ALL_GET_TYPE=13302;           //所有物品技能回复
+    SC_ITEM_SKILL_ACTIVE_TYPE=13303;            //激活物品技能应答
+    SC_ITEM_SKILL_UPGRADE_TYPE=13304;           //物品技能升级应答
+   
+   //商城促销特权 13401-13500
+    CS_SHOP_DISCOUNT_GET_TYPE=13401;           //商城促销特权信息
+    SC_SHOP_DISCOUNT_GET_TYPE=13402;           //商城促销特权信息回复
+    SC_SHOP_DISCOUNT_NOTICE_TYPE=13403;        //商城促销特权信息推送
+
+    //泣血枪 13501-13600 
+    CS_QIXUE_GET_TYPE=13501;                    //泣血枪信息
+    SC_QIXUE_GET_TYPE=13502;                    //泣血枪信息回复
+    CS_QIXUE_ADVANCED_TYPE=13503;               //泣血枪进阶
+    SC_QIXUE_ADVANCED_TYPE=13504;               //泣血枪进阶回复
+    SC_QIXUE_INFO_TYPE=13505;                   //泣血枪信息推送
+    SC_QIXUE_WEAPON_LOSE_INFO_TYPE=13506;       //玩家被击杀泣血枪兵魂消失推送
+    SC_QIXUE_SHA_QI_VARY_TYPE=13507;            //泣血枪杀气推送
+    SC_QIXUE_SHA_QI_DROP_TYPE=13508;            //泣血枪杀气掉落
+
+    //创世之战 13601-13700
+    CS_CHUANGSHI_YUGAO_TYPE=13601;              //创世之战预告请求
+    SC_CHUANGSHI_YUGAO_TYPE=13602;              //创世之战预告回复
+    CS_CHUANGSHI_YUGAO_BAOMING_TYPE=13603;      //报名创世之战请求
+    SC_CHUANGSHI_YUGAO_BAOMING_TYPE=13604;      //报名创世之战回复
+    SC_PLAYER_CHUANGSHI_CAMP_TYPE=13605;        //玩家阵营信息推送
+    CS_PLAYER_CHUANGSHI_CAMP_CHANGE_TYPE=13606; //玩家阵营变化
+    CS_CHUANGSHI_CITY_LIST_TYPE=13607;                      //创世城列表
+    SC_CHUANGSHI_CITY_LIST_TYPE=13608;                      //创世城列表回复
+    SC_CHUANGSHI_SHEN_WANG_BROADCAST_TYPE=13609;            //创世神王结果推送
+    CS_CHUANGSHI_SHEN_WANG_BAO_MING_LIST_TYPE=13610;        //创世神王报名列表
+    SC_CHUANGSHI_SHEN_WANG_BAO_MING_LIST_TYPE=13611;        //创世神王报名列表
+    CS_CHUANGSHI_SHEN_WANG_BAO_MING_TYPE=13612;             //创世神王报名
+    SC_CHUANGSHI_SHEN_WANG_BAO_MING_TYPE=13613;             //创世神王报名
+    CS_CHUANGSHI_SHEN_WANG_TOU_PIAO_LIST_TYPE=13614;    //创世神王投票列表
+    SC_CHUANGSHI_SHEN_WANG_TOU_PIAO_LIST_TYPE=13615;    //创世神王投票列表回复
+    CS_CHUANGSHI_SHEN_WANG_TOU_PIAO_TYPE=13616;         //创世神王投票
+    SC_CHUANGSHI_SHEN_WANG_TOU_PIAO_TYPE=13617;         //创世神王投票回复
+    CS_CHUANGSHI_CITY_REN_MING=13618;                   //任命
+    SC_CHUANGSHI_CITY_REN_MING=13619;                   //任命成功
+    CS_CHUANGSHI_INFO_TYPE=13620;                       //创世界面信息
+    SC_CHUANGSHI_INFO_TYPE=13621;                       //创世界面信息回复
+    CS_CHUANGSHI_CAMP_PAY_SCHEDULE_TYPE=13622;                      //阵营工资分配
+    SC_CHUANGSHI_CAMP_PAY_SCHEDULE_TYPE=13623;                      //阵营工资分配回复
+    CS_CHUANGSHI_CITY_PAY_SCHEDULE_TYPE=13624;                      //城池工资分配
+    SC_CHUANGSHI_CITY_PAY_SCHEDULE_TYPE=13625;                      //城池工资分配回复
+    CS_CHUANGSHI_MY_PAY_RECEIVE_TYPE=13626;                      //个人工资领取
+    SC_CHUANGSHI_MY_PAY_RECEIVE_TYPE=13627;                      //个人工资领取回复
+    CS_CHUANGSHI_CAMP_PAY_RECEIVE_TYPE=13628;                    //阵营工资领取
+    SC_CHUANGSHI_CAMP_PAY_RECEIVE_TYPE=13629;                    //阵营工资领取回复
+    CS_CHUANGSHI_CITY_JIANSHE_TYPE=13630;                     //城池建设
+    SC_CHUANGSHI_CITY_JIANSHE_TYPE=13631;                     //城池建设回复
+    CS_CHUANGSHI_POSITION_ADVANCE_TYPE=13632;                 //升职请求
+    SC_CHUANGSHI_POSITION_ADVANCE_TYPE=13633;                 //升职回复
+    CS_CHUANGSHI_GUANZHI_REW_TYPE=13634;                      //官职奖励请求
+    SC_CHUANGSHI_GUANZHI_REW_TYPE=13635;                      //官职奖励回复
+    CS_CHUANGSHI_ENTER_CITY_TYPE=13636;                       //进入城池请求
+    SC_CHUANGSHI_ENTER_CITY_TYPE=13637;                       //进入城池回复
+    CS_CHUANGSHI_GONGCHENG_TARGET_TYPE=13638;                      //参加攻城请求
+    SC_CHUANGSHI_GONGCHENG_TARGET_TYPE=13639;                      //参加攻城回复
+    CS_CHUANGSHI_JOIN_CAMP_TYPE=13640;                      //加入阵营请求
+    SC_CHUANGSHI_JOIN_CAMP_TYPE=13641;                      //加入阵营回复
+    CS_CHUANGSHI_TIANQI_SET_TYPE=13642;                     //城池天气设置请求
+    SC_CHUANGSHI_TIANQI_SET_TYPE=13643;                     //城池天气设置回复
+    CS_CHUANGSHI_SCENE_RELIVE_OCCUPYING_TYPE=13644;               //抢占复活点
+    SC_CHUANGSHI_SCENE_RELIVE_OCCUPYING_TYPE=13645;               //抢占复活点回复
+    SC_CHUANGSHI_SCENE_RELIVE_OCCUPY_STOP_TYPE=13646;             //占领复活点取消
+    SC_CHUANGSHI_SCENE_RELIVE_OCCUPY_TYPE=13647;                  //占领复活点成功
+    CS_CHUANGSHI_MY_PAY_SCHEDULE_RECEIVE_TYPE=13648;              //个人分配工资领取
+    SC_CHUANGSHI_MY_PAY_SCHEDULE_RECEIVE_TYPE=13649;              //个人分配工资领取回复
+    SC_CHUANGSHI_PLAYER_INFO_NOTICE_TYPE=13650;                   //玩家创世信息推送
+    SC_CHUANGSHI_CAMP_NOTICE_TYPE=13651;                          //阵营信息推送
+    CS_CHUANGSHI_LOG_LIST_TYPE=13652;               //创世战报列表
+    SC_CHUANGSHI_LOG_LIST_TYPE=13653;               //创世战报列表回复
+    SC_CHUANGSHI_SCENE_FINISH_TYPE=13654;           //创世攻城结束推送
+    SC_CHUANGSHI_SCENE_YUXI_BROADCAST_TYPE=13655;           //玉玺信息广播
+    SC_CHUANGSHI_SCENE_DOOR_BROKE_TYPE=13656;               //创世城门破了
+    SC_CHUANGSHI_SCENE_INFO_NOTICE_TYPE=13657;              //场景信息下发
+    SC_CHUANGSHI_MEM_RENMING_NOTICE_TYPE=13658;                     //城主任命推送
+    SC_CHUANGSHI_CHENGZHU_CHANGED_NOTICE_TYPE=13659;                //盟主变更推送
+    SC_CHUANGSHI_CHENGZHU_ALLIANCE_DISMISS_NOTICE_TYPE=13660;       //城主仙盟解散推送
+    SC_CHUANGSHI_CHENGZHU_CAMP_ATTACK_NOTICE_TYPE=13661;            //阵营攻城目标推送
+    SC_CHUANGSHI_CHENGZHU_CAMP_PAY_SCHEDULE_NOTICE_TYPE=13662;      //阵营工资分配推送
+    SC_CHUANGSHI_CHENGZHU_CITY_WAR_DEFENCE_NOTICE_TYPE=13663;       //城门被攻击或玉玺易主推送
+    SC_CHUANGSHI_ALLIANCE_CAMP_CHANGED_NOTICE_TYPE=13664;       //仙盟阵营更换通知
+    CS_CHUANGSHI_WANFAZIRAN_TYPE=13665;       //使用万法自然
+    SC_CHUANGSHI_WANFAZIRAN_TYPE=13666;       //使用万法自然回复
+    SC_CHUANGSHI_SCENE_RELIVE_TIMES_CHANGED_TYPE=13667;         //创世攻城原地复活次数变更
+    CS_CHUANGSHI_SCENE_SHENWANG_CALL_TYPE=13668;       //神王召唤
+    SC_CHUANGSHI_SCENE_SHENWANG_CALL_TYPE=13669;       //神王召唤回复
+    SC_CHUANGSHI_SCENE_SHENWANG_CALL_BROADCAST_TYPE=13670;       //神王召唤推送
+    CS_CHUANGSHI_SCENE_RESCURE_TYPE=13671;       //神王召唤前往救援
+    SC_CHUANGSHI_SCENE_RESCURE_TYPE=13672;       //神王召唤前往救援回复
+    CS_CHUANGSHI_SCENE_CALL_YONGBING_TYPE=13673;       //召唤雇佣兵
+    SC_CHUANGSHI_SCENE_CALL_YONGBING_TYPE=13674;       //召唤雇佣兵回复
+    SC_CHUANGSHI_PLAYER_JIFEN_CHANGED_TYPE=13675;           //玩家创世积分变化
+    
+      
+    SC_CHUANGSHI_CHENGZHU_CITY_PAY_SCHEDULE_NOTICE_TYPE=13679;      //城池工资分配推送
+    
+    //比武大会 13701-13800
+    SC_ARENAPVP_SCENE_DATA_TYPE=13701;                  //pvp场景数据推送
+    CS_ARENAPVP_RACE_INFO_TYPE=13702;                   //赛程情况
+    SC_ARENAPVP_RACE_INFO_TYPE=13703;                   //赛程情况回复
+    CS_ARENAPVP_BAZHU_INFO_TYPE=13704;                  //历届霸主信息
+    SC_ARENAPVP_BAZHU_INFO_TYPE=13705;                  //历届霸主信息回复
+    CS_ARENAPVP_GUESS_INFO_TYPE=13706;                  //竞猜信息
+    SC_ARENAPVP_GUESS_INFO_TYPE=13707;                  //竞猜信息回复
+    CS_ARENAPVP_GUESS_TYPE=13708;                       //竞猜
+    SC_ARENAPVP_GUESS_TYPE=13709;                       //竞猜回复
+    SC_ARENAPVP_BATTLE_START_TYPE=13710;                //pvp对战开始
+    SC_ARENAPVP_PLAYER_SHOW_DATA_CHANGED_TYPE=13711;    //场景玩家信息变化
+    SC_ARENAPVP_GUESS_BEGIN_NOTICE_TYPE=13712;          //竞猜开启推送
+    CS_ARENAPVP_INFO_TYPE=13713;                        //pvp信息
+    SC_ARENAPVP_INFO_TYPE=13714;                        //pvp信息回复
+    SC_ARENAPVP_BATTLE_END_TYPE=13715;                  //pvp对战结束
+    SC_ARENAPVP_ELECTION_FAILED_NOTICE_TYPE=13716;      //pvp海选淘汰推送
+    SC_ARENAPVP_ELECTION_SCENE_DATA_TYPE=13717;         //海选场景数据推送 
+    SC_ARENAPVP_ELECTION_SCENE_DATA_CHANGED_TYPE=13718; //海选场景数据变化推送 
+    CS_ARENAPVP_ELECTION_RACE_INFO_TYPE=13719;          //海选赛程情况
+    SC_ARENAPVP_ELECTION_RACE_INFO_TYPE=13720;          //海选赛程情况回复
+    CS_ARENAPVP_GUESS_NOTICE_SETTING_TYPE=13721;         //竞猜提醒设置
+    SC_ARENAPVP_GUESS_NOTICE_SETTING_TYPE=13722;         //竞猜提醒设置回复
+    SC_ARENAPVP_JIFEN_NOTICE_TYPE=13723;                 //pvp积分变化推送
+    SC_ARENAPVP_ELECTION_END_TYPE=13724;                 //海选结束
+    SC_ARENAPVP_GUESS_INFO_PUSH_TYPE=13725; //竞猜推送
+    
+    
+    //结义 13801-13900
+    CS_JIEYI_MEMBER_INFO_TYPE=13801;                 //结义成员信息请求
+    SC_JIEYI_MEMBER_INFO_TYPE=13802;                 //结义成员信息回复
+    SC_JIEYI_PLAYER_INFO_TYPE=13803;                 //玩家结义信息回复
+    CS_JIEYI_INVITE_TYPE=13804;                      //玩家结义邀请请求
+    SC_JIEYI_INVITE_TYPE=13805;                      //玩家结义邀请回复
+    SC_JIEYI_INVITE_NOTICE_TYPE=13806;               //玩家结义邀请回复推送
+    CS_JIEYI_HELP_INVITE_TYPE=13807;                 //处理结义邀请请求
+    SC_JIEYI_HELP_INVITE_TYPE=13808;                 //处理结义邀请回复
+    SC_JIEYI_HELP_INVITE_NOTICE_TYPE=13809;          //处理结义邀请回复推送
+    CS_JIEYI_NAME_UP_LEV_TYPE=13810;                 //结义威名升级请求
+    SC_JIEYI_NAME_UP_LEV_TYPE=13811;                 //结义威名升级回复
+    CS_JIEYI_TOKEN_ACTIVITE_TYPE=13812;              //玩家信物激活请求
+    SC_JIEYI_TOKEN_ACTIVITE_TYPE=13813;              //玩家信物激活回复
+    CS_JIEYI_TOKEN_UP_LEV_TYPE=13814;                //玩家信物升级请求
+    SC_JIEYI_TOKEN_UP_LEV_TYPE=13815;                //玩家信物升级回复
+    CS_JIEYI_TOKEN_CHANGE_TYPE=13816;                //玩家信物替换请求
+    SC_JIEYI_TOKEN_CHANGE_TYPE=13817;                //玩家信物替换回复
+    CS_JIEYI_TOKEN_GIVE_TYPE=13818;                  //兄弟信物赠送(替换)请求
+    SC_JIEYI_TOKEN_GIVE_TYPE=13819;                  //兄弟信物赠送(替换)回复
+    SC_JIEYI_TOKEN_GIVE_NOTICE_TYPE=13820;           //兄弟信物赠送(替换)回复推送
+    CS_JIEYI_JIE_CHU_TYPE=13821;                     //解除结义请求
+    SC_JIEYI_JIE_CHU_TYPE=13822;                     //解除结义回复
+    SC_JIEYI_JIE_CHU_NOTICE_TYPE=13823;              //解除结义回复推送
+    CS_JIEYI_POST_TYPE=13824;                        //玩家发布结义请求
+    SC_JIEYI_POST_TYPE=13825;                        //玩家发布结义回复
+    CS_JIEYI_LEAVE_WORD_INFO_TYPE=13826;             //玩家结义留言墙请求
+    SC_JIEYI_LEAVE_WORD_INFO_TYPE=13827;             //玩家结义留言墙回复
+    CS_JIEYI_DAOJU_CHANGE_TYPE=13828;                //玩家道具替换请求
+    SC_JIEYI_DAOJU_CHANGE_TYPE=13829;                //玩家道具替换回复
+    CS_JIEYI_DAOJU_HELP_CHANGE_TYPE=13830;           //兄弟道具替换请求
+    SC_JIEYI_DAOJU_HELP_CHANGE_TYPE=13831;           //兄弟道具替换回复
+    SC_JIEYI_DAOJU_HELP_CHANGE_NOTICE_TYPE=13832;    //兄弟道具替换回复推送
+    SC_JIEYI_INFO_ON_CHANGE_TYPE=13833;              //结义信息发生改变推送
+    SC_JIEYI_BROTHER_INFO_ON_CHANGE_TYPE=13834;      //结义兄弟信息发生改变推送
+    CS_JIEYI_QIU_YUAN_TYPE=13835;                    //玩家求援请求
+    SC_JIEYI_QIU_YUAN_TYPE=13836;                    //玩家求援回复
+    SC_JIEYI_QIU_YUAN_NOTICE_TYPE=13837;             //玩家求援回复推送
+    CS_JIEYI_JIU_YUAN_TYPE=13838;                    //兄弟救援请求
+    SC_JIEYI_JIU_YUAN_TYPE=13839;                    //兄弟救援回复
+    CS_JIEYI_LAO_DA_TI_REN_TYPE=13840;               //老大踢人请求
+    SC_JIEYI_LAO_DA_TI_REN_TYPE=13841;               //老大踢人回复
+    SC_JIEYI_LAO_DA_TI_REN_NOTICE_TYPE=13842;        //老大踢人回复推送
+    SC_JIEYI_LAO_DA_TI_REN_OTHER_NOTICE_TYPE=13843;  //推送给被踢着
+    CS_JIEYI_TOKEN_SUO_YAO_TYPE=13844;               //信物索要请求
+    SC_JIEYI_TOKEN_SUO_YAO_TYPE=13845;               //信物索要回复
+    SC_JIEYI_TOKEN_SUO_YAO_NOTICE_TYPE=13846;        //信物索要回复推送
+    CS_JIEYI_HANDLE_TOKEN_SUO_YAO_TYPE=13847;        //处理信物索要请求
+    SC_JIEYI_HANDLE_TOKEN_SUO_YAO_TYPE=13848;        //处理信物索要回复
+    SC_JIEYI_SHENG_WEI_ZHI_DROP_TYPE=13849;          //声威值掉落
+    SC_JIEYI_SHENG_WEI_ZHI_TUI_SONG_TYPE=13850;      //声威值推送
+    
+    //逆付费 13901-14000
+    CS_FEEDBACK_FEE_INFO_TYPE=13901;              //逆付费信息
+    SC_FEEDBACK_FEE_INFO_TYPE=13902;              //逆付费信息回复 
+    CS_FEEDBACK_FEE_EXCHANGE_TYPE=13903;              //逆付费兑换信息
+    SC_FEEDBACK_FEE_EXCHANGE_TYPE=13904;              //逆付费兑换信息回复 
+
+    //通用排队 14001-14100
+    CS_LINEUP_CANCEL_TYPE=14001;                        //取消排队
+    SC_LINEUP_CANCEL_TYPE=14002;                        //取消排队回复
+    SC_LINEUP_NOTICE_TYPE=14003;                        //排队变更推送
+    SC_LINEUP_SUCCESS_TYPE=14004;                       //排队成功
+    SC_LINEUP_SCENE_FINISH_TO_CANCEL_TYPE=14005;        //场景结束推送给排队
+    
+    //无双神器 14101-14200
+    CS_WUSHUANGWEAPON_DEVOURING_TYPE=14101;   //吞噬请求
+    SC_WUSHUANGWEAPON_DEVOURING_TYPE=14102;   //吞噬请求回复
+    CS_WUSHUANGWEAPON_BREAKTHROUGH_TYPE=14103;  //突破请求
+    SC_WUSHUANGWEAPON_BREAKTHROUGH_TYPE=14104;  //突破请求回复
+    CS_WUSHUANGWEAPON_PUT_ON_TYPE=14105;  //  穿装备请求
+    SC_WUSHUANGWEAPON_PUT_ON_TYPE=14106;  //  穿装备请求回复
+    CS_WUSHUANGWEAPON_TAKE_OFF_TYPE=14107;  //脱装备请求
+    SC_WUSHUANGWEAPON_TAKE_OFF_TYPE=14108;  //脱装备请求回复
+    CS_WUSHUANGWEAPON_INFO_TYPE=14109;  //列表信息请求
+    SC_WUSHUANGWEAPON_INFO_TYPE=14110;  //列表信息请求回复
+
+   //珍稀boss 14201-14300
+    SC_PLAYER_ZHENXI_BOSS_INFO_TYPE=14201; //珍稀boss
+
+    //仙尊特权卡 14301-14400
+    CS_XIAN_ZUN_CARD_INFO_TYPE=14301;                    // 仙尊特权卡信息请求
+    SC_XIAN_ZUN_CARD_INFO_TYPE=14302;                    // 仙尊特权卡信息回复
+    CS_XIAN_ZUN_CARD_BUY_TYPE=14303;                     // 仙尊特权卡购买请求
+    SC_XIAN_ZUN_CARD_BUY_TYPE=14304;                     // 仙尊特权卡购买回复
+    CS_RECEIVE_XIAN_ZUN_CARD_REWARD_TYPE=14305;          // 领取每日奖励请求
+    SC_RECEIVE_XIAN_ZUN_CARD_REWARD_TYPE=14306;          // 领取每日奖励回复
+    SC_XIAN_ZUN_CARD_NOTICE_TYPE=14307;                  // 仙尊特权卡过期推送
+
+    //上古之灵 14401-14500
+    CS_SHANGGUZHILING_INFO_TYPE=14401; //上古之灵信息
+    SC_SHANGGUZHILING_INFO_TYPE=14402;
+    CS_SHANGGUZHILING_UPLEVEL_TYPE=14403; //上古之灵升级
+    SC_SHANGGUZHILING_UPLEVEL_TYPE=14404;
+    CS_SHANGGUZHILING_LINGWEN_UPLEVEL_TYPE=14405; //上古之灵灵纹升级
+    SC_SHANGGUZHILING_LINGWEN_UPLEVEL_TYPE=14406;
+    CS_SHANGGUZHILING_UPRANK_TYPE=14407; //上古之灵进阶
+    SC_SHANGGUZHILING_UPRANK_TYPE=14408;
+    CS_SHANGGUZHILING_LINGLIAN_TYPE=14409; //上古之灵灵炼
+    SC_SHANGGUZHILING_LINGLIAN_TYPE=14410;
+    CS_SHANGGUZHILING_RECEIVE_TYPE=14411; //上古之灵定时奖励领取
+    SC_SHANGGUZHILING_RECEIVE_TYPE=14412;
+    
+    //特戒 14501-14600
+    CS_RING_INFO_GET_TYPE=14501;        // 特戒信息请求
+    SC_RING_INFO_GET_TYPE=14502;        // 特戒信息回复
+    CS_RING_ADVANCE_TYPE=14503;         // 特戒进阶请求
+    SC_RING_ADVANCE_TYPE=14504;         // 特戒进阶回复
+    CS_RING_STRENGTHEN_TYPE=14505;      // 特戒强化请求
+    SC_RING_STRENGTHEN_TYPE=14506;      // 特戒强化回复
+    CS_RING_JINGLING_TYPE=14507;        // 特戒净灵请求
+    SC_RING_JINGLING_TYPE=14508;        // 特戒净灵回复
+    CS_RING_FUSE_TYPE=14509;            // 特戒融合请求
+    SC_RING_FUSE_TYPE=14510;            // 特戒融合回复
+    CS_RING_EQUIP_TYPE=14511;           // 装备特戒请求
+    SC_RING_EQUIP_TYPE=14512;           // 装备特戒回复
+    CS_RING_UNLOAD_TYPE=14513;          // 卸下特戒请求
+    SC_RING_UNLOAD_TYPE=14514;          // 卸下特戒回复
+    SC_RING_SLOT_CHANGE_TYPE=14515;     // 特戒槽位数据改变
+    CS_RING_BAOKU_INFO_TYPE=14516;      // 特戒宝库信息请求
+    SC_RING_BAOKU_INFO_TYPE=14517;      // 特戒宝库信息回复
+    CS_RING_BAOKU_ATTEND_TYPE=14518;    // 特戒宝库探索请求
+    SC_RING_BAOKU_ATTEND_TYPE=14519;    // 特戒宝库探索回复
+    SC_RING_LUCKY_POINTS_CHANGE_TYPE=14520;     // 幸运值变化推送
+}

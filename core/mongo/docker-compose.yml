@@ -1,0 +1,27 @@
+version: "2"
+services:
+    mongo1:
+        image: mongo:3.2.11
+        ports:
+            - "27017"
+        command: mongod --replSet rs
+        links:
+            - mongo2:mongo2
+            - mongo3:mongo3
+    mongo2:
+        image: mongo:3.2.11
+        ports:
+            - "27017"
+        command: mongod --replSet rs
+    mongo3:
+        image: mongo:3.2.11
+        ports:
+            - "27017"
+        command: mongod --replSet rs
+    # mongosetup:
+    #     image: mongo:3.0
+    #     links:
+    #         - mongo1:mongo1
+    #         - mongo2:mongo2
+    #         - mongo3:mongo3
+    #     entrypoint: ./scripts/setup.sh

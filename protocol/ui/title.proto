@@ -1,0 +1,101 @@
+syntax = "proto2";
+
+package ui;
+
+
+message TitleInfo {
+    //称号id
+    required int32 titleId=1;
+    //称号激活时间 
+    required int64 acitveTime=2 [default=0];
+    //有效时间 0无限期
+    required int64 validTime=3;
+    //称号等级
+    required int32 starLev=4 [default=0];
+}
+
+//称号信息请求
+message CSTitleGet {
+}
+//称号信息应答
+message SCTitleGet{
+   //称号穿戴id
+   required int32 titleWear=1;
+   //称号信息
+   repeated TitleInfo titleList=2;
+}
+
+//激活称号请求
+message CSTitleActive {
+    //称号id
+   required int32 titleId=1;
+}
+//激活称号应答
+message SCTitleActive {
+   //称号id
+   required int32 titleId=1;
+   //激活时间
+   required int64 activeTime=2;
+    //持续时间
+    required int64 validTime=3;
+}
+
+//穿戴称号请求
+message CSTitleWear {
+   //称号id
+   required int32 titleId=1;
+}
+//穿戴称号应答
+message SCTitleWear {
+    //称号id
+    required int32 titleId=1;
+}
+
+//称号卸下请求
+message CSTitleUnLoad {
+}
+
+//称号卸下回复
+message SCTitleUnLoad {
+   //称号穿戴id
+   required int32 titleWear=1;
+}
+
+//称号增加
+message SCTitleAdd {
+    //称号id
+    required int32 titleId=1;
+}
+
+//称号移除
+message SCTitleRemove {
+    //称号id
+    required int32 titleId=2;
+}
+
+//限时称号叠加时效性
+message CSTitleAddValidTime {
+    //称号id
+    required int32 titleId=1;
+}
+message SCTitleAddValidTime {
+    //称号id
+    required int32 titleId=1;
+    //有效时间
+    required int64 validTime=2; 
+}  
+
+// 称号升星请求
+message CSTitleUpStar {
+    // 称号id
+    required int32 titleId=1;
+}
+// 称号升星回复
+message SCTitleUpStar {
+    // 称号id
+    required int32 titleId=1;
+    // 称号等级
+    required int32 starLev=2;
+    // 称号祝福值
+    required int32 bless=3;
+}

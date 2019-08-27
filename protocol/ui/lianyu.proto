@@ -1,0 +1,80 @@
+syntax = "proto2";
+
+package ui;
+import "item.proto";
+import "common.proto";
+
+message LianYuRank{
+    //排名
+    required int32 pos=1;
+    //服务器id
+    required int32 serverId=2;
+    //角色名字
+    required string name=3;
+    //获得杀气
+    required int32 num=4;
+}
+
+//进场景下发
+message SCLianYuGet {
+    //排名
+    repeated LianYuRank rankList=1;
+    //boss状态 0 待刷新 1 已刷新  2 已击杀
+    required int32 bossStatus=2;
+    //boss位置
+    optional Position pos=3;
+    //玩家杀气数量
+    required int32 shaQiNum=4;
+}
+
+//取消排队
+message CSLianYuCancleLineUp {
+
+}
+
+//取消排队回复
+message SCLianYuCancleLineUp {
+
+}
+
+//排队变更回复
+message SCLianYuLineUp {
+    //前面人数
+    required int32 beforeNum=1;
+}
+
+//排队成功回复
+message SCLianYuLineUpSuccess {
+
+}
+
+//boss 状态变更推送
+message SCLianYuBossStatus {
+    //boss状态 0 待刷新 1 已刷新  2 已击杀
+    required int32 bossStatus=1;
+    //boss位置
+    optional Position pos=2;
+}
+
+
+//排行榜杀气变更推送
+message SCLianYuRankChanged {
+    //排名
+    repeated LianYuRank rankList=1;
+}
+
+//结束后获得物品推送
+message SCLianYuResult {
+    repeated ItemInfo itemList=1; 
+}
+
+//场景结束推送给排队
+message SCLianYuFinishToLineUp{
+
+}
+
+//杀气变更推送
+message SCLianYuShaQiChanged{
+    required int32 shaQiNum=1;
+}
+

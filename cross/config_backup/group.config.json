@@ -1,0 +1,62 @@
+{
+    "debug":false,
+    "game":{
+        "map":"../resources/map",
+        "template":"../resources/template",
+        "redis":{
+            "host":"127.0.0.1",
+            "port":6379,
+            "maxIdle":50,
+            "maxActive":50,
+            "wait": true,
+            "idleTimeout":240
+    
+        },
+        "db":{
+            "debug":false,
+            "dialect":"mysql",
+            "user":"root",
+            "password":"root",
+            "host":"127.0.0.1:3306",
+            "dbName":"game_center",
+            "parseTime":true,
+            "charset":"utf8mb4",
+            "maxActive":100,
+            "maxIdle":50,
+            "maxLifeTime":240
+        },
+        "center":{
+            "host":"192.168.1.13",
+            "port":10001,
+            "syncInterval":10000
+        },
+        "gameDb":{
+            "debug":false,
+            "dialect":"mysql",
+            "user":"root",
+            "password":"root",
+            "host":"127.0.0.1:3306",
+            "dbName":"game",
+            "parseTime":true,
+            "charset":"utf8mb4",
+            "maxActive":100,
+            "maxIdle":50,
+            "maxLifeTime":240
+        }
+    },
+    "server":{
+        "server":"./data/server",
+        "id":1,
+        "serverType":1,
+        "platform":1,
+        "host":"192.168.1.20",
+        "port":12000,
+        "path":"",
+        "pprofPort":6060,
+        "statsPort":9000
+    }
+}
+
+
+
+

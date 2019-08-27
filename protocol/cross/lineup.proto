@@ -1,0 +1,39 @@
+syntax = "proto2";
+
+package cross;
+
+//参与
+message SILineupAttend{
+    required int32 crossType=1;
+    required int64 sceneId=2;
+}
+message ISLineupAttend{
+    //排队位置
+    required int32 beforeNum=1;
+    //类型
+    required int32 crossType=2; 
+    // 
+    required int64 sceneId=3;
+}
+ 
+//取消排队
+message SILineupCancle{
+    required int32 crossType=1;
+    required int64 sceneId=2;
+}
+message ISLineupCancle { 
+    required int32 crossType=1;
+}
+
+//排队完成
+message ISLineupSuccess {
+    required int32 crossType=1;
+}
+message SILineupSuccess {
+}
+
+message ISLineupSceneFinishToCancel{
+    required int32 crossType=1;
+}
+
+

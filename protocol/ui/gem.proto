@@ -1,0 +1,69 @@
+syntax = "proto2";
+
+package ui;
+
+import "drop.proto";
+
+//矿山信息
+message MineInfo {
+    //矿工人数
+    required int32 level=1;
+    //当前原石库存
+    required int32 storage=2;
+    //上次记录时间
+    required int64 lastTime=3;
+}
+
+//挖矿信息请求
+message CSGemMineGet{
+    
+}
+
+
+//挖矿信息应答
+message SCGemMineGet{
+    //矿山信息
+    required MineInfo mineInfo=1;
+    //我的原石
+    required int64 stone=2;
+}
+
+
+//激活矿工请求
+message CSGemMineActive {
+    //矿工等级
+    required int32 level=1;
+}
+//激活矿工应答
+message SCGemMineActive {
+    //矿山信息
+    required MineInfo mineInfo=1;
+}
+
+//领取收益请求
+message CSGemMineReceive {
+}
+
+//领取收益应答
+message SCGemMineReceive {
+    //我的原石
+    required int64 stone=1;
+    //记录时间
+    required int64 lastTime=2;
+}
+
+//赌石请求
+message CSGemGamble {
+    //赌石类型 1初级赌石 2高级赌石
+    required int32 type=1;
+    //是否十连
+    required bool tenEven=2;
+}
+
+//赌石应答
+message SCGemGamble {
+    //掉落物品列表
+    repeated DropInfo dropList=1;
+    //我的原石
+    required int64 stone=2;
+}

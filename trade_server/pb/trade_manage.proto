@@ -1,0 +1,98 @@
+syntax = "proto3";
+
+package pb;
+
+//全局商品列表
+message GlobalTradeItem {
+    int64 globalTradeId=1; //全局商品id
+    int32 platform=2; //平台
+    int32 serverId=3;   //服务器id
+    int64 tradeId=4;  //商品id
+    int64 playerId=5;  //玩家id
+    string playerName=6; //玩家名字
+    int32 itemId=7;  //物品id
+    int32 itemNum=8;  //物品数量
+    int32 gold=9;      //价格
+    string propertyData=10; //属性数据
+    int32 level =11; //等级
+    int32 buyPlayerPlatform=12; //购买者平台
+    int32 buyPlayerServerId=13; //购买者服务器id
+    int64 buyPlayerId=14;   //购买者玩家id
+    string buyPlayerName=15;  //购买者玩家名字
+    int64 updateTime =16; //更新时间
+    int64 createTime =17; //创建时间
+    int64 deleteTime =18; //删除时间
+}
+
+//上架物品
+message TradeUploadItemRequest{
+    int32 platform=1; //平台
+    int32 serverId=2;   //服务器id
+    int64 tradeId=3;  //商品id
+    int64 playerId=4;  //玩家id
+    string playerName=5; //玩家名字
+    int32 itemId=6;  //物品id
+    int32 itemNum=7;  //物品数量
+    int32 gold=8;      //价格
+    string propertyData=9; //属性数据
+    int32 level =10; //等级
+}
+
+//上架物品回复
+message TradeUploadItemResponse{
+    GlobalTradeItem tradeItem=1; //上架物品
+}
+
+
+
+//下架物品
+message TradeWithdrawItemRequest{
+    int32 platform=1; //平台
+    int32 serverId=2;   //服务器id
+    int64 globalTradeId=3; //商品id
+}
+
+//下架物品回复
+message TradeWithdrawItemResponse{
+    int32 platform=1; //平台
+    int32 serverId=2;   //服务器id
+    int64 globalTradeId=3; //商品id
+}
+
+//获取交易列表
+message TradeItemListRequest{
+    int32 platform=1; //平台
+    int32 serverId=2;   //服务器id
+}
+
+//全局商品列表
+message TradeItemListResponse{
+    repeated GlobalTradeItem tradeItemList=1;
+}
+
+//交易物品
+message TradeItemRequest{
+    int32 platform=1; //平台
+    int32 serverId=2;   //服务器id
+    int64 buyPlayerId=4;  //购买者id
+    string buyPlayerName=5; //购买者名字
+    int64 globalTradeId=3;  //全局商品id
+}
+
+//交易商品回复
+message TradeItemResponse{
+    GlobalTradeItem tradeItem=6;  //全局商品
+}
+
+
+service TradeManage {
+    //获取商品列表
+    rpc GetTradeList(TradeItemListRequest)returns(TradeItemListResponse){}
+    //上架
+    rpc Upload(TradeUploadItemRequest) returns(TradeUploadItemResponse){}
+    //下架
+    rpc Withdraw(TradeWithdrawItemRequest) returns(TradeWithdrawItemResponse){}
+    //交易
+    rpc Trade(TradeItemRequest) returns(TradeItemResponse){}
+}
+

@@ -1,0 +1,36 @@
+version: "2"
+services:
+    nsqlookupd:
+        image: 123.57.44.87:5000/nsqio/nsq:v0.3.8
+        environment:
+            - TZ=Asia/Shanghai
+        ports:
+            - "10.171.11.92:4160:4160"
+            - "10.171.11.92:4161:4161"
+        command: 
+            - "/nsqlookupd"
+    nsqd:
+        image: 123.57.44.87:5000/nsqio/nsq:v0.3.8
+        environment:
+            - TZ=Asia/Shanghai
+        ports: 
+            - "10.171.11.92:4150:4150"
+            - "10.171.11.92:4151:4151"
+        command: 
+            - "/nsqd"
+            - "--lookupd-tcp-address=nsqlookupd:4160"
+            - "-broadcast-address=10.171.11.92"
+        depends_on:
+            - nsqlookupd
+    nsqdadmin:
+        image: 123.57.44.87:5000/nsqio/nsq:v0.3.8
+        environment:
+            - TZ=Asia/Shanghai
+        ports: 
+            - "4170:4170"
+            - "4171:4171"
+        command: 
+            - "/nsqadmin"
+            - "--lookupd-http-address=nsqlookupd:4161"
+        depends_on:
+            - nsqlookupd

@@ -1,0 +1,68 @@
+{
+    "debug":true,
+    "game":{
+        "map":"../resources/map",
+        "template":"../resources/template",
+        "redis":{
+            "host":"127.0.0.1",
+            "port":6379,
+            "maxIdle":50,
+            "maxActive":50,
+            "wait": true,
+            "idleTimeout":240
+    
+        },
+        "db":{
+            "debug":true,
+            "dialect":"mysql",
+            "user":"root",
+            "password":"ccn123456.",
+            "host":"192.168.1.17:3306",
+            "dbName":"game3",
+            "parseTime":true,
+            "charset":"utf8mb4",
+            "maxActive":100,
+            "maxIdle":50,
+            "maxLifeTime":240
+        },
+        "center":{
+            "host":"192.168.1.123",
+            "port":20001,
+            "syncInterval":10000
+        },
+        "log":{
+            "host":"192.168.1.13",
+            "port":14222
+        },
+        "remote":{
+            "host":"192.168.1.7",
+            "port":11000	
+        },
+        "charge":{
+            "host":"192.168.1.123",
+            "port":28080
+        },
+        "coupon":{
+            "host":"192.168.1.123",
+            "port":29090
+        },
+        "trade":{
+            "host":"192.168.1.123",
+            "port":17071
+        },
+        "gmOpen":true
+    },
+    "server":{
+        "debug":false,
+        "server":"./data/server",
+         "id":2,
+        "platform":1,
+        "host":"192.168.1.7",
+        "port":4000,
+        "path":"",
+        "pprofPort":6060,
+        "statsPort":9000
+    }
+}
+
+

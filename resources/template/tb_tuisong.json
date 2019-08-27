@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "type": 1,
+    "min_level": 1,
+    "max_level": 3
+  },
+  {
+    "id": 2,
+    "type": 2,
+    "min_level": 1,
+    "max_level": 3
+  },
+  {
+    "id": 3,
+    "type": 3,
+    "min_level": 1,
+    "max_level": 3
+  }
+]

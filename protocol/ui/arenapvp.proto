@@ -1,0 +1,202 @@
+syntax = "proto2";
+
+package ui;
+
+import "scene.proto";
+
+//玩家数据
+message BattlePlayerBasicInfo {
+    required int64 playerId=1;      //玩家id
+    required string playerName=2;   //玩家姓名
+    required int32 platform=3;      //平台
+    required int32 serverId=4;      //服
+    required int32 sex=5;           //性别
+    required int32 role=6;          //职业
+    optional int32 weaponId=7;      //兵魂
+    optional int32 wingId=8;        //战翼
+    optional int32 fashionId=9;     //时装
+    optional int32 weaponState=10; //兵魂觉醒
+    optional int32 xianTiId=11; 
+    optional int32 lingYuId=12; 
+    optional int32 faBaoId = 13;
+    
+}
+
+//霸主数据
+message ArenapvpBaZhu {
+    //届 
+    required int32 raceNumber=1; 
+    required BattlePlayerBasicInfo basicInfo=2;
+}
+  
+//pvp信息
+message CSArenapvpInfo {
+}
+message SCArenapvpInfo {
+    required int32 isOut=1;
+    optional ArenapvpBaZhu baZhu=2; //最近的霸主
+    required int32 jiFen=3;         //当前兑换积分
+    required int32 noticeSetting=4; //竞猜提醒设置
+    required int32 isTicket=5;  //是否购买门票
+} 
+
+//兑换积分变化推送
+message SCArenapvpJiFenChanged {
+    required int32 jiFen=1;
+}
+
+//历届霸主请求
+message CSArenapvpBaZhuInfo {
+    //页数
+    required int32 page=1;
+    required int32 pageNum=2;
+}
+message SCArenapvpBaZhuInfo {
+    required int32 page=1;
+    repeated ArenapvpBaZhu baZhuList=2;
+    required int32 totalPage=3;
+    required int32 pageNum=4;
+}
+
+//pvp对战数据
+message ArenapvpBattlePlayer{
+    required BattlePlayerBasicInfo basicInfo=1;
+    required int32 index=2;       //场次
+    required int64 winnerId=3;    //获胜id
+    required int32 type=4;       //对战类型   2.32进16 3.16进8 4 8进4 5.4进2  6 决赛
+}
+   
+//pvp对战赛程情况
+message CSArenapvpRaceInfo {
+    // 2.32进16 3.16进8 4.决赛
+    required int32 type=1;
+}
+message SCArenapvpRaceInfo {
+    // 2.32进16 3.16进8 4.决赛
+    required int32 type=1;
+    repeated ArenapvpBattlePlayer playerList=2;
+}
+
+message ElectionRaceInfo {
+    //会场编号
+    required int32 electionIndex=1;
+    //会场人数
+    required int32 playerCount=2; 
+}
+ 
+//海选-赛程情况
+message CSArenapvpElectionRaceInfo {
+}
+message SCArenapvpElectionRaceInfo { 
+    repeated ElectionRaceInfo electionList=1;
+}
+
+
+//竞猜开启推送
+message SCArenapvpGuessBeginNotice {
+    repeated ArenapvpBattlePlayer playerList=1; 
+}
+
+//竞猜日志
+message ArenapvpGuessLog {
+    required int64 guessId=1;
+    required int64 winnerId=2;
+    required int32 guessType=3;
+    required int64 createTime=4;
+}
+
+//竞猜信息
+message CSArenapvpGuessInfo {
+}
+message SCArenapvpGuessInfo {
+    required int64 guessId=1;
+    repeated ArenapvpGuessLog logList=2;
+    repeated ArenapvpBattlePlayer playerList=3; 
+}
+
+//竞猜
+message CSArenapvpGuess {  
+    //选择的玩家id 
+    required int64 guessId=1;  
+}
+message SCArenapvpGuess {
+    required int64 guessId=1;
+}
+
+//竞猜提醒我
+message CSArenapvpGuessNoticeSetting {
+    // 0否1是
+    required int32 notice=1;
+}
+message SCArenapvpGuessNoticeSetting{
+    required int32 notice=1;
+}
+
+//海选失败推送
+message SCArenapvpElectionFailedNotice {
+}
+  
+
+//海选-场景数据 
+message SCArenapvpElectionSceneData{
+    //排名信息
+    repeated SceneRankInfo rankInfoList=1;  
+    //复活次数
+    required int32 reliveTimes=2;
+}  
+
+//海选-场景数据变化
+message SCArenapvpElectionSceneDataChanged{
+    required int32 reliveTimes=1;
+}  
+
+//海选结束
+message SCArenapvpElectionEnd{
+    required bool isWin=1;            //是否晋级  
+} 
+ 
+//基础信息
+message ArenapvpPlayerShowData {
+    required int64 playerId=1;//玩家id
+    optional int64 maxHp=2 [default=-1]; //最大血量
+    optional int64 hp=3 [default=-1];   //当前血量
+    optional int32 online=4 [default=-1]; //0:离线 1:在线 
+    optional int32 remainReliveTime=5 [default=-1]; //当前复活次数
+    optional int32 isDead=6 [default=-1]; //0:正常 1:死亡
+    optional int64 deadTime=7 [default=-1]; //死亡时间
+    optional int32 state=8  [default=-1]; //0:正常1:失败 2:退出
+}
+
+//玩家信息
+message ArenapvpPlayerAllData {
+    required BattlePlayerBasicInfo basicInfo=1;
+    required ArenapvpPlayerShowData showData=2;
+}
+
+//1v1-场景数据 
+message SCArenapvpSceneData{
+    repeated ArenapvpPlayerAllData battleList=2; 
+    //对战类型   2.32进16 3.16进8 4 8进4 5.4进2  6 决赛
+    required int32 pvpType=3;             
+}
+
+//场景玩家信息变化
+message SCArenapvpPlayerShowDataChanged{
+    required ArenapvpPlayerShowData playerShowData=1;
+}
+  
+//pvp对战开始(倒计时结束)
+message SCArenapvpBattleStart{
+} 
+
+//pvp对战结束
+message SCArenapvpBattleEnd{
+    required int64 winnerPlayerId=1;            //获胜玩家id  
+    required int32 pvpType=2;                   //对战类型
+}
+
+//竞猜结果推送
+message SCArenapvpGuessInfoPush {
+
+    required ArenapvpGuessLog log=1;
+}

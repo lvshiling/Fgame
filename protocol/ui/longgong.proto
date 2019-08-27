@@ -1,0 +1,43 @@
+syntax = "proto2";
+
+package  ui;
+
+import "scene.proto";
+
+//龙宫探宝信息
+message SCLonggongGet {
+    //玩家采集黑龙财宝次数
+    required int32 collectCount=1;
+    //珍珠采集数
+    required int32 pearlCount=2;
+    //boss血量
+    required int64 bossHp=3; 
+    //boss状态:0未刷新 1存活 2已死亡
+    required int32 bossStatus=4; 
+    //排名信息
+    repeated SceneRankInfo rankInfoList=5; //排行信息
+    //宝藏采集物uid
+    optional int64 uid=6 [default=0];
+}
+
+//推送龙宫探宝玩家信息
+message SCLonggongPlayerValChange {
+    //玩家采集黑龙财宝次数
+    required int32 collectCount=1;
+}
+
+//推送龙宫探宝场景采集珍珠数变化
+message SCLonggongSceneValBroadcast {
+    //珍珠采集数
+    optional int32 pearlCount=1 [default=-1];
+    //boss状态:0未刷新 1存活 2已死亡
+    optional int32 bossStatus=2 [default=-1];
+    //boss血量
+    optional int64 bossHp=3 [default=-1];
+    //宝藏采集物uid
+    optional int64 uid=4 [default=0];
+}
+
+//龙宫探宝结束后推送
+message SCLonggongResult {
+}

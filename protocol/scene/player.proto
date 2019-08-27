@@ -1,0 +1,62 @@
+syntax = "proto2";
+
+package scene;
+
+import "common.proto";
+import "buff.proto";
+
+//玩家场景数据
+message ScenePlayerData {
+    required int64 uid =1;
+    required int32 job =2;
+    required int32 sex =3;
+    required string name = 4;
+    required Position pos = 5;
+    required float angle =6;
+    required ScenePlayerShowData playerShowData= 7;
+    required int32 level = 8;
+    repeated ObjectBuffData buffList=9;
+    //所有者
+    required int64 ownerId=10;
+}
+
+
+message ScenePlayerShowData{
+    required int64 uid =1;
+    required int32 lingTong=2; //0:不是灵童 1:灵童
+    optional int64 hp =3;
+    optional int64 hpMax=4;
+    optional int32 titleId=5;
+    optional int32 weaponId=6;
+    optional int32 clothesId=7;
+    optional int32 rideId=8;
+    optional int32 wingId=9;
+    optional int32 rideLevel=10;
+    optional string bangPaiName=11;
+    optional int32 pkState=12;   //pk状态 1:和平 2:组队 3:帮派 4:全体 5:攻守 6:阵营 
+    optional int32 pkValue=13;  //pk值  
+    optional int32 speed=14;    //移动速度
+    optional int32 camp=15;     //攻守 0:中立 1:攻击 2:防守
+    optional string teamName=16; //队伍名称
+    optional int32 shenFaId = 17; //身法
+    optional int32 lingYuId = 18; //领域
+    optional int32 fourGodKey =19; //四神的钥匙
+    optional bool weaponWaken=20;//冰魂觉醒
+    optional int32 realm = 21; //境界 
+    optional string spouseName=22; //夫妻称号
+    optional int32 weddingStatus=23;//婚礼状态 0:不在婚礼 1:巡游 2:酒席
+    optional int32 modelId=24;       //模型变化
+    optional int32 vip=25; //vip等级
+    optional int32 ringType=26; //婚戒等级(1:青铜,2:紫金,3:龙凤)
+    optional int32 faBaoId=27; //法宝
+    optional int32 petId=28; //宠物id
+    optional int32 xianTiId=29; //仙体id
+    optional int32 flyPetId=30; //飞宠id
+    optional int32 shenYuKey =31; //神域的钥匙
+    optional bool isModel=32;   //是否雕像 
+    optional bool isRobot=33;   //是否机器人
+    optional string jieYiName=34; //结义名字
+    optional int32 zhenYing=35; //阵营0:没阵营 1:盘古 2：女娲 3：伏羲
+    optional int32 guanZhi=36; //官职0:无 1:平民 2：城主 3：神王
+
+}

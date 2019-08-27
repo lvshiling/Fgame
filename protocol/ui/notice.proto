@@ -1,0 +1,19 @@
+syntax = "proto2";
+
+package ui;
+
+
+
+message SCNotice{
+    //消息内容
+    required bytes content=1;
+    //间隔时间
+    required int64 intervalTime=2;
+    //开始时间 -1(立即开始)
+    optional int64 startTime=3 [default=-1];
+    //结束时间 -1(达到num次数结束)
+    optional int64 endTime=4 [default=-1];
+    //次数 -1(达到endTime结束)
+    optional int32 num=5 [default=-1];
+}
+

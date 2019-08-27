@@ -1,0 +1,9 @@
+{
+  
+    "nats":{
+        "host":"192.168.1.13",
+        "port":4222,
+        "topic":"chat_log"
+    },
+    "sdk":"./config/sdk"
+}

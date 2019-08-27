@@ -1,0 +1,27 @@
+syntax = "proto2";
+
+package ui;
+
+message ShengHenInfo {
+   //圣痕类型
+   required int32 type=1;
+} 
+
+//圣痕信息请求 
+message CSShengHenGet {
+} 
+message SCShengHenGet{
+   //圣痕信息
+   repeated ShengHenInfo infoList=1; 
+}
+
+//激活圣痕请求
+message CSShengHenActive {
+   //圣痕类型
+   required int32 type=1;
+}
+message SCShengHenActive {
+   //圣痕类型
+   required int32 type=1;
+}
+ 

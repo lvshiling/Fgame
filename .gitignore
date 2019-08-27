@@ -1,0 +1,66 @@
+# ---> Go
+# Compiled Object files, Static and Dynamic libs (Shared Objects)
+*.o
+*.a
+*.so
+
+# Folders
+_obj
+_test
+
+# Architecture specific extensions/prefixes
+*.[568vq]
+[568vq].out
+
+*.cgo1.go
+*.cgo2.c
+_cgo_defun.c
+_cgo_gotypes.go
+_cgo_export.*
+
+_testmain.go
+
+*.exe
+*.exe~
+main
+*.test
+*.prof
+
+# ---> SVN
+.svn/
+
+# ---> logs
+logs/
+
+# ---> mac
+.DS_Store
+
+# ---> vscode
+.vscode
+game/debug
+cross/debug
+
+# ---> unity meta
+*.meta
+
+# ---> config
+config/
+
+node_modules/
+
+# ---> dbmerge tool
+backup/
+worktemp/
+
+# --->gm
+public/
+dist/
+
+#--->game
+stack.log
+
+#--->deploy
+deploy/
+.temp/
+/cross/config/all.config.json
+all.config.json

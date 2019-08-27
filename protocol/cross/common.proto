@@ -1,0 +1,11 @@
+
+syntax = "proto2";
+
+package cross;
+
+//心跳包
+message SIHeartBeat {
+}
+
+message ISHeartBeat {
+}

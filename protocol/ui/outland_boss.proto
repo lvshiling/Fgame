@@ -1,0 +1,76 @@
+syntax = "proto2";
+
+package ui;
+import "drop.proto";
+import "world_boss.proto";
+import "common.proto";
+import "item.proto";
+
+
+message DropRecords{
+    required int64 dropTime=1;
+    required string killerName=2;
+    required int32 biologyId=3;
+    required int32 mapId=4;
+    repeated ItemInfo itemList=5;
+}
+
+//外域boss列表
+message CSOutlandBossList{
+
+}
+//外域boss列表应答
+message SCOutlandBossList{
+    repeated BossInfo bossInfoList=1;
+    required int32 curZhuoQi=2;
+}
+
+//挑战外域boss
+message CSOutlandBossChallenge{
+    required int32 biologyId=1;
+}
+message SCOutlandBossChallenge{
+    required Position pos=1;
+}
+
+//boss信息推送
+message SCOutlandBossInfoBroadcast{
+    required BossInfo bossInfo =1;
+}
+//地图boss列表信息推送
+message SCOutlandBossListInfoNotice{
+    repeated BossInfo bossInfoList =1;
+}
+
+//外域boss死亡推送(对boss造成伤害)
+message SCOutlandBossEnemiesNotice{
+    required int64 attackId=1;
+    required string attackPlayerName=2;
+    required string  bossName=3;
+    repeated DropInfo dropInfoList=4;
+    required int32 biologyId=5;
+}
+
+//浊气值信息推送
+message SCOutlandBossZhuoqiInfo{
+    required int32 curZhuoQi=1;
+}
+
+//掉落记录增量
+message CSOutlandBossDropRecordsIncr{
+    required int64 recordsTime=1;
+}
+//掉落记录增量回复
+message SCOutlandBossDropRecordsIncr{
+    repeated DropRecords recordsList=1;
+}
+
+//掉落记录
+message CSOutlandBossDropRecordsGet{
+
+}
+//掉落记录回复
+message SCOutlandBossDropRecordsGet{
+    //棋局日志棋局日志
+    repeated DropRecords recordsList=1;
+}

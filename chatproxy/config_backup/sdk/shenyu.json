@@ -1,0 +1,12 @@
+{
+    "android":{
+        "game":207,
+        "key":"0a877fb82fbf6a4f36965b8c83f94e9d",
+        "url":"http://api.baikunw.com/mobilechat.php"
+    },
+    "ios":{
+        "game":208,
+        "key":"2fb87053bb92b7cddc3232e0bccb23aa",
+        "url":"http://api.baikunw.com/mobilechat.php"
+    }
+}

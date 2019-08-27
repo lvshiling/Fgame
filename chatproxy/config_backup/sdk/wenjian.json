@@ -1,0 +1,12 @@
+{
+    "android":{
+        "game":205,
+        "key":"8069bbe345540a48cf810aac99eeeacd",
+        "url":"http://api.2wanxt.com/mobilechat.php"
+    },
+    "ios":{
+        "game":206,
+        "key":"2657540cebbd2d3d4806af6c78aad4bb",
+        "url":"http://api.2wanxt.com/mobilechat.php"
+    }
+}

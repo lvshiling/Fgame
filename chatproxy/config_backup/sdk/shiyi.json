@@ -1,0 +1,12 @@
+{
+    "android":{
+        "game":11,
+        "key":"43911de434f1bb1c641230e3188f743b",
+        "url":"http://api.26580.com/mobilechat.php"
+    },
+    "ios":{
+        "game":12,
+        "key":"fa7bf1cd27191f15a9632e075ff024ef",
+        "url":"http://api.26580.com/mobilechat.php"
+    }
+}

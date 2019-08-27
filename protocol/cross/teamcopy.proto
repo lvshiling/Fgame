@@ -1,0 +1,43 @@
+syntax = "proto2";
+
+package cross;
+import "skill.proto";
+import "property.proto";
+
+message TeamPlayer {
+    required int64 playerId=1;
+    required int64 force=2;
+    required bool online=3;
+    required string name=4;
+    required int32 level=5;
+    required int32 role=6;
+    required int32 sex=7;
+    required int32 fashionId=8;
+    required int32 serverId=9;
+    required PropertyData battlePropertyData=10;
+    repeated SkillData skillList=11;
+    required int32 purpose=12;
+}
+
+
+//开始战斗
+message SITeamCopyStartBattle{
+    repeated TeamPlayer playerList=1;
+}
+
+//开始战斗
+message ISTeamCopyStartBattle{
+    required bool sucess=1;
+}
+
+//战斗结果
+message ISTeamCopyBattleResult {
+    required int32 purpose=1;
+    required bool sucess=2;
+}
+
+//战斗结果
+message SITeamCopyBattleResult {
+
+}
+

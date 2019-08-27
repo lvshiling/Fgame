@@ -1,0 +1,37 @@
+[
+  {
+    "id": 1,
+    "item_id": 40372,
+    "min_count": 0,
+    "max_count": 5,
+    "rate": 10000
+  },
+  {
+    "id": 2,
+    "item_id": 40372,
+    "min_count": 6,
+    "max_count": 10,
+    "rate": 7000
+  },
+  {
+    "id": 3,
+    "item_id": 40372,
+    "min_count": 11,
+    "max_count": 20,
+    "rate": 5000
+  },
+  {
+    "id": 4,
+    "item_id": 40372,
+    "min_count": 20,
+    "max_count": 50,
+    "rate": 3000
+  },
+  {
+    "id": 5,
+    "item_id": 40372,
+    "min_count": 50,
+    "max_count": 99999,
+    "rate": 0
+  }
+]

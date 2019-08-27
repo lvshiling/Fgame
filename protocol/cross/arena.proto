@@ -1,0 +1,110 @@
+syntax = "proto2";
+
+package cross;
+import "skill.proto";
+import "property.proto";
+
+message ArenaPlayer {
+    required int64 playerId=1;
+    required int64 force=2;
+    required bool online=3;
+    required string name=4;
+    required int32 level=5;
+    required int32 role=6;
+    required int32 sex=7;
+    required int32 fashionId=8;
+    required int32 serverId=9;
+    required PropertyData battlePropertyData=10;
+    repeated SkillData skillList=11;
+    required int32 winCount=12;//连胜次数
+}
+
+//匹配
+message SIArenaMatch{
+    repeated ArenaPlayer playerList=1;
+}
+
+//匹配
+message ISArenaMatch{
+
+}
+
+//匹配成功
+message ISArenaMatchResult{
+    required bool result=1;
+}
+
+//停止匹配
+message SIArenaStopMatch{
+
+}
+
+//停止匹配回复
+message ISArenaStopMatch{
+    required bool success=1;
+}
+
+//3v3 获胜 
+message ISArenaWin{
+    //3v3等级
+    required int32 level = 1;
+    //获得额外宝箱
+    required bool extra=2;
+}
+
+//3v3 获胜回复
+message SIArenaWin{
+
+}
+
+message PlayerArenaData{
+    optional int32 reliveTime=1;
+    optional int32 winTime=2;
+}
+
+
+
+
+//获胜次数变化
+message SIPlayerArenaDataChanged{
+    required PlayerArenaData playerArenaData=1;
+}
+
+//3v3 复活
+message ISArenaRelive {
+
+}
+
+//3v3 复活回复
+message SIArenaRelive{
+    required bool success = 1;
+}
+
+//3v3 采集经验树成功
+message ISArenaCollectExpTree{
+
+}
+
+message SIArenaCollectExpTree{
+
+}
+
+//宝箱采集
+message ISArenaCollectBox{
+    required int32 boxId=1;
+}
+
+message SIArenaCollectBox{
+
+}
+
+//3v3比赛退出
+message ISArenaGiveUp{
+}
+message SIArenaGiveUp{
+}
+
+//重置复活次数
+message ISArenaResetReliveTimes{
+}
+

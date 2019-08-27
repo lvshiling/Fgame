@@ -1,0 +1,51 @@
+syntax = "proto2";
+
+package  ui;
+
+import "drop.proto";
+import "rewproperty.proto";
+
+message HuiYuanInfo {
+    //是否会员
+    required bool isHuiYuan=1;
+    //是否领取
+    required bool isReceive=2;
+    //过期时间
+    required int64 expireTime=3;
+    //vip类型 1临时 2永久
+    required int32 huiyuanType=4;
+    //是否第一份奖励
+    required bool isFirstRew=5; 
+}
+//会员信息请求
+message CSHuiYuanInfo{
+}
+message SCHuiYuanInfo{ 
+    repeated HuiYuanInfo huiyuanInfo=1;
+    // 1 正常版  2 贵价版
+    required int32 houtaiType=2;
+} 
+
+//购买会员
+message CSBuyHuiYuan{
+    //vip类型 1临时 2永久
+    required int32 huiyuanType=1;
+}
+message SCBuyHuiYuan{
+    //过期时间：0不过期
+    required int64 expireTime=1;
+    // 1 正常版  2 贵价版
+    required int32 houtaiType=2;
+}
+ 
+//领取会员奖励
+message CSHuiYuanReceiveRew{
+    //vip类型 1临时 2永久
+    required int32 huiyuanType=1;
+}
+message SCHuiYuanReceiveRew{
+    required RewProperty rewInfo=1;
+    repeated DropInfo dropInfo=2;
+    // 1 正常版  2 贵价版
+    required int32 houtaiType=3;
+}

@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package pb;
+
+
+
+//远程命令
+message RemoteCommandRequest{
+    int32 typ=1;
+    bytes cmd=2;
+}
+
+//远程命令回复
+message RemoteCommandResponse{
+    int32 errorCode=1;
+    string errorMsg=2;
+}
+
+service Remote{
+    //获取
+    rpc DoCmd(RemoteCommandRequest) returns(RemoteCommandResponse){}
+}
+

@@ -1,0 +1,106 @@
+syntax = "proto2";
+
+package cross;
+
+import "player.proto";
+import "show.proto";
+import "skill.proto";
+import "buff.proto";
+import "property.proto";
+import "pk.proto";
+import "alliance.proto";
+import "team.proto";
+import "arena.proto";
+import "xuechi.proto";
+import "relive.proto";
+import "battle.proto";
+import "dense_wat.proto";
+import "lingtong.proto";
+import "shenmo.proto";
+import "activity.proto";
+import "arenapvp.proto";
+import "jieyi.proto";
+import "chuangshi.proto";
+ 
+
+
+message CrossData {
+    required int32 crossType=1;    //跨服类型
+    repeated string args=2;  //跨服参数
+}
+
+//用户场景数据推送更新
+message SIPlayerData{
+    required PlayerBasicData playerBasicData =1;
+    required PlayerShowData playerShowData =2;
+    required PropertyData basicPropertyData=3;
+    required PropertyData battlePropertyData=4;
+    repeated SkillData skillList=5;
+    repeated BuffData buffList=6;
+    required PkData pkData=7;
+    required AllianceData allianceData=8;
+    required TeamData teamData=9; 
+    required CrossData crossData=10;//跨服数据
+    required PlayerArenaData arenaData=11; //竞技场数据
+    required XueChiData xueChiData=12; //血池数据
+    required PlayerReliveData reliveData=13; //玩家复活数据
+    required PlayerBattleData battleData=14; //玩家战斗数据
+    required DenseWatData denseWatData=15;  //金银密窟
+    required int64 power=16; //战力
+    optional LingTongData lingTongData=17; //灵童数据
+    required ShenMoData shenMoData=18;   //神魔战场
+    repeated ActivityPkData activityPkDataList=19; //活动pk数据
+    required PlayerArenapvpData arenapvpData=20; //pvp数据
+    repeated ActivityRankData activityRankDataList=21; //活动排行榜数据
+    required JieYiData jieYiData=22;       // 结义数据 
+    required ChuangShiData chuangShiData=23;    //创世数据
+    repeated  PlayerBossReliveData bossReliveDataList=24; //boss复活数据
+    repeated TeShuSkillData teShuSkillDataList =25;//特殊技能
+} 
+
+
+//用户系统战斗属性变化
+message SIPlayerSystemBattlePropertyChanged {
+    required PropertyData battlePropertyData=1;
+    required int64 power=2;
+}
+
+//用户基础战斗属性变化
+message SIPlayerBasicPropertyChanged{
+    required PropertyData basicPropertyData=2;
+}
+
+message SIPlayerExitCross{
+
+}
+
+message ISPlayerExitCross{
+
+}
+
+//生物被杀
+message ISPlayerKillBiology{
+    required int32 biologyId=1;
+}
+
+//生物被杀
+message SIPlayerKillBiology {
+    required int32 biologyId=2;
+}
+
+
+//骑乘同步
+message ISPlayerMountSync {
+    required bool hidden=1;
+}
+
+//玩家boss复活数据
+message PlayerBossReliveData{
+    required int32 bossType =1;
+    required int32 reliveTime=2;
+}
+
+//复活同步
+message ISPlayerBossReliveSync{
+    required PlayerBossReliveData playerBossReliveData=1;
+}

@@ -1,0 +1,15 @@
+syntax = "proto2";
+
+package ui;
+
+//放烟花请求
+message CSFireWorks{
+    required int32 itemId=1;
+    required int32 num=2;
+}
+
+//放烟花全场景广播
+message SCFireWorksBroadcast{
+    required int32 itemId=1;
+    required int32 num=2;
+}

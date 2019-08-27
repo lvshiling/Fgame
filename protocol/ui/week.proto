@@ -1,0 +1,49 @@
+syntax = "proto2";
+
+package  ui;
+
+import "drop.proto";
+import "rewproperty.proto";
+
+message WeekInfo {
+    //是否领取
+    required bool isReceive=1;
+    //过期时间
+    required int64 expireTime=2;
+    //周卡类型 0高级 1普通 
+    required int32 weekType=3;
+    //领取日
+    required int32 dayInt=4;
+}
+
+//周卡信息请求
+message CSWeekInfo{
+}
+ //登录下发
+message SCWeekInfo{ 
+    repeated WeekInfo weekInfo=1;
+} 
+
+//购买周卡
+message CSWeekBuy{
+    //周卡类型 0高级 1普通 
+    required int32 weekType=1;
+}
+message SCWeekBuy{
+    required int32 weekType=1;
+    required int64 expireTime=2;
+    repeated DropInfo dropInfo=3;
+    required RewProperty rewInfo=4;
+    required WeekInfo weekInfo=5;  
+}
+ 
+//领取周卡奖励 
+message CSWeekReceiveRew{
+    //周卡类型 0高级 1普通 
+    required int32 weekType=1;
+}
+message SCWeekReceiveRew{
+    required RewProperty rewInfo=1;
+    repeated DropInfo dropInfo=2;
+    required WeekInfo weekInfo=3;  
+} 

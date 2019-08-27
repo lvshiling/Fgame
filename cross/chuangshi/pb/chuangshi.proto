@@ -1,0 +1,210 @@
+syntax = "proto3";
+
+package pb;
+
+//创世成员
+message ChuangShiMemberInfo {
+    int32 platform =1;      //玩家平台id
+    int32 serverId=2;       //玩家服务器id
+    int64 playerId=3;       //玩家id
+    string name=4;          //名字
+    int64 force=5;          //玩家战力
+    int32 pos=6;            //职位
+    int32 alPos=7;          //仙盟职位
+    string allianceName=8;  //仙盟名字
+    int64 allianceId=9;     //仙盟id
+    int32 campType=10;      //阵营
+} 
+
+message JianSheSkill{
+    int32 level=1;         //技能建筑等级
+    int64 activateTime=2;    //过期时间
+} 
+message CityJianShe {  
+    int32 jianSheType=1;   //建筑类型 
+    int32 level=2;         //等级 
+    int32 exp=3;           //经验 
+    int32 skillLevelSet=4; //当前使用技能（天气台专用）
+    repeated JianSheSkill skillMap=5; //技能激活记录（天气台专用）
+} 
+//城池 
+message ChuangShiCity {
+    int32 camp =1;                      //阵营
+    int32 cityType=2;                   //城市类型
+    int32 index=3;                      //索引
+    ChuangShiMemberInfo kingMember=4;   //城主
+    int64 cityId=5;     //城池id
+    int64 jifen=6;      //积分
+    int64 diamonds=7;   //钻石
+    repeated CityJianShe jianSheList=8; //城池建设
+    int32 orignalCamp=9;        //初始阵营
+}
+
+// 投票
+message ChuangShiVote{
+    int32 ticketNum=1;              //票数
+    ChuangShiMemberInfo member=2;   //玩家信息
+}
+
+// 攻城
+message ChuangShiTarget {
+    int32 campType=1;
+    int64 cityName=2; 
+}
+
+message ChuangShiCamp{
+    int32 campType=1;                           //阵营
+    ChuangShiMemberInfo kingMember=2;           //神王
+    int64 power=3;                              //总战力
+    repeated ChuangShiMemberInfo signList=4;    //神王候选报名列表
+    repeated ChuangShiVote voteList=5;          //神王候选投票列表 
+    repeated ChuangShiMemberInfo memberList=6;  //成员列表 
+    repeated ChuangShiCity cityList=7;          //城池列表
+    repeated ChuangShiTarget targetList=8;      //攻城目标
+    int32 shenWangStatus=9;                     //神王选举阶段
+    int64 jifen=10;     //积分
+    int64 diamonds=11;   //钻石
+} 
+
+message ChuangShiWholeInfoRequest {
+} 
+
+message ChuangShiWholeInfoResponse {
+    repeated ChuangShiCamp campList=1;
+} 
+
+//神王报名 
+message ChuangShiShenWangSignUpRequest {
+    int64 playerId=1;
+    int32 platform=2;
+    int32 serverId=3; 
+    int32 campType=4;
+} 
+message ChuangShiShenWangSignUpResponse  {
+    int64 playerId=1;   //玩家id
+    bool success=2;     //是否成功
+    repeated ChuangShiMemberInfo signList=3; //神王候选报名列表
+    int32 campType=4;
+} 
+
+//神王投票
+message ChuangShiShenWangVoteRequest {
+    int64 playerId=1; 
+    int64 supportId=2;
+    int32 campType=3; 
+}
+message ChuangShiShenWangVoteResponse  {
+    bool success=1;     //是否成功
+    repeated ChuangShiVote voteList=2; //神王候选投票列表 
+    int32 campType=3;   
+} 
+
+//任命
+message ChuangShiCityRenMingRequest {
+    int64 memberId=1;        //任命玩家id
+    int64 cityId=2;        //城池id
+    int64 beCommitId=3;      //被任命玩家id
+}
+message ChuangShiCityRenMingResponse  {
+    bool success=1;
+}
+
+message CityPaySchedule {
+    int32 alPos=1; //仙盟职位
+    int32 ratio=2; //分配比例
+}
+
+//城池工资分配
+message ChuangShiCityPayScheduleRequest {
+    repeated CityPaySchedule scheduleList=1;
+    int64 playerId=2;
+}
+message ChuangShiCityPayScheduleResponse  {
+    ChuangShiCamp camp=1;   //阵营信息
+}
+
+message CampPaySchedule {
+    int64 cityId=1; //城池id
+    int32 ratio=2; //分配比例 
+}
+//阵营工资分配
+message ChuangShiCampPayScheduleRequest {
+    repeated CampPaySchedule scheduleList=1;
+    int64 playerId=2;
+}
+message ChuangShiCampPayScheduleResponse  {
+    ChuangShiCamp camp=1;       //阵营信息
+}
+
+//阵营工资领取
+message ChuangShiCampPayReceiveRequest {
+    int64 playerId=2;
+}
+message ChuangShiCampPayReceiveResponse  {
+    ChuangShiCamp camp=1;       //阵营信息
+}
+
+//城池建设
+message ChuangShiCityJianSheRequest {
+    int64 playerId=1;
+    int32 num=2;        //建设次数
+    int64 cityId=3;
+    int32 jianSheType=4;    //建设类型
+}
+message ChuangShiCityJianSheResponse  { 
+    ChuangShiCamp camp=1;   //阵营信息 
+    bool success=2;         //是否成功 
+}
+
+//城池建设
+message ChuangShiGongChengTargetRequest {
+    int64 playerId=1;
+    int64 cityId=2;
+}
+message ChuangShiGongChengTargetResponse  { 
+    bool success=1;
+}
+
+//加入阵营 
+message ChuangShiJoinCampRequest {
+    int32 campType=1;  
+    repeated ChuangShiMemberInfo memList=2;
+}
+message ChuangShiJoinCampResponse  { 
+    bool success=1;
+} 
+ 
+//城池天气设置
+message ChuangShiCityTianQiSetRequest {
+    int64 playerId=1;
+    int64 cityId=2;
+    int32 level=3;      //天气技能建筑等级
+}
+message ChuangShiCityTianQiSetResponse  { 
+    bool success=1;
+}
+   
+service Chuangshi{
+    //获取创世信息
+    rpc GetChuangShiWholeInfo(ChuangShiWholeInfoRequest) returns(ChuangShiWholeInfoResponse){}
+    //神王报名
+    rpc ShenWangSignUp (ChuangShiShenWangSignUpRequest) returns (ChuangShiShenWangSignUpResponse){}
+    //神王投票 
+    rpc ShenWangVote (ChuangShiShenWangVoteRequest) returns (ChuangShiShenWangVoteResponse){}
+    //任命 
+    rpc CityRenMing (ChuangShiCityRenMingRequest) returns (ChuangShiCityRenMingResponse){}
+    //城池工资分配 
+    rpc CityPaySchedule (ChuangShiCityPayScheduleRequest) returns (ChuangShiCityPayScheduleResponse){}
+    //阵营工资分配 
+    rpc CampPaySchedule (ChuangShiCampPayScheduleRequest) returns (ChuangShiCampPayScheduleResponse){}
+    //阵营工资领取 
+    rpc CampPayReceive (ChuangShiCampPayReceiveRequest) returns (ChuangShiCampPayReceiveResponse){}
+    //城池建设 
+    rpc CityJianShe (ChuangShiCityJianSheRequest) returns (ChuangShiCityJianSheResponse){}
+    //设置攻城目标 
+    rpc GongChengTargetFuShu (ChuangShiGongChengTargetRequest) returns (ChuangShiGongChengTargetResponse){}
+    //加入阵营
+    rpc JoinCamp (ChuangShiJoinCampRequest) returns (ChuangShiJoinCampResponse){}
+    //城池天气设置
+    rpc CityTianQiSet (ChuangShiCityTianQiSetRequest) returns (ChuangShiCityTianQiSetResponse){}
+} 

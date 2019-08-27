@@ -1,0 +1,18 @@
+{
+    "iOS":{
+        "appId":"607",
+        "appKey":"63df4f45ae9571d2d8ea261b54db013c",
+        "appSecret":"796ad2134a2ebd23713f52017320e04d",
+        "publicKey":"MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCUfv+zhDV7i+a2FOD4COQ1UVyaYPdmnhN7e39h0uJpz9ze1U5vcMR4lWw1qlhdZCJeK2DicpFLk89QkC4z0bw4lhPUR8+8tlwGfZrV37+a6OXHsWu1DpwKCGkA7nA8tB/49FPKFVOrmFKVz0+ufVXnQPFigK8+HsDXXpD56kdNTwIDAQAB",
+        "privateKey":"MIICdQIBADANBgkqhkiG9w0BAQEFAASCAl8wggJbAgEAAoGBAJR+/7OENXuL5rYU4PgI5DVRXJpg92aeE3t7f2HS4mnP3N7VTm9wxHiVbDWqWF1kIl4rYOJykUuTz1CQLjPRvDiWE9RHz7y2XAZ9mtXfv5ro5cexa7UOnAoIaQDucDy0H/j0U8oVU6uYUpXPT659VedA8WKArz4ewNdekPnqR01PAgMBAAECgYBeJvvXhZ8ne3fHwQs3GOQhDjpJw+t5TAcMRyxoCP73mgzv2I1HyVc5IXyftica58+Gp7hhO8T2B3zuFszEnFnbC7kPYDXwL6LWFewc1s8b435CTQEM2JiJjpyPEOzJZfQ/sWw4umy5xybFTnKcZZJWfV5ervCfUWGg4XuiTvMWUQJBAMbxlJN35vVkF83AoJ654YfOZDkN0CdWVUjbTf1ZAxyrsNeWG+AEsGY9LfGhg1SnF6CTdmPR4uHzkh6EN0izlMcCQQC/FZAptfBYsMbaRkONv9Z6rSDTvd/RF01J9iOTqboZ+rAiI2m4gZp0CBueUrfxzdSQI+MfSkcigG5qgDPoBGs5AkAxiOlTpqEtLJT4uCPGIcZUCEHQKu5PPSHTGDfdAxLRSranl0qthr1dV5Je/bYzl788TjtGM3ZoiDszufwB8CT1AkAIUYL+HdqBsehmNirYr+JBYuoL7bchnhcSQjHYSso8OUqToeEHVDUKGhRBty4ky6YWREmt4gjoupiT8FLSJecZAkBw/nhRBjsVybgWvbUL/qCaZuI8jbwPD6GxCO//l5VuTf8YqqRe6knTmo6BXgLV8lHEy0XHUWson/McNGRZZpPE",
+        "notifyUrl":"http://test.fhgamers.com:18080/api/charge/shunyou/ios"
+    },
+    "android":{
+        "appId":"608",
+        "appKey":"1dc2015afd326bc55fcce8d83dbed4cc",
+        "appSecret":"0cb270853ff271615b2a90c31b95fe09",
+        "publicKey":"MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCyY+ypfxxG7NUvwKQt6ie6WceOgD4Mniq2fd/BfzoE/+2y22WWXKKxgLcCWwklqrl94eMGrxRJ4qaOXoiRJyVKfn7oQtQ7jqN6Yuq9yc1VIUANSc8KKLPhkTQS2EaWfCkliGEIhfiG1A1BQd8t8VoxbUM3t1dJKnViunWt4wVJrwIDAQAB",
+        "privateKey":"MIICdwIBADANBgkqhkiG9w0BAQEFAASCAmEwggJdAgEAAoGBALJj7Kl/HEbs1S/ApC3qJ7pZx46APgyeKrZ938F/OgT/7bLbZZZcorGAtwJbCSWquX3h4wavFEnipo5eiJEnJUp+fuhC1DuOo3pi6r3JzVUhQA1Jzwoos+GRNBLYRpZ8KSWIYQiF+IbUDUFB3y3xWjFtQze3V0kqdWK6da3jBUmvAgMBAAECgYACwTBCXcgeAEI6fosKencqlYBTXv+WSkr2jnMKFeDbeug8vs6Ox9drTkWFL8qwXjaHDxnmXIW/rlRMFoGdXDFjMm4C+hOGz0bTinKhwxvk5Pkh1F1+p4cXyKzH8Ojybv3STA8cz2Stq2f0JtjKRCbbVmH+h0yPlC6GtH+HfAN3wQJBAPaFxwSIsMeltRX9qQ2tEpmLcxW8vZEHvsUVZTmT1sly/kKermlOqMd4CilOa7QYjayEOJ2jTnWfeF6D0a9f74kCQQC5P5qk3wyZCzlXgcVenbq4xhtXqE1YfsbG6urqXOgwHgx9DgV+b+wxnGj6+7vuDCPx/YBKgKiO3UeyZjprkCl3AkEArYpZIpjzEWhWhQePVWBL4qknN9so+4qfQfAg1Rp8rk10LgO0tc84w0p+pLte2GYcfaCKlnYaynSbcLWNC88WOQJAb09DibuoozE2VFlakd6uuqX2+fXb+8e5gv7XBtmqfncfw+iv7mgsASddgSnPo1rSIm7TLnEeVzGpCg4ZHlayQwJBAJl/i1A19zUkcMiEw0xS8Gr66IC5d4G9jKNyAQZc8FYRIUkb+OxHFi45miuqsnmRVKJ8Bi9B9bjgmBJcoAz7glE=",
+        "notifyUrl":"http://test.fhgamers.com:18080/api/charge/shunyou/android"
+    }
+}

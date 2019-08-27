@@ -1,0 +1,22 @@
+syntax = "proto2";
+
+package cross;
+
+
+//戮仙刃掉落
+message ISMassacreDrop{
+    //攻击者id
+    required int64 attackerId=1;
+    //攻击者名字
+    required string attackerName=2;
+}
+
+//戮仙刃掉落回复
+message SIMassacreDrop{
+    //掉落物品ID
+    required int32 itemId=1;
+    //掉落物品数量
+    required int64 itemNum=2;
+    //攻击者id
+    required int64 attackerId=3;
+}

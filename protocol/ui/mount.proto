@@ -1,0 +1,168 @@
+syntax = "proto2";
+
+package ui;
+
+//坐骑信基本信息息
+message MountInfo {
+    //阶数
+   required int32 advancedId=1;
+   //当前坐骑id
+   required int32 mountId=2;
+   //食幻化丹食丹等级
+   required int32 unrealLevel=3;
+   //幻化丹培养进度值
+   required int32 unrealPro=4;
+   //食培养丹食丹等级
+   required int32 culLevel=5;
+   //培养丹培养进度值
+   required int32 culPro=6;
+   //坐骑皮肤
+   repeated MountSkinInfo skinList=7;
+}
+
+//坐骑皮肤
+message MountSkinInfo {
+    //坐骑皮肤id
+    required int32 mountId=1;
+    //升星等级
+    required int32 level=2;
+    //升星培养值
+    required int32 pro=3;
+}
+
+//坐骑信息请求
+message CSMountGet {
+}
+
+//坐骑信息应答
+message SCMountGet{
+   //阶数
+   required int32 advancedId=1;
+   //当前坐骑id
+   required int32 mountId=2;
+   //食幻化丹食丹等级
+   required int32 unrealLevel=3;
+   //幻化丹培养进度值
+   required int32 unrealPro=4;
+   //食培养丹食丹等级
+   required int32 culLevel=5;
+   //培养丹培养进度值
+   required int32 culPro=6;
+   //幻化
+   repeated int32 unrealList=7;
+   //祝福值
+   optional int32 bless=8;
+   //祝福值开始时间
+   optional int64 blessTime=9;
+   //是否隐藏坐骑
+   required bool hidden=10;
+   //坐骑皮肤列表
+   repeated MountSkinInfo mountSkinList=11;
+}
+
+//食用幻化丹请求
+message CSMountUnrealDan {
+    required int32 num=1;
+}
+//食用幻化丹应答
+message SCMountUnrealDan {
+   //幻化丹食丹等级
+   required int32 level=1;
+   //进度值
+   required int32 progress=2;
+}
+
+//食用培养丹请求
+message CSMountCulDan {
+    required int32 num=1;
+}
+//食用培养丹应答
+message SCMountCulDan {
+   //培养丹食丹等级
+   required int32 level=1;
+   //进度值
+   required int32 progress=2;
+}
+
+//幻化请求
+message CSMountUnreal {
+    //幻化坐骑id
+    required int32 mountId=1;
+}
+//幻化应答
+message SCMountUnreal {
+    optional int32 mountId=1;
+}
+
+//卸下请求
+message CSMountUnload {
+}
+
+//卸下应答
+message SCMountUnload {
+    //坐骑id
+    required int32 mountId=1;
+}
+
+//进阶请求
+message CSMountAdvanced{
+    //是否自动进阶
+    required bool autoFlag=1;
+}
+//进阶应答
+message SCMountAdvanced{
+    //阶数
+    required int32 advancedId=1;
+    //坐骑id
+    required int32 mountId=2;
+    //祝福值
+    optional int32 bless=3;
+    //祝福值开始时间
+    optional int64 blessTime=4;
+    //进阶方式 1进阶丹 2祝福丹 3直升券
+    required int32 advancedType=5;
+    // 是否暴击
+    optional bool isDouble=6 [default=false];
+    //总祝福值
+    optional int32 totalBless=7;
+}
+
+//坐骑隐藏
+message CSMountHidden {
+    //是否隐藏 0展示  1隐藏
+    required bool hidden=1;
+}
+
+//坐骑隐藏
+message SCMountHidden {
+    required bool hidden=1;
+}
+
+
+
+//坐骑皮肤升星请求
+message CSMountUpstar {
+    //坐骑皮肤id
+    required int32 mountId=1;
+ }
+ 
+ //坐骑皮肤升星应答
+ message SCMountUpstar {
+     //坐骑皮肤id
+     required int32 mountId=1;
+     //皮肤星数
+     required int32 level=2;
+     //进度值
+     required int32 upPro=3;
+}
+
+
+
+
+
+
+
+
+
+
+

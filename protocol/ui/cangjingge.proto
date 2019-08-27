@@ -1,0 +1,33 @@
+syntax = "proto2";
+
+package ui;
+import "world_boss.proto";
+import "common.proto";
+
+
+//藏经阁boss列表
+message CSCangjinggeBossList{
+
+}
+//藏经阁boss列表应答
+message SCCangjinggeBossList{
+    repeated BossInfo bossInfoList=1;
+}
+
+//挑战藏经阁boss
+message CSCangjinggeBossChallenge{
+    required int32 biologyId=1;
+}
+message SCCangjinggeBossChallenge{
+    required Position pos=1;
+}
+
+//boss信息推送
+message SCCangjinggeBossInfoBroadcast{
+    required BossInfo bossInfo =1;
+}
+
+//地图boss列表信息推送
+message SCCangjinggeBossListInfoNotice{
+    repeated BossInfo bossInfoList =1;
+}
